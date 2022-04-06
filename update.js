@@ -47,7 +47,7 @@ async function clone() {
 	console.log('-> Đang tải bản cập nhật mới');
 	const response = await axios({
 		method: 'GET',
-		url: "https://github.com/KhangGia1810/MiraiOfficials/archive/refs/heads/main.zip",
+		url: "https://github.com/KhangGia1810/MiraiOfficials-Project/archive/refs/heads/main.zip",
 		responseType: "stream"
 	});
 
@@ -72,7 +72,7 @@ function unzip() {
 
 function install () {
     console.log('-> Đang cài đặt bản cập nhật mới');
-    copySync(process.cwd() + '/GK/main/MiraiOfficials-main/', './');
+    copySync(process.cwd() + '/GK/main/MiraiOfficials-Project-main/', './');
     return;
 }
 
