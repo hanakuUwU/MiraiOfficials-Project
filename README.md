@@ -1,3 +1,4 @@
+# File này để chạy replit team education 
 # Mirai
 # Nhập vào console:
 # +𝐁𝟏: npm i
