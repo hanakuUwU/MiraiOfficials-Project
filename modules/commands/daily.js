@@ -15,7 +15,7 @@ module.exports.config = {
 module.exports.languages = {
     "vi": {
         "cooldown": "Bạn đang trong thời gian chờ\nVui lòng thử lại sau: %1 giờ %2 phút %3 giây!",
-        "rewarded": "Bạn đã nhận %1$ và %2 lượt dùng bot, để có thể tiếp tục nhận, vui lòng quay lại sau 24 tiếng"
+        "rewarded": "Bạn đã nhận %1$ và %2 lượt dùng bot, để có thể tiếp tục nhận, vui lòng quay lại sau 35 phút"
     },
     "en": {
         "cooldown": "You received today's rewards, please come back after: %1 hours %2 minutes %3 seconds.",
