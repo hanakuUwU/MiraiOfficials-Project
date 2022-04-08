@@ -2,8 +2,8 @@ const Monitor = require('ping-monitor');
 const notifier = require('node-notifier');
 
 const myMonitor = new Monitor({
-    address: '171.250.165.123',//thay địa chỉ ip của web chạy bot hoặc để nguyên 127.0.0.1 còn được gọi là localhost nha bruh( just for pro 🐧)
-    port: 8080, //port bot 
+    address: '127.0.0.1',//thay địa chỉ ip của web chạy bot hoặc để nguyên 127.0.0.1 còn được gọi là localhost nha bruh( just for pro 🐧)
+    port: 8888, //port bot 
     interval: 10, // 10 giây
   config: {
     intervalUnits: 'seconds', // minutes, seconds,hour
