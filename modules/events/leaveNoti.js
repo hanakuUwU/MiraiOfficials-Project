@@ -30,7 +30,7 @@ module.exports.run = async function({ api, event, Users, Threads }) {
 	const { threadID } = event;
 	const data = global.data.threadData.get(parseInt(threadID)) || (await Threads.getData(threadID)).data;
 	const name = global.data.userName.get(event.logMessageData.leftParticipantFbId) || await Users.getNameUser(event.logMessageData.leftParticipantFbId);
-	const type = (event.author == event.logMessageData.leftParticipantFbId) ? "𝐷𝑎̃ 𝑡𝑢̛̣ 𝑟𝑜̛̀𝑖 𝑘ℎ𝑜̉𝑖 𝑛ℎ𝑜́𝑚" : "𝐷𝑎̃ 𝑏𝑖̣ 𝑞𝑢𝑎̉𝑛 𝑡𝑟𝑖̣ 𝑣𝑖𝑒̂𝑛 𝑑𝑎́ 𝑏𝑎𝑦 𝑚𝑎̀𝑢";
+	const type = (event.author == event.logMessageData.leftParticipantFbId) ? "do không chịu được nghiệp của nhóm nên đã tự bốc hơi khỏi nhóm" : "do cố thanh tẩy nhóm nhưng bị quản trị viên phát hiện nên đã bị cho ra đảo tu";
 	const path = join(__dirname, "cache", "leaveGif");
 	const gifPath = join(path, `${threadID}.gif`);
 	var msg, formPush
