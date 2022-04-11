@@ -226,7 +226,7 @@ var money = (await Currencies.getData(event.senderID)).money
 	let count = res.data.count;
   let callback = function () {
           api.sendMessage({
-            body: `⚡️𝐀̉𝐧𝐡 𝐂𝐡𝐢𝐭𝐚𝐧𝐝𝐚 𝐧𝐞̀ <3\n𝐓𝐚̀𝐢 𝐊𝐡𝐨𝐚̉𝐧: -𝟏𝟎𝟎𝟎$\n𝐓𝐨̂̉𝐧𝐠 𝐬𝐨̂́ 𝐚̉𝐧𝐡: ${count}`,
+            body: `⚡️𝐀̉𝐧𝐡 𝐠𝐞𝐧𝐭𝐥𝐞 𝐧𝐞̀ <3\n𝐓𝐚̀𝐢 𝐊𝐡𝐨𝐚̉𝐧: -𝟏𝟎𝟎𝟎$\n𝐓𝐨̂̉𝐧𝐠 𝐬𝐨̂́ 𝐚̉𝐧𝐡: ${count}`,
             attachment: fs.createReadStream(__dirname + `/cache/boobs.png`)
           }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/boobs.png`), event.messageID);
         };
