@@ -6,7 +6,7 @@ module.exports.config = {
 	hasPermssion: 0,
 	credits: "Thiệu Trung Kiên",
 	description: "",
-	commandCategory: "cc",
+	commandCategory: "Giải trí",
 	usages: "",
 	cooldowns: 0
 }, module.exports.onLoad = async function() {
@@ -23,8 +23,8 @@ module.exports.config = {
 	var s = n.data.length,
 		r = 1;
 	(r = parseInt(a[1]) || 1) < -1 && (r = 1);
-	Math.ceil(s / 6);
-	for (var o = "", i = [], c = 6 * (r - 1); c < 6 * (r - 1) + 6 && !(c >= s); c++) {
+	Math.ceil(s / 5);
+	for (var o = "", i = [], c = 5 * (r - 1); c < 5 * (r - 1) + 5 && !(c >= s); c++) {
 		const e = n.data[c].title,
 			t = (await axios.get(n.data[c].images, {
 				responseType: "stream"
@@ -89,7 +89,7 @@ module.exports.config = {
 			setTimeout((() => {
 				for (let e = 0; e < i.length; e++) n.push(fs.createReadStream(__dirname + `/nettruyen/${e}.jpg`)), s.push(__dirname + `/nettruyen/${e}.jpg`);
 				return t.sendMessage({
-					body: "Xem vui vẻ",
+					body: "ok",
 					attachment: n
 				}, a.threadID, (() => {
 					for (let e of s) fs.unlinkSync(e)
