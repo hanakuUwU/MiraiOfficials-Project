@@ -1,10 +1,11 @@
+
 module.exports.config = {
 	name: "duyettv",
 	version: "1.0.0",
 	hasPermssion: 0,
 	credits: "Thiệu Trung Kiên",
 	description: "Duyệt Thành Viên Trong Danh Sách Phê Duyệt Box",
-	commandCategory: "Tiện ích",
+	commandCategory: "Box",
 	usages: "",
 	cooldowns: 0
 }, module.exports.run = async function({
@@ -31,7 +32,7 @@ module.exports.config = {
 			messageID: s.messageID,
 			type: "reply"
 		})))
-	} else s.sendMessage("Cần quyền quản trị viên! Vui lòng thử lại", a.threadID)
+	} else s.sendMessage("Cần quyền quản trị viên ! Vui lòng thử lại", a.threadID)
 }, module.exports.handleReply = async function({
 	api: e,
 	args: a,
