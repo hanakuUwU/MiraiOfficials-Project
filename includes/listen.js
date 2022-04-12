@@ -1,2 +1,241 @@
-function _0xeeee(){const _0x1fa475=['forEach','allThreadID','Ngày\x20của\x20bạn\x20có\x20vẻ\x20không\x20hợp\x20lệ','Bạn\x20sống\x20ở\x20kỷ\x20nguyên\x20nào\x20thế?','writeFileSync','10076090TEhyRC','name','now','getAll','../utils/log.js','splice','parse','event','get','error','threadAllowNSFW','./handle/handleCreateDatabase','./controllers/threads','format','url','7597584sTBdSS','indexOf','successLoadEnvironment','loadedEnvironmentUser','./handle/handleReaction','trim','log','./handle/handleCommand','Tháng\x20của\x20bạn\x20có\x20vẻ\x20không\x20hợp\x20lệ','fileName','./controllers/users','commandBanned','config','threadInfo','push','======\x20','message_unsend','loader','2ddcVPd','data','./controllers/currencies','attachment','threadBanned','getCurrentUserID','failLoadEnvironment','63RmqPyq','NSFW','[\x20DATABASE\x20]','set','getInfo','ms\x20======','BOTNAME','setTitle','listen','getText','arraybuffer','DD/MM/YYYY_HH:mm:ss','userID','TID','split','type','\x20‍\x20','/../modules/commands/cache/','banned','message','existsSync','toFixed','4418148DfqqOw','stringify','PREFIX','exports','timeStart','ATTACHMENT','reason','9uXVIac','length','message_reaction','startLoadEnvironment','2839085geyhwZ','readFileSync','client','participantIDs','userName','dateAdded','from','allCurrenciesID','axios','[\x20BOT\x20INFO\x20]','unlinkSync','userBanned','\x20]\x20•\x20','BOX','3678012KhrvMt','47339pOecYF','utf-8','message_reply','./handle/handleEvent','162224kxVQwq','Phút\x20của\x20bạn\x20có\x20vẻ\x20không\x20hợp\x20lệ','createReadStream','Giây\x20của\x20bạn\x20có\x20vẻ\x20không\x20hợp\x20lệ','keys','\x20-\x20[\x20','moment-timezone'];_0xeeee=function(){return _0x1fa475;};return _0xeeee();}function _0x12d6(_0x1c7839,_0x258a46){const _0xeeeefb=_0xeeee();return _0x12d6=function(_0x12d649,_0x58a42b){_0x12d649=_0x12d649-0x11e;let _0x1244eb=_0xeeeefb[_0x12d649];return _0x1244eb;},_0x12d6(_0x1c7839,_0x258a46);}const _0x49e8b4=_0x12d6;(function(_0x447216,_0x26e8c3){const _0x256e74=_0x12d6,_0x4290a2=_0x447216();while(!![]){try{const _0x224528=-parseInt(_0x256e74(0x16e))/0x1*(parseInt(_0x256e74(0x137))/0x2)+-parseInt(_0x256e74(0x16d))/0x3+-parseInt(_0x256e74(0x154))/0x4+parseInt(_0x256e74(0x15f))/0x5+parseInt(_0x256e74(0x125))/0x6+parseInt(_0x256e74(0x13e))/0x7*(parseInt(_0x256e74(0x172))/0x8)+parseInt(_0x256e74(0x15b))/0x9*(parseInt(_0x256e74(0x17e))/0xa);if(_0x224528===_0x26e8c3)break;else _0x4290a2['push'](_0x4290a2['shift']());}catch(_0x1621c5){_0x4290a2['push'](_0x4290a2['shift']());}}}(_0xeeee,0x9dca8),module[_0x49e8b4(0x157)]=function({api:_0x169989,models:_0x100b8e}){const _0x152c29=_0x49e8b4,_0x3d4607=require(_0x152c29(0x12f))({'models':_0x100b8e,'api':_0x169989}),_0x2a3853=require(_0x152c29(0x122))({'models':_0x100b8e,'api':_0x169989}),_0x496199=require(_0x152c29(0x139))({'models':_0x100b8e}),_0xab0e04=require(_0x152c29(0x182)),_0x5b0eb8=require('fs'),_0x34bb80=require(_0x152c29(0x178)),_0x383934=require(_0x152c29(0x167));(async function(){const _0x4af4b9=_0x152c29;try{_0xab0e04(global[_0x4af4b9(0x147)](_0x4af4b9(0x146),_0x4af4b9(0x15e)),'[\x20DATABASE\x20]');let _0x1954b7=await _0x2a3853[_0x4af4b9(0x181)](),_0x2c6717=await _0x3d4607['getAll'](['userID',_0x4af4b9(0x17f),_0x4af4b9(0x138)]),_0x5873d7=await _0x496199[_0x4af4b9(0x181)]([_0x4af4b9(0x14a)]);for(const _0x3bee66 of _0x1954b7){const _0x5d665=String(_0x3bee66['threadID']);global[_0x4af4b9(0x138)][_0x4af4b9(0x17a)]['push'](_0x5d665),global[_0x4af4b9(0x138)]['threadData'][_0x4af4b9(0x141)](_0x5d665,_0x3bee66[_0x4af4b9(0x138)]||{}),global[_0x4af4b9(0x138)]['threadInfo']['set'](_0x5d665,_0x3bee66[_0x4af4b9(0x132)]||{});if(_0x3bee66[_0x4af4b9(0x138)]&&_0x3bee66[_0x4af4b9(0x138)][_0x4af4b9(0x150)]==!![])global['data'][_0x4af4b9(0x13b)]['set'](_0x5d665,{'reason':_0x3bee66[_0x4af4b9(0x138)]['reason']||'','dateAdded':_0x3bee66['data']['dateAdded']||''});if(_0x3bee66['data']&&_0x3bee66[_0x4af4b9(0x138)][_0x4af4b9(0x130)]&&_0x3bee66[_0x4af4b9(0x138)][_0x4af4b9(0x130)]['length']!=0x0)global['data'][_0x4af4b9(0x130)][_0x4af4b9(0x141)](_0x5d665,_0x3bee66['data'][_0x4af4b9(0x130)]);if(_0x3bee66[_0x4af4b9(0x138)]&&_0x3bee66[_0x4af4b9(0x138)][_0x4af4b9(0x13f)])global[_0x4af4b9(0x138)][_0x4af4b9(0x120)][_0x4af4b9(0x133)](_0x5d665);}_0xab0e04[_0x4af4b9(0x136)](global['getText']('listen','loadedEnvironmentThread'));for(const _0x50847b of _0x2c6717){const _0x1bdc64=String(_0x50847b['userID']);global[_0x4af4b9(0x138)]['allUserID'][_0x4af4b9(0x133)](_0x1bdc64);if(_0x50847b[_0x4af4b9(0x17f)]&&_0x50847b[_0x4af4b9(0x17f)][_0x4af4b9(0x15c)]!=0x0)global[_0x4af4b9(0x138)][_0x4af4b9(0x163)][_0x4af4b9(0x141)](_0x1bdc64,_0x50847b[_0x4af4b9(0x17f)]);if(_0x50847b[_0x4af4b9(0x138)]&&_0x50847b[_0x4af4b9(0x138)][_0x4af4b9(0x150)]==0x1)global[_0x4af4b9(0x138)][_0x4af4b9(0x16a)][_0x4af4b9(0x141)](_0x1bdc64,{'reason':_0x50847b['data'][_0x4af4b9(0x15a)]||'','dateAdded':_0x50847b['data'][_0x4af4b9(0x164)]||''});if(_0x50847b[_0x4af4b9(0x138)]&&_0x50847b[_0x4af4b9(0x138)][_0x4af4b9(0x130)]&&_0x50847b[_0x4af4b9(0x138)][_0x4af4b9(0x130)][_0x4af4b9(0x15c)]!=0x0)global['data'][_0x4af4b9(0x130)]['set'](_0x1bdc64,_0x50847b[_0x4af4b9(0x138)][_0x4af4b9(0x130)]);}for(const _0x4f4ac8 of _0x5873d7)global[_0x4af4b9(0x138)][_0x4af4b9(0x166)][_0x4af4b9(0x133)](String(_0x4f4ac8['userID']));_0xab0e04['loader'](global[_0x4af4b9(0x147)](_0x4af4b9(0x146),_0x4af4b9(0x128))),_0xab0e04(global[_0x4af4b9(0x147)](_0x4af4b9(0x146),_0x4af4b9(0x127)),_0x4af4b9(0x140));}catch(_0x2d8011){return _0xab0e04[_0x4af4b9(0x136)](global['getText']('listen',_0x4af4b9(0x13d),_0x2d8011),_0x4af4b9(0x11f));}}()),_0xab0e04(_0x169989[_0x152c29(0x13c)]()+_0x152c29(0x177)+global[_0x152c29(0x131)][_0x152c29(0x156)]+_0x152c29(0x16b)+(!global[_0x152c29(0x131)][_0x152c29(0x144)]?'This\x20bot\x20was\x20made\x20by\x20GK':global[_0x152c29(0x131)]['BOTNAME']),_0x152c29(0x168));const _0x274151=require(_0x152c29(0x12c))({'api':_0x169989,'models':_0x100b8e,'Users':_0x3d4607,'Threads':_0x2a3853,'Currencies':_0x496199}),_0x45bc80=require('./handle/handleCommandEvent')({'api':_0x169989,'models':_0x100b8e,'Users':_0x3d4607,'Threads':_0x2a3853,'Currencies':_0x496199}),_0x39ae57=require('./handle/handleReply')({'api':_0x169989,'models':_0x100b8e,'Users':_0x3d4607,'Threads':_0x2a3853,'Currencies':_0x496199}),_0x53b12d=require(_0x152c29(0x129))({'api':_0x169989,'models':_0x100b8e,'Users':_0x3d4607,'Threads':_0x2a3853,'Currencies':_0x496199}),_0x5afa23=require(_0x152c29(0x171))({'api':_0x169989,'models':_0x100b8e,'Users':_0x3d4607,'Threads':_0x2a3853,'Currencies':_0x496199}),_0x1eec53=require(_0x152c29(0x121))({'api':_0x169989,'Threads':_0x2a3853,'Users':_0x3d4607,'Currencies':_0x496199,'models':_0x100b8e});_0xab0e04['loader'](_0x152c29(0x134)+(Date[_0x152c29(0x180)]()-global[_0x152c29(0x161)][_0x152c29(0x158)])+'ms\x20======');const _0x4dbe01=__dirname+'/../modules/commands/cache/datlich.json',_0x484962={0x1:0x1f*0x18*0x3c*0x3c*0x3e8,0x2:0x1c*0x18*0x3c*0x3c*0x3e8,0x3:0x1f*0x18*0x3c*0x3c*0x3e8,0x4:0x1e*0x18*0x3c*0x3c*0x3e8,0x5:0x1f*0x18*0x3c*0x3c*0x3e8,0x6:0x1e*0x18*0x3c*0x3c*0x3e8,0x7:0x1f*0x18*0x3c*0x3c*0x3e8,0x8:0x1f*0x18*0x3c*0x3c*0x3e8,0x9:0x1e*0x18*0x3c*0x3c*0x3e8,0xa:0x1f*0x18*0x3c*0x3c*0x3e8,0xb:0x1e*0x18*0x3c*0x3c*0x3e8,0xc:0x1f*0x18*0x3c*0x3c*0x3e8},_0x480888=_0x229c33=>new Promise(_0x2b1301=>{const _0x4f031a=_0x152c29;_0x229c33[_0x4f031a(0x179)]((_0x5db5c4,_0x4244ae)=>_0x229c33[_0x4244ae]=parseInt(String(_0x5db5c4)[_0x4f031a(0x12a)]()));const _0x313120=_0x3b4600=>_0x3b4600==0x0?0x0:_0x3b4600==0x2?_0x229c33[0x2]%0x4==0x0?0x1d:0x1c:[0x1,0x3,0x5,0x7,0x8,0xa,0xc]['includes'](_0x3b4600)?0x1f:0x1e;if(_0x229c33[0x1]>0xc||_0x229c33[0x1]<0x1)_0x2b1301(_0x4f031a(0x12d));if(_0x229c33[0x0]>_0x313120(_0x229c33[0x1])||_0x229c33[0x0]<0x1)_0x2b1301(_0x4f031a(0x17b));if(_0x229c33[0x2]<0x7e6)_0x2b1301(_0x4f031a(0x17c));if(_0x229c33[0x3]>0x17||_0x229c33[0x3]<0x0)_0x2b1301('Giờ\x20của\x20bạn\x20có\x20vẻ\x20không\x20hợp\x20lệ');if(_0x229c33[0x4]>0x3b||_0x229c33[0x3]<0x0)_0x2b1301(_0x4f031a(0x173));if(_0x229c33[0x5]>0x3b||_0x229c33[0x3]<0x0)_0x2b1301(_0x4f031a(0x175));yr=_0x229c33[0x2]-0x7b2,yearToMS=yr*0x16d*0x18*0x3c*0x3c*0x3e8,yearToMS+=((yr-0x2)/0x4)[_0x4f031a(0x153)](0x0)*0x18*0x3c*0x3c*0x3e8,monthToMS=0x0;for(let _0x24586d=0x1;_0x24586d<_0x229c33[0x1];_0x24586d++)monthToMS+=_0x484962[_0x24586d];if(_0x229c33[0x2]%0x4==0x0)monthToMS+=0x18*0x3c*0x3c*0x3e8;dayToMS=_0x229c33[0x0]*0x18*0x3c*0x3c*0x3e8,hourToMS=_0x229c33[0x3]*0x3c*0x3c*0x3e8,minuteToMS=_0x229c33[0x4]*0x3c*0x3e8,secondToMS=_0x229c33[0x5]*0x3e8,oneDayToMS=0x18*0x3c*0x3c*0x3e8,timeMs=yearToMS+monthToMS+dayToMS+hourToMS+minuteToMS+secondToMS-oneDayToMS,_0x2b1301(timeMs);}),_0x22c989=0xa*0x3c*0x3e8;_0xab0e04[_0x152c29(0x136)](_0x152c29(0x134)+(Date[_0x152c29(0x180)]()-global[_0x152c29(0x161)]['timeStart'])+_0x152c29(0x143));const _0x65274e=async()=>{const _0x3eb0af=_0x152c29;if(!_0x5b0eb8[_0x3eb0af(0x152)](_0x4dbe01))_0x5b0eb8[_0x3eb0af(0x17d)](_0x4dbe01,JSON['stringify']({},null,0x4));var _0x4b584=JSON[_0x3eb0af(0x184)](_0x5b0eb8[_0x3eb0af(0x160)](_0x4dbe01)),_0x4232f4=_0x34bb80()['tz']('Asia/Ho_Chi_Minh')[_0x3eb0af(0x123)](_0x3eb0af(0x149));_0x4232f4=_0x4232f4[_0x3eb0af(0x14c)]('_'),_0x4232f4=[..._0x4232f4[0x0][_0x3eb0af(0x14c)]('/'),..._0x4232f4[0x1][_0x3eb0af(0x14c)](':')];let _0x2daac9=[],_0x204637=await _0x480888(_0x4232f4);const _0x5da2dd=_0x1bb84e=>new Promise(async _0x160fd7=>{const _0x4821ed=_0x3eb0af;let _0x588d26=await _0x480888(_0x1bb84e[_0x4821ed(0x14c)]('_'));if(_0x588d26<_0x204637){if(_0x204637-_0x588d26<_0x22c989)_0x4b584[boxID][_0x1bb84e][_0x4821ed(0x14b)]=boxID,_0x2daac9['push'](_0x4b584[boxID][_0x1bb84e]),delete _0x4b584[boxID][_0x1bb84e];else delete _0x4b584[boxID][_0x1bb84e];_0x5b0eb8[_0x4821ed(0x17d)](_0x4dbe01,JSON[_0x4821ed(0x155)](_0x4b584,null,0x4));};_0x160fd7();});await new Promise(async _0x215f16=>{const _0x794794=_0x3eb0af;for(boxID in _0x4b584){for(e of Object[_0x794794(0x176)](_0x4b584[boxID]))await _0x5da2dd(e);}_0x215f16();});for(el of _0x2daac9){try{var _0xfc7af2=(await _0x2a3853[_0x3eb0af(0x142)](el[_0x3eb0af(0x14b)]))[_0x3eb0af(0x162)];_0xfc7af2[_0x3eb0af(0x183)](_0xfc7af2[_0x3eb0af(0x126)](_0x169989['getCurrentUserID']()),0x1);var _0x243966=el['REASON']||'MỌI\x20NGƯỜI\x20ƠI',_0x501ecc=[],_0xc5491e=0x0;for(let _0x10fb54=0x0;_0x10fb54<_0xfc7af2[_0x3eb0af(0x15c)];_0x10fb54++){if(_0x10fb54==_0x243966[_0x3eb0af(0x15c)])_0x243966+=_0x3eb0af(0x14e);_0x501ecc['push']({'tag':_0x243966[_0x10fb54],'id':_0xfc7af2[_0x10fb54],'fromIndex':_0x10fb54-0x1});}}catch(_0x54e795){return console[_0x3eb0af(0x12b)](_0x54e795);}var _0x51a456={'body':_0x243966,'mentions':_0x501ecc};if('ATTACHMENT'in el){_0x51a456['attachment']=[];for(a of el[_0x3eb0af(0x159)]){let _0x31d01b=(await _0x383934[_0x3eb0af(0x11e)](encodeURI(a[_0x3eb0af(0x124)]),{'responseType':_0x3eb0af(0x148)}))[_0x3eb0af(0x138)];_0x5b0eb8['writeFileSync'](__dirname+('/../modules/commands/cache/'+a[_0x3eb0af(0x12e)]),Buffer[_0x3eb0af(0x165)](_0x31d01b,_0x3eb0af(0x16f))),_0x51a456[_0x3eb0af(0x13a)]['push'](_0x5b0eb8[_0x3eb0af(0x174)](__dirname+('/../modules/commands/cache/'+a['fileName'])));}}console[_0x3eb0af(0x12b)](_0x51a456);if(_0x3eb0af(0x16c)in el)await _0x169989[_0x3eb0af(0x145)](el[_0x3eb0af(0x16c)],el[_0x3eb0af(0x14b)]);_0x169989['sendMessage'](_0x51a456,el[_0x3eb0af(0x14b)],()=>_0x3eb0af(0x159)in el?el[_0x3eb0af(0x159)][_0x3eb0af(0x179)](_0x2c981a=>_0x5b0eb8[_0x3eb0af(0x169)](__dirname+(_0x3eb0af(0x14f)+_0x2c981a[_0x3eb0af(0x12e)]))):'');}};return setInterval(_0x65274e,_0x22c989/0xa),_0x4ddb16=>{const _0x3c6b58=_0x152c29;switch(_0x4ddb16[_0x3c6b58(0x14d)]){case _0x3c6b58(0x151):case _0x3c6b58(0x170):case _0x3c6b58(0x135):_0x1eec53({'event':_0x4ddb16}),_0x274151({'event':_0x4ddb16}),_0x39ae57({'event':_0x4ddb16}),_0x45bc80({'event':_0x4ddb16});break;case _0x3c6b58(0x185):_0x5afa23({'event':_0x4ddb16});break;case _0x3c6b58(0x15d):_0x53b12d({'event':_0x4ddb16});break;default:break;}};});
-//THIZ BOT WAS MADE BY ME(CATALIZCS) AND MY BROTHER SPERMLORD - DO NOT STEAL MY CODE (つ ͡ ° ͜ʖ ͡° )つ ✄ ╰⋃╯
+module.exports = function({ api, models }) {
+
+	const Users = require("./controllers/users")({ models, api }),
+				Threads = require("./controllers/threads")({ models, api }),
+				Currencies = require("./controllers/currencies")({ models });
+	const logger = require("../utils/log.js");
+	const fs = require("fs");
+	const moment = require('moment-timezone');
+	const axios = require("axios");
+
+	//////////////////////////////////////////////////////////////////////
+	//========= Push all variable from database to environment =========//
+	//////////////////////////////////////////////////////////////////////
+	
+(async function () {
+
+    try {
+        logger(global.getText('listen', 'startLoadEnvironment'), '[ DATABASE ]');
+        let threads = await Threads.getAll(),
+            users = await Users.getAll(['userID', 'name', 'data']),
+            currencies = await Currencies.getAll(['userID']);
+        for (const data of threads) {
+            const idThread = String(data.threadID);
+            global.data.allThreadID.push(idThread), 
+            global.data.threadData.set(idThread, data['data'] || {}), 
+            global.data.threadInfo.set(idThread, data.threadInfo || {});
+            if (data['data'] && data['data']['banned'] == !![]) 
+            	global.data.threadBanned.set(idThread, 
+            	{
+                'reason': data['data']['reason'] || '',
+                'dateAdded': data['data']['dateAdded'] || ''
+            });
+            if (data['data'] && data['data']['commandBanned'] && data['data']['commandBanned']['length'] != 0) 
+            global['data']['commandBanned']['set'](idThread, data['data']['commandBanned']);
+            if (data['data'] && data['data']['NSFW']) global['data']['threadAllowNSFW']['push'](idThread);
+        }
+        logger.loader(global.getText('listen', 'loadedEnvironmentThread'));
+        for (const dataU of users) {
+            const idUsers = String(dataU['userID']);
+            global.data['allUserID']['push'](idUsers);
+            if (dataU.name && dataU.name['length'] != 0) global.data.userName['set'](idUsers, dataU.name);
+            if (dataU.data && dataU.data.banned == 1) global.data['userBanned']['set'](idUsers, {
+                'reason': dataU['data']['reason'] || '',
+                'dateAdded': dataU['data']['dateAdded'] || ''
+            });
+            if (dataU['data'] && dataU.data['commandBanned'] && dataU['data']['commandBanned']['length'] != 0) 
+            global['data']['commandBanned']['set'](idUsers, dataU['data']['commandBanned']);
+        }
+        for (const dataC of currencies) global.data.allCurrenciesID.push(String(dataC['userID']));
+        logger.loader(global.getText('listen', 'loadedEnvironmentUser')), logger(global.getText('listen','successLoadEnvironment'),'[ DATABASE ]');
+    } catch (error) {
+        return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
+    }
+}());
+	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by CatalizCS and SpermLord" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	
+	///////////////////////////////////////////////
+	//========= Require all handle need =========//
+	//////////////////////////////////////////////
+
+	const handleCommand = require("./handle/handleCommand")({ api, models, Users, Threads, Currencies });
+	const handleCommandEvent = require("./handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
+	const handleReply = require("./handle/handleReply")({ api, models, Users, Threads, Currencies });
+	const handleReaction = require("./handle/handleReaction")({ api, models, Users, Threads, Currencies });
+	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
+	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
+  const handleUnsend = require("./handle/handleUnsend")({ api });
+
+	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
+
+
+	//DEFINE DATLICH PATH
+	const datlichPath = __dirname + '/../modules/commands/cache/datlich.json';
+
+	//FUNCTION HOẠT ĐỘNG NHƯ CÁI TÊN CỦA NÓ, CRE: DUNGUWU
+	const monthToMSObj = {
+		1: 31 * 24 * 60 * 60 * 1000,
+		2: 28 * 24 * 60 * 60 * 1000,
+		3: 31 * 24 * 60 * 60 * 1000,
+		4: 30 * 24 * 60 * 60 * 1000,
+		5: 31 * 24 * 60 * 60 * 1000,
+		6: 30 * 24 * 60 * 60 * 1000,
+		7: 31 * 24 * 60 * 60 * 1000,
+		8: 31 * 24 * 60 * 60 * 1000,
+		9: 30 * 24 * 60 * 60 * 1000,
+		10: 31 * 24 * 60 * 60 * 1000,
+		11: 30 * 24 * 60 * 60 * 1000,
+		12: 31 * 24 * 60 * 60 * 1000
+	};
+	const checkTime = (time) => new Promise((resolve) => {
+		time.forEach((e, i) => time[i] = parseInt(String(e).trim()));
+		const getDayFromMonth = (month) => (month == 0) ? 0 : (month == 2) ? (time[2] % 4 == 0) ? 29 : 28 : ([1, 3, 5, 7, 8, 10, 12].includes(month)) ? 31 : 30;
+		if (time[1] > 12 || time[1] < 1) resolve("Tháng của bạn có vẻ không hợp lệ");
+		if (time[0] > getDayFromMonth(time[1]) || time[0] < 1) resolve("Ngày của bạn có vẻ không hợp lệ");
+		if (time[2] < 2022) resolve("Bạn sống ở kỷ nguyên nào thế?");
+		if (time[3] > 23 || time[3] < 0) resolve("Giờ của bạn có vẻ không hợp lệ");
+		if (time[4] > 59 || time[3] < 0) resolve("Phút của bạn có vẻ không hợp lệ");
+		if (time[5] > 59 || time[3] < 0) resolve("Giây của bạn có vẻ không hợp lệ");
+		yr = time[2] - 1970;
+		yearToMS = (yr) * 365 * 24 * 60 * 60 * 1000;
+		yearToMS += ((yr - 2) / 4).toFixed(0) * 24 * 60 * 60 * 1000;
+		monthToMS = 0;
+		for (let i = 1; i < time[1]; i++) monthToMS += monthToMSObj[i];
+		if (time[2] % 4 == 0) monthToMS += 24 * 60 * 60 * 1000;
+		dayToMS = time[0] * 24 * 60 * 60 * 1000;
+		hourToMS = time[3] * 60 * 60 * 1000;
+		minuteToMS = time[4] * 60 * 1000;
+		secondToMS = time[5] * 1000;
+		oneDayToMS = 24 * 60 * 60 * 1000;
+		timeMs = yearToMS + monthToMS + dayToMS + hourToMS + minuteToMS + secondToMS - oneDayToMS;
+		resolve(timeMs);
+	});
+
+
+	const tenMinutes = 10 * 60 * 1000;
+
+	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
+	const checkAndExecuteEvent = async () => {
+
+		/*smol check*/
+		if (!fs.existsSync(datlichPath)) fs.writeFileSync(datlichPath, JSON.stringify({}, null, 4));
+		var data = JSON.parse(fs.readFileSync(datlichPath));
+
+		//GET CURRENT TIME
+		var timeVN = moment().tz('Asia/Ho_Chi_Minh').format('DD/MM/YYYY_HH:mm:ss');
+		timeVN = timeVN.split("_");
+		timeVN = [...timeVN[0].split("/"), ...timeVN[1].split(":")];
+
+		let temp = [];
+		let vnMS = await checkTime(timeVN);
+		const compareTime = e => new Promise(async (resolve) => {
+			let getTimeMS = await checkTime(e.split("_"));
+			if (getTimeMS < vnMS) {
+				if (vnMS - getTimeMS < tenMinutes) {
+					data[boxID][e]["TID"] = boxID;
+					temp.push(data[boxID][e]); delete data[boxID][e];
+				} else delete data[boxID][e];
+				fs.writeFileSync(datlichPath, JSON.stringify(data, null, 4));
+			};
+			resolve();
+		})
+
+		await new Promise(async (resolve) => {
+			for (boxID in data) {
+				for (e of Object.keys(data[boxID])) await compareTime(e);
+			}
+			resolve();
+		})
+		for (el of temp) {
+			try {
+				var all = (await Threads.getInfo(el["TID"])).participantIDs;
+			    all.splice(all.indexOf(api.getCurrentUserID()), 1);
+				var body = el.REASON || "MỌI NGƯỜI ƠI", mentions = [], index = 0;
+				
+			    for (let i = 0; i < all.length; i++) {
+				    if (i == body.length) body += " ‍ ";
+				    mentions.push({
+				  	  tag: body[i],
+				  	  id: all[i],
+				  	  fromIndex: i - 1
+				    });
+			    }
+			} catch (e) { return console.log(e); }
+			var out = {
+				body, mentions
+			}
+			if ("ATTACHMENT" in el) {
+				out.attachment = [];
+				for (a of el.ATTACHMENT) {
+					let getAttachment = (await axios.get(encodeURI(a.url), { responseType: "arraybuffer"})).data;
+					fs.writeFileSync(__dirname + `/../modules/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
+					out.attachment.push(fs.createReadStream(__dirname + `/../modules/commands/cache/${a.fileName}`));
+				}
+			}
+			console.log(out);
+			if ("BOX" in el) await api.setTitle(el["BOX"], el["TID"]);
+			api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../modules/commands/cache/${a.fileName}`)) : "");
+		}
+
+	}
+	setInterval(checkAndExecuteEvent, tenMinutes/10);
+	
+
+	//////////////////////////////////////////////////
+	//========= Send event to handle need =========//
+	/////////////////////////////////////////////////
+	 
+	return async (event) => {
+    const threadInfo = await api.getThreadInfo(event.threadID)
+    var threadName = threadInfo.threadName||"Tên không tồn tại";
+	  if (event.type == "change_thread_image") api.sendMessage(`» [ CẬP NHẬT NHÓM ] ${event.snippet}`, event.threadID);
+	  let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
+	  let adminBot = global.config.ADMINBOT;
+	  let ndhBot = global.config.NDH;
+	  let pendingPath = __dirname + "/../modules/commands/cache/pendingdThreads.json";
+	  if (!data.includes(event.threadID) && !adminBot.includes(event.senderID) &&!ndhBot.includes(event.senderID)) {
+		
+		//getPrefix
+		  const threadSetting = (await Threads.getData(String(event.threadID))).data || {};
+		  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+		  //check body
+		if (event.body && event.body == `${prefix}request`) {
+		  adminBot.forEach(e => {
+			api.sendMessage(`Box ${event.threadID} đã yêu cầu được duyệt! ${threadName}`, e);
+		  })
+		  return api.sendMessage(`Đã gửi yêu cầu đến các admin bot!`, event.threadID, () => {
+			let pendingData = JSON.parse(fs.readFileSync(pendingPath));
+			if (!pendingData.includes(event.threadID)) {
+			  pendingData.push(event.threadID);
+			fs.writeFileSync(pendingPath, JSON.stringify(pendingData));
+			}
+		  });
+		}
+		// if (event.threadID == 7349457131746039) console.log(prefix);
+		if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`Box của bạn chưa được duyệt, để gửi yêu cầu duyệt, dùng:\n${prefix}request`, event.threadID);
+	
+  
+		
+	  };
+	  switch (event.type) {
+		case "message":
+		case "message_reply":
+		case "message_unsend":
+		  handleCreateDatabase({ event });
+		  handleCommand({ event });
+		  handleReply({ event });
+		  handleCommandEvent({ event });
+  
+		  break;
+		case "event":
+		  handleEvent({ event });
+		  break;
+		case "message_reaction":
+        handleUnsend({ event });
+		  handleReaction({ event });
+		  break;
+		default:
+		  break;
+	  }
+	};
+  };
