@@ -188,7 +188,7 @@ module.exports = function({ api, models }) {
 	return async (event) => {
     const threadInfo = await api.getThreadInfo(event.threadID)
     var threadName = threadInfo.threadName||"Tên không tồn tại";
-	  if (event.type == "change_thread_image") api.sendMessage(`» [ CẬP NHẬT NHÓM ] ${event.snippet}`, event.threadID);
+	  if (event.type == "change_thread_image") api.sendMessage(`» [ ThreadUpdate ] ${event.snippet}`, event.threadID);
 	  let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
 	  let adminBot = global.config.ADMINBOT;
 	  let ndhBot = global.config.NDH;
