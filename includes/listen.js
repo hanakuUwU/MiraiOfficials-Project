@@ -52,7 +52,7 @@ module.exports = function({ api, models }) {
         return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
     }
 }());
-	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by CatalizCS and SpermLord" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by GK" : global.config.BOTNAME}`, "[ BOT INFO ]");
 	
 	///////////////////////////////////////////////
 	//========= Require all handle need =========//
@@ -64,8 +64,7 @@ module.exports = function({ api, models }) {
 	const handleReaction = require("./handle/handleReaction")({ api, models, Users, Threads, Currencies });
 	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
 	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
-  const handleUnsend = require("./handle/handleUnsend")({ api });
-
+  const handleUnsend = require("./handle/handleUnsend")({ api })
 	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
 
 
@@ -184,58 +183,31 @@ module.exports = function({ api, models }) {
 	//////////////////////////////////////////////////
 	//========= Send event to handle need =========//
 	/////////////////////////////////////////////////
-	 
-	return async (event) => {
-    const threadInfo = await api.getThreadInfo(event.threadID)
-    var threadName = threadInfo.threadName||"Tên không tồn tại";
-	  if (event.type == "change_thread_image") api.sendMessage(`» [ ThreadUpdate ] ${event.snippet}`, event.threadID);
-	  let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
-	  let adminBot = global.config.ADMINBOT;
-	  let ndhBot = global.config.NDH;
-	  let pendingPath = __dirname + "/../modules/commands/cache/pendingdThreads.json";
-	  if (!data.includes(event.threadID) && !adminBot.includes(event.senderID) &&!ndhBot.includes(event.senderID)) {
-		
-		//getPrefix
-		  const threadSetting = (await Threads.getData(String(event.threadID))).data || {};
-		  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-		  //check body
-		if (event.body && event.body == `${prefix}request`) {
-		  adminBot.forEach(e => {
-			api.sendMessage(`Box ${event.threadID} đã yêu cầu được duyệt! ${threadName}`, e);
-		  })
-		  return api.sendMessage(`Đã gửi yêu cầu đến các admin bot!`, event.threadID, () => {
-			let pendingData = JSON.parse(fs.readFileSync(pendingPath));
-			if (!pendingData.includes(event.threadID)) {
-			  pendingData.push(event.threadID);
-			fs.writeFileSync(pendingPath, JSON.stringify(pendingData));
-			}
-		  });
-		}
-		// if (event.threadID == 7349457131746039) console.log(prefix);
-		if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`Box của bạn chưa được duyệt, để gửi yêu cầu duyệt, dùng:\n${prefix}request`, event.threadID);
 	
-  
-		
-	  };
-	  switch (event.type) {
-		case "message":
-		case "message_reply":
-		case "message_unsend":
-		  handleCreateDatabase({ event });
-		  handleCommand({ event });
-		  handleReply({ event });
-		  handleCommandEvent({ event });
-  
-		  break;
-		case "event":
-		  handleEvent({ event });
-		  break;
-		case "message_reaction":
-        handleUnsend({ event });
-		  handleReaction({ event });
-		  break;
-		default:
-		  break;
-	  }
+	return (event) => {
+		switch (event.type) {
+			case "message":
+			case "message_reply":
+			case "message_unsend":
+				handleCreateDatabase({ event });
+				handleCommand({ event });
+				handleReply({ event });
+				handleCommandEvent({ event });
+
+				break;
+			case "event":
+				handleEvent({ event });
+				break;
+			case "message_reaction":
+				if(event.senderID == api.getCurrentUserID() && event.reaction == '😠') {
+					api.unsendMessage(event.messageID)
+				}
+				handleReaction({ event });
+				break;
+			default:
+				break;
+		}
 	};
-  };
+};
+
+//THIZ BOT WAS MADE BY ME(CATALIZCS) AND MY BROTHER SPERMLORD - DO NOT STEAL MY CODE (つ ͡ ° ͜ʖ ͡° )つ ✄ ╰⋃╯
