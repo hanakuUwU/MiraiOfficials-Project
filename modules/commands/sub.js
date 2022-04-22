@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports.config = {
-    name: "sub2",
+    name: "sub",
     version: "2.2.0",
     hasPermssion: 0,
     credits: "Dàn code của D-Jukie, đàn cá của Heo Rừng UwU",
@@ -14,10 +14,10 @@ module.exports.config = {
 };
 
 module.exports.checkPath = function (type, senderID) {
-    const pathItem = path.join(__dirname, 'cauca2', `item.json`);
-    const pathUser = path.join(__dirname, 'cauca2', 'datauser', `${senderID}.json`);
-    const pathUser_1 = require("./cauca2/datauser/" + senderID + '.json');
-    const pathItem_1 = require("./cauca2/item.json");
+    const pathItem = path.join(__dirname, 'cauca', `item.json`);
+    const pathUser = path.join(__dirname, 'cauca', 'datauser', `${senderID}.json`);
+    const pathUser_1 = require("./cauca/datauser/" + senderID + '.json');
+    const pathItem_1 = require("./cauca/item.json");
     if (type == 1) return pathItem
     if (type == 2) return pathItem_1
     if (type == 3) return pathUser
@@ -28,9 +28,9 @@ module.exports.onLoad = async () => {
     const fs = require("fs-extra");
     const axios = require("axios");
 
-    const dir = __dirname + `/cauca2/`;
-    const dirCache = __dirname + `/cauca2/cache/`;
-    const dirData = __dirname + `/cauca2/datauser/`;
+    const dir = __dirname + `/cauca/`;
+    const dirCache = __dirname + `/cauca/cache/`;
+    const dirData = __dirname + `/cauca/datauser/`;
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, {
         recursive: true
     });
@@ -41,13 +41,13 @@ module.exports.onLoad = async () => {
         recursive: true
     });
     if (!fs.existsSync(dir + "item.json")) (await axios({
-        url: "https://raw.githubusercontent.com/phamvandien1/abc/main/item.json",
+        url: "https://raw.githubusercontent.com/KhangGia1810/fishing/main/data.json",
         method: 'GET',
         responseType: 'stream'
     })).data.pipe(fs.createWriteStream(dir + "data.json"));
 
     if (!fs.existsSync(dir + "item.json")) (await axios({
-        url: "https://raw.githubusercontent.com/phamvandien1/abc/main/data.json",
+        url: "https://raw.githubusercontent.com/KhangGia1810/fishing/main/item.json",
         method: 'GET',
         responseType: 'stream'
     })).data.pipe(fs.createWriteStream(dir + "item.json"));
@@ -220,7 +220,7 @@ module.exports.run = async function ({
 }
 
 module.exports.dataFish =async function (a, b) {
-    const data = require("./cauca2/data.json");
+    const data = require("./cauca/data.json");
     var loc = data.find(i => i.location == a)
     var are = loc.area.find(i => i.name == b)
     return are.creature
@@ -231,8 +231,8 @@ module.exports.image = async function(link) {
     const axios = global.nodemodule["axios"];
     var images = [];
     let download = (await axios.get(link, { responseType: "arraybuffer" } )).data; 
-        fs.writeFileSync( __dirname + `/cauca2/cache/subnautica.png`, Buffer.from(download, "utf-8"));
-        images.push(fs.createReadStream(__dirname + `/cauca2/cache/subnautica.png`));
+        fs.writeFileSync( __dirname + `/cauca/cache/subnautica.png`, Buffer.from(download, "utf-8"));
+        images.push(fs.createReadStream(__dirname + `/cauca/cache/subnautica.png`));
     return images
 }
 module.exports.subnautica = async function() {
@@ -240,7 +240,7 @@ module.exports.subnautica = async function() {
     const axios = global.nodemodule["axios"];
     var images = [];
     let download = (await axios.get('https://i.imgur.com/pTrrcQB.png', { responseType: "arraybuffer" } )).data; 
-        fs.writeFileSync( __dirname + `/cauca2/cache/subnauticapage.png`, Buffer.from(download, "utf-8"));
+        fs.writeFileSync( __dirname + `/cauca/cache/subnauticapage.png`, Buffer.from(download, "utf-8"));
         images.push(fs.createReadStream(__dirname + `/cauca/cache/subnauticapage.png`));
     return images
 }
@@ -377,7 +377,7 @@ module.exports.handleReply = async function ({
         return api.sendMessage(`===[MAIN WEAPON]===\n- Đặt '${item[parseInt(body) - 1].name}' thành vũ khí chính thành công!`, threadID, messageID);
     }
     case 'location': {
-        const data = require("./cauca2/data.json");
+        const data = require("./cauca/data.json");
         if (body != 1 && body != 2) return api.sendMessage("Lựa chọn không hợp lệ!", threadID, messageID);
         api.unsendMessage(handleReply.messageID)
         var listLoca = '==[ LOCATION ]==\n',
