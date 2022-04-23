@@ -8,7 +8,7 @@ module.exports.config = {
 	usages: "sing [Text]",
 	cooldowns: 10,
 	envConfig: {
-		"YOUTUBE_API": "AIzaSyC1HQ3HHQSzgXdvlm5vZ2gWX0Ubk8GYD-c",
+		"YOUTUBE_API": "AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE",
 		"SOUNDCLOUD_API": "M4TSyS6eV0AcMynXkA3qQASGcOFQTWub"
 	}
 };
