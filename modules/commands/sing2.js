@@ -1,5 +1,5 @@
 module.exports.config = {
-	name: "sing2",
+	name: "sing",
 	version: "1.0.0",
 	hasPermssion: 0,
 	credits: "CatalizCS",//mod sing by Jukie
@@ -23,7 +23,7 @@ module.exports.handleReply = async function({ api, event, handleReply }) {
 	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
 	ytdl.getInfo(handleReply.link[event.body - 1]).then(res => {
 	let body = res.videoDetails.title;
-	api.sendMessage(`🎵Đang xử lý bài hát của bạn !\n-----------\n${body}\n-----------🎵\nXin Vui lòng Đợi !`, event.threadID, (err, info) =>
+	api.sendMessage(`🌺──────────🌺\n\n${body}\n\n🌺──────────🌺\n        𝐍𝐠𝐮𝐲𝐞̂̃𝐧 𝐆𝐢𝐚 𝐊𝐡𝐚𝐧𝐠`, event.threadID, (err, info) =>
 	setTimeout(() => {api.unsendMessage(info.messageID) } , 100000));
     });
 	try {
@@ -32,14 +32,15 @@ module.exports.handleReply = async function({ api, event, handleReply }) {
 		ytdl(handleReply.link[event.body - 1])
 			.pipe(createWriteStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`))
 			.on("close", () => {
-				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`).size > 26214400) return api.sendMessage('❗Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID);
-				else return api.sendMessage({body : `${body}`, attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID)
+				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`).size > 26214400) return api.sendMessage('❗𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐟𝐢𝐥𝐞 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐌𝐁.', event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID);
+				else return api.sendMessage({body : `🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n\n${body}\n\n🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n 
+           𝐍𝐠𝐮𝐲𝐞̂̃𝐧 𝐆𝐢𝐚 𝐊𝐡𝐚𝐧𝐠`, attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID)
 			})
-			.on("error", (error) => api.sendMessage(`❕Đã xảy ra vấn đề khi đang xử lý request, lỗi: \n${error}`, event.threadID, event.messageID));
+			.on("error", (error) => api.sendMessage(`❕Đ𝐚̃ 𝐱𝐚̉𝐲 𝐫𝐚 𝐯𝐚̂́𝐧 𝐝𝐞̂̀ 𝐤𝐡𝐢 𝐝𝐚𝐧𝐠 𝐱𝐮̛̉ 𝐥𝐲́ 𝐫𝐞𝐪𝐮𝐞𝐬𝐭, 𝐥𝐨̂̃𝐢: \n${error}`, event.threadID, event.messageID));
 	});
 	}
 	catch {
-		api.sendMessage("❌Không thể xử lý yêu cầu của bạn!", event.threadID, event.messageID);
+		api.sendMessage("❌𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐲́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧!", event.threadID, event.messageID);
 	}
 	return api.unsendMessage(handleReply.messageID);
 }
@@ -52,7 +53,7 @@ module.exports.run = async function({ api, event, args }) {
 	const youtube = new YouTubeAPI(global.configModule[this.config.name].YOUTUBE_API);
 	const keyapi = global.configModule[this.config.name].YOUTUBE_API
  
-	if (args.length == 0 || !args) return api.sendMessage('📢Phần tìm kiếm không được để trống!', event.threadID, event.messageID);
+	if (args.length == 0 || !args) return api.sendMessage('📢𝐓𝐡𝐢𝐞̂́𝐮 𝐭𝐮̛̀ 𝐤𝐡𝐨́𝐚 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦!', event.threadID, event.messageID);
 	const keywordSearch = args.join(" ");
 	const videoPattern = /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/gm;
 	const urlValid = videoPattern.test(args[0]);
@@ -64,13 +65,13 @@ module.exports.run = async function({ api, event, args }) {
 			ytdl(args[0])
 				.pipe(createWriteStream(__dirname + `/cache/${id}.m4a`))
 				.on("close", () => {
-					if (statSync(__dirname + `/cache/${id}.m4a`).size > 26214400) return api.sendMessage('❗Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`), event.messageID);
+					if (statSync(__dirname + `/cache/${id}.m4a`).size > 26214400) return api.sendMessage('❗𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐟𝐢𝐥𝐞 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐌𝐁.', event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`), event.messageID);
 					else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${id}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`) , event.messageID)
 				})
-				.on("error", (error) => api.sendMessage(`❕Đã xảy ra vấn đề khi đang xử lý request, lỗi: \n${error}`, event.threadID, event.messageID));
+				.on("error", (error) => api.sendMessage(`❕Đ𝐚̃ 𝐱𝐚̉𝐲 𝐫𝐚 𝐯𝐚̂́𝐧 𝐝𝐞̂̀ 𝐤𝐡𝐢 𝐝𝐚𝐧𝐠 𝐱𝐮̛̉ 𝐥𝐲́ 𝐫𝐞𝐪𝐮𝐞𝐬𝐭, 𝐥𝐨̂̃𝐢: \n${error}`, event.threadID, event.messageID));
 		}
 		catch {
-			api.sendMessage("❌Không thể xử lý yêu cầu của bạn!", event.threadID, event.messageID);
+			api.sendMessage("❌𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐲́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧!", event.threadID, event.messageID);
 		}
  
 	}
@@ -103,10 +104,10 @@ let getthumnail = (await axios.get(`${linkthumnail}`, { responseType: 'arraybuff
  
   imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
         /////=//////////////
-				msg += (`${num+=1}. ${value.title}\nTime: ${time}\nKênh: ${channel}\n🎵-----------------------🎵\n`);
+				msg += (`${num+=1}. ${value.title}\n𝐓𝐢𝐦𝐞: ${time}\n𝐊𝐞̂𝐧𝐡: ${channel}\n🌺──────────🌺\n`);
       }
  
-      var body = `📢 Có ${link.length} kết quả trùng với từ khoá tìm kiếm của bạn:\n🎵-----------------🎵\n${msg}\n🐧Hãy reply(phản hồi) chọn một trong những tìm kiếm trên`
+      var body = `📢𝐂𝐨́ ${link.length} 𝐤𝐞̂́𝐭 𝐪𝐮𝐚̉ 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n🌺──────────🌺\n${msg}\n🐧𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
  
 return api.sendMessage({attachment: imgthumnail, body: body}, event.threadID,(error, info) => global.client.handleReply.push({ 
   name: this.config.name, 
@@ -148,10 +149,10 @@ let datab = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=
  
   imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
         /////=//////////////
-				msg += (`${num+=1}. ${value.title}\nTime: ${time}\nKênh: ${channel}\n🎵-----------------------🎵\n`);
+				msg += (`${num+=1}. ${value.title}\n𝐓𝐢𝐦𝐞: ${time}\n𝐊𝐞̂𝐧𝐡: ${channel}\n🌺──────────🌺\n`);
       }
  
-      var body = `📢Có ${link.length} kết quả trùng với từ khoá tìm kiếm của bạn:\n🎵--------------------🎵\n${msg}\n🐧Hãy reply(phản hồi) chọn một trong những tìm kiếm trên`
+      var body = `📢𝐂𝐨́ ${link.length} 𝐤𝐞̂́𝐭 𝐪𝐮𝐚̉ 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n🌺──────────🌺\n${msg}\n🐧𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲(𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
 return api.sendMessage({attachment: imgthumnail, body: body}, event.threadID,(error, info) => global.client.handleReply.push({ 
   name: this.config.name, 
   messageID: info.messageID, 
@@ -167,3 +168,4 @@ return api.sendMessage({attachment: imgthumnail, body: body}, event.threadID,(er
  
  
 }
+
