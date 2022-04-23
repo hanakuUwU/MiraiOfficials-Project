@@ -63,7 +63,7 @@ function startBot(message) {
 //========= Check update from Github =========//
 ////////////////////////////////////////////////
 
-axios.get('https://raw.githubusercontent.com/KhangGia1810/MiraiOfficials-Project/main/package.json').then((res) => {
+axios.get('https://raw.githubusercontent.com/KhangGia1810/package/main/package.json').then((res) => {
   const local = JSON.parse(readFileSync('./package.json'))
 if (semver.lt(local.version, res.data.version)) {
   if (local.autoUpdate == true) {
