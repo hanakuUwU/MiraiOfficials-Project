@@ -6,3 +6,4 @@
 # B5: npm i axios
 # B6: npm i start ( không cũng được)
 # Lỗi sqlite_busy thì dùng npm i sqlite@5.0.2
+# Lỗi -122 thì xóa folder cache nhé, thích thì xóa lun data.sqlite cũng đc
