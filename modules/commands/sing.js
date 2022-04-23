@@ -14,7 +14,7 @@ module.exports.config = {
 		"axios": ""
 	},
 	envConfig: {
-		"YOUTUBE_API": "AIzaSyC1HQ3HHQSzgXdvlm5vZ2gWX0Ubk8GYD-c"
+		"YOUTUBE_API": "AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE"
 	}	
 };
  
