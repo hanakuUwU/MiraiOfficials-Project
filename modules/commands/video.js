@@ -2,14 +2,14 @@ module.exports.config={
   name:"video",
   version:"1.0.0",
   hasPermssion:0,
-  credits:"Kaneki mod by D-Jukie mod by chinhle",
+  credits:"D-Jukie",
   description:"Phát video thông qua link YouTube hoặc từ khoá tìm kiếm",
   commandCategory:"media",
   usages:"[searchVideos]",
   cooldowns:10,
   dependencies:{"ytdl-core":"","simple-youtube-api":""},
   	envConfig: {
-		"YOUTUBE_API": "AIzaSyC1HQ3HHQSzgXdvlm5vZ2gWX0Ubk8GYD-c"
+		"YOUTUBE_API": "AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE"
 	}	
 },
   module.exports.handleReply=async function({api:e,event:a,handleReply:t}){
