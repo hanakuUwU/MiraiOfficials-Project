@@ -60,16 +60,20 @@ module.exports.run = async function({ api, event, args }) {
  
 	if (urlValid) {
 		try {
-            var id = args[0].split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-			(id[2] !== undefined) ? id = id[2].split(/[^0-9a-z_\-]/i)[0] : id = id[0];
+     ytdl.getInfo(args[0]).then(res => {
+			let body = res.videoDetails.title;
+			var id = args[0].split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            (id[2] !== undefined) ? id = id[2].split(/[^0-9a-z_\-]/i)[0] : id = id[0];
 			ytdl(args[0])
 				.pipe(createWriteStream(__dirname + `/cache/${id}.m4a`))
 				.on("close", () => {
-					if (statSync(__dirname + `/cache/${id}.m4a`).size > 26214400) return api.sendMessage('❗𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐟𝐢𝐥𝐞 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐌𝐁.', event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`), event.messageID);
-					else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${id}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`) , event.messageID)
+					if (statSync(__dirname + `/cache/${id}.m4a`).size > 26214400) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐟𝐢𝐥𝐞 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐌𝐁!', event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`), event.messageID);
+					else return api.sendMessage({body : `🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n\n${body}\n\n🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n 
+           𝐍𝐠𝐮𝐲𝐞̂̃𝐧 𝐆𝐢𝐚 𝐊𝐡𝐚𝐧𝐠`, attachment: createReadStream(__dirname + `/cache/${id}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`) , event.messageID)
 				})
-				.on("error", (error) => api.sendMessage(`❕Đ𝐚̃ 𝐱𝐚̉𝐲 𝐫𝐚 𝐯𝐚̂́𝐧 𝐝𝐞̂̀ 𝐤𝐡𝐢 𝐝𝐚𝐧𝐠 𝐱𝐮̛̉ 𝐥𝐲́ 𝐫𝐞𝐪𝐮𝐞𝐬𝐭, 𝐥𝐨̂̃𝐢: \n${error}`, event.threadID, event.messageID));
-		}
+				.on("error", (error) => api.sendMessage(`Đ𝐚̃ 𝐱𝐚̉𝐲 𝐫𝐚 𝐯𝐚̂́𝐧 𝐝𝐞̂̀ 𝐤𝐡𝐢 𝐱𝐮̛̉ 𝐥𝐲́ 𝐫𝐞𝐪𝐮𝐞𝐬𝐭, 𝐥𝐨̂̃𝐢: \n${error}`, event.threadID, event.messageID));
+			});
+			}
 		catch {
 			api.sendMessage("❌𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐲́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧!", event.threadID, event.messageID);
 		}
@@ -163,9 +167,4 @@ return api.sendMessage({attachment: imgthumnail, body: body}, event.threadID,(er
 	}
   for(let ii = 1; ii < 7 ; ii++) {
   unlinkSync(__dirname + `/cache/${ii}.png`)}
- 
- 
- 
- 
 }
-
