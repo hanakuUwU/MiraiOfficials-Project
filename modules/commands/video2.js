@@ -23,7 +23,7 @@ module.exports.handleReply = async function({ api, event, handleReply }) {
 	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
 	ytdl.getInfo(handleReply.link[event.body - 1]).then(res => {
 	let body = res.videoDetails.title;
-	api.sendMessage(`${body}`, event.threadID, (err, info) =>
+	api.sendMessage(`🌺──────────🌺\n${body}\n🌺──────────🌺`, event.threadID, (err, info) =>
 	setTimeout(() => {api.unsendMessage(info.messageID) } , 100000));
     });
 	try {
@@ -33,7 +33,7 @@ module.exports.handleReply = async function({ api, event, handleReply }) {
 			.pipe(createWriteStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`))
 			.on("close", () => {
 				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`).size > 26214400) return api.sendMessage('ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ᴠɪ̀ ᴅᴜɴɢ ʟᴜ̛ᴏ̛̣ɴɢ ʟᴏ̛́ɴ ʜᴏ̛ɴ 25ᴍʙ.', event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`), event.messageID);
-				else return api.sendMessage({body : `${body}`, attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`), event.messageID)
+				else return api.sendMessage({body : `🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n${body}\n🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺`, attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`), event.messageID)
 			})
 			.on("error", (error) => api.sendMessage(`ᴆᴀ̃ xᴀ̉ʏ ʀᴀ ᴠᴀ̂́ɴ ᴆᴇ̂̀ ᴋʜɪ ᴆᴀɴɢ xᴜ̛̉ ʟʏ́ ʀᴇǫᴜᴇsᴛ, ʟᴏ̂̃ɪ: \n${error}`, event.threadID, event.messageID));
 	});
