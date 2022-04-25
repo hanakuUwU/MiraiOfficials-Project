@@ -32,15 +32,15 @@ module.exports.handleReply = async function({ api, event, handleReply }) {
 		ytdl(handleReply.link[event.body - 1])
 			.pipe(createWriteStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`))
 			.on("close", () => {
-				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`).size > 26214400) return api.sendMessage('ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ᴠɪ̀ ᴅᴜɴɢ ʟᴜ̛ᴏ̛̣ɴɢ ʟᴏ̛́ɴ ʜᴏ̛ɴ 25ᴍʙ.', event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`), event.messageID);
+				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`).size > 26214400) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐟𝐢𝐥𝐞 𝐜𝐨́ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐦𝐛.', event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`), event.messageID);
 				else return api.sendMessage({body : `🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n\n${body}\n\n🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n 
            𝐍𝐠𝐮𝐲𝐞̂̃𝐧 𝐆𝐢𝐚 𝐊𝐡𝐚𝐧𝐠`, attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.mp4`), event.messageID)
 			})
-			.on("error", (error) => api.sendMessage(`ᴆᴀ̃ xᴀ̉ʏ ʀᴀ ᴠᴀ̂́ɴ ᴆᴇ̂̀ ᴋʜɪ ᴆᴀɴɢ xᴜ̛̉ ʟʏ́ ʀᴇǫᴜᴇsᴛ, ʟᴏ̂̃ɪ: \n${error}`, event.threadID, event.messageID));
+			.on("error", (error) => api.sendMessage(`Đ𝐚̃ 𝐱𝐚̉𝐲 𝐫𝐚 𝐥𝐨̂̃𝐢 𝐤𝐡𝐢 𝐱𝐮̛̉ 𝐥𝐢́ 𝐫𝐞𝐪𝐮𝐞𝐬𝐭, 𝐥𝐨̂̃𝐢:: \n${error}`, event.threadID, event.messageID));
 	});
 	}
 	catch {
-		api.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ xᴜ̛̉ ʟʏ́ ʏᴇ̂ᴜ ᴄᴀ̂̀ᴜ ᴄᴜ̉ᴀ ʙᴀ̣ɴ!", event.threadID, event.messageID);
+		api.sendMessage("𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐢́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧!", event.threadID, event.messageID);
 	}
 	return api.unsendMessage(handleReply.messageID);
 }
@@ -53,7 +53,7 @@ module.exports.run = async function({ api, event, args }) {
 	const youtube = new YouTubeAPI(global.configModule[this.config.name].YOUTUBE_API);
 	const keyapi = global.configModule[this.config.name].YOUTUBE_API
  
-	if (args.length == 0 || !args) return api.sendMessage('ᴘʜᴀ̂̀ɴ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴋʜᴏ̂ɴɢ ᴆᴜ̛ᴏ̛̣ᴄ ᴆᴇ̂̉ ᴛʀᴏ̂́ɴɢ!', event.threadID, event.messageID);
+	if (args.length == 0 || !args) return api.sendMessage('📢𝐓𝐡𝐢𝐞̂́𝐮 𝐭𝐮̛̀ 𝐤𝐡𝐨́𝐚 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦!', event.threadID, event.messageID);
 	const keywordSearch = args.join(" ");
 	const videoPattern = /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/gm;
 	const urlValid = videoPattern.test(args[0]);
@@ -75,7 +75,7 @@ module.exports.run = async function({ api, event, args }) {
 			});
 			}
 		catch {
-			api.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ xᴜ̛̉ ʟʏ́ ʏᴇ̂ᴜ ᴄᴀ̂̀ᴜ ᴄᴜ̉ᴀ ʙᴀ̣ɴ!", event.threadID, event.messageID);
+			api.sendMessage("𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐢́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧!", event.threadID, event.messageID);
 		}
  
 	}
@@ -111,7 +111,7 @@ let getthumnail = (await axios.get(`${linkthumnail}`, { responseType: 'arraybuff
 				msg += (`${num+=1}. ${value.title}\nᴛɪᴍᴇ: ${time}\nᴋᴇ̂ɴʜ: ${channel}\n-----------------------\n`);
       }
  
-      var body = `🎼 ᴄᴏ́ ${link.length} ᴋᴇ̂́ᴛ ǫᴜᴀ̉ ᴛʀᴜ̀ɴɢ ᴠᴏ̛́ɪ ᴛᴜ̛̀ ᴋʜᴏᴀ́ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴄᴜ̉ᴀ ʙᴀ̣ɴ:\n👇👇👇👇👇\n${msg}\nʜᴀ̃ʏ ʀᴇᴘʟʏ(ᴘʜᴀ̉ɴ ʜᴏ̂̀ɪ) ᴄʜᴏ̣ɴ ᴍᴏ̣̂ᴛ ᴛʀᴏɴɢ ɴʜᴜ̛̃ɴɢ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴛʀᴇ̂ɴ`
+      var body = `🎼 𝐂𝐨́ ${link.length} 𝐊𝐞̂́𝐭 𝐪𝐮𝐚̉ 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨́𝐚 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n👇👇👇👇👇\n${msg}\n𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐤𝐞̂́𝐭 𝐪𝐮𝐚̉ 𝐭𝐫𝐞̂𝐧`
  
 return api.sendMessage({attachment: imgthumnail, body: body}, event.threadID,(error, info) => global.client.handleReply.push({ 
   name: this.config.name, 
@@ -156,7 +156,7 @@ let datab = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=
 				msg += (`${num+=1}. ${value.title}\nᴛɪᴍᴇ: ${time}\nᴋᴇ̂ɴʜ: ${channel}\n-----------------------\n`);
       }
  
-      var body = `🎼 ᴄᴏ́ ${link.length} ᴋᴇ̂́ᴛ ǫᴜᴀ̉ ᴛʀᴜ̀ɴɢ ᴠᴏ̛́ɪ ᴛᴜ̛̀ ᴋʜᴏᴀ́ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴄᴜ̉ᴀ ʙᴀ̣ɴ:\n👇👇👇👇👇\n${msg}\nʜᴀ̃ʏ ʀᴇᴘʟʏ(ᴘʜᴀ̉ɴ ʜᴏ̂̀ɪ) ᴄʜᴏ̣ɴ ᴍᴏ̣̂ᴛ ᴛʀᴏɴɢ ɴʜᴜ̛̃ɴɢ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴛʀᴇ̂ɴ`
+      var body = `🎼 🎼 𝐂𝐨́ ${link.length} 𝐊𝐞̂́𝐭 𝐪𝐮𝐚̉ 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨́𝐚 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n👇👇👇👇👇\n${msg}\n𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐤𝐞̂́𝐭 𝐪𝐮𝐚̉ 𝐭𝐫𝐞̂𝐧`
 return api.sendMessage({attachment: imgthumnail, body: body}, event.threadID,(error, info) => global.client.handleReply.push({ 
   name: this.config.name, 
   messageID: info.messageID, 
