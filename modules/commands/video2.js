@@ -59,16 +59,20 @@ module.exports.run = async function({ api, event, args }) {
  
 	if (urlValid) {
 		try {
-            var id = args[0].split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-			(id[2] !== undefined) ? id = id[2].split(/[^0-9a-z_\-]/i)[0] : id = id[0];
+            ytdl.getInfo(args[0]).then(res => {
+			let body = res.videoDetails.title;
+			var id = args[0].split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            (id[2] !== undefined) ? id = id[2].split(/[^0-9a-z_\-]/i)[0] : id = id[0];
 			ytdl(args[0])
 				.pipe(createWriteStream(__dirname + `/cache/${id}.mp4`))
 				.on("close", () => {
-					if (statSync(__dirname + `/cache/${id}.mp4`).size > 26214400) return api.sendMessage('ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ᴠɪ̀ ᴅᴜɴɢ ʟᴜ̛ᴏ̛̣ɴɢ ʟᴏ̛́ɴ ʜᴏ̛ɴ 25ᴍʙ.', event.threadID, () => unlinkSync(__dirname + `/cache/${id}.mp4`), event.messageID);
-					else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${id}.mp4`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.mp4`) , event.messageID)
+					if (statSync(__dirname + `/cache/${id}.mp4`).size > 26214400) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐟𝐢𝐥𝐞 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐌𝐁!', event.threadID, () => unlinkSync(__dirname + `/cache/${id}.mp4`), event.messageID);
+					else return api.sendMessage({body : `🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n\n${body}\n\n🌺────• 𝐌𝐮𝐬𝐢𝐜 •────🌺\n 
+           𝐍𝐠𝐮𝐲𝐞̂̃𝐧 𝐆𝐢𝐚 𝐊𝐡𝐚𝐧𝐠`, attachment: createReadStream(__dirname + `/cache/${id}.mp4`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.mp4`) , event.messageID)
 				})
-				.on("error", (error) => api.sendMessage(`ᴆᴀ̃ xᴀ̉ʏ ʀᴀ ᴠᴀ̂́ɴ ᴆᴇ̂̀ ᴋʜɪ ᴆᴀɴɢ xᴜ̛̉ ʟʏ́ ʀᴇǫᴜᴇsᴛ, ʟᴏ̂̃ɪ: \n${error}`, event.threadID, event.messageID));
-		}
+				.on("error", (error) => api.sendMessage(`Đ𝐚̃ 𝐱𝐚̉𝐲 𝐫𝐚 𝐯𝐚̂́𝐧 𝐝𝐞̂̀ 𝐤𝐡𝐢 𝐱𝐮̛̉ 𝐥𝐲́ 𝐫𝐞𝐪𝐮𝐞𝐬𝐭, 𝐥𝐨̂̃𝐢: \n${error}`, event.threadID, event.messageID));
+			});
+			}
 		catch {
 			api.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ xᴜ̛̉ ʟʏ́ ʏᴇ̂ᴜ ᴄᴀ̂̀ᴜ ᴄᴜ̉ᴀ ʙᴀ̣ɴ!", event.threadID, event.messageID);
 		}
