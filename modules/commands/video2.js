@@ -23,7 +23,7 @@ module.exports.handleReply = async function({ api, event, handleReply }) {
 	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
 	ytdl.getInfo(handleReply.link[event.body - 1]).then(res => {
 	let body = res.videoDetails.title;
-	api.sendMessage(`🌺──────────🌺\n${body}\n🌺──────────🌺`, event.threadID, (err, info) =>
+	api.sendMessage(`🌺──────────🌺\n${body}\n🌺──────────🌺\n𝐕𝐮𝐢 𝐥𝐨̀𝐧𝐠 𝐜𝐡𝐨̛̀ 𝐦𝐨̣̂𝐭 𝐜𝐡𝐮́𝐭`, event.threadID, (err, info) =>
 	setTimeout(() => {api.unsendMessage(info.messageID) } , 100000));
     });
 	try {
