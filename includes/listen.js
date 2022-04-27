@@ -1,21 +1,19 @@
-module.exports = function({ api, models }) {
+module.exports = function({ api, models, event, args }) {
 
 	const Users = require("./controllers/users")({ models, api }),
 				Threads = require("./controllers/threads")({ models, api }),
-				Currencies = require("./controllers/currencies")({ models });
+				Currencies = require("./controllers/currencies")({ models })
 	const logger = require("../utils/log.js");
 	const fs = require("fs");
 	const moment = require('moment-timezone');
 	const axios = require("axios");
-
 	//////////////////////////////////////////////////////////////////////
 	//========= Push all variable from database to environment =========//
 	//////////////////////////////////////////////////////////////////////
 	
 (async function () {
-
     try {
-        logger(global.getText('listen', 'startLoadEnvironment'), '[ DATABASE ]');
+       logger(global.getText('listen', 'startLoadEnvironment'), '[ DATABASE ]');
         let threads = await Threads.getAll(),
             users = await Users.getAll(['userID', 'name', 'data']),
             currencies = await Currencies.getAll(['userID']);
@@ -47,26 +45,24 @@ module.exports = function({ api, models }) {
             global['data']['commandBanned']['set'](idUsers, dataU['data']['commandBanned']);
         }
         for (const dataC of currencies) global.data.allCurrenciesID.push(String(dataC['userID']));
-        logger.loader(global.getText('listen', 'loadedEnvironmentUser')), logger(global.getText('listen','successLoadEnvironment'),'[ DATABASE ]');
+        logger.loader(global.getText('listen', 'loadedEnvironmentUser')),logger(global.getText('listen','successLoadEnvironment'),'[ DATABASE ]');
+    	
     } catch (error) {
         return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
     }
 }());
-	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by GK" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "Bot Messenger" : global.config.BOTNAME}`, "[ BOT INFO ]");
 	
 	///////////////////////////////////////////////
 	//========= Require all handle need =========//
 	//////////////////////////////////////////////
-
 	const handleCommand = require("./handle/handleCommand")({ api, models, Users, Threads, Currencies });
 	const handleCommandEvent = require("./handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
 	const handleReply = require("./handle/handleReply")({ api, models, Users, Threads, Currencies });
 	const handleReaction = require("./handle/handleReaction")({ api, models, Users, Threads, Currencies });
 	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
+	const handleRefresh = require("./handle/handleRefresh")({ api, models, Users, Threads, Currencies });
 	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
-  const handleUnsend = require("./handle/handleUnsend")({ api })
-	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
-
 
 	//DEFINE DATLICH PATH
 	const datlichPath = __dirname + '/../modules/commands/cache/datlich.json';
@@ -111,10 +107,9 @@ module.exports = function({ api, models }) {
 	});
 
 
-	const tenMinutes = 10 * 60 * 1000;
+		const tenMinutes = 10 * 60 * 1000;
 
-	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
-	const checkAndExecuteEvent = async () => {
+		const checkAndExecuteEvent = async () => {
 
 		/*smol check*/
 		if (!fs.existsSync(datlichPath)) fs.writeFileSync(datlichPath, JSON.stringify({}, null, 4));
@@ -178,15 +173,18 @@ module.exports = function({ api, models }) {
 
 	}
 	setInterval(checkAndExecuteEvent, tenMinutes/10);
+  // get time bật bot
+  var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
+   var thu = moment.tz('Asia/Ho_Chi_Minh').format('dddd');
+  if (thu == 'Sunday') thu = 'Chủ nhật'
+  if (thu == 'Monday') thu = 'Thứ'
+  if (thu == 'Tuesday') thu = 'Thứ 3'
+  if (thu == 'Wednesday') thu = 'Thứ 4'
+  if (thu == "Thursday") thu = 'Thứ 5'
+  if (thu == 'Friday') thu = 'Thứ 6'
+  if (thu == 'Saturday') thu = 'Thứ 7'
+  logger(`${thu} || ${gio}`, "[ Time ]")
   
-  /////////////////////////////////////////////////
-  //=========== Get time khi bot bật ============//
-  //========= Không có tác dụng như upt =========//
-  /////////////////////////////////////////////////
-
-	var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
-  logger(`====== ${gio} ======`, "» •Time• «");
-
 	//////////////////////////////////////////////////
 	//========= Send event to handle need =========//
 	/////////////////////////////////////////////////
@@ -204,6 +202,7 @@ module.exports = function({ api, models }) {
 				break;
 			case "event":
 				handleEvent({ event });
+				handleRefresh({ event });
 				break;
 			case "message_reaction":
 				if(event.senderID == api.getCurrentUserID() && event.reaction == '😠') {
