@@ -1,19 +1,213 @@
-module.exports.config={
-  name:"video",
-  version:"1.0.0",
-  hasPermssion:0,
-  credits:"D-Jukie",
-  description:"Phát video thông qua link YouTube hoặc từ khoá tìm kiếm",
-  commandCategory:"media",
-  usages:"[searchVideos]",
-  cooldowns:10,
-  dependencies:{"ytdl-core":"","simple-youtube-api":""},
-  	envConfig: {
-		"YOUTUBE_API": "AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE"
-	}	
-},
-  module.exports.handleReply=async function({api:e,event:a,handleReply:t}){
-    const n=global.nodemodule.axios,s=global.nodemodule["fs-extra"],
-    i=(global.nodemodule.request,await n.get("https://raw.githubusercontent.com/quyenkaneki/data/main/video.json")),
-    r=i.data.keyVideo.length,o=i.data.keyVideo[Math.floor(Math.random()*r)],{createReadStream:d,createWriteStream:m,unlinkSync:l,statSync:h}=global.nodemodule["fs-extra"];var c,
-    u=a.body;if(c=u,isNaN(c)||(c<1||c>6))return e.sendMessage("ᴄʜᴏ̣ɴ ᴛᴜ̛̀ 1 -> 6 ᴛʜᴏ̂ɪ ʙᴀʙʏ. ɪᴜ UwU ❤️",a.threadID,a.messageID);e.unsendMessage(t.messageID);try{var g={method:"GET",url:"https://ytstream-download-youtube-videos.p.rapidapi.com/dl",params:{id:`${t.link[a.body-1]}`},headers:{"x-rapidapi-host":"ytstream-download-youtube-videos.p.rapidapi.com","x-rapidapi-key":`${o.API_KEY}`}};var p=(await n.request(g)).data,y=p.title;if("fail"==p.status)return e.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ɴᴀ̀ʏ.",a.threadID);var f=Object.keys(p.link)[1],b=p.link[f][0];path1=__dirname+"/cache/1.mp4";const i=(await n.get(`${b}`,{responseType:"arraybuffer"})).data;return s.writeFileSync(path1,Buffer.from(i,"utf-8")),e.unsendMessage(t.messageID),s.statSync(__dirname+"/cache/1.mp4").size>26e6?e.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ᴠɪ̀ ᴅᴜɴɢ ʟᴜ̛ᴏ̛̣ɴɢ ʟᴏ̛́ɴ ʜᴏ̛ɴ 25ᴍʙ.",a.threadID,(()=>l(__dirname+"/cache/1.mp4")),a.messageID):e.sendMessage({body:`» ${y}`,attachment:s.createReadStream(__dirname+"/cache/1.mp4")},a.threadID,(()=>s.unlinkSync(__dirname+"/cache/1.mp4")),a.messageID)}catch{return e.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ɴᴀ̀ʏ.!",a.threadID,a.messageID)}for(let e=1;e<7;e++)l(__dirname+`/cache/${e}.png`)},module.exports.run=async function({api:e,event:a,args:t}){const n=global.nodemodule.axios,s=global.nodemodule["fs-extra"],i=(global.nodemodule.request,await n.get("https://raw.githubusercontent.com/quyenkaneki/data/main/video.json")),r=i.data.keyVideo.length,o=i.data.keyVideo[Math.floor(Math.random()*r)],d=(global.nodemodule["ytdl-core"],global.nodemodule["simple-youtube-api"]),{createReadStream:m,createWriteStream:l,unlinkSync:h,statSync:c}=global.nodemodule["fs-extra"];var u=["AIzaSyBRycaxsBIsmtjAtFJJYujIteWFmpiAtOg"];const g=u[Math.floor(Math.random()*u.length)],p=new d(g);if(0==t.length||!t)return e.sendMessage("» ᴘʜᴀ̂̀ɴ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴋʜᴏ̂ɴɢ ᴆᴜ̛ᴏ̛̣ᴄ ᴆᴇ̂̉ ᴛʀᴏ̂́ɴɢ!",a.threadID,a.messageID);const y=t.join(" ");if(0==t.join(" ").indexOf("https://")){var f={method:"GET",url:"https://ytstream-download-youtube-videos.p.rapidapi.com/dl",params:{id:t.join(" ").split(/^.*(youtu.be\/|v\/|embed\/|watch\?|youtube.com\/user\/[^#]*#([^\/]*?\/)*)\??v?=?([^#\&\?]*).*/)[3]},headers:{"x-rapidapi-host":"ytstream-download-youtube-videos.p.rapidapi.com","x-rapidapi-key":`${o.API_KEY}`}};var b=(await n.request(f)).data,v=b.title;if("fail"==b.status)return e.sendMessage("Không thể gửi file này.",a.threadID);var k=Object.keys(b.link)[1],I=b.link[k][0];path1=__dirname+"/cache/1.mp4";const i=(await n.get(`${I}`,{responseType:"arraybuffer"})).data;return s.writeFileSync(path1,Buffer.from(i,"utf-8")),s.statSync(__dirname+"/cache/1.mp4").size>26e6?e.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ ɢᴜ̛̉ɪ ғɪʟᴇ ᴠɪ̀ ᴅᴜɴɢ ʟᴜ̛ᴏ̛̣ɴɢ ʟᴏ̛́ɴ ʜᴏ̛ɴ 25ᴍʙ.",a.threadID,(()=>h(__dirname+"/cache/1.mp4")),a.messageID):e.sendMessage({body:`» ${v}`,attachment:s.createReadStream(__dirname+"/cache/1.mp4")},a.threadID,(()=>s.unlinkSync(__dirname+"/cache/1.mp4")),a.messageID)}try{const t=global.nodemodule["fs-extra"],n=global.nodemodule.axios;var w=[],_="",D=0,S=0,M=[],$=await p.searchVideos(y,6);for(let e of $){if(void 0===e.id)return;w.push(e.id);e.id;let a=__dirname+`/cache/${S+=1}.png`,s=`https://img.youtube.com/vi/${e.id}/hqdefault.jpg`,i=(await n.get(`${s}`,{responseType:"arraybuffer"})).data,r=(await n.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${e.id}&key=${g}`)).data.items[0].contentDetails.duration.slice(2).replace("S","").replace("M",":");(await n.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${e.id}&key=${g}`)).data.items[0].snippet.channelTitle;if(t.writeFileSync(a,Buffer.from(i,"utf-8")),M.push(t.createReadStream(__dirname+`/cache/${S}.png`)),1==(D=D+=1))var x="⓵";if(2==D)x="⓶";if(3==D)x="⓷";if(4==D)x="⓸";if(5==D)x="⓹";if(6==D)x="⓺";_+=`${x} 《${r}》 ${e.title}\n\n`}var j=`»🔎 ᴄᴏ́ ${w.length} ᴅᴀɴʜ sᴀ́ᴄʜ ᴛʀᴜ̀ɴɢ ᴠᴏ̛́ɪ ᴛᴜ̛̀ ᴋʜᴏᴀ́ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴄᴜ̉ᴀ ʙᴀ̣ɴ:\n\n${_}» ʜᴀ̃ʏ ʀᴇᴘʟʏ(ᴘʜᴀ̉ɴ ʜᴏ̂̀ɪ ᴛʜᴇᴏ sᴏ̂́ ᴛʜᴜ̛́ ᴛᴜ̛̣) ᴄʜᴏ̣ɴ ᴍᴏ̣̂ᴛ ᴛʀᴏɴɢ ɴʜᴜ̛̃ɴɢ ᴛɪ̀ᴍ ᴋɪᴇ̂́ᴍ ᴛʀᴇ̂ɴ`;return e.sendMessage({attachment:M,body:j},a.threadID,((e,t)=>global.client.handleReply.push({name:this.config.name,messageID:t.messageID,author:a.senderID,link:w})),a.messageID)}catch(t){return e.sendMessage("ᴋʜᴏ̂ɴɢ ᴛʜᴇ̂̉ xᴜ̛̉ ʟʏ́ ʀᴇǫᴜᴇsᴛ ᴅᴏ ᴆᴀ̃ ᴘʜᴀ́ᴛ sɪɴʜ ʟᴏ̂̃ɪ ᴍᴏᴅᴜʟ: "+t.message,a.threadID,a.messageID)}};
+module.exports.config = {
+    name: "video",
+    version: "1.0.0",
+    hasPermssion: 0,
+    credits: "D-Jukie",
+    description: "Phát video thông qua link YouTube hoặc từ khoá tìm kiếm",
+    commandCategory: "Phương tiện",
+    usages: "[searchVideos]",
+    cooldowns: 10,
+    dependencies: {
+        "ytdl-core": "",
+        "simple-youtube-api": ""
+    },
+    envConfig: {
+        "YOUTUBE_API": "AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE"
+    }
+};
+
+module.exports.handleReply = async function ({
+    api,
+    event,
+    handleReply
+}) {
+    const axios = global.nodemodule['axios'];
+    const fs = global.nodemodule["fs-extra"];
+    const request = global.nodemodule["request"];
+    const res = await axios.get(`https://shiron-official.github.io/apikey-DATA/apikey_rapiapi.json`);
+    const length_KEY = res.data.keyVideo.length
+    const randomAPIKEY = res.data.keyVideo[Math.floor(Math.random() * length_KEY)]
+    const {
+        createReadStream,
+        createWriteStream,
+        unlinkSync,
+        statSync
+    } = global.nodemodule["fs-extra"];
+    try {
+        var options = {
+                  method: 'GET',
+                  url: 'https://ytstream-download-youtube-videos.p.rapidapi.com/dl',
+                  params: {id: `${handleReply.link[event.body - 1]}`, geo: 'DE'},
+                  headers: {
+                    'x-rapidapi-host': 'ytstream-download-youtube-videos.p.rapidapi.com',
+                    'x-rapidapi-key': `${randomAPIKEY}`
+                  }
+                };
+        const data = await axios.request(options);
+        path1 = __dirname + `/cache/${event.senderID}.mp4`
+        const getms = (await axios.get(`${data.data.link["18"]}`, {
+            responseType: "arraybuffer"
+        })).data;
+        fs.writeFileSync(path1, Buffer.from(getms, "utf-8"));
+        api.unsendMessage(handleReply.messageID)
+        if (fs.statSync(__dirname + `/cache/${event.senderID}.mp4`).size > 104000000) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐯𝐢𝐝𝐞𝐨 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐦𝐛', event.threadID, () => unlinkSync(__dirname + `/cache/${event.senderID}.mp4`), event.messageID);
+        else return api.sendMessage({
+            body: `🎬──── •🎶• ────🎬\n» ${data.data.title} «\n🎬──── •🎶• ────🎬`,
+            attachment: fs.createReadStream(__dirname + `/cache/${event.senderID}.mp4`)
+        }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.senderID}.mp4`), event.messageID)
+    } catch {
+        return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐲́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧', event.threadID, event.messageID);
+    }
+    return api.unsendMessage(handleReply.messageID);
+}
+module.exports.run = async function ({
+    api,
+    event,
+    args
+}) {
+    const axios = global.nodemodule['axios'];
+    const fs = global.nodemodule["fs-extra"];
+    const request = global.nodemodule["request"];
+    const ytdl = global.nodemodule["ytdl-core"];
+    const YouTubeAPI = global.nodemodule["simple-youtube-api"];
+    const res = await axios.get(`https://shiron-official.github.io/apikey-DATA/apikey_rapiapi.json`);
+    const length_KEY = res.data.keyVideo.length
+    const randomAPIKEY = res.data.keyVideo[Math.floor(Math.random() * length_KEY)]
+    const {
+        createReadStream,
+        createWriteStream,
+        unlinkSync,
+        statSync
+    } = global.nodemodule["fs-extra"];
+    const youtube = new YouTubeAPI(global.configModule[this.config.name].YOUTUBE_API);
+    const keyapi = global.configModule[this.config.name].YOUTUBE_API
+    if (args.length == 0 || !args) return api.sendMessage('» 𝐏𝐡𝐚̂̀𝐧 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐤𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐛𝐨̉ 𝐭𝐫𝐨̂́𝐧𝐠', event.threadID, event.messageID);
+    const keywordSearch = args.join(" ");
+    if (args.join(" ").indexOf("https://") == 0) {
+        var url = args.join(" ")
+        var urlsplit = url.split(/^.*(youtu.be\/|v\/|embed\/|watch\?|youtube.com\/user\/[^#]*#([^\/]*?\/)*)\??v?=?([^#\&\?]*).*/);
+        const linkUrlSing = urlsplit[3]
+        var options = {
+                      method: 'GET',
+                      url: 'https://ytstream-download-youtube-videos.p.rapidapi.com/dl',
+                      params: {id: `${linkUrlSing}`, geo: 'DE'},
+                      headers: {
+                        'x-rapidapi-host': 'ytstream-download-youtube-videos.p.rapidapi.com',
+                        'x-rapidapi-key': `${randomAPIKEY}`
+                      }
+                    };
+        const data = await axios.request(options);
+        path1 = __dirname + `/cache/${event.senderID}.mp4`
+        const getms = (await axios.get(`${data.data.link["18"]}`, {
+            responseType: "arraybuffer"
+        })).data;
+        fs.writeFileSync(path1, Buffer.from(getms, "utf-8"));
+        if (fs.statSync(__dirname + `/cache/${event.senderID}.mp4`).size > 104000000) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐯𝐢𝐝𝐞𝐨 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐦𝐛', event.threadID, () => unlinkSync(__dirname + `/cache/${event.senderID}.mp4`), event.messageID);
+        else return api.sendMessage({
+            body: `🎬──── •🎶• ────🎬\n» ${data.data.title} «\n🎬──── •🎶• ────🎬`,
+            attachment: fs.createReadStream(__dirname + `/cache/${event.senderID}.mp4`)
+        }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.senderID}.mp4`), event.messageID)
+    } else {
+        try {
+            var link = [],
+                msg = "",
+                num = 0,
+                numb = 0;
+            var imgthumnail = [];
+            var results = await youtube.searchVideos(keywordSearch, 6);
+            for (let value of results) {
+                if (typeof value.id == 'undefined') return;
+                link.push(value.id);
+                var idd = value.id;
+                let datab = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${value.id}&key=${keyapi}`)).data;
+                let gettime = datab.items[0].contentDetails.duration;
+                let timeee = (gettime.slice(2));
+                let timee = timeee.replace('S', '')
+                let time = timee.replace('M', ':')
+                let datac = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${value.id}&key=${keyapi}`)).data;
+                let channel = datac.items[0].snippet.channelTitle;
+                let folderthumnail = __dirname + `/cache/${numb+=1}.png`;
+                let linkthumnail = `https://img.youtube.com/vi/${value.id}/maxresdefault.jpg`;
+                let getthumnail = (await axios.get(`${linkthumnail}`, {
+                    responseType: 'arraybuffer'
+                })).data;
+                fs.writeFileSync(folderthumnail, Buffer.from(getthumnail, 'utf-8'));
+
+                imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
+                num = num+=1
+                if (num == 1) var num1 = "🐳 ⓵"
+                if (num == 2) var num1 = "🐳 ⓶" 
+                if (num == 3) var num1 = "🐳 ⓷" 
+                if (num == 4) var num1 = "🐳 ⓸" 
+                if (num == 5) var num1 = "🐳 ⓹" 
+                if (num == 6) var num1 = "🐳 ⓺"
+                msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${time}\n[📻] 𝐊𝐞̂𝐧𝐡: ${channel}\n---------------------------\n`);
+            }
+            var body = `»🔎 𝐂𝐨́ ${link.length} 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n\n${msg}\n» 𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢 𝐭𝐡𝐞𝐨 𝐬𝐨̂́ 𝐭𝐡𝐮̛́ 𝐭𝐮̛̣) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
+
+            return api.sendMessage({
+                    attachment: imgthumnail,
+                    body: body
+                }, event.threadID, (error, info) => global.client.handleReply.push({
+                    name: this.config.name,
+                    messageID: info.messageID,
+                    author: event.senderID,
+                    link
+                }),
+                event.messageID);
+        } catch (error) {
+            const fs = global.nodemodule["fs-extra"];
+            const axios = global.nodemodule["axios"];
+            var link = [],
+                msg = "",
+                num = 0,
+                numb = 0;
+            var imgthumnail = []
+            var results = await youtube.searchVideos(keywordSearch, 6);
+            for (let value of results) {
+                if (typeof value.id == 'undefined') return;
+                link.push(value.id);
+                var idd = value.id;
+                let folderthumnail = __dirname + `/cache/${numb+=1}.png`;
+
+                let linkthumnail = `https://img.youtube.com/vi/${value.id}/hqdefault.jpg`;
+
+                let getthumnail = (await axios.get(`${linkthumnail}`, {
+                    responseType: 'arraybuffer'
+                })).data;
+                let datab = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${value.id}&key=${keyapi}`)).data;
+                let gettime = datab.items[0].contentDetails.duration;
+                let timeee = (gettime.slice(2));
+                let timee = timeee.replace('S', '')
+                let time = timee.replace('M', ':')
+
+                let datac = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${value.id}&key=${keyapi}`)).data;
+                let channel = datac.items[0].snippet.channelTitle;
+                fs.writeFileSync(folderthumnail, Buffer.from(getthumnail, 'utf-8'));
+                imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
+                num = num+=1
+                if (num == 1) var num1 = "🐳 ⓵"
+                if (num == 2) var num1 = "🐳 ⓶"
+                if (num == 3) var num1 = "🐳 ⓷"
+                if (num == 4) var num1 = "🐳 ⓸"
+                if (num == 5) var num1 = "🐳 ⓹"
+                if (num == 6) var num1 = "🐳 ⓺"
+                msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${time}\n[📻] 𝐊𝐞̂𝐧𝐡: ${channel}\n---------------------------\n`);
+            }
+            var body = `»🔎 𝐂𝐨́ ${link.length} 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n\n${msg}\n» 𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢 𝐭𝐡𝐞𝐨 𝐬𝐨̂́ 𝐭𝐡𝐮̛́ 𝐭𝐮̛̣) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
+            return api.sendMessage({
+                    attachment: imgthumnail,
+                    body: body
+                }, event.threadID, (error, info) => global.client.handleReply.push({
+                    name: this.config.name,
+                    messageID: info.messageID,
+                    author: event.senderID,
+                    link
+                }),
+                event.messageID);
+        }
+    }
+    for (let ii = 1; ii < 7; ii++) {
+        unlinkSync(__dirname + `/cache/${ii}.png`)
+    }
+}
