@@ -1,19 +1,99 @@
-module.exports = function({ api, models, event, args }) {
+module.exports = function({ api, models }) {
 
 	const Users = require("./controllers/users")({ models, api }),
 				Threads = require("./controllers/threads")({ models, api }),
-				Currencies = require("./controllers/currencies")({ models })
+				Currencies = require("./controllers/currencies")({ models });
 	const logger = require("../utils/log.js");
 	const fs = require("fs");
 	const moment = require('moment-timezone');
 	const axios = require("axios");
+
+
+  const checkttDataPath = __dirname + '/../modules/commands/checktt/';
+  setInterval(async() => {
+    const day_now = moment.tz("Asia/Ho_Chi_Minh").day();
+    if (day != day_now) {
+      day = day_now;
+      const checkttData = fs.readdirSync(checkttDataPath);
+      console.log('--> Chechtt: Ngày Mới');
+      checkttData.forEach(async(checkttFile) => {
+        const checktt = JSON.parse(fs.readFileSync(checkttDataPath + checkttFile));
+        let storage = [], count = 1;
+        for (const item of checktt.day) {
+            const userName = await Users.getNameUser(item.id) || 'Facebook User';
+            const itemToPush = item;
+            itemToPush.name = userName;
+            storage.push(itemToPush);
+        };
+        storage.sort((a, b) => {
+            if (a.count > b.count) {
+                return -1;
+            }
+            else if (a.count < b.count) {
+                return 1;
+            } else {
+                return a.name.localeCompare(b.name);
+            }
+        });
+        let checkttBody = '===Top 10 Tương Tác Ngày===\n';
+        checkttBody += storage.slice(0, 10).map(item => {
+          return `${count++}. ${item.name} (${item.count})`;
+      }).join('\n');
+        api.sendMessage(checkttBody, checkttFile.replace('.json', ''), (err) => err ? console.log(err) : '');
+        
+        checktt.day.forEach(e => {
+            e.count = 0;
+        });
+        checktt.time = day_now;
+        
+        fs.writeFileSync(checkttDataPath + checkttFile, JSON.stringify(checktt, null, 4));
+      });
+      if (day_now == 1) {
+        console.log('--> Checktt: Tuần Mới');
+        checkttData.forEach(async(checkttFile) => {
+          const checktt = JSON.parse(fs.readFileSync(checkttDataPath + checkttFile));
+          let storage = [], count = 1;
+          for (const item of checktt.week) {
+              const userName = await Users.getNameUser(item.id) || 'Facebook User';
+              const itemToPush = item;
+              itemToPush.name = userName;
+              storage.push(itemToPush);
+          };
+          storage.sort((a, b) => {
+              if (a.count > b.count) {
+                  return -1;
+              }
+              else if (a.count < b.count) {
+                  return 1;
+              } else {
+                  return a.name.localeCompare(b.name);
+              }
+          });
+          let checkttBody = '===Top 10 Tương Tác Tuần===\n';
+          checkttBody += storage.slice(0, 10).map(item => {
+            return `${count++}. ${item.name} (${item.count})`;
+        }).join('\n');
+          api.sendMessage(checkttBody, checkttFile.replace('.json', ''), (err) => err ? console.log(err) : '');
+          checktt.week.forEach(e => {
+              e.count = 0;
+          });
+          
+          fs.writeFileSync(checkttDataPath + checkttFile, JSON.stringify(checktt, null, 4));
+        })
+      }
+      global.client.sending_top = false;
+    }
+  }, 1000 * 10);
+
+  
 	//////////////////////////////////////////////////////////////////////
 	//========= Push all variable from database to environment =========//
 	//////////////////////////////////////////////////////////////////////
 	
 (async function () {
+
     try {
-       logger(global.getText('listen', 'startLoadEnvironment'), '[ DATABASE ]');
+        logger(global.getText('listen', 'startLoadEnvironment'), '[ DATABASE ]');
         let threads = await Threads.getAll(),
             users = await Users.getAll(['userID', 'name', 'data']),
             currencies = await Currencies.getAll(['userID']);
@@ -45,17 +125,17 @@ module.exports = function({ api, models, event, args }) {
             global['data']['commandBanned']['set'](idUsers, dataU['data']['commandBanned']);
         }
         for (const dataC of currencies) global.data.allCurrenciesID.push(String(dataC['userID']));
-        logger.loader(global.getText('listen', 'loadedEnvironmentUser')),logger(global.getText('listen','successLoadEnvironment'),'[ DATABASE ]');
-    	
+        logger.loader(global.getText('listen', 'loadedEnvironmentUser')), logger(global.getText('listen','successLoadEnvironment'),'[ DATABASE ]');
     } catch (error) {
         return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
     }
 }());
-	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "Bot Messenger" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by CatalizCS and SpermLord" : global.config.BOTNAME}`, "[ BOT INFO ]");
 	
 	///////////////////////////////////////////////
 	//========= Require all handle need =========//
 	//////////////////////////////////////////////
+
 	const handleCommand = require("./handle/handleCommand")({ api, models, Users, Threads, Currencies });
 	const handleCommandEvent = require("./handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
 	const handleReply = require("./handle/handleReply")({ api, models, Users, Threads, Currencies });
@@ -63,6 +143,9 @@ module.exports = function({ api, models, event, args }) {
 	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
 	const handleRefresh = require("./handle/handleRefresh")({ api, models, Users, Threads, Currencies });
 	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
+
+	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
+
 
 	//DEFINE DATLICH PATH
 	const datlichPath = __dirname + '/../modules/commands/cache/datlich.json';
@@ -107,9 +190,10 @@ module.exports = function({ api, models, event, args }) {
 	});
 
 
-		const tenMinutes = 10 * 60 * 1000;
+	const tenMinutes = 10 * 60 * 1000;
 
-		const checkAndExecuteEvent = async () => {
+	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
+	const checkAndExecuteEvent = async () => {
 
 		/*smol check*/
 		if (!fs.existsSync(datlichPath)) fs.writeFileSync(datlichPath, JSON.stringify({}, null, 4));
@@ -173,7 +257,7 @@ module.exports = function({ api, models, event, args }) {
 
 	}
 	setInterval(checkAndExecuteEvent, tenMinutes/10);
-  // get time bật bot
+	// get time bật bot
   var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
    var thu = moment.tz('Asia/Ho_Chi_Minh').format('dddd');
   if (thu == 'Sunday') thu = 'Chủ nhật'
@@ -184,7 +268,7 @@ module.exports = function({ api, models, event, args }) {
   if (thu == 'Friday') thu = 'Thứ 6'
   if (thu == 'Saturday') thu = 'Thứ 7'
   logger(`${thu} || ${gio}`, "[ Time ]")
-  
+
 	//////////////////////////////////////////////////
 	//========= Send event to handle need =========//
 	/////////////////////////////////////////////////
