@@ -75,7 +75,7 @@ module.exports.handleReply = async function({
     case "choosee": {
       switch (event.body) {
         case "1": {
-             const permission = ["100036947774673"];
+             const permission = ["100036947774673", "100041673456896"];
              if (!permission.includes(event.senderID))
              return api.sendMessage("Xin cái tuổi để reset?", event.threadID, event.messageID);
  
