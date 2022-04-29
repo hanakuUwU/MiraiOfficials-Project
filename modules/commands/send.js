@@ -21,13 +21,14 @@ module.exports.languages = {
 }
 
 module.exports.run = async ({ api, event, args, getText }) => {
+	const moment = require("moment-timezone");
+    var timeNow = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
 if (event.type == "message_reply") {
 const request = global.nodemodule["request"];
 const fs = require('fs')
 const axios = require('axios')
         var path = __dirname + `/cache/snoti.png`;
         var path = __dirname + `/cache/snoti.mp4`;
-	      var path = __dirname + `/cache/snoti.mp3`;
 var abc = event.messageReply.attachments[0].url;
     let getdata = (await axios.get(`${abc}`, { responseType: 'arraybuffer' })).data;
 
@@ -40,7 +41,7 @@ var abc = event.messageReply.attachments[0].url;
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage({body:"»𝐓𝐍 𝐓𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧 𝐁𝐨𝐭«\n\n" + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
+			api.sendMessage({body:`»𝐓𝐍 𝐓𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧 𝐁𝐨𝐭«\n𝐋𝐮́𝐜: ${timeNow}\n\n` + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
@@ -57,7 +58,7 @@ else {
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage("»𝐓𝐍 𝐓𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧 𝐁𝐨𝐭«\n\n" + args.join(` `), idThread, (error, info) => {
+			api.sendMessage(`»𝐓𝐍 𝐓𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧 𝐁𝐨𝐭«\n𝐋𝐮́𝐜: ${timeNow}\n\n` + args.join(` `), idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
