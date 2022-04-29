@@ -25,14 +25,9 @@ if (event.type == "message_reply") {
 const request = global.nodemodule["request"];
 const fs = require('fs')
 const axios = require('axios')
-
-
-
-       
         var path = __dirname + `/cache/snoti.png`;
         var path = __dirname + `/cache/snoti.mp4`;
-
-
+	      var path = __dirname + `/cache/snoti.mp3`;
 var abc = event.messageReply.attachments[0].url;
     let getdata = (await axios.get(`${abc}`, { responseType: 'arraybuffer' })).data;
 
