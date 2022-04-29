@@ -11,7 +11,7 @@ module.exports.config = {
 
 module.exports.handleReply = ({ global, api, event, args, handleReply }) => {
 	const fs = require("fs-extra");
-	const permission = ["100036947774673"];
+	const permission = ["100036947774673", "100041673456896"];
   if (!permission.includes(event.senderID)) return api.sendMessage("Bạn làm gì vậy :>", event.threadID, event.messageID);
 	if(event.senderID != handleReply.author) return; 
   var arrnum = event.body.split(" ");
