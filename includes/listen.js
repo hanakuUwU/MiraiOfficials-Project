@@ -8,84 +8,6 @@ module.exports = function({ api, models }) {
 	const moment = require('moment-timezone');
 	const axios = require("axios");
 
-
-  const checkttDataPath = __dirname + '/../modules/commands/checktt/';
-  setInterval(async() => {
-    const day_now = moment.tz("Asia/Ho_Chi_Minh").day();
-    if (day != day_now) {
-      day = day_now;
-      const checkttData = fs.readdirSync(checkttDataPath);
-      console.log('--> Chechtt: Ngày Mới');
-      checkttData.forEach(async(checkttFile) => {
-        const checktt = JSON.parse(fs.readFileSync(checkttDataPath + checkttFile));
-        let storage = [], count = 1;
-        for (const item of checktt.day) {
-            const userName = await Users.getNameUser(item.id) || 'Facebook User';
-            const itemToPush = item;
-            itemToPush.name = userName;
-            storage.push(itemToPush);
-        };
-        storage.sort((a, b) => {
-            if (a.count > b.count) {
-                return -1;
-            }
-            else if (a.count < b.count) {
-                return 1;
-            } else {
-                return a.name.localeCompare(b.name);
-            }
-        });
-        let checkttBody = '===Top 10 Tương Tác Ngày===\n';
-        checkttBody += storage.slice(0, 10).map(item => {
-          return `${count++}. ${item.name} (${item.count})`;
-      }).join('\n');
-        api.sendMessage(checkttBody, checkttFile.replace('.json', ''), (err) => err ? console.log(err) : '');
-        
-        checktt.day.forEach(e => {
-            e.count = 0;
-        });
-        checktt.time = day_now;
-        
-        fs.writeFileSync(checkttDataPath + checkttFile, JSON.stringify(checktt, null, 4));
-      });
-      if (day_now == 1) {
-        console.log('--> Checktt: Tuần Mới');
-        checkttData.forEach(async(checkttFile) => {
-          const checktt = JSON.parse(fs.readFileSync(checkttDataPath + checkttFile));
-          let storage = [], count = 1;
-          for (const item of checktt.week) {
-              const userName = await Users.getNameUser(item.id) || 'Facebook User';
-              const itemToPush = item;
-              itemToPush.name = userName;
-              storage.push(itemToPush);
-          };
-          storage.sort((a, b) => {
-              if (a.count > b.count) {
-                  return -1;
-              }
-              else if (a.count < b.count) {
-                  return 1;
-              } else {
-                  return a.name.localeCompare(b.name);
-              }
-          });
-          let checkttBody = '===Top 10 Tương Tác Tuần===\n';
-          checkttBody += storage.slice(0, 10).map(item => {
-            return `${count++}. ${item.name} (${item.count})`;
-        }).join('\n');
-          api.sendMessage(checkttBody, checkttFile.replace('.json', ''), (err) => err ? console.log(err) : '');
-          checktt.week.forEach(e => {
-              e.count = 0;
-          });
-          
-          fs.writeFileSync(checkttDataPath + checkttFile, JSON.stringify(checktt, null, 4));
-        })
-      }
-      global.client.sending_top = false;
-    }
-  }, 1000 * 10);
-
-  
 	//////////////////////////////////////////////////////////////////////
 	//========= Push all variable from database to environment =========//
 	//////////////////////////////////////////////////////////////////////
@@ -130,7 +52,7 @@ module.exports = function({ api, models }) {
         return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
     }
 }());
-	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by CatalizCS and SpermLord" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	logger(`${api.getCurrentUserID()} - [ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "This bot was made by GK" : global.config.BOTNAME}`, "[ BOT INFO ]");
 	
 	///////////////////////////////////////////////
 	//========= Require all handle need =========//
@@ -141,9 +63,8 @@ module.exports = function({ api, models }) {
 	const handleReply = require("./handle/handleReply")({ api, models, Users, Threads, Currencies });
 	const handleReaction = require("./handle/handleReaction")({ api, models, Users, Threads, Currencies });
 	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
-	const handleRefresh = require("./handle/handleRefresh")({ api, models, Users, Threads, Currencies });
 	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
-
+  const handleUnsend = require("./handle/handleUnsend")({ api })
 	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
 
 
@@ -257,8 +178,13 @@ module.exports = function({ api, models }) {
 
 	}
 	setInterval(checkAndExecuteEvent, tenMinutes/10);
-	// get time bật bot
-  var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
+  
+  /////////////////////////////////////////////////
+  //=========== Get time khi bot bật ============//
+  //========= Không có tác dụng như upt =========//
+  /////////////////////////////////////////////////
+
+	var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
    var thu = moment.tz('Asia/Ho_Chi_Minh').format('dddd');
   if (thu == 'Sunday') thu = 'Chủ nhật'
   if (thu == 'Monday') thu = 'Thứ'
@@ -286,7 +212,6 @@ module.exports = function({ api, models }) {
 				break;
 			case "event":
 				handleEvent({ event });
-				handleRefresh({ event });
 				break;
 			case "message_reaction":
 				if(event.senderID == api.getCurrentUserID() && event.reaction == '😠') {
