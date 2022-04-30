@@ -40,10 +40,10 @@ module.exports.handleEvent = async function({ api, event, Users }) {
     for (const [ID, name] of Object.entries(mentions)) {
         if (ID in busyData) {
             var infoBusy = busyData[ID], mentioner = await Users.getNameUser(senderID), replaceName = event.body.replace(`${name}`, "");
-            infoBusy.tag.push(`${mentioner}: ${replaceName == "" ? "ᴆᴀ̃ ᴛᴀɢ ʙᴀ̣ɴ 1 ʟᴀ̂̀ɴ" : replaceName}`)
+            infoBusy.tag.push(`${mentioner}: ${replaceName == "" ? "𝐕𝐮̛̀𝐚 𝐭𝐚𝐠 𝐛𝐚̣𝐧 𝟏 𝐥𝐚̂̀𝐧" : replaceName}`)
             busyData[ID] = infoBusy;
             fs.writeFileSync(busyPath, JSON.stringify(busyData, null, 4));
-            return api.sendMessage(`${name.replace("@", "")} ʜɪᴇ̣̂ɴ ᴆᴀɴɢ ʙᴀ̣̂ɴ ${infoBusy.lido ? ` ᴠᴏ̛́ɪ ʟʏ́ ᴅᴏ: ${infoBusy.lido}.` : "."}`, threadID, messageID);
+            return api.sendMessage(`${name.replace("@", "")} hiện đang bận ${infoBusy.lido ? ` với lí do: ${infoBusy.lido}.` : "."}`, threadID, messageID);
         }
     }
 }
