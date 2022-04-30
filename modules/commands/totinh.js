@@ -30,10 +30,10 @@ module.exports.handleReaction = async function({ api, event, handleReaction, Use
 		await Users.setData(talkID, infoUser_1);
     await Users.setData(change.ID, infoUser_2);
 		return api.sendMessage(`Bạn đã thả cảm xúc, đồng nghĩa với việc bạn đã đồng ý với lời tỏ tình này của người kia.\n\n${getMsg()}\nNotes:\n- Cả 2 bạn sẽ không thể chia tay trong vòng 7 ngày kể từ khi bắt đầu.\n- Hiện tại bạn có thể xem thông tin về cặp đôi của mình bằng cách ${PREFIX}dating info`, threadID, async (error, info) => {
-			api.changeNickname(`${change.name} - Dating with ${infoUser_1.name}`, threadID, change.ID);
+			api.changeNickname(`${change.name} - 𝐃𝐚𝐭𝐢𝐧𝐠 𝐰𝐢𝐭𝐡 ${infoUser_1.name}`, threadID, change.ID);
       var { userInfo } = await Threads.getInfo(threadID);
       if (Object.keys(userInfo).includes(talkID)) {
-        api.changeNickname(`${userInfo_1.name} - Dating with ${change.name}`, threadID, talkID.ID);
+        api.changeNickname(`${userInfo_1.name} - 𝐃𝐚𝐭𝐢𝐧𝐠 𝐰𝐢𝐭𝐡 ${change.name}`, threadID, talkID.ID);
       }
 			api.sendMessage(`${change.name} đã đồng ý với lời tỏ tình của bạn, cả 2 người đã bắt đầu ở trạng thái hẹn hò. Bạn có thể xem thông tin về cặp đôi của mình bằng lệnh dating.`, talkID);
 		})
