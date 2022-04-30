@@ -1,5 +1,6 @@
 module.exports = function ({ Users, Threads, Currencies }) {
     const logger =require("../../utils/log.js");
+    const chalk = require("chalk");
     return async function ({ event }) {
         const { allUserID, allCurrenciesID, allThreadID, userName, threadInfo } = global.data; 
         const { autoCreateDB } = global.config;
