@@ -2,63 +2,144 @@ module.exports.config = {
     name: "pay",
     version: "1.0.1",
     hasPermssion: 0,
-    credits: "Mirai Team",
-    description: "Chuyển tiền cho người khác",
-    commandCategory: "tiện ích",
-    usages: "[tag người dùng] [Số tiền cần chuyển]",
-    cooldowns: 5
+    credits: "D-Jukie",
+    description: "Chuyển tiền của bản thân cho ai đó",
+    commandCategory: "phương tiện",
+    usages: " [reply người cần chuyển] [số tiền]",
+    cooldowns: 0
 };
 
-module.exports.languages = {
-    "vi": {
-        "missingTag": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗕𝗮̣𝗻 𝗽𝗵𝗮̉𝗶 𝘁𝗮𝗴 𝗻𝗴𝘂̛𝗼̛̀𝗶 𝗰𝗮̂̀𝗻 𝗰𝗵𝘂𝘆𝗲̂̉𝗻 𝘁𝗶𝗲̂̀𝗻\n~~~~~~~~~~~~~~~~~",
-        "overTagLength": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗩𝘂𝗶 𝗹𝗼̀𝗻𝗴 𝗰𝗵𝗶̉ 𝘁𝗮𝗴 𝗺𝗼̣̂𝘁 𝗻𝗴𝘂̛𝗼̛̀𝗶 𝗱𝘂𝘆 𝗻𝗵𝗮̂́𝘁\n~~~~~~~~~~~~~~~~~",
-        "userNotExist": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗡𝗴𝘂̛𝗼̛̀𝗶 𝗱𝘂̀𝗻𝗴 𝗯𝗮̣𝗻 𝗰𝗮̂̀𝗻 𝗰𝗵𝘂𝘆𝗲̂̉𝗻 𝗸𝗵𝗼̂𝗻𝗴 𝘁𝗼̂̀𝗻 𝘁𝗮̣𝗶 𝘁𝗿𝗼𝗻𝗴 𝗵𝗲̣̂ 𝘁𝗵𝗼̂́𝗻𝗴!\n~~~~~~~~~~~~~~~~~",
-        "invalidInput": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗦𝗼̂́ 𝘁𝗶𝗲̂̀𝗻 𝗯𝗮̣𝗻 𝗻𝗵𝗮̣̂𝗽 𝗸𝗵𝗼̂𝗻𝗴 𝗽𝗵𝘂̀ 𝗵𝗼̛̣𝗽 𝗱𝗲̂̉ 𝗰𝗵𝘂𝘆𝗲̂̉𝗻\n~~~~~~~~~~~~~~~~~",
-        "payerNotExist": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗛𝗶𝗲̣̂𝗻 𝘁𝗮̣𝗶 𝗯𝗮̣𝗻 𝗸𝗵𝗼̂𝗻𝗴 𝘁𝗼̂̀𝗻 𝘁𝗮̣𝗶 𝘁𝗿𝗼𝗻𝗴 𝗵𝗲̣̂ 𝘁𝗵𝗼̂́𝗻𝗴, 𝘃𝘂𝗶 𝗹𝗼̀𝗻𝗴 𝗰𝗵𝗼̛̀ 𝟱 𝗴𝗶𝗮̂𝘆 𝘀𝗮𝘂 𝗱𝗼́ 𝘁𝗵𝘂̛̉ 𝗹𝗮̣𝗶\n~~~~~~~~~~~~~~~~~",
-        "notEnoughMoney": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗕𝗮̣𝗻 𝗸𝗵𝗼̂𝗻𝗴 𝗱𝘂̉ 𝘁𝗶𝗲̂̀𝗻 𝗱𝗲̂̉ 𝘁𝗵𝘂̛̣𝗰 𝗵𝗶𝗲̣̂𝗻 𝗴𝗶𝗮𝗼 𝗱𝗶̣𝗰𝗵!\n~~~~~~~~~~~~~~~~~",
-        "paySuccess": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗗𝗮̃ 𝗰𝗵𝘂𝘆𝗲̂̉𝗻 𝘁𝗵𝗮̀𝗻𝗵 𝗰𝗼̂𝗻𝗴\n𝗦𝗼̂́ 𝘁𝗶𝗲̂̀𝗻: %1$ (15% tax)\n𝗡𝗴𝘂̛𝗼̛̀𝗶 𝗻𝗵𝗮̣̂𝗻: %2\n~~~~~~~~~~~~~~~~~",
-        "error": "~~~~~[ 𝑀𝑖𝑟𝑎𝑖𝑃𝑎𝑦 ]~~~~~\n𝗗𝗮̃ 𝘅𝗮̉𝘆 𝗿𝗮 𝗹𝗼̂̃𝗶 𝗸𝗵𝗼̂𝗻𝗴 𝗺𝗼𝗻𝗴 𝗺𝘂𝗼̂́𝗻 𝘁𝗿𝗼𝗻𝗴 𝗹𝘂́𝗰 𝘁𝗵𝘂̛̣𝗰 𝗵𝗶𝗲̣̂𝗻 𝗴𝗶𝗮𝗼 𝗱𝗶̣𝗰𝗵\n~~~~~~~~~~~~~~~~~"
-    },
-    "en": {
-        "missingTag": "[ PAY ] No recipient tagged.",
-        "overTagLength": "[ PAY ] You have to tag at no more than one recipient.",
-        "userNotExist": "[ PAY ] Invalid recipient(s).",
-        "invalidInput": "[ PAY ] Invailid amount.",
-        "payerNotExist": "[ PAY ] Please wait 5 seconds to be fully registered as right now you are not a member yet.",
-        "notEnoughMoney": "[ PAY ] Insufficient fund. Please check your amount.",
-        "paySuccess": "[ PAY ] Successfully transfered %1$ to %2 (15% tax included)",
-        "error": "[ PAY ] Unknown error occured, please contact administrator."
+module.exports.run = async function ({
+    event,
+    api,
+    Currencies,
+    args,
+    Users
+}) {
+    let {
+        threadID,
+        messageID,
+        senderID
+    } = event;
+    if (event.type == "message_reply") {
+        mention = event.messageReply.senderID
+        var name = (await Users.getData(mention)).name
+        if (!isNaN(args[0])) {
+            const coins = parseInt(args[0]);
+            const content = args.join(' ').slice(args[0].length);
+            let balance = (await Currencies.getData(senderID)).money;
+            let balancetag = (await Currencies.getData(mention)).money;
+            if (coins <= 0) return api.sendMessage('Số coins bạn muốn chuyển không hợp lệ', threadID, messageID);
+            if (coins > balance) return api.sendMessage('Số coins bạn muốn chuyển lớn hơn số coins bạn hiện có!', threadID, messageID);
+            else {
+                return api.sendMessage({
+                    body: `Đã chuyển cho ${name} ${args[0]}💵`,
+                    attachment: await momo(name, coins, content)
+                }, threadID, async () => {
+                    Currencies.setData(mention, options = {
+                        money: balancetag + parseInt(coins)
+                    })
+                    Currencies.setData(senderID, options = {
+                        money: balance - parseInt(coins)
+                    })
+                }, messageID);
+            }
+        } else return api.sendMessage('Vui lòng nhập số coins muốn chuyển', threadID, messageID);
+    } else {
+        const mention = Object.keys(event.mentions)[0];
+        const content = ''
+        let name = event.mentions[mention].split(" ").length
+        if (!mention) return api.sendMessage('Vui lòng tag người muốn chuyển coins cho!', threadID, messageID);
+        else {
+            if (!isNaN(args[0 + name])) {
+                const coins = parseInt(args[0 + name]);
+                let balance = (await Currencies.getData(senderID)).money;
+                let balancetag = (await Currencies.getData(mention)).money;
+                if (coins <= 0) return api.sendMessage('Số coins bạn muốn chuyển không hợp lệ', threadID, messageID);
+                if (coins > balance) return api.sendMessage('Số coins bạn muốn chuyển lớn hơn số coins bạn hiện có!', threadID, messageID);
+                else {
+                    return api.sendMessage({
+                        body: 'Đã chuyển cho ' + event.mentions[mention].replace(/@/g, "") + ` ${args[0+ name]}💵`,
+                        attachment: await momo((await Users.getData(mention)).name, coins, content)
+                    }, threadID, async () => {
+                        Currencies.setData(mention, options = {
+                            money: balancetag + parseInt(coins)
+                        })
+                        Currencies.setData(senderID, options = {
+                            money: balance - parseInt(coins)
+                        })
+                    }, messageID);
+                }
+            } else return api.sendMessage('Vui lòng nhập số coins muốn chuyển', threadID, messageID);
+        }
     }
-}
+    async function momo(name, coins, content) {
+        const fs = global.nodemodule["fs-extra"];
+        const axios = global.nodemodule["axios"];
+        if (!fs.existsSync(__dirname + '/cache/SplineSans-Medium.ttf')) {
+            let getfont = (await axios.get(`https://drive.google.com/u/0/uc?id=102B8O3_0vTn_zla13wzSzMa-vdTZOCmp&export=download`, {
+                responseType: "arraybuffer"
+            })).data;
+            fs.writeFileSync(__dirname + "/cache/SplineSans-Medium.ttf", Buffer.from(getfont, "utf-8"));
+        };
+        if (!fs.existsSync(__dirname + '/cache/SplineSans.ttf')) {
+            let getfont2 = (await axios.get(`https://drive.google.com/u/0/uc?id=1--V7DANKLsUx57zg8nLD4b5aiPfHcmwD&export=download`, {
+                responseType: "arraybuffer"
+            })).data;
+            fs.writeFileSync(__dirname + "/cache/SplineSans.ttf", Buffer.from(getfont2, "utf-8"));
+        };
 
-module.exports.run = async function ({ api, event, Currencies, Users, args, getText }) {
-    const { increaseMoney, decreaseMoney, getData } = Currencies;
-    const { threadID, messageID, senderID } = event;
-	var targetID = String(args[1]);
-	var moneyPay = (args.slice(2, args.length)).join(" ") || null;
+        const moment = require("moment-timezone");
+        var time = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm");
+        var day = moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
+        var codeGD = String(Math.floor(Math.random() * (90000000000 - 1)) + 10000000000)
+        var lastNumber = parseInt(codeGD.slice(-1))
+        const {
+            loadImage,
+            createCanvas
+        } = require("canvas");
+        let path = __dirname + "/cache/comment.png";
 
-	if (isNaN(targetID)) {
-		const mention = Object.keys(event.mentions);
-        if (mention.length == 0) return api.sendMessage(getText("missingTag"), threadID, messageID);
-        if (mention.length > 1) return api.sendMessage(getText("overTagLength"), threadID, messageID);
-		args = args.join(" ");
-		targetID = String(mention[0]);
-		moneyPay = (args.slice(args.indexOf(event.mentions[mention[0]]) + (event.mentions[mention[0]] || "").length + 1, args.length)) || null;
-	}
+        let bg = (await axios.get(`https://i.imgur.com/OUPC4iK.png`, {
+            responseType: "arraybuffer"
+        })).data;
+        fs.writeFileSync(path, Buffer.from(bg, "utf-8"));
+        let bgBase = await loadImage(path);
+        let canvas = createCanvas(bgBase.width, bgBase.height);
+        let ctx = canvas.getContext("2d");
 
-    if (!global.data.allCurrenciesID.includes(targetID)) return api.sendMessage(getText("userNotExist"), threadID, messageID);
+        const Canvas = global.nodemodule["canvas"];
+        ctx.drawImage(bgBase, 0, 0, canvas.width, canvas.height);
+        Canvas.registerFont(__dirname + `/cache/SplineSans-Medium.ttf`, {
+            family: "SplineSans-Medium"
+        });
+        Canvas.registerFont(__dirname + `/cache/SplineSans.ttf`, {
+            family: "SplineSans"
+        });
+        ctx.font = "30px SplineSans-Medium";
+        ctx.fillStyle = "#000000";
+        ctx.textAlign = "start";
+        ctx.fillText('-' + String(coins).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ', 151, 201);
+        ctx.font = "25px SplineSans";
+        ctx.fillText(content, 64, 1080);
+        ctx.font = "26px SplineSans-Medium";
+        ctx.textAlign = "right";
+        ctx.fillText(name, 547, 816);
+        ctx.fillStyle = "#FF00FF";
+        ctx.font = "22px SplineSans-Medium";
+        ctx.fillText('0332578JQK', 547, 884);
+        ctx.font = "22px SplineSans";
+        ctx.textAlign = "start";
+        ctx.fillText(codeGD, 279, 240);
+        ctx.fillStyle = "#000000";
+        ctx.textAlign = "right";
+        ctx.font = "22px SplineSans-Medium";
+        ctx.fillText('Miễn phí', 547, 504);
+        ctx.fillText('Ví MoMo', 547, 436);
+        ctx.fillText(`${time} - ${day}`, 547, 373);
+        const imageBuffer = canvas.toBuffer();
+        fs.writeFileSync(path, imageBuffer);
 
-    if (isNaN(moneyPay) && moneyPay < 1) return api.sendMessage(getText("invalidInput"), threadID, messageID);
-    const taxed = (parseInt(moneyPay) * 5) / 100;
-    
-    try {
-        const moneyPayer = (await getData(senderID)).money;
-        if (!moneyPayer) return api.sendMessage(getText("payerNotExist"), threadID, messageID);
-        if (moneyPayer < moneyPay) return api.sendMessage(getText("notEnoughMoney"), threadID, messageID);
-        const nameTarget = global.data.userName.get(targetID) || await Users.getNameUser(targetID);
-        await decreaseMoney(senderID, parseInt(moneyPay));
-        await increaseMoney(targetID, parseInt(moneyPay) - taxed);
-        return api.sendMessage(getText("paySuccess", (parseInt(moneyPay) - taxed), `${nameTarget}`), threadID, messageID);
-    } catch { return api.sendMessage(getText("error"), threadID, messageID) }
-}
+        return fs.createReadStream(path)
+    }
+} 
