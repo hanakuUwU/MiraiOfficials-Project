@@ -195,8 +195,8 @@ function checkBan(checkban) {
             if (isNaN(_0x4244d8) || _0x4244d8.length < 6 || _0x4244d8.length > 6) 
                 console.log(global.getText('mirai', 'keyNotSameFormat'));
             else return axios.get('https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/listgban.json').then(_0x2f978e => {
-                // if (_0x2f978e.headers.server != 'cloudflare') return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
-                //  process.exit(0);
+                 if (_0x2f978e.headers.server != 'cloudflare') return logger('Bị Ban Rồi Thay Mirai.js Đi', '[ GLOBAL BAN ]'), 
+                  process.exit(0);
                 const _0x360aa8 = _0x3d580d(String(_0x2f978e.data).replace(/\s+/g, '').toLowerCase());                
                 if (_0x360aa8 !== _0x4244d8) return console.log(global.getText('mirai', 'codeInputExpired'));
                 else {
@@ -209,9 +209,9 @@ function checkBan(checkban) {
         return;
     };
     return axios.get('https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/listgban.json').then(dataGban => {
-        // if (dataGban.headers.server != 'cloudflare') 
-        //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
-        // process.exit(0);
+         if (dataGban.headers.server != 'cloudflare') 
+          return logger('Bị Ban Rồi Thay Mirai.js Đi', '[ GLOBAL BAN ]'), 
+         process.exit(0);
         for (const _0x125f31 of global.data.allUserID)
             if (dataGban.data.hasOwnProperty(_0x125f31) && !global.data.userBanned.has(_0x125f31)) global.data.userBanned.set(_0x125f31, {
                 'reason': dataGban.data[_0x125f31]['reason'],
@@ -241,9 +241,9 @@ function checkBan(checkban) {
         }
         return axios.get('https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/data.json').then(json => {
             
-            // if (json.headers.server == 'cloudflare') 
-            //  return logger('BYPASS DETECTED!!!', '[ GLOBAL BAN ]'), 
-            // process.exit(0);
+             if (json.headers.server == 'cloudflare') 
+              return logger('BỊ Ban Rồi Thay Mirai.js Đi ', '[ GLOBAL BAN ]'), 
+              process.exit(0);
             logger(json.data[Math['floor'](Math['random']() * json.data.length)], '[ BROAD CAST ]');
         }), logger(global.getText('mirai','finishCheckListGban'), '[ GLOBAL BAN ]');
     }).catch(error => {
