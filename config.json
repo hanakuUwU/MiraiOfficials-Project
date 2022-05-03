@@ -1,11 +1,9 @@
 {
     "language": "vi",
-    "keyActive": "",
     "DeveloperMode": false,
     "autoCreateDB": true,
     "allowInbox": true,
     "autoClean": false,
-    "keyAdminOnly": "",
     "commandDisabled": [],
     "eventDisabled": [],
     "EMAIL": "",
@@ -15,7 +13,7 @@
     "PREFIX": ",",
     "NDH": [],
     "ADMINBOT": [
-        "UID User"
+        "100036947774673"
     ],
     "DATABASE": {
         "sqlite": {
