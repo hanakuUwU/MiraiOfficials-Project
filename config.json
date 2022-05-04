@@ -6,6 +6,7 @@
     "autoClean": false,
     "commandDisabled": [],
     "eventDisabled": [],
+    "adminOnly": false,
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
