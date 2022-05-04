@@ -155,17 +155,17 @@ case "sp": {
             else global.utils.throwError(this.config.name, threadID, messageID);
         }
         case 'boxonly': {
-          if (permssion != 1) return api.sendMessage("[⚜️] Xin lỗi! lệnh này chỉ quản trị viên box mới dùng được", threadID, messageID);
+          const { threadID, messageID, mentions } = event;
         const { resolve } = require("path");
         const pathData = resolve(__dirname, 'cache', 'data.json');
         const database = require(pathData);
         const { adminbox } = database;   
         if (adminbox[threadID] == true) {
             adminbox[threadID] = false;
-            api.sendMessage("[⚜️] Tắt thành công chế độ Quản trị viên tất cả mọi người đều có thể sử dụng bot", threadID, messageID);
+            api.sendMessage("[⚜️] Tắt thành công chế độ QTV Only", threadID, messageID);
         } else {
             adminbox[threadID] = true;
-            api.sendMessage("[⚜️] Bật thành công chế chỉ Quản trị viên nhóm mới có thể sử dụng bot", threadID, messageID);
+            api.sendMessage("[⚜️] Bật thành công chế độ QTV Only", threadID, messageID);
         }
         writeFileSync(pathData, JSON.stringify(database, null, 4));
         break;
