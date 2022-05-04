@@ -4,7 +4,7 @@ module.exports.config = {
 	hasPermssion: 2,
 	credits: "Mirai mod by HĐGN",
 	description: "Gửi tin nhắn tới các nhóm(reply vào ảnh/video cần gửi kèm)!\nPhiên bản xịn hơn của sendnotiUwU",
-	commandCategory: "system",
+	commandCategory: "Admin",
 	usages: "[Text]",
 	cooldowns: 5
 };
@@ -20,15 +20,22 @@ module.exports.languages = {
 	}
 }
 
-module.exports.run = async ({ api, event, args, getText }) => {
-	const moment = require("moment-timezone");
-    var timeNow = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
+module.exports.run = async ({ api, event, args, getText, Users }) => {
+  const name = await Users.getNameUser(event.senderID)
+const moment = require("moment-timezone");
+      var gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss");  
 if (event.type == "message_reply") {
 const request = global.nodemodule["request"];
 const fs = require('fs')
 const axios = require('axios')
-        var path = __dirname + `/cache/snoti.png`;
-        var path = __dirname + `/cache/snoti.mp4`;
+			var getURL = await request.get(event.messageReply.attachments[0].url);
+			
+					var pathname = getURL.uri.pathname;
+var ext = pathname.substring(pathname.lastIndexOf(".") + 1);
+			
+					var path = __dirname + `/cache/snoti`+`.${ext}`;
+
+
 var abc = event.messageReply.attachments[0].url;
     let getdata = (await axios.get(`${abc}`, { responseType: 'arraybuffer' })).data;
 
@@ -41,7 +48,7 @@ var abc = event.messageReply.attachments[0].url;
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage({body:`»𝐓𝐍 𝐓𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧 𝐁𝐨𝐭«\n𝐋𝐮́𝐜: ${timeNow}\n\n` + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
+			api.sendMessage({body: `====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n` + args.join(` `) + ``,attachment: fs.createReadStream(path) }, idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
@@ -58,7 +65,7 @@ else {
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage(`»𝐓𝐍 𝐓𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧 𝐁𝐨𝐭«\n𝐋𝐮́𝐜: ${timeNow}\n\n` + args.join(` `), idThread, (error, info) => {
+			api.sendMessage(`====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n` + args.join(` `) + ``, idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
