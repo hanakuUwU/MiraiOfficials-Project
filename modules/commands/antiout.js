@@ -46,14 +46,22 @@ module.exports.run = async function({ api, event }) {
     const { resolve } = global.nodemodule["path"];
     const path = resolve(__dirname, 'cache', 'meewmeew.json');
     const { threadID, messageID } = event;
+	const axios = require("axios");
+	  const res = await axios.get("https://api.xlshsad.repl.co/images/mirai");
+//lấy data trên web api
+const data = res.data.url;
+//tải ảnh xuống
+let download = (await axios.get(data, {
+			responseType: "stream"
+		})).data;
     const database = require(path);
     const { antiout } = database;
     if (antiout[threadID] == true) {
         antiout[threadID] = false;
-        api.sendMessage("𝐓𝐚̆́𝐭 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠 𝐚𝐧𝐭𝐢𝐨𝐮𝐭", threadID, messageID);
+        api.sendMessage({body: "𝐓𝐚̆́𝐭 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠 𝐚𝐧𝐭𝐢𝐨𝐮𝐭",attachment: download}, threadID, messageID);
     } else {
         antiout[threadID] = true;
-        api.sendMessage("𝐁𝐚̣̂𝐭 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠 𝐚𝐧𝐭𝐢𝐨𝐮𝐭\n𝐍𝐠𝐡𝐢𝐞̂𝐦 𝐜𝐚̂́𝐦 𝐡𝐚̀𝐧𝐡 𝐯𝐢 𝐩𝐡𝐚́ 𝐡𝐨𝐚̣𝐢, 𝐥𝐚̣𝐦 𝐝𝐮̣𝐧𝐠", threadID, messageID);
+        api.sendMessage({body: "𝐁𝐚̣̂𝐭 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠 𝐚𝐧𝐭𝐢𝐨𝐮𝐭\n𝐍𝐠𝐡𝐢𝐞̂𝐦 𝐜𝐚̂́𝐦 𝐡𝐚̀𝐧𝐡 𝐯𝐢 𝐩𝐡𝐚́ 𝐡𝐨𝐚̣𝐢, 𝐥𝐚̣𝐦 𝐝𝐮̣𝐧𝐠",attachment: download}, threadID, messageID);
     }
     writeFileSync(path, JSON.stringify(database, null, 4));
 }
