@@ -37,6 +37,6 @@ module.exports.config = {
   var imglove=[];imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt2.png"));
     imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt3.png"));
   imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt.png"));
-  var msg={body:`${"💟===💟𝐓𝐢̉ 𝐥𝐞̣̂ 𝐡𝐨̛̣𝐩 𝐧𝐡𝐚𝐮💟===💟"}\n${namee}${" <3 "}${name}\n${"𝐋𝐚̀: "}${tle}${"% "}`,mentions:arraytag,attachment:imglove};
+  var msg={body:`${"💟===💟𝐓𝐢̉ 𝐥𝐞̣̂ 𝐡𝐨̛̣𝐩 𝐧𝐡𝐚𝐮💟===💟"}\n${namee}\n${"⠀⠀⠀⠀ ⠀⠀⠀ <3"}\n${name}\n${"𝐋𝐚̀: "}${tle}${"% "}`,mentions:arraytag,attachment:imglove};
   return api["sendMessage"](msg,event["threadID"],event["messageID"])
         }
