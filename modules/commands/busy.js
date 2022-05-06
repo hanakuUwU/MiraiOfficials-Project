@@ -51,9 +51,17 @@ module.exports.handleEvent = async function({ api, event, Users }) {
 module.exports.run = async function({ api, event, args, Users }) {
 	await new Promise(resolve => setTimeout(resolve, 1000));
     let busyData = JSON.parse(fs.readFileSync(busyPath));
+  const axios = require("axios")
 	const moment = require("moment-timezone");
     var timeNow = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss");
     const { threadID, senderID, messageID, body } = event;
+  const res = await axios.get("https://api.xlshsad.repl.co/images/mirai");
+//lấy data trên web api
+const data = res.data.url;
+//tải ảnh xuống
+let download = (await axios.get(data, {
+			responseType: "stream"
+		})).data;
     var content = args.join(" ") || "";
     if (!(senderID in busyData)) {
         busyData[senderID] = {
@@ -62,7 +70,6 @@ module.exports.run = async function({ api, event, args, Users }) {
         }
         fs.writeFileSync(busyPath, JSON.stringify(busyData, null, 4));
        var msg = (content.length == 0) ? `🌺──── •𝐁𝐮𝐬𝐲• ────🌺\n\n》𝐁𝐚̣𝐧 𝐯𝐮̛̀𝐚 𝐛𝐚̣̂𝐭 𝐛𝐮𝐬𝐲\n》𝐋𝐢́ 𝐝𝐨: 𝐈𝐧𝐯𝐢𝐬𝐢𝐛𝐥𝐞\n\n🌺───「${timeNow}」───🌺` : `🌺──── •𝐁𝐮𝐬𝐲• ────🌺\n\n》𝐁𝐚̣𝐧 𝐯𝐮̛̀𝐚 𝐛𝐚̣̂𝐭 𝐛𝐮𝐬𝐲\n》𝐋𝐢́ 𝐝𝐨: ${content}\n\n🌺───「${timeNow}」───🌺`;
-        return api.sendMessage(msg, threadID, messageID);
+        return api.sendMessage({body: msg, attachment: download}, threadID, messageID);
     }
 }
-
