@@ -33,10 +33,10 @@ module.exports.run = async function ({ api, event, args, Currencies, Users }) {
         }
         if (choose.toLowerCase() == result) {
             await Currencies.increaseMoney(senderID, parseInt(money * 1));
-            api.sendMessage({ body: `🎋Bạn đã thắng \n🧧Được: ${money*1}$\n🍀Kết quả: ${result}`, attachment: image }, threadID, messageID);
+            api.sendMessage({ body: `🏮──── •🎲• ────🏮\n🎋𝐁𝐚̣𝐧 𝐯𝐮̛̀𝐚 𝐭𝐡𝐚̆́𝐧𝐠 𝐥𝐨̛́𝐧\n🧧𝐆𝐨𝐦 𝐯𝐞̂̀: ${money*1} 𝐕𝐍𝐃\n🍀𝐊𝐞̂́𝐭 𝐪𝐮𝐚̉: ${result}\n🏮──── •🎲• ────🏮`, attachment: image }, threadID, messageID);
         } else {
             await Currencies.decreaseMoney(senderID, parseInt(money));
-            api.sendMessage({ body: `🎋Bạn đã thua\n🧨Mất: ${money}$\n🍀Kết quả: ${result}`, attachment: image}, threadID, messageID);
+            api.sendMessage({ body: `🏮──── •🎲• ────🏮\n🎋𝐁𝐚̣𝐧 𝐯𝐮̛̀𝐚 𝐭𝐡𝐮𝐚 𝐬𝐚̂́𝐩 𝐦𝐚̣̆𝐭\n🧨𝐁𝐚𝐲 𝐦𝐞̣: ${money} 𝐕𝐍𝐃\n🍀𝐊𝐞̂́𝐭 𝐪𝐮𝐚̉: ${result}\n🏮──── •🎲• ────🏮`, attachment: image}, threadID, messageID);
         }
         for(var i = 0; i < image.length; i++) {
             fs.unlinkSync(__dirname + `/cache/${i}.png`);
