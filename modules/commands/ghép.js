@@ -16,9 +16,9 @@ module.exports.onLoad = async() => {
     const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
     const { downloadFile } = global.utils;
     const dirMaterial = __dirname + `/cache/canvas/`;
-    const path = resolve(__dirname, 'cache/canvas', 'pairing.jpg');
+    const path = resolve(__dirname, 'cache/canvas', 'hello.png');
     if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-    if (!existsSync(path)) await downloadFile("https://i.pinimg.com/736x/15/fa/9d/15fa9d71cdd07486bb6f728dae2fb264.jpg", path);
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/HzvO3Yv.png", path);
 }
 
 async function makeImage({ one, two }) {
@@ -28,8 +28,8 @@ async function makeImage({ one, two }) {
     const jimp = global.nodemodule["jimp"];
     const __root = path.resolve(__dirname, "cache", "canvas");
 
-    let pairing_img = await jimp.read(__root + "/pairing.jpg");
-    let pathImg = __root + `/pairing_${one}_${two}.png`;
+    let pairing_img = await jimp.read(__root + "/hello.png");
+    let pathImg = __root + `/hello_${one}_${two}.png`;
     let avatarOne = __root + `/avt_${one}.png`;
     let avatarTwo = __root + `/avt_${two}.png`;
     
@@ -77,5 +77,5 @@ module.exports.run = async function({ api, event, args, Users, Threads, Currenci
         var sex = await data[id].gender;
         var gender = sex == 2 ? "Nam🧑" : sex == 1 ? "Nữ👩‍🦰" : "Trần Đức Bo";
 var one = senderID, two = id;
-    return makeImage({ one, two }).then(path => api.sendMessage({ body: `Chúc mừng ${namee} đã được ghép đôi với ${name}\nTỉ Lệ Hợp Đôi là: ${tle}`, mentions: arraytag, attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
+    return makeImage({ one, two }).then(path => api.sendMessage({ body: `𝐆𝐡𝐞́𝐩 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠\n${namee}\n⠀⠀⠀⠀ <3\n${name}\n𝐓𝐢̉ 𝐥𝐞̣̂ 𝐥𝐚̀: ${tle}`, mentions: arraytag, attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
     }
