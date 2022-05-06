@@ -32,7 +32,7 @@ module.exports.config = {
   let Avatar2=( await axios["get"](`${"https://graph.facebook.com/"}${event["senderID"]}${"/picture?height=1500&width=1500&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de"}`,{responseType:"arraybuffer"}))["data"];
   fs["writeFileSync"](__dirname+ "/cache/avt2.png",Buffer["from"](Avatar2,"utf-8"));
 
-    let Avatar3=( await axios["get"](`${"https://i.imgur.com/ZyjEFDK.jpg"}`,{responseType:"arraybuffer"}))["data"];
+    let Avatar3=( await axios["get"](`${"https://i.imgur.com/0lgB4WG.png"}`,{responseType:"arraybuffer"}))["data"];
   fs["writeFileSync"](__dirname+ "/cache/avt3.png",Buffer["from"](Avatar3,"utf-8"));
   var imglove=[];imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt2.png"));
     imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt3.png"));
