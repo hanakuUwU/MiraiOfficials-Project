@@ -219,10 +219,10 @@ module.exports.run = async ({ api, event}) => {
    const data = await getUserInfo(senderID);
   if (Object.keys(event.mentions).length == 1) {
     if (data.gender == 2 ) {
-        api.sendMessage(`𝐆𝐮̛̉𝐢 𝐚𝐧𝐡 ${event.mentions[mention].replace("@", "")} 𝐯𝐚̀𝐢 𝐥𝐨̛̀𝐢 𝐭𝐡𝐢́𝐧𝐡:\n${trai[Math.floor(Math.random() * trai.length)]}`,threadID, messageID);
+        api.sendMessage(`𝐆𝐮̛̉𝐢 ${event.mentions[mention].replace("@", "")} 𝐯𝐚̀𝐢 𝐥𝐨̛̀𝐢 𝐭𝐡𝐢́𝐧𝐡:\n${trai[Math.floor(Math.random() * trai.length)]}`,threadID, messageID);
     }
     if (data.gender == 1 ) {
-        api.sendMessage(`𝐆𝐮̛̉𝐢 𝐞𝐦 ${event.mentions[mention].replace("@", "")} 𝐯𝐚̀𝐢 𝐥𝐨̛̀𝐢 𝐭𝐡𝐢́𝐧𝐡:\n${gai[Math.floor(Math.random() * gai.length)]}`, threadID, messageID);
+        api.sendMessage(`𝐆𝐮̛̉𝐢 ${event.mentions[mention].replace("@", "")} 𝐯𝐚̀𝐢 𝐥𝐨̛̀𝐢 𝐭𝐡𝐢́𝐧𝐡:\n${gai[Math.floor(Math.random() * gai.length)]}`, threadID, messageID);
     }
   }
   else {
