@@ -1,15 +1,15 @@
 const chalk = require('chalk');
-
+const colors = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan'];
 module.exports = (data, option) => {
 	switch (option) {
 		case "warn":
-			console.log(chalk.bold.hex("#FF7F50")('[ ❕ ] » ') + data);
+			console.log(chalk.yellow('[ ❕ ] » ') + data);
 			break;
 		case "error":
-			console.log(chalk.bold.hex("#FF0000")('[ ❗ Lỗi rồi ] » ') + data);
+			console.log(chalk.red('[ ❕ ] » ') + data);
 			break;
 		default:
-			console.log(chalk.bold.hex("#FF4500")(`${option} » `) + data);
+			console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`${option} » `) + chalk[colors[Math.floor(Math.random() * colors.length)]](data));
 			break;
 	}
 }
@@ -17,13 +17,13 @@ module.exports = (data, option) => {
 module.exports.loader = (data, option) => {
 	switch (option) {
 		case "warn":
-			console.log(chalk.bold.hex("#FF0000")('» •GK• « ') + data);
+			console.log(chalk.yellow('» •GK• « ') + data);
 			break;
 		case "error":
-			console.log(chalk.bold.hex("#FFFF00")('» •GK• « ') + data);
+			console.log(chalk.red('» •GK• « ') + data);
 			break;
 		default:
-			console.log(chalk.bold.hex("#00FFFF")('» •GK• « ') + data);
+			console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`» •GK• « `) + chalk[colors[Math.floor(Math.random() * colors.length)]](data));
 			break;
 	}
 }
