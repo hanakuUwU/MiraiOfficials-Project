@@ -1,10 +1,10 @@
 module.exports.config = {
 	name: "casino",
-	version: "0.0.1",
+	version: "0.1.1",
 	hasPermssion: 0,
 	credits: "tdunguwu",
-	description: "Chơi tài xỉu",
-	commandCategory: "Economy",
+	description: "Tổng Hợp Về Cờ Bạc",
+	commandCategory: "Trò Chơi",
 	usages: "",
 	cooldowns: 0
 };	
@@ -22,7 +22,7 @@ module.exports.run = async function ({ api, event, args, Currencies, Users }) {
         request('https://raw.githubusercontent.com/KhangGia1810/data/main/casinogame-crop-crop-1645143014593.jpeg').pipe(createWriteStream(__dirname + '/cache/casio.jpeg'));
       }
   if(!choose){
-    var msg =  {body: `🌺──── •𝐂𝐚𝐬𝐢𝐧𝐨• ────🌺\n❯ 𝟏. 𝐓𝐫𝐨̀ 𝐓𝐚̀𝐢 𝐗𝐢̉𝐮 🎲\n❯ 𝟐. 𝐓𝐫𝐨̀ 𝐂𝐡𝐚̆̃𝐧 𝐋𝐞̉ 🎴\n❯ 𝟑. 𝐓𝐫𝐨̀ 𝐋𝐨̂ Đ𝐞̂̀ 💸\n❯ 𝟒. 𝐓𝐫𝐨̀ 𝐇𝐢𝐞̣̂𝐮 𝐒𝐨̂́ 🎫\n❯ 𝟓. 𝐓𝐫𝐨̀ 𝐒𝐥𝐨𝐭 🎰\n😽──── •𝐂𝐚𝐬𝐢𝐧𝐨• ────😽\n𝐑𝐞𝐩𝐥𝐲 𝐒𝐓𝐓 𝐦𝐮𝐨̂́𝐧 𝐜𝐡𝐨̛𝐢`, attachment : [
+    var msg =  {body: `🃏─── 𝐂𝐀𝐒𝐈𝐍𝐎 ───🃏\n\n❯  𝟏. 𝐓𝐫𝐨̀ 𝐓𝐚̀𝐢 𝐗𝐢̉𝐮 🎲\n❯  𝟐. 𝐓𝐫𝐨̀ 𝐂𝐡𝐚̆̃𝐧 𝐋𝐞̉ 🎴\n❯  𝟑. 𝐓𝐫𝐨̀ 𝐋𝐨̂ Đ𝐞̂̀ 💸\n❯  𝟒. 𝐓𝐫𝐨̀ 𝐇𝐢𝐞̣̂𝐮 𝐒𝐨̂́ 🎫\n❯  𝟓. 𝐓𝐫𝐨̀ 𝐒𝐥𝐨𝐭 🎰\n❯  𝟲. 𝗧𝗿𝗼̀ 𝗞𝗲́𝗼 𝗕𝘂́𝗮 𝗕𝗮𝗼 ✌️\n\n𝐑𝐞𝐩𝐥𝐲 𝐒𝐓𝐓 𝐱𝐞𝐦 𝐡𝐮̛𝐨̛́𝐧𝐠 𝐝𝐚̂̃𝐧 𝐜𝐚́𝐜𝐡 𝐜𝐡𝐨̛𝐢 𝐭𝐮̛̀𝐧𝐠 𝐭𝐫𝐨̀ 𝐜𝐡𝐨̛𝐢 𝐧𝐡𝐞́ 🌸\n🃏─── 𝐂𝐀𝐒𝐈𝐍𝐎 ───🃏`, attachment : [
       require("fs").createReadStream(__dirname + "/cache/casio.jpeg")
     ]}
    return api.sendMessage(msg,  threadID, (error, info) => {
@@ -60,11 +60,11 @@ module.exports.run = async function ({ api, event, args, Currencies, Users }) {
     var defl_number = xiu[Math.floor(Math.random() * xiu.length)];
   }
   if (choose == 'tài' || choose == 'xỉu') { 
-    if (kqua < 50 || isNaN(kqua)) return api.sendMessage("𝐌𝐮̛́𝐜 𝐜𝐮̛𝐨̛̣𝐜 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐤𝐡𝐨̂𝐧𝐠 𝐩𝐡𝐮̀ 𝐡𝐨̛̣𝐩 𝐡𝐨𝐚̣̆𝐜 𝐝𝐮̛𝐨̛́𝐢 𝟓𝟎$!!!", threadID, messageID);
+    if (kqua < 50 || isNaN(kqua)) return api.sendMessage("Mức đặt cược của bạn không phù hợp hoặc dưới 50$!!!", threadID, messageID);
     if (moneyUser < kqua) return api.sendMessage(`Số dư bạn không đủ ${kqua}$ để có thể chơi`, threadID, messageID);
 if (choose == random) {
   	await Currencies.increaseMoney(senderID, parseInt(kqua * 2));
-  return api.sendMessage(`bạn thắng Bot lắc ra ${random} ${defl_number} và nhận được ${kqua * 2}`,event.threadID, event.messageID)
+  return api.sendMessage(`bạn thắng bot lắc ra ${random} ${defl_number} và nhận được ${kqua * 2}`,event.threadID, event.messageID)
 } else {
   await Currencies.decreaseMoney(senderID, parseInt(kqua ));
       return api.sendMessage(`bạn thua bot lắc ra ${random} ${defl_number} và mất ${kqua}`,event.threadID, event.messageID)}
@@ -103,6 +103,56 @@ return api.sendMessage(`bạn đã thua vì chọn ${args[1]} và kết quả l�
   return api.sendMessage(`bạn thua bạn chọn là: ${kqua}\nsố thứ nhất bot chọn là: ${z}\nsố thứ nhất bot chọn là: ${y}\nhiệu số là ${dap_an} và mất số tiền là ${tiencuoc}`,threadID, messageID)
   }
     }
+if (args[0] == "rps" || args[0] == "kbb") { 
+  function outMsg(data) {
+        api.sendMessage(data, event.threadID, event.messageID);
+       }
+          
+    if(!args[1]) {
+        outMsg("Vui lòng nhập 'kéo' hoặc 'búa' hoặc 'bao'")
+    }
+    else{
+    var turnbot = ["✌️","👊","✋"]
+          var botturn = turnbot[Math.floor(Math.random() * turnbot.length)] 
+          const userturn = args[1];
+                   
+          if (userturn == "kéo"||userturn == "búa"||userturn == "bao") {
+            if (userturn == turnbot) {
+              return outMsg(`Hòa\nUser : ${userturn}\nBot : ${botturn}\nHòa, số dư không thay đổi`)
+            } else if (userturn == "kéo") {
+              if (botturn == "👊") {
+                
+                return outMsg(`BẠN ĐÃ THUA\n\nUser : ${userturn}\nBot : ${botturn}\n`)
+                
+              } else if (botturn == "✋") {
+                
+                return outMsg(`BẠN ĐÃ THẮNG\n\nUser : ${userturn}\nBot : ${botturn}\n`)
+                
+            }
+          } else if (userturn == "búa") {
+            if (botturn == "✋") {
+              
+              return outMsg(`BẠN ĐÃ THUA\n\nUser : ${userturn}\nBot : ${botturn}\n`)
+              
+            } else if (botturn == "✌️") {
+              
+              return outMsg(`BẠN ĐÃ THẮNG\n\nUser : ${userturn}\nBot : ${botturn}\n`)
+              
+          }
+        } else if (userturn == "bao") {
+          if (botturn == "✌️") {
+            
+            return outMsg(`BẠN ĐÃ THUA\n\nUser : ${userturn}\nBot : ${botturn}\n`)
+            
+          } else if (botturn == "👊") {
+           
+            return outMsg(`BẠN ĐÃ THẮNG\n\nUser : ${userturn}\nBot : ${botturn}\n`)
+            
+   }
+  }
+}
+  } 
+}
  if (choose == 'slot') { 
    const slotItems = ["🍇", "🍉", "🍊", "🍏", "🥭", "🍓", "🍒", "🍌", "🥝", "🥑", "🌽"];
     var number = [], win = false;
@@ -117,12 +167,12 @@ return api.sendMessage(`bạn đã thua vì chọn ${args[1]} và kết quả l�
     }
     switch (win) {
         case true: {
-            api.sendMessage(`🎰 ${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]} 🎰\nBạn đã thắng`, event.threadID, event.messageID);
+            api.sendMessage(`╭──────────╮\nㅤ🎰 » ${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]} 🎰\n« 🎰\n╰──────────╯\n𝐗𝐢𝐧 𝐜𝐡𝐮́𝐜 𝐦𝐮̛̀𝐧𝐠 𝐛𝐚̣𝐧 𝐭𝐡𝐚̆́𝐧𝐠 𝐫𝐨̂̀𝐢`, event.threadID, event.messageID);
            
             break;
         }
         case false: {
-            api.sendMessage(`🎰 » ${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]} « 🎰\nBạn đã thua`, event.threadID, event.messageID);
+            api.sendMessage(`╭──────────╮\nㅤ🎰 » ${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]} « 🎰\n╰──────────╯\n𝐁𝐚̣𝐧 𝐭𝐡𝐮𝐚 𝐫𝐨̂̀𝐢 𝐱𝐢𝐧 𝐜𝐡𝐢𝐚 𝐛𝐮𝐨̂̀𝐧`, event.threadID, event.messageID);
            
             break;
         }
@@ -142,20 +192,23 @@ return api.sendMessage(`bạn đã thua vì chọn ${args[1]} và kết quả l�
     case "choosee": {
         switch (event.body) {
         case "1": { 
-          return api.sendMessage(`${global.config.PREFIX}casino [ TÀI OR XỈU ]`, threadID, messageID )
+          return api.sendMessage(`𝐁𝐚̣𝐧 𝐡𝐚̃𝐲 𝐧𝐡𝐚̣̂𝐩 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐜𝐚𝐬𝐢𝐧𝐨 [ 𝐓𝐀̀𝐈 𝐡𝐨𝐚̣̆𝐜 𝐗𝐈̉𝐔 ]`, threadID, messageID )
         }
         case "2": { 
-          return api.sendMessage(`${global.config.PREFIX}casino [ Chẵn OR Lẻ ]`, threadID, messageID )
+          return api.sendMessage(`𝐁𝐚̣𝐧 𝐡𝐚̃𝐲 𝐧𝐡𝐚̣̂𝐩 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐜𝐚𝐬𝐢𝐧𝐨 [ 𝐂𝐡𝐚̆̃𝐧 𝐡𝐨𝐚̣̆𝐜 𝐋𝐞̉ ]`, threadID, messageID )
         }
         case "3": { 
-          return api.sendMessage(`${global.config.PREFIX}casino [ Lode Or Lô Or Đề ] [ Số Mà Bạn Tin Tưởng ]`, threadID, messageID )
+          return api.sendMessage(`𝐁𝐚̣𝐧 𝐡𝐚̃𝐲 𝐧𝐡𝐚̣̂𝐩 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐜𝐚𝐬𝐢𝐧𝐨 [ Lode Or Lô Or Đề ] [ Số Mà Bạn Tin Tưởng ]`, threadID, messageID )
         }
         case "4": {
-          return api.sendMessage(`${global.config.PREFIX}casino [ hieu Or Hiệu Or Hieu ] [ Số Mà Bạn Tin Tưởng ]`, event.threadID, event.messageID )
+          return api.sendMessage(`𝐁𝐚̣𝐧 𝐡𝐚̃𝐲 𝐧𝐡𝐚̣̂𝐩 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐜𝐚𝐬𝐢𝐧𝐨 [ 𝐡𝐢𝐞𝐮 𝐎𝐫 𝐇𝐢𝐞̣̂𝐮 𝐎𝐫 𝐇𝐢𝐞𝐮 ] [ 𝐒𝐨̂́ 𝐌𝐚̀ 𝐁𝐚̣𝐧 𝐓𝐢𝐧 𝐓𝐮̛𝐨̛̉𝐧𝐠 ]`, event.threadID, event.messageID )
         }
-         case "5": {
-          return api.sendMessage(`${global.config.PREFIX}casino [ Slot ]`, event.threadID, event.messageID )}
+        case "5": {
+          return api.sendMessage(`𝐁𝐚̣𝐧 𝐡𝐚̃𝐲 𝐧𝐡𝐚̣̂𝐩 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐜𝐚𝐬𝐢𝐧𝐨 [ 𝐒𝐥𝐨𝐭 ]`, event.threadID, event.messageID )
+        }
+         case "6": {
+          return api.sendMessage(`𝐁𝐚̣𝐧 𝐡𝐚̃𝐲 𝐧𝐡𝐚̣̂𝐩 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐜𝐚𝐬𝐢𝐧𝐨 𝐤𝐛𝐛 ["kéo", "búa", "bao"]`, event.threadID, event.messageID )}
 }
     }
     }
-}
+		 }
