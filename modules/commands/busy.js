@@ -55,9 +55,9 @@ module.exports.run = async function({ api, event, args, Users }) {
 	const moment = require("moment-timezone");
     var timeNow = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss");
     const { threadID, senderID, messageID, body } = event;
-  const res = await axios.get("https://api.xlshsad.repl.co/images/mirai");
+  const res = await axios.get("https://APIDoraemon.miraiofficials123.repl.co");
 //lấy data trên web api
-const data = res.data.url;
+const data = res.data.data;
 //tải ảnh xuống
 let download = (await axios.get(data, {
 			responseType: "stream"
