@@ -1,5 +1,5 @@
 module.exports.config = {
-	name: "tiktok2",
+	name: "tik",
 	version: "1.0.0",
 	hasPermssion: 0,
 	credits: "Thiệu Trung Kiên",
