@@ -15,9 +15,9 @@
     "author": "Khang",
     "license": "GPL-3.0",
     "bugs": {
-		"url": "https://github.com/KhangGia1810/MiraiOfficials-Project/issues"
-	},
-	"homepage": "https://github.com/Khang  Gia1810/MiraiOfficials-Project#readme",
+        "url": "https://github.com/KhangGia1810/MiraiOfficials-Project/issues"
+    },
+    "homepage": "https://github.com/Khang  Gia1810/MiraiOfficials-Project#readme",
     "dependencies": {
         "@miraipr0ject/assets": "^1.0.9",
         "aes-js": "^3.1.2",
@@ -75,6 +75,7 @@
         "totp-generator": "0.0.13",
         "websocket-stream": "^5.5.2",
         "wikijs": "^6.3.3",
+        "youtube-search-api": "^1.1.0",
         "ytdl-core": "^4.11.0"
     }
 }
