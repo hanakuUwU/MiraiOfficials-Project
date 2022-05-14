@@ -11,18 +11,10 @@ module.exports.config = {
 	};
 			
 module.exports.run = async ({ event, api ,global ,Config , logger, Threads, Users, args, body, is}) => {
-  const axios = require("axios");
 	 const fs = require("fs");
   const login = require("helyt");
   let type = args.join(" ");
   if (!type) return api.sendMessage("Vui lòng nhập từ khoá", event.threadID, event.messageID);
-  const res = await axios.get("https://apikanna.ngochan6666.repl.co");
-//lấy data trên web api
-const data = res.data.data;
-//tải ảnh xuống
-let download = (await axios.get(data, {
-			responseType: "stream"
-		})).data;
   login({
     appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))
   }, (err, api) => {
@@ -49,7 +41,7 @@ let download = (await axios.get(data, {
 2/${b}\nUID: ${b1}\nProfile Url : ${p1}\n
 3/${c}\nUID : ${c2}\nProfile Url : ${p2}\n
 4/${d}\nUID: ${d1}\nProfile Url : ${p3}\n
-5/${e}\nUID: ${e1}\nProfile Url : ${p4}`, attachment: download}, event.threadID, event.messageID);
+5/${e}\nUID: ${e1}\nProfile Url : ${p4}`}, event.threadID, event.messageID);
     });
   });
                              }
