@@ -50,7 +50,7 @@ module.exports.handleReply = async function ({ api, event, handleReply }) {
         if (fs.statSync(path).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => fs.unlinkSync(path), event.messageID);
         api.unsendMessage(handleReply.messageID)
         return api.sendMessage({ 
-            body: `🎵𝐓𝐢𝐭𝐥𝐞: ${data.title}\n⏱️𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${this.convertHMS(data.dur)}\n⏱️𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧 𝐱𝐮̛̉ 𝐥𝐢́: ${Math.floor((Date.now()- data.timestart)/1000)} 𝐠𝐢𝐚̂𝐲\n⠀⠀⠀⠀⠀⠀『${timeNow}』\n⠀⠀𝐍𝐠𝐡𝐞 𝐧𝐡𝐚̣𝐜 𝐯𝐮𝐢 𝐯𝐞̉ 𝐧𝐡𝐚!🥰`,
+            body: `[🎵]𝐓𝐢𝐭𝐥𝐞: ${data.title}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${this.convertHMS(data.dur)}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧 𝐱𝐮̛̉ 𝐥𝐢́: ${Math.floor((Date.now()- data.timestart)/1000)} 𝐠𝐢𝐚̂𝐲\n⠀⠀⠀⠀⠀⠀『${timeNow}』\n⠀⠀𝐍𝐠𝐡𝐞 𝐧𝐡𝐚̣𝐜 𝐯𝐮𝐢 𝐯𝐞̉ 𝐧𝐡𝐚!🥰`,
             attachment: fs.createReadStream(path)}, event.threadID, ()=> fs.unlinkSync(path), 
          event.messageID)
             
@@ -79,7 +79,7 @@ module.exports.run = async function ({ api, event, args }) {
             var data = await downloadMusicFromYoutube(args.join(" "), path);
             if (fs.statSync(path).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => fs.unlinkSync(path), event.messageID);
             return api.sendMessage({ 
-                body: `🎵𝐓𝐢𝐭𝐥𝐞: ${data.title}\n⏱️𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${this.convertHMS(data.dur)}\n⏱️𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧 𝐱𝐮̛̉ 𝐥𝐢́: ${Math.floor((Date.now()- data.timestart)/1000)} 𝐠𝐢𝐚̂𝐲\n⠀⠀⠀⠀⠀⠀『${timeNow}』\n⠀⠀𝐍𝐠𝐡𝐞 𝐧𝐡𝐚̣𝐜 𝐯𝐮𝐢 𝐯𝐞̉ 𝐧𝐡𝐚!🥰`,
+                body: `[🎵]𝐓𝐢𝐭𝐥𝐞: ${data.title}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${this.convertHMS(data.dur)}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧 𝐱𝐮̛̉ 𝐥𝐢́: ${Math.floor((Date.now()- data.timestart)/1000)} 𝐠𝐢𝐚̂𝐲\n⠀⠀⠀⠀⠀⠀『${timeNow}』\n⠀⠀𝐍𝐠𝐡𝐞 𝐧𝐡𝐚̣𝐜 𝐯𝐮𝐢 𝐯𝐞̉ 𝐧𝐡𝐚!🥰`,
                 attachment: fs.createReadStream(path)}, event.threadID, ()=> fs.unlinkSync(path), 
             event.messageID)
             
