@@ -1,6 +1,6 @@
 module.exports.config = {
 	name: "admin",
-	version: "1.0.5",
+	version: "1.0.6",// thêm tính năng chặn nhắn riêng
 	hasPermssion: 0,
 	credits: "Mirai Team",
 	description: "Bật tắt chế độ chỉ qtv dùng lệnh",
@@ -180,6 +180,19 @@ case "sp": {
             } else {
                 config.adminOnly = false;
                 api.sendMessage(`[⚜️] Tắt thành công chỉ Admin mới dùng được bot`, threadID, messageID);
+            }
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                break;
+              }
+     case 'pa':
+        case '-p': {
+            if (permssion != 3) return api.sendMessage("[⚜️] Xin lỗi! lệnh này chỉ admin or admin support mới dùng được", threadID, messageID);
+            if (config.adminPaseOnly == false) {
+                config.adminPaseOnly = true;
+                api.sendMessage(`[⚜️] Bật thành công chỉ Admin mới được nhắn riêng với bot`, threadID, messageID);
+            } else {
+                config.adminPaseOnly = false;
+                api.sendMessage(`[⚜️] Tắt thành công chỉ Admin mới được nhắn riêng với bot`, threadID, messageID);
             }
                 writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
                 break;
