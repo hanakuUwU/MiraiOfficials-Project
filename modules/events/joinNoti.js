@@ -26,12 +26,14 @@ module.exports.onLoad = function () {
 
 
 module.exports.run = async function({ api, event }) {
+  const moment = require("moment-timezone");
+	var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
 	const { join } = global.nodemodule["path"];
 	const { threadID } = event;
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
 		api.changeNickname(`👉 ${global.config.PREFIX} 👈 🤍 ${(!global.config.BOTNAME) ? "Cre by CatalizCS" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
 		const fs = require("fs");
-		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 ⫷`, attachment: fs.createReadStream(__dirname + "/cache/joinMp4/received_523521742592731.gif")} ,threadID));
+		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 ⫷`, attachment: fs.createReadStream(__dirname + "/cache/joinMp4/hello.gif")} ,threadID));
 	}
 	else {
 		try {
@@ -52,7 +54,7 @@ module.exports.run = async function({ api, event }) {
 			}
 			memLength.sort((a, b) => a - b);
 			
-			(typeof threadData.customJoin == "undefined") ? msg = `🇻🇳 𝑾𝒆𝒍𝒄𝒐𝒎𝒆 {name} \n🔰Đ𝒂̃ đ𝒆̂́𝒏 𝒗𝒐̛́𝒊 𝒃𝒐𝒙 {threadName}\n👤𝑩𝒂̣𝒏 𝒍𝒂̀ 𝒕𝒉𝒂̀𝒏𝒉 𝒗𝒊𝒆̂𝒏 𝒕𝒉𝒖̛́  {soThanhVien} \n⚡𝑽𝒖𝒊 𝒍𝒐̀𝒏𝒈 đ𝒐̣𝒄 𝒏𝒉𝒖̛̃𝒏𝒈 đ𝒊𝒆̂̀𝒖 𝒍𝒆̣̂𝒏𝒉 𝒔𝒂𝒖 đ𝒂̂𝒚 𝒏𝒉𝒆́ \n📌𝑫𝒖̀𝒏𝒈 𝒍𝒆̣̂𝒏𝒉 ${global.config.PREFIX}𝒔𝒆𝒕𝒏𝒂𝒎𝒆 + 𝑻𝒆̂𝒏 𝒄𝒂̂̀𝒏 đ𝒐̂̉𝒊 \n💞𝑮𝒊𝒐̛́𝒊 𝒕𝒉𝒊𝒆̣̂𝒖 𝑯𝒐̣ 𝒕𝒆̂𝒏... \n👼𝑵𝒂̆𝒎 𝒔𝒊𝒏𝒉... \n🏘️𝑵𝒐̛𝒊 𝒐̛̉... \n💟𝑻𝒖̛̀ 𝒈𝒊𝒐̛̀ 𝒃𝒂̣𝒏 𝒔𝒆̃ 𝒍𝒂̀ 𝒎𝒐̣̂𝒕 𝒕𝒉𝒂̀𝒏𝒉 𝒗𝒊𝒆̂𝒏 𝒄𝒖̉𝒂 𝒃𝒐𝒙 𝒎𝒊̀𝒏𝒉 💖♥` : msg = threadData.customJoin;
+			(typeof threadData.customJoin == "undefined") ? msg = `🇻🇳 𝑾𝒆𝒍𝒄𝒐𝒎𝒆 {name} \n🔰Đ𝒂̃ đ𝒆̂́𝒏 𝒗𝒐̛́𝒊 𝒃𝒐𝒙 {threadName}\n👤𝑩𝒂̣𝒏 𝒍𝒂̀ 𝒕𝒉𝒂̀𝒏𝒉 𝒗𝒊𝒆̂𝒏 𝒕𝒉𝒖̛́  {soThanhVien}\n📌𝑫𝒖̀𝒏𝒈 𝒍𝒆̣̂𝒏𝒉 ${global.config.PREFIX}𝒔𝒆𝒕𝒏𝒂𝒎𝒆 + 𝑻𝒆̂𝒏 𝒄𝒂̂̀𝒏 đ𝒐̂̉𝒊 \n💟𝑻𝒖̛̀ 𝒈𝒊𝒐̛̀ 𝒃𝒂̣𝒏 𝒔𝒆̃ 𝒍𝒂̀ 𝒎𝒐̣̂𝒕 𝒕𝒉𝒂̀𝒏𝒉 𝒗𝒊𝒆̂𝒏 𝒄𝒖̉𝒂 𝒃𝒐𝒙 𝒎𝒊̀𝒏𝒉 💖♥\n⠀=[ ${gio} ]=` : msg = threadData.customJoin;
 			msg = msg
 			.replace(/\{name}/g, nameArray.join(', '))
 			.replace(/\{type}/g, (memLength.length > 1) ?  '𝐂𝐚́𝐜 𝐁𝐚̣𝐧' : '𝐁𝐚̣𝐧')
@@ -65,7 +67,7 @@ module.exports.run = async function({ api, event }) {
 
 			if (existsSync(pathGif)) formPush = { body: msg, attachment: createReadStream(pathGif), mentions }
 			else if (randomPath.length != 0) {
-				const pathRandom = join(__dirname, "cache", "joinMp4", `${randomPath[Math.floor(Math.random() * randomPath.length)]}`);
+				const pathRandom = join(__dirname, "cache", "joinMp4", "hi.mp4");
 				formPush = { body: msg, attachment: createReadStream(pathRandom), mentions }
 			}
 			else formPush = { body: msg, mentions }
