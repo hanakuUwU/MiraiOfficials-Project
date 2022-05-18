@@ -25,7 +25,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies }) {
     if (!(senderID in usages)) {
       usages[senderID] = {};
       usages[senderID].day = getDay;
-      usages[senderID].usages = 20;
+      usages[senderID].usages = 100;
     };
     
 if(!global.data.allThreadID.includes(threadID) && !ADMINBOT.includes(senderID) && adminbot.adminPaseOnly == true) {
