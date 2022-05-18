@@ -7,6 +7,7 @@
     "commandDisabled": [],
     "eventDisabled": [],
     "adminOnly": false,
+    "adminPaseOnly": false,
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
