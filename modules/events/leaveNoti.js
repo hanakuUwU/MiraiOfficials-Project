@@ -24,6 +24,10 @@ module.exports.onLoad = function () {
 }
 
 module.exports.run = async function({ api, event, Users, Threads }) {
+	const moment = require("moment-timezone");
+	const ngay = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY");
+	const hours = moment.tz("Asia/Ho_Chi_Minh").format("HH");
+	const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss");
 	if (event.logMessageData.leftParticipantFbId == api.getCurrentUserID()) return;
 	const { createReadStream, existsSync, mkdirSync, readdirSync } = global.nodemodule["fs-extra"];
 	const { join } =  global.nodemodule["path"];
@@ -37,8 +41,8 @@ module.exports.run = async function({ api, event, Users, Threads }) {
 
 	if (existsSync(path)) mkdirSync(path, { recursive: true });
 
-	(typeof data.customLeave == "undefined") ? msg = " {name} {type} " : msg = data.customLeave;
-	msg = msg.replace(/\{name}/g, name).replace(/\{type}/g, type);
+	(typeof data.customLeave == "undefined") ? msg = `Buổi {session}, ngày ${ngay}\nLúc: {gio}\n{name} {type} ` : msg = data.customLeave;
+	msg = msg.replace(/\{name}/g, name).replace(/\{type}/g, type).replace(/\{session}/g, hours <= 10 ? "sáng" : hours > 10 && hours <= 12 ? "trưa" : hours > 12 && hours <= 18 ? "chiều" : "tối").replace(/\{gio}/g, gio); ;
 
 	const randomPath = readdirSync(join(__dirname, "cache", "leaveGif", "random"));
 
