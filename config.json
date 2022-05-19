@@ -8,6 +8,7 @@
     "eventDisabled": [],
     "adminOnly": false,
     "adminPaseOnly": false,
+    "ndhOnly": false,
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
