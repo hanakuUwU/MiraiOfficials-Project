@@ -1,27 +1,32 @@
 module.exports.config = {
-	name: "cadao",
-	version: "1.0.0",
-	hasPermssion: 0,
-	credits: "VanHung",
-	description: "Ca Dao Việt Nam",
-	commandCategory: "fun",
-	usages: "cadao",
-	cooldowns: 5
+ name: "cadao",
+ version: "1.0.0",
+ hasPermssion: 0,
+ credits: "VanHung",
+ description: "Ca Dao Việt Nam",
+ commandCategory: "Kiến thức",
+ usages: "cadao",
+ cooldowns: 5
 };
 
 module.exports.run = async ({ api, event }) => {
 const axios = require('axios');
 const request = require('request');
-const fs = require("fs");
-const res = await axios.get(`https://apikanekiflop.tk/cadao`);
-const anh = await axios.get(`https://api.xlshsad.repl.co/images/mirai`);
-var image = res.data.url;
-var cadao = res.data.data
+const fs = require("fs-extra");
+
+const rep = await axios.get(`https://jrt-api.jrt-official.repl.co/cadao`);
+var cadao = rep.data.data;
+  //console.log(rdCadao);
+
+
+const anh = await axios.get(`https://apidoraemon.miraiofficials123.repl.co`);
+var gai = anh.data.data.substring(anh.data.data.lastIndexOf(".") + 1);
+
 let callback = function () {
-			 api.sendMessage({
-				body: `★Ca dao Việt Nam★:\n﹤ ${cadao} ﹥`,
-				attachment: fs.createReadStream(__dirname + `/cache/gaicadao.jpg`)
-			}, event.threadID, () => fs.unlinkSync(__dirname + `/cache/gaicadao.jpg`), event.messageID);
-			};
-			request(anh.data.url).pipe(fs.createWriteStream(__dirname + `/cache/gaicadao.jpg`)).on("close", callback);
+    api.sendMessage({
+    body: `❤️ Ca Dao Việt Nam ❤️\n\n${cadao} `,
+    attachment: fs.createReadStream(__dirname + `/cache/gaicadao.${gai}`)
+   }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/gaicadao.${gai}`), event.messageID);
+   };
+   request(anh.data.data).pipe(fs.createWriteStream(__dirname + `/cache/gaicadao.${gai}`)).on("close", callback);
 }
