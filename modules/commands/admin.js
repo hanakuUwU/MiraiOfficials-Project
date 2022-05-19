@@ -1,6 +1,6 @@
 module.exports.config = {
 	name: "admin",
-	version: "1.0.6",// thêm tính năng chặn nhắn riêng
+	version: "1.0.7",// thêm 2 cái phế thải
 	hasPermssion: 0,
 	credits: "Mirai Team",
 	description: "Bật tắt chế độ chỉ qtv dùng lệnh",
@@ -45,7 +45,7 @@ module.exports.onLoad = function() {
 }
 module.exports.run = async function ({ api, event, args, Users, permssion, getText }) {
     const content = args.slice(1, args.length);
-    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» HDSD: ${global.config.PREFIX} admin lệnh bạn cần dùng
+    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» HDSD: ${global.config.PREFIX}admin lệnh bạn cần dùng
 `, event.threadID, event.messageID);
     const { threadID, messageID, mentions } = event;
     const { configPath } = global.client;
@@ -184,19 +184,32 @@ case "sp": {
                 writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
                 break;
               }
-     case 'pa':
+				case 'pa':
         case '-p': {
-            if (permssion != 3) return api.sendMessage("[⚜️] Xin lỗi! lệnh này chỉ admin or admin support mới dùng được", threadID, messageID);
+            if (permssion != 3) return api.sendMessage("[⚜️] Xin lỗi! lệnh này chỉ admin mới dùng được", threadID, messageID);
             if (config.adminPaseOnly == false) {
                 config.adminPaseOnly = true;
-                api.sendMessage(`[⚜️] Bật thành công chỉ Admin mới được nhắn riêng với bot`, threadID, messageID);
+                api.sendMessage(`[⚜️] Bật thành công chỉ admin or admin sp mới nhắn riêng với bot được`, threadID, messageID);
             } else {
                 config.adminPaseOnly = false;
-                api.sendMessage(`[⚜️] Tắt thành công chỉ Admin mới được nhắn riêng với bot`, threadID, messageID);
+                api.sendMessage(`[⚜️] Tắt thành công chỉ admin or admin sp mới nhắn riêng với bot được`, threadID, messageID);
             }
                 writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
                 break;
-              }
+							}
+        case 'sponly':
+        case '-s': {
+            if (permssion != 3) return api.sendMessage("[⚜️] Xin lỗi! lệnh này chỉ admin mới dùng được", threadID, messageID);
+            if (config.ndhOnly == false) {
+                config.ndhOnly = true;
+                api.sendMessage(`[⚜️] Bật thành công chỉ admin or admin sp mới dùng được bot`, threadID, messageID);
+            } else {
+                config.ndhOnly = false;
+                api.sendMessage(`[⚜️] Tắt thành công chỉ admin or admin sp mới dùng được bot`, threadID, messageID);
+            }
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                break;
+							}
         default: {
             return global.utils.throwError(this.config.name, threadID, messageID);
         }
