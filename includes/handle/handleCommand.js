@@ -30,7 +30,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies }) {
     
 if(!global.data.allThreadID.includes(threadID) && !ADMINBOT.includes(senderID) && adminbot.adminPaseOnly == true) {
   const res = await axios.get(`https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/handle.json`);
-if(!global.data.allThreadID.includes(threadID) && !ADMINBOT.includes(senderID) && adminbot.adminPaseOnly == true)return api.sendMessage("[ MODE ] - Chỉ admin mới được sử dụng bot trong chat riêng.", threadID, messageID)
+if(!global.data.allThreadID.includes(threadID) &&  !NDH.includes(senderID) && !ADMINBOT.includes(senderID) && adminbot.adminPaseOnly == true)return api.sendMessage("[ MODE ] - Chỉ admin or admin sp mới được sử dụng bot trong chat riêng.", threadID, messageID)
 }    
     if (!ADMINBOT.includes(senderID) && adminbot.adminOnly == true) {
       const res = await axios.get(`https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/handle.json`);
@@ -38,7 +38,7 @@ if(!global.data.allThreadID.includes(threadID) && !ADMINBOT.includes(senderID) &
     }
     if (!NDH.includes(senderID) && !ADMINBOT.includes(senderID) && adminbot.ndhOnly == true) {
       const res = await axios.get(`https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/handle.json`);
-      if (!NDH.includes(senderID) && !ADMINBOT.includes(senderID) && adminbot.ndhOnly == true && res.data.status == true) return api.sendMessage('[ MODE ] - Chỉ người hỗ trợ bot mới có thể sử dụng bot', threadID, messageID)
+      if (!NDH.includes(senderID) && !ADMINBOT.includes(senderID) && adminbot.ndhOnly == true && res.data.status == true) return api.sendMessage('[ MODE ] - Chỉ admin or admin sp mới có thể sử dụng bot', threadID, messageID)
     }
     const dataAdbox = require('./../../modules/commands/cache/data.json');
     var threadInf = (threadInfo.get(threadID) || await Threads.getInfo(threadID));
