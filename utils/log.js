@@ -17,10 +17,10 @@ module.exports = (data, option) => {
 module.exports.loader = (data, option) => {
 	switch (option) {
 		case "warn":
-			console.log(chalk.yellow('» •GK• « ') + data);
+			console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`» •GK• « `) + chalk[colors[Math.floor(Math.random() * colors.length)]](data));
 			break;
 		case "error":
-			console.log(chalk.red('» •GK• « ') + data);
+			console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`» •GK• « `) + chalk[colors[Math.floor(Math.random() * colors.length)]](data));
 			break;
 		default:
 			console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`» •GK• « `) + chalk[colors[Math.floor(Math.random() * colors.length)]](data));
