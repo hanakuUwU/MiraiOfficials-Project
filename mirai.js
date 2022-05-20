@@ -3,7 +3,6 @@
 /////////////////////////////////////////////////////
 
 const { readdirSync, readFileSync, writeFileSync, existsSync, unlinkSync, rm } = require("fs-extra");
-var log = require("./utils/log");
 const { join, resolve } = require("path");
 const chalk = require("chalk");
 const { execSync } = require('child_process');
@@ -13,7 +12,7 @@ const timeStart = Date.now();
 const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
 const listbuiltinModules = require("module").builtinModules;
-log("Đang khởi tạo các biến...", "[ ChatBot Mirai ]");
+logger("Đang khởi tạo các biến...", "[ ChatBot ]");
 
 global.client = new Object({
     commands: new Map(),
