@@ -13,7 +13,7 @@ const timeStart = Date.now();
 const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
 const listbuiltinModules = require("module").builtinModules;
-log("Đang khởi tạo các biến...", "ChatBot Mirai");
+log("Đang khởi tạo các biến...", "[ ChatBot Mirai ]");
 
 global.client = new Object({
     commands: new Map(),
@@ -242,7 +242,7 @@ function checkBan(checkban) {
         return axios.get('https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/data.json').then(json => {
             
              //if (json.headers.server == 'cloudflare') 
-             // return logger('BỊ Ban Rồi Thay Mirai.js Đi ', '[ GLOBAL BAN ]'), 
+             // return logger('Bị Ban Rồi Thay Mirai.js Đi ', '[ GLOBAL BAN ]'), 
               //process.exit(0);
             logger(json.data[Math['floor'](Math['random']() * json.data.length)], '[ BROAD CAST ]');
         }), logger(global.getText('mirai','finishCheckListGban'), '[ GLOBAL BAN ]');
