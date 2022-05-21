@@ -1,3 +1,4 @@
+const fs = require("fs-extra");
 module.exports.config = {
     name: "work",
     version: "1.0.2",
@@ -10,6 +11,13 @@ module.exports.config = {
         cooldownTime: 1200000
     }
 };
+module.exports.onLoad = () => {
+    const fs = require("fs-extra");
+    const request = require("request");
+    const dirMaterial = __dirname + `/cache/`;
+    if (!fs.existsSync(dirMaterial + "cache")) fs.mkdirSync(dirMaterial, { recursive: true });
+    if (!fs.existsSync(dirMaterial + "work.jpeg")) request("https://i.imgur.com/pPw9hY9.jpeg").pipe(fs.createWriteStream(dirMaterial + "work.jpeg"));
+}
 module.exports.languages = {
     "vi": {
         "cooldown": "⚡️Bạn đã làm việc rồi, quay lại sau: %1 phút %2 giây."      
@@ -92,15 +100,7 @@ module.exports.run = async ({  event, api, handleReply, Currencies, getText }) =
         return api.sendMessage(getText("cooldown", minutes, (seconds < 10 ? "0" + seconds : seconds)), event.threadID, event.messageID);
     }
     else {    
-    return api.sendMessage("⚡ KIẾM TIỀN MỖI NGÀY ⚡" +
-                "\n\n1. Khu công nghiệp 🏗️." +
-                "\n2. Khu dịch vụ 🏘️." +
-                "\n3. Khu mỏ dầu 🏭." +
-                "\n4. Khai thác quặng." +
-                "\n5. Đào đá ⛰️" +
-                "\n6. Đứng đường 🏪 :)))" +
-                "\n7. Update soon..." +
-                "\n\n⚡️Hãy reply tin nhắn và chọn theo số" //thêm hiển thị case tại đây ||  \n[number]. [Ngành nghề]" +
+    return api.sendMessage({body: "⚡ KIẾM TIỀN MỖI NGÀY ⚡\n\n1. Khu công nghiệp 🏗️.\n2. Khu dịch vụ 🏘️.\n3. Khu mỏ dầu 🏭.\n4. Khai thác quặng.\n5. Đào đá ⛰️\n6. Đứng đường 🏪 :)))\n7. Update soon...\n\n⚡️Hãy reply tin nhắn và chọn theo số",attachment: fs.createReadStream(__dirname + `/cache/work.jpeg`)}
             , event.threadID, (error, info) => {
                 data.work2Time = Date.now();
         global.client.handleReply.push({
