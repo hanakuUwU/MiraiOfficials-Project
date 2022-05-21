@@ -28,7 +28,7 @@ module.exports.languages = {
 }
 module.exports.handleReply = async ({ event, api, handleReply, Currencies, getText }) => {
     const { threadID, messageID, senderID } = event;
-    let data = (await Currencies.getData(senderID)).data || {};
+    let cc = (await Currencies.getData(senderID)).cc || {};
 //random coins nhận được khi làm việc ít nhất 200
 var coinscn = Math.floor(Math.random() * 401) + 1000; //random coins khi làm ở khu công nghiệp
 var coinsdv = Math.floor(Math.random() * 801) + 1000; //random coins khi làm ở khu dịch vụ
@@ -79,8 +79,8 @@ var msg = "";
                 msg = "⚡️Update soon...";
             };
             return api.sendMessage(`${msg}`, threadID, async () => {
-            data.work2Time = Date.now();
-            await Currencies.setData(senderID, { data });
+            cc.work2Time = Date.now();
+            await Currencies.setData(senderID, { cc });
             
         });
 
@@ -90,11 +90,11 @@ var msg = "";
 module.exports.run = async ({  event, api, handleReply, Currencies, getText }) => {
     const { threadID, messageID, senderID } = event;
     const cooldown = global.configModule[this.config.name].cooldownTime;
-    let data = (await Currencies.getData(senderID)).data || {};
+    let cc = (await Currencies.getData(senderID)).cc || {};
     //cooldownTime cho mỗi lần nhận 
-    if (typeof data !== "undefined" && cooldown - (Date.now() - data.work2Time) > 0) {
+    if (typeof cc !== "undefined" && cooldown - (Date.now() - cc.work2Time) > 0) {
 
-        var time = cooldown - (Date.now() - data.work2Time),
+        var time = cooldown - (Date.now() - cc.work2Time),
             minutes = Math.floor(time / 600000),
             seconds = ((time % 600000) / 10000).toFixed(0); 
         return api.sendMessage(getText("cooldown", minutes, (seconds < 10 ? "0" + seconds : seconds)), event.threadID, event.messageID);
@@ -102,7 +102,7 @@ module.exports.run = async ({  event, api, handleReply, Currencies, getText }) =
     else {    
     return api.sendMessage({body: "⚡ KIẾM TIỀN MỖI NGÀY ⚡\n\n1. Khu công nghiệp 🏗️.\n2. Khu dịch vụ 🏘️.\n3. Khu mỏ dầu 🏭.\n4. Khai thác quặng.\n5. Đào đá ⛰️\n6. Đứng đường 🏪 :)))\n7. Update soon...\n\n⚡️Hãy reply tin nhắn và chọn theo số",attachment: fs.createReadStream(__dirname + `/cache/work.jpeg`)}
             , event.threadID, (error, info) => {
-                data.work2Time = Date.now();
+                cc.work2Time = Date.now();
         global.client.handleReply.push({
             type: "choosee",
             name: this.config.name,
