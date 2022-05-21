@@ -20,9 +20,9 @@ module.exports.onLoad = async () => {
 	const { existsSync, writeFileSync, mkdirSync } = require("fs-extra")
 	const { join } = require("path")
 	const axios = require("axios");
-	const dir = __dirname + `/banking`;
+	const dir = __dirname + `/cache/banking`;
 	if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    const pathData = join(__dirname + '/banking/banking.json');
+    const pathData = join(__dirname + '/cache/banking/banking.json');
     if (!existsSync(pathData)) return writeFileSync(pathData, "[]", "utf-8"); 
 	return;
 }
@@ -34,8 +34,8 @@ module.exports.run = async function({ api, event, args, models, Users, Threads, 
     if(checkKey.status !== true) return api.sendMessage('⚠APIKEY CỦA BẠN ĐÃ HẾT HẠN, VUI LÒNG LIÊN HỆ chinhle ĐỂ MUA KEY\n⚡️FB: https://www.facebook.com/chinhle3601/', threadID, messageID);*/
   const { readFileSync, writeFileSync } = require("fs-extra")
   const { join } = require("path")
-  const pathData = join(__dirname + '/banking/banking.json');
-  const user = require('./banking/banking.json');
+  const pathData = join(__dirname + '/cache/banking/banking.json');
+  const user = require('./cache/banking/banking.json');
   const timeIM = 60*60
   const laisuat = 0.005
   const moneyInput = parseInt(args[1])
