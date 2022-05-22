@@ -22,6 +22,8 @@ module.exports.run = async function ({ api, event, args, Currencies, Users }) {
                    "Đánh bạc quen tay, ngủ ngày quen mắt, ăn vặt quen mồm.",
                    "Nhỏ mà cờ bạc, lớn lên chỉ có ăn mày.",
                    "Cờ bạc ai thua, ai thắng, ai không thắng để rồi lại sẽ thua.",
+                 "Mày ngu, mày chết mẹ mày đi",
+                 "Suốt ngày chỉ biết cờ bạc",
                    "Tiền bán, tiền buôn thì cất trong nhà. Còn tiền cờ bạc thì ra ngoài đường.",
                    "Không có người nào luôn thua trong đánh bài, chỉ có những người chưa biết cách để chiến thắng mà thôi."
                   ];
