@@ -7,8 +7,9 @@ module.exports.config = {
 	commandCategory: "tài chính",
     cooldowns: 5,
     envConfig: {
-        cooldownTime: 12000,
-        rewardCoin: 200
+        cooldownTime: 1020000,
+        rewardCoin: 2000,
+        rewardUsages: 20
     }
 };
 
@@ -33,8 +34,8 @@ module.exports.onLoad = () => {
 module.exports.run = async ({ event, api, Currencies, getText }) => {
     const { daily } = global.configModule,
         cooldownTime = daily.cooldownTime,
-        rewardCoin = daily.rewardCoin;
-
+    rewardCoin = daily.rewardCoin;
+    rewardUsages = daily.rewardUsages;
     var { senderID, threadID } = event;
 
     let data = (await Currencies.getData(senderID)).data || {};
@@ -47,7 +48,7 @@ module.exports.run = async ({ event, api, Currencies, getText }) => {
 		return api.sendMessage(getText("cooldown", hours, minutes, (seconds < 10 ? "0" : "") + seconds), threadID);
     }
 
-    else return api.sendMessage(getText("rewarded", rewardCoin, 20), threadID, async () => {
+    else return api.sendMessage(getText("rewarded", rewardCoin, rewardUsages), threadID, async () => {
         let dataM = JSON.parse(fs.readFileSync(path));
         dataM[senderID].usages += 20;
         fs.writeFileSync(path, JSON.stringify(dataM, null, 4));
