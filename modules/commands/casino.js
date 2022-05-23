@@ -6,7 +6,7 @@ module.exports.config = {
 	description: "Tổng Hợp Về Cờ Bạc",
 	commandCategory: "Trò Chơi",
 	usages: "",
-	cooldowns: 0
+	cooldowns: 5
 };	
 module.exports.run = async function ({ api, event, args, Currencies, Users }) {
    
@@ -19,7 +19,7 @@ module.exports.run = async function ({ api, event, args, Currencies, Users }) {
   const kqua = args[1];
   const tiencuoc = args[2];
   if (!existsSync(__dirname + '/cache/casio.jpeg')) {
-        request('https://i.imgur.com/CLUdMcS.jpeg').pipe(createWriteStream(__dirname + '/cache/casio.jpeg'));
+        request('https://raw.githubusercontent.com/KhangGia1810/data/main/casinogame-crop-crop-1645143014593.jpeg').pipe(createWriteStream(__dirname + '/cache/casio.jpeg'));
       }
   if(!choose){
     var msg =  {body: `🃏─── 𝐂𝐀𝐒𝐈𝐍𝐎 ───🃏\n\n❯  𝟏. 𝐓𝐫𝐨̀ 𝐓𝐚̀𝐢 𝐗𝐢̉𝐮 🎲\n❯  𝟐. 𝐓𝐫𝐨̀ 𝐂𝐡𝐚̆̃𝐧 𝐋𝐞̉ 🎴\n❯  𝟑. 𝐓𝐫𝐨̀ 𝐋𝐨̂ Đ𝐞̂̀ 💸\n❯  𝟒. 𝐓𝐫𝐨̀ 𝐇𝐢𝐞̣̂𝐮 𝐒𝐨̂́ 🎫\n❯  𝟓. 𝐓𝐫𝐨̀ 𝐒𝐥𝐨𝐭 🎰\n❯  𝟲. 𝗧𝗿𝗼̀ 𝗞𝗲́𝗼 𝗕𝘂́𝗮 𝗕𝗮𝗼 ✌️\n\n𝐑𝐞𝐩𝐥𝐲 𝐒𝐓𝐓 𝐱𝐞𝐦 𝐡𝐮̛𝐨̛́𝐧𝐠 𝐝𝐚̂̃𝐧 𝐜𝐚́𝐜𝐡 𝐜𝐡𝐨̛𝐢 𝐭𝐮̛̀𝐧𝐠 𝐭𝐫𝐨̀ 𝐜𝐡𝐨̛𝐢 𝐧𝐡𝐞́ 🌸\n🃏─── 𝐂𝐀𝐒𝐈𝐍𝐎 ───🃏`, attachment : [
