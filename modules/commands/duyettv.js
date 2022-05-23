@@ -6,7 +6,7 @@ module.exports.config = {
 	description: "Duyệt Thành Viên Trong Danh Sách Phê Duyệt Box",
 	commandCategory: "Box Chat",
 	usages: "",
-	cooldowns: 0
+	cooldowns: 5
 }, module.exports.run = async function({
 	args: e,
 	event: a,
