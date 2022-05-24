@@ -12,12 +12,12 @@
         "type": "git",
         "url": "git+https://github.com/KhangGia1810/MiraiOfficials-Project.git"
     },
-    "author": "NguyenKhang",
+    "author": "Khang",
     "license": "GPL-3.0",
     "bugs": {
         "url": "https://github.com/KhangGia1810/MiraiOfficials-Project/issues"
     },
-    "homepage": "https://github.com/KhangGia1810/MiraiOfficials-Project#readme",
+    "homepage": "https://github.com/Khang  Gia1810/MiraiOfficials-Project#readme",
     "dependencies": {
         "@miraipr0ject/assets": "^1.0.9",
         "aes-js": "^3.1.2",
@@ -55,6 +55,7 @@
         "node-superfetch": "^0.2.3",
         "npm": "^8.5.3",
         "npmlog": "^6.0.1",
+        "pastebin-api": "^4.0.1",
         "path": "^0.12.7",
         "pidusage": "^3.0.0",
         "qrcode": "^1.5.0",
