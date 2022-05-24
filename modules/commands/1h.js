@@ -40,8 +40,6 @@ module.exports.config = {
 };
 
 module.exports.handleReply = async function ({ api, event, handleReply }) {
-	  const moment = require("moment-timezone")
-    var timeNow = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
     const axios = require('axios')
     const { createReadStream, unlinkSync, statSync } = require("fs-extra")
     try {
@@ -50,7 +48,7 @@ module.exports.handleReply = async function ({ api, event, handleReply }) {
         if (fs.statSync(path).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => fs.unlinkSync(path), event.messageID);
         api.unsendMessage(handleReply.messageID)
         return api.sendMessage({ 
-            body: `[🎵]𝐓𝐢𝐭𝐥𝐞: ${data.title}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${this.convertHMS(data.dur)}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧 𝐱𝐮̛̉ 𝐥𝐢́: ${Math.floor((Date.now()- data.timestart)/1000)} 𝐠𝐢𝐚̂𝐲\n⠀⠀⠀⠀⠀⠀『${timeNow}』\n⠀⠀𝐍𝐠𝐡𝐞 𝐧𝐡𝐚̣𝐜 𝐯𝐮𝐢 𝐯𝐞̉ 𝐧𝐡𝐚!🥰`,
+            body: `[🎵]Title: ${data.title}\n[⏱️]Thời gian: ${this.convertHMS(data.dur)}\n[⏱️]Thời gian xử lý: ${Math.floor((Date.now()- data.timestart)/1000)} giây`,
             attachment: fs.createReadStream(path)}, event.threadID, ()=> fs.unlinkSync(path), 
          event.messageID)
             
@@ -79,7 +77,7 @@ module.exports.run = async function ({ api, event, args }) {
             var data = await downloadMusicFromYoutube(args.join(" "), path);
             if (fs.statSync(path).size > 26214400) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => fs.unlinkSync(path), event.messageID);
             return api.sendMessage({ 
-                body: `[🎵]𝐓𝐢𝐭𝐥𝐞: ${data.title}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${this.convertHMS(data.dur)}\n[⏱️]𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧 𝐱𝐮̛̉ 𝐥𝐢́: ${Math.floor((Date.now()- data.timestart)/1000)} 𝐠𝐢𝐚̂𝐲\n⠀⠀⠀⠀⠀⠀『${timeNow}』\n⠀⠀𝐍𝐠𝐡𝐞 𝐧𝐡𝐚̣𝐜 𝐯𝐮𝐢 𝐯𝐞̉ 𝐧𝐡𝐚!🥰`,
+                body: `[🎵]Title: ${data.title}\n[⏱️]Thời gian: ${this.convertHMS(data.dur)}\n[⏱️]Thời gian xử lý: ${Math.floor((Date.now()- data.timestart)/1000)} giây`,
                 attachment: fs.createReadStream(path)}, event.threadID, ()=> fs.unlinkSync(path), 
             event.messageID)
             
@@ -95,7 +93,7 @@ module.exports.run = async function ({ api, event, args }) {
             for (let value of data) {
               link.push(value.id);
               num = num+=1
-              msg += (`🐳${num}.   ${value.title} \n𝐓𝐢𝐦𝐞: ${value.length.simpleText}\n\n`);
+              msg += (`${num} - ${value.title} (${value.length.simpleText})\n\n`);
             }
             var body = `»🔎 Có ${link.length} kết quả trùng với từ khoá tìm kiếm của bạn:\n\n${msg}» Hãy reply(phản hồi) chọn một trong những tìm kiếm trên`
             return api.sendMessage({
@@ -111,4 +109,4 @@ module.exports.run = async function ({ api, event, args }) {
             return api.sendMessage('Đã xảy ra lỗi, vui lòng thử lại trong giây lát!!\n' + e, event.threadID, event.messageID);
         }
     }
-									}
+}
