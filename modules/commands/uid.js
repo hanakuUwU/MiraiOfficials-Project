@@ -9,13 +9,14 @@ module.exports.config = {
 };
 
 module.exports.run = function({ api, event }) {
-  if (event.type == "message_reply") {
-    id = event.messageReply.senderID
-    return api.sendMessage(id,event.threadID, event.messageID)
-  }
-	if (Object.keys(event.mentions) == 0) return api.sendMessage(`${event.senderID}`, event.threadID, event.messageID);
+  const { threadID, messageID, mentions, type, senderID, messageReply  } = event;
+  if(type == "message_reply"){ 
+    id = messageReply.senderID
+    return api.sendMessage(id, threadID, messageID)
+}
+	if (Object.keys(mentions) == 0) return api.sendMessage(`${senderID}`, threadID, messageID);
 	else {
-		for (var i = 0; i < Object.keys(event.mentions).length; i++) api.sendMessage(`${Object.values(event.mentions)[i].replace('@', '')}: ${Object.keys(event.mentions)[i]}`, event.threadID);
+		for (var i = 0; i < Object.keys(mentions).length; i++) api.sendMessage(`${Object.values(mentions)[i].replace('@', '')}: ${Object.keys(mentions)[i]}`, threadID);
 		return;
 	}
 }
