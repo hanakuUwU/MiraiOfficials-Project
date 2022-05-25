@@ -113,8 +113,7 @@ module.exports = function({ api, models }) {
 
 	const tenMinutes = 10 * 60 * 1000;
 
-	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
-	const checkAndExecuteEvent = async () => {
+		const checkAndExecuteEvent = async () => {
 
 		/*smol check*/
 		if (!fs.existsSync(datlichPath)) fs.writeFileSync(datlichPath, JSON.stringify({}, null, 4));
