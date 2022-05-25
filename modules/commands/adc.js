@@ -70,6 +70,21 @@ module.exports.run = async function ({ api, event, args }) {
         })
     }
 
+    if (url[0].indexOf('github') !== -1) {
+        axios.get(url[0]).then(i => {
+            var data = i.data
+            fs.writeFile(
+                `${__dirname}/${args[0]}.js`,
+                data,
+                "utf-8",
+                function (err) {
+                    if (err) return api.sendMessage(`Đã xảy ra lỗi khi áp dụng code vào ${args[0]}.js`, threadID, messageID);
+                    api.sendMessage(`Đã áp dụng code vào ${args[0]}.js, sử dụng command load để sử dụng!`, threadID, messageID);
+                }
+            );
+        })
+    }
+
     if (url[0].indexOf('buildtool') !== -1 || url[0].indexOf('tinyurl.com') !== -1) {
         const options = {
             method: 'GET',
