@@ -45,7 +45,7 @@ module.exports.onLoad = function() {
 }
 module.exports.run = async function ({ api, event, args, Users, permssion, getText }) {
     const content = args.slice(1, args.length);
-    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» admin -s => bật tắt chế độ chỉ admin vs admin sp mới được xài\n» HDSD: ${global.config.PREFIX}admin lệnh bạn cần dùng
+    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» admin sponly => bật tắt chế độ chỉ admin vs admin sp mới được xài\n» HDSD: ${global.config.PREFIX}admin lệnh bạn cần dùng
 `, event.threadID, event.messageID);
     const { threadID, messageID, mentions } = event;
     const { configPath } = global.client;
