@@ -17,7 +17,7 @@
     "bugs": {
         "url": "https://github.com/KhangGia1810/MiraiOfficials-Project/issues"
     },
-    "homepage": "https://github.com/KhangGia1810/MiraiOfficials-Project#readme",
+    "homepage": "https://github.com/KhangGia1810/MiraiOfficials-Project#README",
     "dependencies": {
         "@miraipr0ject/assets": "^1.0.9",
         "aes-js": "^3.1.2",
