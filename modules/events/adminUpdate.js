@@ -36,7 +36,7 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
                 }
                 else if (logMessageData.ADMIN_EVENT == "remove_admin") {
                     dataThread.adminIDs = dataThread.adminIDs.filter(item => item.id != logMessageData.TARGET_ID);
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`[ ThreadUpdat ] Đã cập nhật ${logMessageData.TARGET_ID} trở thành thànhh viên thành công`, threadID, async (error, info) => {
+                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`[ ThreadUpdate ] Đã cập nhật ${logMessageData.TARGET_ID} trở thành thànhh viên thành công`, threadID, async (error, info) => {
                         if (global.configModule[this.config.name].autoUnsend) {
                             await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
                             return api.unsendMessage(info.messageID);
@@ -84,7 +84,7 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
 
             case "log:thread-name": {
                 dataThread.threadName = event.logMessageData.name || "Không tên";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`[ ThreadUpdat ] Đã cập nhật tên nhóm thành ${dataThread.threadName}`, threadID, async (error, info) => {
+                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`[ ThreadUpdate ] Đã cập nhật tên nhóm thành ${dataThread.threadName}`, threadID, async (error, info) => {
                     if (global.configModule[this.config.name].autoUnsend) {
                         await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
                         return api.unsendMessage(info.messageID);
