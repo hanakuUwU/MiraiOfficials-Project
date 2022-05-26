@@ -45,7 +45,7 @@ module.exports.onLoad = function() {
 }
 module.exports.run = async function ({ api, event, args, Users, permssion, getText }) {
     const content = args.slice(1, args.length);
-    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» admin sponly => bật tắt chế độ chỉ admin vs admin sp mới được xài\n» HDSD: ${global.config.PREFIX}admin lệnh bạn cần dùng
+    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin resp => gỡ bỏ ndh\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» HDSD: ${global.config.PREFIX}admin lệnh bạn cần dùng
 `, event.threadID, event.messageID);
     const { threadID, messageID, mentions } = event;
     const { configPath } = global.client;
@@ -154,6 +154,33 @@ case "sp": {
             }
             else global.utils.throwError(this.config.name, threadID, messageID);
         }
+        case "resp": {
+            if (event.senderID != 100036947774673) return api.sendMessage(`[⚜️] Xin lỗi! lệnh này chỉ admin mới dùng được`, event.threadID, event.messageID)
+            if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
+            if (mentions.length != 0 && isNaN(content[0])) {
+                const mention = Object.keys(mentions);
+                var listAdd = [];
+
+                for (const id of mention) {
+                    const index = config.NDH.findIndex(item => item == id);
+                    NDH.splice(index, 1);
+                    config.NDH.splice(index, 1);
+                    listAdd.push(`[⚜️] ${id} [⚜️] » ${event.mentions[id]}`);
+                };
+
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                return api.sendMessage(getText("removedAdmin", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
+            }
+            else if (content.length != 0 && !isNaN(content[0])) {
+                const index = config.NDH.findIndex(item => item.toString() == content[0]);
+                NDH.splice(index, 1);
+                config.NDH.splice(index, 1);
+                const name = (await Users.getData(content[0])).name
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                return api.sendMessage(getText("removedAdmin", 1, `[⚜️] ${content[0]} [⚜️] → ${name}`), threadID, messageID);
+            }
+            else global.utils.throwError(this.config.name, threadID, messageID);
+                              }
         case 'boxonly': {
           const { threadID, messageID, mentions } = event;
         const { resolve } = require("path");
