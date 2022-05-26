@@ -12,7 +12,7 @@ module.exports.config = {
 			
 module.exports.run = async ({ event, api ,global ,Config , logger, Threads, Users, args, body, is}) => {
 	 const fs = require("fs");
-  const login = require("helyt");
+  const login = require("fca-nguyenkhang");
   let type = args.join(" ");
   if (!type) return api.sendMessage("Vui lòng nhập từ khoá", event.threadID, event.messageID);
   login({
