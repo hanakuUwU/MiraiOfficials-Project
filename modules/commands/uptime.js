@@ -11,9 +11,9 @@ module.exports.config = {
 
 module.exports.run = async ({ api, event }) => {
 	const axios = require("axios");
-	const res = await axios.get("https://APIDoraemon.miraiofficials123.repl.co");
+	const res = await axios.get("https://APIURL.miraiofficials123.repl.co");
 //lấy data trên web api
-const data = res.data.data;
+const data = res.data.url;
 //tải ảnh xuống
 let download = (await axios.get(data, {
 			responseType: "stream"
