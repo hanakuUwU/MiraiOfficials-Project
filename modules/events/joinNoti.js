@@ -14,7 +14,7 @@ module.exports.config = {
 module.exports.onLoad = function () {
     const { existsSync , mkdirSync } = global.nodemodule["fs-extra"];
     const { join } = global.nodemodule["path"];
-
+  
 	const path = join(__dirname, "cache", "joinMp4");
 	if (existsSync(path)) mkdirSync(path, { recursive: true });	
 
@@ -31,7 +31,7 @@ module.exports.run = async function({ api, event }) {
 	const { join } = global.nodemodule["path"];
 	const { threadID } = event;
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-		api.changeNickname(`👉 ${global.config.PREFIX} 👈 🤍 ${(!global.config.BOTNAME) ? "Cre by CatalizCS" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
+		api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "Cre by CatalizCS" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
 		const fs = require("fs");
 		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 ⫷`, attachment: fs.createReadStream(__dirname + "/cache/joinMp4/hello.gif")} ,threadID));
 	}
