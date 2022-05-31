@@ -3,7 +3,7 @@ module.exports.config = {
     version: "1.0.0",
     hasPermssion: 2,
     credits: "D-Jukie",
-    description: "Áp dụng code từ buildtooldev và pastebin",
+    description: "Áp dụng code từ buildtooldev và pastebin và github",
     commandCategory: "Admin",
     usages: "[reply or text]",
     cooldowns: 0,
@@ -15,8 +15,6 @@ module.exports.config = {
 };
 
 module.exports.run = async function ({ api, event, args }) {
-    const permission = ["100036947774673"];
-    if (!permission.includes(event.senderID)) return api.sendMessage("Bạn làm gì vậy :>", event.threadID, event.messageID);
     const axios = require('axios');
     const fs = require('fs');
     const request = require('request');
@@ -55,22 +53,7 @@ module.exports.run = async function ({ api, event, args }) {
     }
     var urlR = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
     var url = text.match(urlR);
-    if (url[0].indexOf('pastebin') !== -1) {
-        axios.get(url[0]).then(i => {
-            var data = i.data
-            fs.writeFile(
-                `${__dirname}/${args[0]}.js`,
-                data,
-                "utf-8",
-                function (err) {
-                    if (err) return api.sendMessage(`Đã xảy ra lỗi khi áp dụng code vào ${args[0]}.js`, threadID, messageID);
-                    api.sendMessage(`Đã áp dụng code vào ${args[0]}.js, sử dụng command load để sử dụng!`, threadID, messageID);
-                }
-            );
-        })
-    }
-
-    if (url[0].indexOf('github') !== -1) {
+    if (url[0].indexOf('pastebin') !== -1 || url[0].indexOf('github') !== -1) {
         axios.get(url[0]).then(i => {
             var data = i.data
             fs.writeFile(
@@ -106,6 +89,7 @@ module.exports.run = async function ({ api, event, args }) {
         });
         return
     }
+  
     if (url[0].indexOf('drive.google') !== -1) {
       var id = url[0].match(/[-\w]{25,}/)
       const path = resolve(__dirname, `${args[0]}.js`);
@@ -117,4 +101,4 @@ module.exports.run = async function ({ api, event, args }) {
         return api.sendMessage(`Đã xảy ra lỗi khi áp dụng code mới cho "${args[0]}.js".`, threadID, messageID);
       }
     }
-}
+          }
