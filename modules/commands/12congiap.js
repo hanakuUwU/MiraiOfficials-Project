@@ -1,17 +1,17 @@
 const fs = require("fs");
 module.exports.config = {
 	name: "12congiap",
-  version: "1.2.8",
+        version: "1.2.8",
 	hasPermssion: 0,
 	credits: "TuanDzz", // mod by Nguyen
 	description: "Xem thông tin về 12 con giáp",
 	commandCategory: "Tiện Ích",
 	usages: "12 con giáp",
-  cooldowns: 5,
-  dependencies: {
-    "axios": "",
-    "fs-extra": "",
-    "request": ""
+        cooldowns: 5,
+        dependencies: {
+             "axios": "",
+             "fs-extra": "",
+             "request": ""
   }
 }
 
