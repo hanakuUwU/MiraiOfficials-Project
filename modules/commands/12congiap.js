@@ -1,7 +1,7 @@
 const fs = require("fs");
 module.exports.config = {
 	name: "12congiap",
-        version: "1.2.8",
+  version: "1.2.8",
 	hasPermssion: 0,
 	credits: "TuanDzz", // mod by Nguyen
 	description: "Xem thông tin về 12 con giáp",
