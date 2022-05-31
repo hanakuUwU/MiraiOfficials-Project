@@ -13,7 +13,7 @@ module.exports.config = {
     }
 };
 
-const path = __dirname + '/checktt/';
+const path = __dirname + '/tt/';
 const moment = require('moment-timezone');
 
 module.exports.onLoad = () => {
