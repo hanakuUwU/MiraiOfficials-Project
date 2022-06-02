@@ -23,13 +23,6 @@ module.exports.run = async function  ({ event, api, args, permssionm, Users })  
 const axios = require("axios");
     const pathData = join(__dirname, "cache", "autosetname.json");
     const content = (args.slice(1, args.length)).join(" ");
-const res = await axios.get("https://api.xlshsad.repl.co/images/mirai");
-//lấy data trên web api
-const data = res.data.url;
-//tải ảnh xuống
-let download = (await axios.get(data, {
-			responseType: "stream"
-		})).data;
     var dataJson = JSON.parse(readFileSync(pathData, "utf-8"));
     var thisThread = dataJson.find(item => item.threadID == threadID) || { threadID, nameUser: [] };
     switch (args[0]) {
@@ -51,7 +44,7 @@ let download = (await axios.get(data, {
                 break;
         }
         default: {
-                api.sendMessage({body: `Dùng: autosetname add <name> để cấu hình biệt danh cho thành viên mới\nDùng: autosetname remove để xóa cấu hình đặt biệt danh cho thành viên mới`,attachment: download}, threadID, messageID);
+                api.sendMessage({body: `Dùng: autosetname add <name> để cấu hình biệt danh cho thành viên mới\nDùng: autosetname remove để xóa cấu hình đặt biệt danh cho thành viên mới`}, threadID, messageID);
         }
     }
     if (!dataJson.some(item => item.threadID == threadID)) dataJson.push(thisThread);
