@@ -162,9 +162,10 @@ module.exports.run = async function({ api, event, Threads, args, Users }) {
 
     const moment = require("moment-timezone");
     var gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss D/MM/YYYY");
+    var time = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss (D/MM/YYYY)");
     var soad = global.config.ADMINBOT.length;
     api.sendMessage(
-      "DONE!\nĐã gửi nội dung tới " + soad + " admin bot...",
+      `⏰ Vào lúc: ${time}\n📩 Đã gửi nội dung tới ${soad} admin bot...\n🌈 Vui Lòng chờ phản hồi từ admin`,
       event.threadID,
       () => {
         var idad = global.config.ADMINBOT;
