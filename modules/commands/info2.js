@@ -24,10 +24,10 @@ module.exports.onLoad = async function ({ api }) {
         'https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/Module.json'
       )
     if (Object.keys(data.result).length != 0) {
-      global.paid[global.config.keyActive].info = true
+      data.result.Active = true
       console.log()
       console.error(
-        '=============== Actived Success module: info | Welcome back ' +
+        `=============== Actived Success module: info | Welcome back ` +
           data.result.name +
           ' ==============='
       )
@@ -45,7 +45,7 @@ module.exports.onLoad = async function ({ api }) {
     ) {
       console.log()
       console.error(
-        '=============== Error! ' +
+        `=============== Error! ` +
           _0x22380e.response.data.result +
           ' ==============='
       )
@@ -62,9 +62,12 @@ module.exports.run = async ({ event, api, Users, args }) => {
     { createReadStream, unlinkSync, writeFileSync } =
       global.nodemodule['fs-extra'],
     axios = global.nodemodule.axios,
+    { data } = await axios.get(
+        'https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/Module.json'
+      ),
     { randomString } = global.utils,
     { threadID, messageID, mentions, senderID } = event
-  if (!global.paid || !global.paid[global.config.keyActive].info) {
+  if (data.result.Active == false) {
     return api.sendMessage(
       '[ Donate System ] Bạn chưa kích hoạt module!',
       threadID,
@@ -128,7 +131,7 @@ module.exports.run = async ({ event, api, Users, args }) => {
           adminName.push(name)
         }
         const body =
-          threadName +
+          "Tên nhóm:"+ threadName +
           '  \n💩ID: ' +
           (args[1] || threadID) +
           '\n👀Phê duyệt thành viên: ' +
