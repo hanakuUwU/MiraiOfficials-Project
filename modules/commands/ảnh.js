@@ -27,6 +27,7 @@ const data = res.data.url;
 let download = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+            api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐀𝐧𝐲𝐚 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download}, threadID, messageID);
           };
 			break;
@@ -51,6 +52,7 @@ const data = res.data.url;
 let download3 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐌𝐢𝐫𝐚𝐢 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download3}, threadID, messageID);
           };
 			break; 
@@ -63,6 +65,7 @@ const data = res.data.url;
 let download4 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐂𝐡𝐢𝐭𝐚𝐧𝐝𝐚 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download4}, threadID, messageID);
           };
 			break;
@@ -75,6 +78,7 @@ const data = res.data.url;
 let download5 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐥𝐨𝐥𝐢 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download5}, threadID, messageID);
           };
 			break;
@@ -87,6 +91,7 @@ const data = res.data.data;
 let download6 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐃𝐨𝐫𝐚𝐞𝐦𝐨𝐧 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download6}, threadID, messageID);
           };
 			break;
@@ -99,6 +104,7 @@ const data = res.data.url;
 let download7 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐕𝐢𝐨𝐥𝐞𝐭 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download7}, threadID, messageID);
           };
 			break;
@@ -111,6 +117,7 @@ const data = res.data.data;
 let download8 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐠𝐚́𝐢 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download8}, threadID, messageID);
           };
 			break;     
@@ -123,6 +130,7 @@ const data = res.data.data;
 let download9 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐭𝐫𝐚𝐢 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download9}, threadID, messageID);
           };
 			break;         
@@ -135,6 +143,7 @@ const data = res.data.url;
 let download10 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+          api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐇𝐆 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download10}, threadID, messageID);
           };
 			break;       
