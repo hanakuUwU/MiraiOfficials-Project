@@ -53,70 +53,82 @@ const { threadID, messageID, senderID } = event;
             switch(event.body) {
 
 					case "1":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì hiện tại đơn là một thì trong tiếng Anh hiện đại. Thì này diễn tả một hành động chung chung, tổng quát lặp đi lặp lại nhiều lần hoặc một sự thật hiển nhiên hoặc một hành động diễn ra trong thời gian hiện tại. ", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/1.png`)
 			}, event.threadID, event.messageID);
 			break;
 		case "2":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Định nghĩa thì hiện tại tiếp diễn là thì được dùng để diễn tả những sự việc/hành động xảy ra ngay lúc chúng ta nói hoặc xung quanh thời điểm nói, và hành động/sự việc đó vẫn chưa chấm dứt (còn tiếp tục diễn ra) trong thời điểm nói.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/2.jpg`)
 			}, event.threadID, event.messageID);
 			break;
 		case "3":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì hiện tại hoàn thành là thì sử dụng để diễn tả một hành động đã hoàn thành cho tới thời điểm hiện ...", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/3.png`)
 			}, event.threadID, event.messageID); 
 			break;
 		case "4":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì hiện tại hoàn thành tiếp diễn (thì Present perfect continuous) là thì diễn tả sự việc bắt đầu trong quá khứ và tiếp tục ở hiện tại có thể tiếp diễn ở tương lai sự việc đã kết thúc nhưng ảnh hưởng kết quả còn lưu lại hiện tại.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/4.png`)
 			}, event.threadID, event.messageID); 
 			break;
 		case "5":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì quá khứ đơn (Past simple tense) dùng để diễn tả một hành động, sự việc diễn ra và kết thúc trong quá khứ. Ví dụ: We went shopping yesterday. (Ngày hôm qua chúng tôi đã đi mua sắm).", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/5.png`)
 			}, event.threadID, event.messageID); 
 			break;
 		case "6":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì quá khứ tiếp diễn (Past Continuous tense) là thì được dùng khi muốn nhấn mạnh diễn biến hay quá trình của sự vật hay sự việc hoăc thời gian sự vật hay sự việc đó diễn ra và đây là thì tiếng Anh mà nhiều bạn nhầm lẫn nhất.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/6.png`)
 			}, event.threadID, event.messageID); 
 			break;
 		case "7":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì quá khứ hoàn thành dùng để diễn tả một hành động xảy ra trước một hành động khác và cả hai hành động này đều đã xảy ra trong quá khứ. Hành động nào xảy ra trước thì dùng thì quá khứ hoàn thành, hành động xảy ra sau thì dùng thì quá khứ đơn.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/7.png`)
 			}, event.threadID, event.messageID); 
 			break;
 		case "8":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì quá khứ hoàn thành tiếp diễn (Past Perfect Continuous) là thì dùng để diễn tả một hành động đã và đang xảy ra trong quá khứ nhưng kết thúc trước một hành động khác, hành động đó cũng kết thúc trong quá khứ. Quá khứ hoàn thành tiếp diễn mô tả tính chính xác của các hành động đã xảy ra.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/8.jpg`)
 			}, event.threadID, event.messageID); 
 			break;
     case "9":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì tương lai đơn trong tiếng Anh (Simple future tense) được dùng khi không có kế hoạch hay quyết định làm gì nào trước khi chúng ta nói. Chúng ta ra quyết định tự phát tại thời điểm nói.", attachment: fs.createReadStream(__dirname + `/noprefix/12thi/9.png`)
 			}, event.threadID, event.messageID); 
 			break;
     case "10":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì tương lai tiếp diễn (Future continuous tense) dùng để diễn tả một hành động, sự việc sẽ đang diễn ra tại một thời điểm cụ thể trong tương lai.", attachment: fs.createReadStream(__dirname + `/noprefix/12thi/10.jpg`)
 			}, event.threadID, event.messageID); 
 						break;
       case "11":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Tương lai hoàn thành là gì? Thì tương lai hoàn thành (Future perfect tense) dùng để diễn tả một hành động, sự việc sẽ hoàn thành tới một thời điểm cụ thể trong tương lai.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/11.png`)
 			}, event.threadID, event.messageID); 
 			break;
       case "12":
+                api.unsendMessage(handleReply.messageID);
 			api.sendMessage({
 				body: "Thì tương lai hoàn thành tiếp diễn (Future Perfect Continuous) là thì dùng để nhấn mạnh khoảng thời gian của một hành động, sự việc đang diễn ra trong tương lai và sẽ kết thúc trước một hành động, sự việc khác.", 
 				attachment: fs.createReadStream(__dirname + `/noprefix/12thi/12.jpg`)
