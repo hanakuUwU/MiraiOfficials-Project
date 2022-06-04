@@ -77,5 +77,5 @@ module.exports.run = async function({ api, event, args, Users, Threads, Currenci
         var sex = await data[id].gender;
         var gender = sex == 2 ? "Nam🧑" : sex == 1 ? "Nữ👩‍🦰" : "Trần Đức Bo";
 var one = senderID, two = id;
-    return makeImage({ one, two }).then(path => api.sendMessage({ body: `𝐆𝐡𝐞́𝐩 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠\n${namee}\n⠀⠀⠀⠀ <3\n${name}\n𝐓𝐢̉ 𝐥𝐞̣̂ 𝐥𝐚̀: ${tle}`, mentions: arraytag, attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
+    return makeImage({ one, two }).then(path => api.sendMessage({ body: `𝐆𝐡𝐞́𝐩 𝐭𝐡𝐚̀𝐧𝐡 𝐜𝐨̂𝐧𝐠\n${namee}\n⠀⠀⠀⠀ <3\n${name}\n𝐓𝐢̉ 𝐥𝐞̣̂ 𝐥𝐚̀: ${tle}`, attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
     }
