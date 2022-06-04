@@ -27,7 +27,7 @@ module.exports.onLoad = async function ({ api }) {
       data.result.Active = true
       console.log()
       console.error(
-        `=============== Actived Success module: info | Welcome back ` +
+        `=============== Actived Success module: ${this.config.name} | Welcome back ` +
           data.result.name +
           ' ==============='
       )
