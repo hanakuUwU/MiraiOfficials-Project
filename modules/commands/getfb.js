@@ -9,7 +9,7 @@ module.exports.config = {
   cooldowns: 5
 }
 module.exports.run = async function({ api, event, args}) {
-  const { messageReply, senderID, threadID, messageID, type} = event;
+  const { messageReply, senderID, threadID, messageID, type, mentions} = event;
   if (type == "message_reply") {
       uid = messageReply.senderID
     } else if (args.join().indexOf('@') !== -1) {
