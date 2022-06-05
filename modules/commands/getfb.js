@@ -1,23 +1,23 @@
 module.exports.config = {
   name: "getfb",
-  versions: "1.0.0",
+  version: "1.0.0",
   hasPermssion: 0,
-  credits: "Mirai Team",// mod by NguyenKhang
+  credits: "Nguyen",
   description: "Lấy link fb",
   commandCategory: "tiện ích",
-  usages: "[Trống] or [Tag]/[reply]",
+  usages: "[trống] or [tag]/[reply]",
   cooldowns: 5
 }
-module.exports.run = function({ api, event }) {
-  if (event.type == "message_reply") {
-    id = event.messageReply.senderID
-    return api.sendMessage(`facebook.com/` + id,event.threadID, event.messageID)
-  }
-	if (Object.keys(event.mentions) == 0) return api.sendMessage(`facebook.com/${event.senderID}`, event.threadID, event.messageID);
-  else {
-		for (var i = 0; i < Object.keys(event.mentions).length; i++) api.sendMessage(`facebook.com/${Object.keys(event.mentions)[i]}`, event.threadID, event.messageID);
-		return;
-  }
+module.exports.run = async function({ api, event, args}) {
+  const { messageReply, senderID, threadID, messageID, type} = event;
+  if (type == "message_reply") {
+      uid = messageReply.senderID
+    } else if (args.join().indexOf('@') !== -1) {
+        var uid = Object.keys(mentions)[0]
+    }  else {
+        var uid = senderID
+  } 
+  let data = await api.getUserInfo(uid),
+       { profileUrl } = data[uid];
+  return api.sendMessage(`${profileUrl}`, threadID, messageID)
 }
-
-  
