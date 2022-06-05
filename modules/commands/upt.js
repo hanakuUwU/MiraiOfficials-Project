@@ -1,5 +1,4 @@
-const fbname = "Hanaku.user";
-const githubname = "HanakuUwU";
+const fs = require('fs-extra');
 module.exports.config = {
 	name:"upt",
 	version: "1.0.0",
@@ -18,6 +17,10 @@ function byte2mb(bytes) {
 	while (n >= 1024 && ++l) n = n / 1024;
 	return `${n.toFixed(n < 10 && l > 0 ? 1 : 0)} ${units[l]}`;
 }
+module.exports.onLoad = () => {
+  const dirMaterial = __dirname + `/tad/`; 
+  if (!fs.existsSync(dirMaterial + "tad")) fs.mkdirSync(dirMaterial, { recursive: true });
+}
 module.exports.run = async ({ api, event, args }) => {
 const time = process.uptime(),
 		hours = Math.floor(time / (60 * 60)),
@@ -29,38 +32,26 @@ const time = process.uptime(),
     const axios = require('axios')
 	const pidusage = await global.nodemodule["pidusage"](process.pid);
 	const timeStart = Date.now();
-  const fs = require('fs-extra');
-  const moment = require("moment-timezone");
-  var gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss");
-  var cc = moment.tz('Asia/Ho_Chi_Minh').format('D/MM/YYYY');
-    var thu = moment.tz('Asia/Ho_Chi_Minh').format('dddd');
-  if (thu == 'Sunday') thu = '𝐂𝐡𝐮̉ 𝐍𝐡𝐚̣̂𝐭'
-  if (thu == 'Monday') thu = '𝐓𝐡𝐮̛́ 𝟐'
-  if (thu == 'Tuesday') thu = '𝐓𝐡𝐮̛́ 𝟑'
-  if (thu == 'Wednesday') thu = '𝐓𝐡𝐮̛́ 𝟒'
-  if (thu == "Thursday") thu = '𝐓𝐡𝐮̛́ 𝟓'
-  if (thu == 'Friday') thu = '𝐓𝐡𝐮̛́ 𝟔'
-  if (thu == 'Saturday') thu = '𝐓𝐡𝐮̛́ 𝟕'
-   if (!fs.existsSync(__dirname +
+  if (!fs.existsSync(__dirname +
         `/tad/UTM-Avo.ttf`)) {
-        let getfont = (await axios.get(`https://github.com/hanakuUwU/font/raw/main/UTM%20Avo.ttf`, { responseType: "arraybuffer" })).data;
+        let getfont = (await axios.get(`https://github.com/KhangGia1810/gbanmirai/raw/main/UTM%20Avo.ttf`, { responseType: "arraybuffer" })).data;
         fs.writeFileSync(__dirname + `/tad/UTM-Avo.ttf`, Buffer.from(getfont, "utf-8"));
       }
          if (!fs.existsSync(__dirname +
       `/tad/phenomicon.ttf`)) {
-      let getfont2 = (await axios.get(`https://github.com/hanakuUwU/font/raw/main/phenomicon.ttf`, { responseType: "arraybuffer" })).data;
+      let getfont2 = (await axios.get(`https://github.com/KhangGia1810/gbanmirai/raw/main/phenomicon.ttf`, { responseType: "arraybuffer" })).data;
       fs.writeFileSync(__dirname + `/tad/phenomicon.ttf`, Buffer.from(getfont2, "utf-8"));
     };
   if (!fs.existsSync(__dirname +
       `/tad/CaviarDreams.ttf`)) {
-      let getfont3 = (await axios.get(`https://github.com/hanakuUwU/font/raw/main/CaviarDreams.ttf`, { responseType: "arraybuffer" })).data;
+      let getfont3 = (await axios.get(`https://github.com/KhangGia1810/gbanmirai/raw/main/CaviarDreams.ttf`, { responseType: "arraybuffer" })).data;
       fs.writeFileSync(__dirname + `/tad/CaviarDreams.ttf`, Buffer.from(getfont3, "utf-8"));
     };
    const { loadImage, createCanvas, registerFont } = require("canvas");
   
   let k = args[0];
    if(args[0] == "list"){
-    const alime = (await axios.get('https://run.mocky.io/v3/6aa59c3e-ff9f-41cd-8611-07a1b870042d')).data
+    const alime = (await axios.get('https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/list.json')).data
     var count = alime.listAnime.length;
       var data = alime.listAnime
       var page = 1;
@@ -81,7 +72,7 @@ const time = process.uptime(),
   } else {
     var id = k
   }
-    const lengthchar = (await axios.get('https://run.mocky.io/v3/0dcc2ccb-b5bd-45e7-ab57-5dbf9db17864')).data
+    const lengthchar = (await axios.get('https://raw.githubusercontent.com/KhangGia1810/gbanmirai/main/upt.json')).data
     console.log(lengthchar.length)
   const Canvas = require('canvas');
     let pathImg = __dirname + `/tad/avatar_1111231.png`;
@@ -138,7 +129,7 @@ registerFont(__dirname + `/tad/CaviarDreams.ttf`, {
     const imageBuffer = canvas.toBuffer();
    fs.writeFileSync(pathImg, imageBuffer);
   return api.sendMessage({
-    body: `Bot đã hoạt động được ${hours} giờ ${minutes} phút ${seconds} giây.\n\n❯ Hôm nay là ${thu} || ${cc}\n❯ Tổng người dùng: ${global.data.allUserID.length}\n❯ Tổng Nhóm: ${global.data.allThreadID.length}\n❯ Verrsion: ${global.config.version}\n❯ Cpu đang sử dụng: ${pidusage.cpu.toFixed(1)}%\n❯ Ram đang sử dụng: ${byte2mb(pidusage.memory)}\n❯ Ping: ${Date.now() - timeStart}ms\n❯ ID Nhân Vật: ${id}\n⠀⠀⠀⠀⠀⠀『${gio}』`,
+    body: `Bot đã hoạt động được ${hours} giờ ${minutes} phút ${seconds} giây.\n\n❯ Tổng người dùng: ${global.data.allUserID.length}\n❯ Tổng Nhóm: ${global.data.allThreadID.length}\n❯ Verrsion: ${global.config.version}\n❯ Cpu đang sử dụng: ${pidusage.cpu.toFixed(1)}%\n❯ Ram đang sử dụng: ${byte2mb(pidusage.memory)}\n❯ Ping: ${Date.now() - timeStart}ms\n❯ ID Nhân Vật: ${id}\n`,
     attachment: fs.createReadStream(pathImg)
   },
     event.threadID,
