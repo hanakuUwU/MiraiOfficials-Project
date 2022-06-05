@@ -15,7 +15,7 @@ module.exports.run = async function({ api, event, Users, Currencies }) {
         const fs = global.nodemodule["fs-extra"];
         var data = await Currencies.getData(event.senderID);
         var money = data.money
-        if( money < 696) api.sendMessage("💕 Muốn ghép đôi phải có 696 đô Thì bot mới ghép cho nha!", event.threadID, event.messageID) //thay số tiền cần trừ vào 0, xóa money = 0
+        if( money < 50) api.sendMessage("💕 𝐌𝐮𝐨̂́𝐧 𝐠𝐡𝐞́𝐩 𝐝𝐨̂𝐢 𝐩𝐡𝐚̉𝐢 𝐜𝐨́ 𝟓𝟎𝐊 𝐓𝐡𝐢̀ 𝐛𝐨𝐭 𝐦𝐨̛́𝐢 𝐠𝐡𝐞́𝐩 𝐜𝐡𝐨 𝐧𝐡𝐚!", event.threadID, event.messageID) //thay số tiền cần trừ vào 0, xóa money = 0
         else {
         var tile = Math.floor(Math.random() * 101);
         
@@ -31,9 +31,9 @@ module.exports.run = async function({ api, event, Users, Currencies }) {
         arraytag.push({id: event.senderID, tag: namee});
         arraytag.push({id: id, tag: name});
                 
-        api.changeNickname(`Vợ ${name}`, event.threadID, event.senderID);
-        api.changeNickname(`Chồng của ${namee}`, event.threadID, id);
-        Currencies.setData(event.senderID, options = {money: money - 696})
+        api.changeNickname(`${namee} 𝐖𝐢𝐭𝐡 ${name}`, event.threadID, event.senderID);
+        api.changeNickname(`${name} 𝐖𝐢𝐭𝐡 ${namee}`, event.threadID, id);
+        Currencies.setData(event.senderID, options = {money: money - 50})
   
         let Avatar = (await axios.get( `https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=170440784240186|bc82258eaaf93ee5b9f577a8d401bfc9`, { responseType: "arraybuffer" } )).data; 
             fs.writeFileSync( __dirname + "/cache/1.png", Buffer.from(Avatar, "utf-8") );
