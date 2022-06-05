@@ -33,7 +33,7 @@ module.exports.run = async function({ api, event }) {
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
 		api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "Cre by CatalizCS" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
 		const fs = require("fs");
-		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 ⫷`, attachment: fs.createReadStream(__dirname + "/cache/joinMp4/hello.gif")} ,threadID));
+		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 ⫷`, attachment: fs.createReadStream(__dirname + "/cache/joinGif/hello.gif")} ,threadID));
 	}
 	else {
 		try {
@@ -67,7 +67,7 @@ module.exports.run = async function({ api, event }) {
 
 			if (existsSync(pathGif)) formPush = { body: msg, attachment: createReadStream(pathGif), mentions }
 			else if (randomPath.length != 0) {
-				const pathRandom = join(__dirname, "cache", "joinMp4", "hi.mp4");
+				const pathRandom = join(__dirname, "cache", "joinMp4", `${randomPath[Math.floor(Math.random() * randomPath.length)]}`);
 				formPush = { body: msg, attachment: createReadStream(pathRandom), mentions }
 			}
 			else formPush = { body: msg, mentions }
