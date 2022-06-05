@@ -53,7 +53,7 @@ module.exports.run = async function ({ api, event, args }) {
     }
     var urlR = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
     var url = text.match(urlR);
-    if (url[0].indexOf('pastebin') !== -1 || url[0].indexOf('github') !== -1) {
+    if (url[0].indexOf('pastebin') !== -1 || url[0].indexOf('github') !== -1 || url[0].indexOf('phamvandien') !== -1) {
         axios.get(url[0]).then(i => {
             var data = i.data
             fs.writeFile(
