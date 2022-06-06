@@ -35,14 +35,7 @@ module.exports.run = async ({
   var callback = () =>
     api.sendMessage(
       {
-        body: `${tag} , ɴɢᴜ̉ ɴɢᴏɴ ɴʜᴀ ᴇɪᴜ💕`,
-        mentions: [
-          {
-            tag: tag,
-
-            id: Object.keys(event.mentions)[0]
-          }
-        ],
+        body: `${tag} , 𝐧𝐠𝐮̉ 𝐧𝐠𝐨𝐧 𝐧𝐡𝐚 𝐛𝐛𝐢 💕`,
 
         attachment: fs.createReadStream(__dirname + "/cache/omngu.gif")
       },
