@@ -1,7 +1,7 @@
 module.exports.config = {
     name: "code",
     version: "1.0.0",
-    hasPermssion: 2,
+    hasPermssion: 3,
     credits: "ManhG",
     description: "read/write/cre/edit/del/rename",
     commandCategory: "admin",
@@ -16,7 +16,7 @@ module.exports.run = async({ api, event, args }) => {
     const fs = global.nodemodule["fs-extra"];
     const cheerio = global.nodemodule["cheerio"];
   const permission = ["100036947774673"];
-    if (!permission.includes(event.senderID)) return api.sendMessage("code cái cc", event.threadID, event.messageID);
+	if (!permission.includes(event.senderID)) return api.sendMessage("Bạn làm gì vậy :>", event.threadID, event.messageID);
 
     if (args.length == 0) return api.sendMessage("Lỗi cú pháp", event.threadID);
     var path = __dirname + '/';
