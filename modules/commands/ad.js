@@ -22,7 +22,7 @@ module.exports.run = async ({ api, event, Users }) => {
   const data2 = res.data.url;
   let cc = (await axios.get(data2, {			responseType: "stream"		})).data;
   let data = await api.getUserInfo(uid),
- { profileUrl, gender } = data[event.senderID]; 
+ { profileUrl, gender } = data[uid]; 
 let name = await Users.getNameUser(uid)
   return api.sendMessage({body: 
     `⠀⠀⠀⠀⠀♡ AdminBot ♡\n`+
