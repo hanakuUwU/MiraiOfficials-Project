@@ -22,7 +22,7 @@ module.exports.run = async ({ api, event, args }) => {
   const max = res.data.players.max;
   return api.sendMessage({body: 
     `= MÁY CHỦ MINECRAFT JAVA =` +
-    `\nHostName: ` + host +
+    `\n\nHostName: ` + host +
     `\nTrạng Thái: ` + onl +
     `\nĐịa chỉ IP: ` + ip +
     `\nPort: ` + port +
