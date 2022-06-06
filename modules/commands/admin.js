@@ -1,6 +1,6 @@
 module.exports.config = {
 	name: "admin",
-	version: "1.0.7",// thêm 2 cái phế thải
+	version: "1.0.7",
 	hasPermssion: 0,
 	credits: "Mirai Team",
 	description: "Bật tắt chế độ chỉ qtv dùng lệnh",
@@ -45,7 +45,7 @@ module.exports.onLoad = function() {
 }
 module.exports.run = async function ({ api, event, args, Users, permssion, getText }) {
     const content = args.slice(1, args.length);
-    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» admin add => thêm người dùng làm admin\n» admin list => xem danh sách các admin \n» admin remove => gỡ bỏ admin\n» admin resp => gỡ bỏ ndh\n» admin boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» admin only => bật tắt chế độ chỉ admin mới dùng được bot\n» admin pa => bật tắt tính năng nhắn riêng với bot\n» HDSD: ${global.config.PREFIX}admin lệnh bạn cần dùng
+    if (args.length == 0) return api.sendMessage(`Bạn có thể dùng\n» ${global.config.PREFIX}${this.config.name} add => thêm người dùng làm admin\n» ${global.config.PREFIX}${this.config.name} list => xem danh sách các admin \n» ${global.config.PREFIX}${this.config.name} remove => gỡ bỏ admin\n» ${global.config.PREFIX}${this.config.name} resp => gỡ bỏ ndh\n» ${global.config.PREFIX}${this.config.name} boxonly => bật tắt chế độ chỉ quản trị viên dùng bot\n» ${global.config.PREFIX}${this.config.name} only => bật tắt chế độ chỉ admin mới dùng được bot\n» ${global.config.PREFIX}${this.config.name} pa => bật tắt tính năng nhắn riêng với bot\n» HDSD: ${global.config.PREFIX}${this.config.name} lệnh bạn cần dùng
 `, event.threadID, event.messageID);
     const { threadID, messageID, mentions } = event;
     const { configPath } = global.client;
