@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "thính",
-  version: "18.9.7",
+  version: "1.2.0",
   hasPermssion: 0,
   credits: "Nguyen",
   description: "Xem ca dao Việt Nam",
