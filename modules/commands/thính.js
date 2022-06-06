@@ -1,27 +1,20 @@
 module.exports.config = {
-	name: "thính",
-	version: "1.0.0",
-	hasPermssion: 0,
-	credits: "VanHung",
-	description: "Ca Dao Việt Nam",
-	commandCategory: "other",
-	usages: "cadao",
-	cooldowns: 5
-};
+  name: "thính",
+  version: "18.9.7",
+  hasPermssion: 0,
+  credits: "Nguyen",
+  description: "Xem ca dao Việt Nam",
+  commandCategory: "bổ ích",
+  usages: "",
+  cooldowns: 5
+}
 
 module.exports.run = async ({ api, event }) => {
-const axios = require('axios');
-const request = require('request');
-const fs = require("fs");
-const res = await axios.get(`https://apikanekiflop.tk/hearing`);
-const anh = await axios.get(`https://apikanna.ngochan6666.repl.co`);
-var gai = anh.data.data.substring(anh.data.data.lastIndexOf(".") + 1);
-var cadao = res.data.data
-let callback = function () {
-			 api.sendMessage({
-				body: `${cadao}`,
-				attachment: fs.createReadStream(__dirname + `/cache/gaicadao.${gai}`)
-			}, event.threadID, () => fs.unlinkSync(__dirname + `/cache/gaicadao.${gai}`), event.messageID);
-			};
-			request(anh.data.data).pipe(fs.createWriteStream(__dirname + `/cache/gaicadao.${gai}`)).on("close", callback);
+  const axios = require('axios');
+  const res = await axios.get('https://APIThinh.miraiofficials123.repl.co');
+  const data = res.data.data;
+  const qq = await axios.get(`https://APIURL.MIRAIOFFICIALS123.REPL.CO`);
+  const data2 = qq.data.url;
+  let cc = (await axios.get(data2, {			responseType: "stream"})).data;
+  return api.sendMessage({body: `Ca dao: `+data, attachment: cc}, event.threadID, event.messageID)
 }
