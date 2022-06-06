@@ -16,5 +16,5 @@ module.exports.run = async ({ api, event }) => {
   const qq = await axios.get(`https://APIURL.MIRAIOFFICIALS123.REPL.CO`);
   const data2 = qq.data.url;
   let cc = (await axios.get(data2, {			responseType: "stream"})).data;
-  return api.sendMessage({body: `Ca dao: `+data, attachment: cc}, event.threadID, event.messageID)
+  return api.sendMessage({body: `Thính: `+data, attachment: cc}, event.threadID, event.messageID)
 }
