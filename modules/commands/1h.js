@@ -40,6 +40,7 @@ module.exports.config = {
 };
 
 module.exports.handleReply = async function ({ api, event, handleReply }) {
+  if (event.senderID != handleReply.author) return api.sendMessage("Xàm lồn", event.threadID, event.messageID);
     const axios = require('axios')
     const { createReadStream, unlinkSync, statSync } = require("fs-extra")
     try {
