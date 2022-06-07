@@ -69,7 +69,7 @@ const loadCommand = function ({ moduleList, threadID, messageID }) {
                         if (!loadSuccess || error) throw 'Không thể tải package ' + packageName + (' cho lệnh ') + command.config.name +', lỗi: ' + error + ' ' + error['stack'];
                     }
                 }
-                logger.loader(' Đã tải thành công toàn bộ package cho lệnh' + command.config.name);
+                logger.loader(' Đã tải thành công toàn bộ package cho lệnh ' + command.config.name);
             }
             if (command.config.envConfig && typeof command.config.envConfig == 'Object') try {
                 for (const [key, value] of Object['entries'](command.config.envConfig)) {
