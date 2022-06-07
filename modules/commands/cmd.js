@@ -184,7 +184,7 @@ module.exports.run = function ({ event, args, api }) {
                 `- Các package yêu cầu: ${(Object.keys(dependencies || {})).join(", ") || "Không có"}` +
                 `\n- Mô tả: ${description || "Không có"}` +
                 `\n- Loại: ${commandCategory || "Không có"}` +
-                `\n- Cách xài: ${usages || "chưa có hướng dẫn"}`,
+                `\n- Cách xài: ${global.config.PREFIX}${command.config.name} ${usages || "chưa có hướng dẫn"}`,
                 threadID, messageID
             );
         }
