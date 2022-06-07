@@ -11,7 +11,7 @@ module.exports.config = {
 
 module.exports.run = async ({ api, event }) => {
   const axios = require('axios');
-  const res = await axios.get('https://apithinh.miraiofficials123.repl.co/');
+  const res = await axios.get('https://apicadaovn.miraiofficials123.repl.co/');
   const data = res.data.data;
   const data1 = res.data.url;
   let cc = (await axios.get(data1, {responseType: "stream"})).data;
