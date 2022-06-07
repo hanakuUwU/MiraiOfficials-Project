@@ -18,7 +18,20 @@ module.exports.run = async ({ args, api, event, Currencies, client }) => {
    const { threadID, senderID, messageID, type, mentions } = event;
    const moment = require("moment-timezone");
     var timeNow = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
-   if (args.length == 0) return api.sendMessage(` ===  Bạn có thể dùng  === \n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check luotdung => Check số lượt dùng còn lại của bạn\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check ndfb => Lọc thành viên bị bay acc khỏi nhóm\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check del => Lọc thành viên khỏi nhóm theo số tin nhắn\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check onl => Xem thời gian hoạt động bot onl \n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check tt => Check độ tương tác của bạn\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check box => Lọc nhóm dưới 4 thành viên\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check all => Check tất cả độ tương tác các thành viên trong box\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check covid => Xem thông tin covid\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check mayman => Xem Tỉ lệ % may mắn của bạn?\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => check nude => Check những ảnh gợi cảm\n--------\n    === 「${timeNow}」 ===`, event.threadID, event.messageID);
+   if (args.length == 0) return api.sendMessage(
+     ` ===  Bạn có thể dùng  === \n` + 
+     `--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} luotdung => Check số lượt dùng còn lại của bạn` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} ndfb => Lọc thành viên bị bay acc khỏi nhóm` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} del => Lọc thành viên khỏi nhóm theo số tin nhắn` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} onl => Xem thời gian hoạt động bot onl` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} tt => Check độ tương tác của bạn` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} box => Lọc nhóm dưới 4 thành viên` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} all => Check tất cả độ tương tác các thành viên trong box` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} covid => Xem thông tin covid` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} mayman => Xem Tỉ lệ % may mắn của bạn?` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} nude => Check những ảnh gợi cảm` +
+     `\n--------\n[ 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 ] => ${global.config.PREFIX}${this.config.name} ip => check ip web minecraft` +
+     `\n--------\n    === 「${timeNow}」 ===`, event.threadID, event.messageID);
     var arr = [];
     var mention = Object.keys(event.mentions);
     const data = await api.getThreadInfo(event.threadID);
@@ -232,4 +245,21 @@ var img = res.data.NSFW_Prob;
   }
   api.sendMessage(`Bạn còn ${usages[senderID].usages} lượt dùng bot.`, threadID, messageID);
      }
+  else if (args[0] == "ip") {
+    if(!args[1]){ 
+    return api.sendMessage(`Vui lòng nhập ip or link sever minecraft `,event.threadID, event.messageID)
+  }
+  const res = await axios.get(`https://api.mcsrvstat.us/2/${args[1]}`);
+  const onl = res.data.online;
+  const ip = res.data.ip;
+  const port = res.data.port;
+  const host = res.data.hostname;
+    return api.sendMessage({body: 
+    `= MÁY CHỦ MINECRAFT JAVA =` +
+    `\nHostName: ` + host +
+    `\nTrạng Thái: ` + onl +
+    `\nĐịa chỉ IP: ` + ip +
+    `\nPort: ` + port
+    }, event.threadID, event.messageID)
+  }
 }
