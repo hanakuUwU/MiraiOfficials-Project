@@ -173,15 +173,18 @@ module.exports.run = function ({ event, args, api }) {
 
             if (!command) return api.sendMessage("» 𝐌𝐨𝐝𝐮𝐥𝐞 𝐛𝐚̣𝐧 𝐧𝐡𝐚̣̂𝐩 𝐤𝐡𝐨̂𝐧𝐠 𝐭𝐨̂̀𝐧 𝐭𝐚̣𝐢 ⚠️", threadID, messageID);
 
-            const { name, version, hasPermssion, credits, cooldowns, dependencies } = command.config;
+            const { name, version, hasPermssion, credits, cooldowns, dependencies, description, commandCategory, usages } = command.config;
 
             return api.sendMessage(
-                "=== " + name.toUpperCase() + " ===\n" +
+                "===== " + name.toUpperCase() + " =====\n" +
                 "- Được code bởi: " + credits + "\n" +
                 "- Phiên bản: " + version + "\n" +
                 "- Yêu cầu quyền hạn: " + ((hasPermssion == 0) ? "Người dùng" : (hasPermssion == 1) ? "Quản trị viên" : "Người vận hành bot" ) + "\n" +
                 "- Thời gian chờ: " + cooldowns + " giây(s)\n" +
-                `- Các package yêu cầu: ${(Object.keys(dependencies || {})).join(", ") || "Không có"}`,
+                `- Các package yêu cầu: ${(Object.keys(dependencies || {})).join(", ") || "Không có"}` +
+                `\n- Mô tả: ${description || "Không có"}` +
+                `\n- Loại: ${commandCategory || "Không có"}` +
+                `\n- Cách xài: ${usages || "chưa có hướng dẫn"}`,
                 threadID, messageID
             );
         }
