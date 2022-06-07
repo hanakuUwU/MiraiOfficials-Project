@@ -257,7 +257,7 @@ var img = res.data.NSFW_Prob;
     return api.sendMessage({body: 
     `= MÁY CHỦ MINECRAFT JAVA =` +
     `\nHostName: ` + host +
-    `\nTrạng Thái: ` + onl +
+    `\nTrạng Thái: ` + (onl == true ? 'premium' : onl == false ? 'crack' : 'UNKNOWN') +
     `\nĐịa chỉ IP: ` + ip +
     `\nPort: ` + port
     }, event.threadID, event.messageID)
