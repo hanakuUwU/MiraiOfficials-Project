@@ -2,7 +2,7 @@ module.exports.config = {
   name: "ad",
   version: "1.8.2",
   hasPermssion: 0,
-  credits: "Nguyen",// làm cho nó tiện lợi hơn xíu nên mấy anh procoder tha em
+  credits: "TrúcCute",// chính chủ làm, xin đừng hiểu nhầm thay credits
   description: "K bt nói j",
   commandCategory: "Bổ não",
   usages: "",
