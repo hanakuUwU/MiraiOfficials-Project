@@ -1,23 +1,23 @@
 module.exports.config = {
   name: "ảnh",
-  version: "1.0.0",
+  version: "1.2.0",
   hasPermssion: 0,
-  credits: "Nguyen",
+  credits: "TrúcCute",// chính chủ xin đừng hiểu nhầm thay credits
   description: "xem ảnh hiện có trên bot",
   commandCategory: "Dành cho người dùng",
-  usages: "image",
+  usages: "trống",
   cooldowns: 5,
   dependencies: {
-    "axios":""
+    "axios": ""
   }
 }
 
 module.exports.handleReply = async ({ api, event, handleReply }) => {
   const axios = require("axios");
-const { threadID, messageID } = event;
+const { threadID, messageID, body } = event;
     switch(handleReply.type) {
-        case "choosee": {
-            switch(event.body) {
+        case "reply": {
+            switch(body) {
 
 					case "1": {
                 const res = await axios.get("https://APIURL.miraiofficials123.repl.co");
@@ -40,6 +40,7 @@ const data = res.data.data;
 let download2 = (await axios.get(data, {
 			responseType: "stream"
 		})).data;
+    api.unsendMessage(handleReply.messageID);
           return api.sendMessage({body: `𝐀̉𝐧𝐡 𝐊𝐚𝐧𝐧𝐚 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧 𝐧𝐞̀ <3`, attachment: download2}, threadID, messageID);
           };
 			break;
@@ -149,19 +150,31 @@ let download10 = (await axios.get(data, {
 			break;       
                 
 					default:
-				const choose = parseInt(event.body);
-            	if (isNaN(event.body)) return api.sendMessage("💟 𝐕𝐮𝐢 𝐥𝐨̀𝐧𝐠 𝐧𝐡𝐚̣̂𝐩 𝟏 𝐜𝐨𝐧 𝐬𝐨̂́", event.threadID, event.messageID);
-            	if (choose > 10 || choose < 1) return api.sendMessage("🔰 𝐋𝐮̛̣𝐚 𝐜𝐡𝐨̣𝐧 𝐤𝐡𝐨̂𝐧𝐠 𝐧𝐚̆̀𝐦 𝐭𝐫𝐨𝐧𝐠 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡.", event.threadID, event.messageID); 
+				const choose = parseInt(body);
+            	if (isNaN(body)) return api.sendMessage("💟 𝐕𝐮𝐢 𝐥𝐨̀𝐧𝐠 𝐧𝐡𝐚̣̂𝐩 𝟏 𝐜𝐨𝐧 𝐬𝐨̂́", threadID, messageID);
+            	if (choose > 10 || choose < 1) return api.sendMessage("🔰 𝐋𝐮̛̣𝐚 𝐜𝐡𝐨̣𝐧 𝐤𝐡𝐨̂𝐧𝐠 𝐧𝐚̆̀𝐦 𝐭𝐫𝐨𝐧𝐠 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡.", threadID, messageID); 
 			}
 		}
 	}
 }
 
 module.exports.run = async ({ api, event, handleReply }) => {
-	return api.sendMessage({ body: "⠀ ⠀ = 𝐍𝐡𝐮̛̃𝐧𝐠 𝐚̉𝐧𝐡 𝐡𝐢𝐞̣̂𝐧 𝐜𝐨́ =\n\n𝟏. 𝐀𝐧𝐲𝐚\n𝟐. 𝐊𝐚𝐧𝐧𝐚\n𝟑. 𝐌𝐢𝐫𝐚𝐢\n𝟒. 𝐂𝐡𝐢𝐭𝐚𝐧𝐝𝐚\n𝟓. 𝐥𝐨𝐥𝐢\n𝟔. 𝐃𝐨𝐫𝐚𝐞𝐦𝐨𝐧\n𝟕. 𝐕𝐢𝐨𝐥𝐞𝐭\n𝟖. 𝐆𝐚́𝐢\n𝟗. 𝐓𝐫𝐚𝐢\n𝟏𝟎. 𝐇𝐆\n\n𝐑𝐞𝐩𝐥𝐲 𝐒𝐓𝐓 𝐚̉𝐧𝐡 𝐛𝐚̣𝐧 𝐦𝐮𝐨̂́𝐧 𝐱𝐞𝐦\n=> 𝐂𝐨́ 𝐭𝐡𝐞̂̉ 𝐠𝐨́𝐩 𝐭𝐡𝐞̂𝐦 𝐚̉𝐧𝐡 𝐜𝐡𝐨 𝐚𝐝𝐦𝐢𝐧 𝐛𝐚̆̀𝐧𝐠 𝐜𝐚𝐥𝐥𝐚𝐝, 𝐠𝐢𝐮́𝐩 𝐚̉𝐧𝐡 𝐭𝐡𝐞̂𝐦 𝐩𝐡𝐨𝐧𝐠 𝐩𝐡𝐮́"
+	return api.sendMessage({ body: 
+    "⠀ ⠀ = 𝐍𝐡𝐮̛̃𝐧𝐠 𝐚̉𝐧𝐡 𝐡𝐢𝐞̣̂𝐧 𝐜𝐨́ =" +
+    "\n\n𝟏. 𝐀𝐧𝐲𝐚" +
+    "\n𝟐. 𝐊𝐚𝐧𝐧𝐚" +
+    "\n𝟑. 𝐌𝐢𝐫𝐚𝐢" +
+    "\n𝟒. 𝐂𝐡𝐢𝐭𝐚𝐧𝐝𝐚" +
+    "\n𝟓. 𝐥𝐨𝐥𝐢" +
+    "\n𝟔. 𝐃𝐨𝐫𝐚𝐞𝐦𝐨𝐧" +
+    "\n𝟕. 𝐕𝐢𝐨𝐥𝐞𝐭" +
+    "\n𝟖. 𝐆𝐚́𝐢" +
+    "\n𝟗. 𝐓𝐫𝐚𝐢" +
+    "\n𝟏𝟎. 𝐇𝐆" +
+    "\n\n𝐑𝐞𝐩𝐥𝐲 𝐒𝐓𝐓 𝐚̉𝐧𝐡 𝐛𝐚̣𝐧 𝐦𝐮𝐨̂́𝐧 𝐱𝐞𝐦\n=> 𝐂𝐨́ 𝐭𝐡𝐞̂̉ 𝐠𝐨́𝐩 𝐭𝐡𝐞̂𝐦 𝐚̉𝐧𝐡 𝐜𝐡𝐨 𝐚𝐝𝐦𝐢𝐧 𝐛𝐚̆̀𝐧𝐠 𝐜𝐚𝐥𝐥𝐚𝐝, 𝐠𝐢𝐮́𝐩 𝐚̉𝐧𝐡 𝐭𝐡𝐞̂𝐦 𝐩𝐡𝐨𝐧𝐠 𝐩𝐡𝐮́"
             }, event.threadID, (error, info) => {
         global.client.handleReply.push({
-            type: "choosee",
+            type: "reply",
             name: this.config.name,
             author: event.senderID,
             messageID: info.messageID
