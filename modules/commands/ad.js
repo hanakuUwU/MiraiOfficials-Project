@@ -1,11 +1,11 @@
 module.exports.config = {
   name: "ad",
-  version: "1.8.2",
+  version: "1.4.2",
   hasPermssion: 0,
-  credits: "TrúcCute",// chính chủ làm, xin đừng hiểu nhầm thay credits
-  description: "K bt nói j",
+  credits: "TrúcCute",// chính chủ xin đừng hiểu nhầm thay credits
+  description: "xem thông tin admin",
   commandCategory: "Bổ não",
-  usages: "",
+  usages: "[Trống]",
   cooldowns: 5,
   dependencies: {
     "axios": "",
@@ -14,11 +14,11 @@ module.exports.config = {
 }
 // thay uid nó tự thay link, name, và uid, giớ tính, còn lại tự thay vì t k bt=))
 module.exports.run = async ({ api, event, Users }) => {
-  var uid = '100036947774673';// thay uid vô để giúp thay name, giới tính, link fb
+  var uid = `100056953105174`;// thay uid vô để giúp thay name, giới tính, link fb
   const axios = require('axios');
   const moment = require('moment-timezone');
   const gio = moment.tz('Asia/Ho_Chi_Minh').format('HH:mm:ss || D/MM/YYYY')
-  const res = await axios.get('https://APIMP4.MiraiOfficials123.repl.co');// thay api nhé vì api t có 1 video th
+  const res = await axios.get('https://APIURL.MiraiOfficials123.repl.co');// thay api nhé vì api t có 1 video th
   const data2 = res.data.url;
   let cc = (await axios.get(data2, {			responseType: "stream"		})).data;
   let data = await api.getUserInfo(uid),
