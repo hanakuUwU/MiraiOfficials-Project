@@ -2,9 +2,9 @@ module.exports.config = {
 	name: "uid",
 	version: "1.2.0",
 	hasPermssion: 0,
-	credits: "Nguyen",
+	credits: "TrúcCute",// chính chủ, xin đừng hiểu nhầm thay credits
 	description: "Lấy ID người dùng.",
-	commandCategory: "other",
+	commandCategory: "Bổ não",
 	cooldowns: 5
 }
 
