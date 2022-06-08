@@ -18,8 +18,8 @@ module.exports.config = {
    const moment = require("moment-timezone");
    
    let { senderID, messageID, threadID } = event;
-   const so_lan_spam = 10; // số lần spam, vượt quá sẽ bị ban
-   const thoi_gian_spam = 60000; // 60000 millisecond (5 phút)
+   const so_lan_spam = 5; // số lần spam, vượt quá sẽ bị ban
+   const thoi_gian_spam = 6000; // 60000 millisecond (5 phút)
    const unbanAfter = 600000; // 600000 millisecond (10 phút) 
    const folderRandomImage = __dirname + "/cache/autoban";
    const allImage = fs.readdirSync(folderRandomImage);
