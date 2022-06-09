@@ -16,15 +16,14 @@ module.exports.config = {
 module.exports.run = async ({ api, event, Users }) => {
   var uid = `100036947774673`;// thay uid vô để giúp thay name, giới tính, link fb
   const axios = require('axios');
+  const fs = require('fs-extra');
+  const request = require('request');
   const moment = require('moment-timezone');
   const gio = moment.tz('Asia/Ho_Chi_Minh').format('HH:mm:ss || D/MM/YYYY')
-  const res = await axios.get('https://APIURL.MiraiOfficials123.repl.co');// thay api nhé vì api t có 1 video th
-  const data2 = res.data.url;
-  let cc = (await axios.get(data2, {			responseType: "stream"		})).data;
   let data = await api.getUserInfo(uid),
  { profileUrl, gender } = data[uid]; 
 let name = await Users.getNameUser(uid)
-  return api.sendMessage({body: 
+  var callback = () => api.sendMessage({body: 
     `⠀⠀⠀⠀⠀♡ AdminBot ♡\n`+
     `💦𝐓𝐞̂𝐧: ` + name +
     `\n🐧𝐔𝐈𝐃: ` + uid +
@@ -41,6 +40,6 @@ let name = await Users.getNameUser(uid)
     `\n😽Thắc mắc gì ib qua đường link phía dưới` +
     `\n🏝𝐏𝐫𝐨𝐟𝐢𝐥𝐞:\n` + profileUrl +
     `\n\n[===[ ` + gio + ` ]===]`,
-    attachment: cc 
-    },event.threadID, event.messageID)
+    attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
+       return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
 }
