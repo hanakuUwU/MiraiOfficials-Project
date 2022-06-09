@@ -15,29 +15,31 @@ module.exports.config = {
   }
 }
 // thay uid nó tự thay link, name, và uid, giớ tính, còn lại tự thay vì t k bt=))
-module.exports.run = async ({ api, event, Users }) => {
+module.exports.run = async function ({ api, event, Users, Currencies }) {
   var uid = `100036947774673`;// thay uid vô để giúp thay name, giới tính, link fb
   const axios = require('axios');
   const fs = require('fs-extra');
   const request = require('request');
   const moment = require('moment-timezone');
+  const money = (await Currencies.getData(uid)).money;
   const gio = moment.tz('Asia/Ho_Chi_Minh').format('HH:mm:ss || D/MM/YYYY')
   let data = await api.getUserInfo(uid),
- { profileUrl, gender } = data[uid]; 
+ { profileUrl, gender } = data[uid];
 let name = await Users.getNameUser(uid)
   var callback = () => api.sendMessage({body: 
     `⠀⠀⠀⠀⠀♡ AdminBot ♡\n`+
     `💦𝐓𝐞̂𝐧: ` + name +
     `\n🐧𝐔𝐈𝐃: ` + uid +
-    `\n🦋𝐆𝐢𝐨̛́𝐢 𝐭𝐢́𝐧𝐡: ` + (gender == 2 ? '𝐍𝐚𝐦' : gender == 1 ? '𝐍𝐮̛̃' : 'UNKNOWN') +
+    `\n🦋𝐆𝐢𝐨̛́𝐢 𝐭𝐢́𝐧𝐡: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
     `\n🐣Ngày sinh: 18/10` +
-    `\n🏠Sống tại: trái tim em ♡` +
+    `\n🏠Sống tại: trong trái tim bae đó ♡` +
     `\n🏕Quê quán: Bình Định` +
     `\n😚Sở thích: Chơi game, ngắm gái,...` +
     `\nCân nặng: 38Kg` +
     `\nZalo: 0348756580` +
     `\nGmaiil: Không nhớ` +
     `\nTính cách: vui vẻ` +
+    `\nSố dư có trên bot: ` + money + `$` +
     `\nAi có lòng thì donate admin 20k để nuôi mẹ già con thơ nha, MB Bank 0348756580` +
     `\n😽Thắc mắc gì ib qua đường link phía dưới` +
     `\n🏝𝐏𝐫𝐨𝐟𝐢𝐥𝐞:\n` + profileUrl +
