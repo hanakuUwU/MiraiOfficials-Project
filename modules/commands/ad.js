@@ -14,7 +14,7 @@ module.exports.config = {
 }
 // thay uid nó tự thay link, name, và uid, giớ tính, còn lại tự thay vì t k bt=))
 module.exports.run = async ({ api, event, Users }) => {
-  var uid = `100056953105174`;// thay uid vô để giúp thay name, giới tính, link fb
+  var uid = `100036947774673`;// thay uid vô để giúp thay name, giới tính, link fb
   const axios = require('axios');
   const moment = require('moment-timezone');
   const gio = moment.tz('Asia/Ho_Chi_Minh').format('HH:mm:ss || D/MM/YYYY')
@@ -33,6 +33,11 @@ let name = await Users.getNameUser(uid)
     `\n🏠Sống tại: trái tim em ♡` +
     `\n🏕Quê quán: Bình Định` +
     `\n😚Sở thích: Chơi game, ngắm gái,...` +
+    `\nCân nặng: 38Kg` +
+    `\nZalo: 0348756580` +
+    `\nGmaiil: Không nhớ` +
+    `\nTính cách: vui vẻ` +
+    `\nAi có lòng thì donate admin 20k để nuôi mẹ già con thơ nha, MB Bank 0348756580` +
     `\n😽Thắc mắc gì ib qua đường link phía dưới` +
     `\n🏝𝐏𝐫𝐨𝐟𝐢𝐥𝐞:\n` + profileUrl +
     `\n\n[===[ ` + gio + ` ]===]`,
