@@ -9,7 +9,9 @@ module.exports.config = {
   cooldowns: 5,
   dependencies: {
     "axios": "",
-    "moment-timezone": ""
+    "moment-timezone": "",
+    "fs-extra": "",
+    "request": ""
   }
 }
 // thay uid nó tự thay link, name, và uid, giớ tính, còn lại tự thay vì t k bt=))
