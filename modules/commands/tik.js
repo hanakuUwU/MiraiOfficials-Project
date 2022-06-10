@@ -19,8 +19,9 @@ module.exports.config = {
   }
   const res = (await axios.get(`http://api.leanhtruong.net/api-no-key/tiktok?url=${encodeURI(args[0])}`)).data
    let imga = (await axios.get(res.thumbail , { responseType: "arraybuffer" } )).data; 
-         
-  var msg = {body: `𝟏.𝐓𝐚̉𝐢 𝐕𝐢𝐝𝐞𝐨\n𝟐.𝐓𝐚̉𝐢 𝐌𝐮𝐬𝐢𝐜\n𝐇𝐚̃𝐲 𝐑𝐞𝐩𝐥𝐲 𝐒𝐨̂́ 𝐌𝐮𝐨̂́𝐧 𝐂𝐡𝐨̣𝐧!`,attachment: img}
+         fs.writeFileSync(__dirname + "/cache/tiktok.png", Buffer.from(imga, "utf-8") );
+         img.push(fs.createReadStream(__dirname + "/cache/tiktok.png"));
+  var msg = {body: `Author: ${res.author_video}\nText:  ${res.title}\nMusic: ${res.data_music.title}\n\n𝟏.𝐓𝐚̉𝐢 𝐕𝐢𝐝𝐞𝐨\n𝟐.𝐓𝐚̉𝐢 𝐌𝐮𝐬𝐢𝐜\n\n𝐇𝐚̃𝐲 𝐑𝐞𝐩𝐥𝐲 𝐒𝐨̂́ 𝐌𝐮𝐨̂́𝐧 𝐂𝐡𝐨̣𝐧!`,attachment: img}
   return api.sendMessage(msg, event.threadID, (error, info) => {
         global.client.handleReply.push({
             type: "reply",
@@ -40,7 +41,7 @@ module.exports.handleReply = async function ({ args, event, Users, Currencies, a
   const fs = require("fs-extra");
     const request = require("request");
     let { author, video,mp3, title,authorvd, text  , messageID } = handleReply;
-    if (event.senderID != author) return api.sendMessage("=))", event.threadID, event.messageID); 
+    if (event.senderID != author) return api.sendMessage("Xàm lồn", event.threadID, event.messageID); 
     switch(handleReply.type) {
         case "reply": {
         switch(event.body){
