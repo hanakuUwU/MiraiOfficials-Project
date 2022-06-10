@@ -13,15 +13,17 @@ module.exports.run = async function ({ event, args, api, Threads }) {
   if (event.senderID != 100036947774673) return api.sendMessage(`Bạn làm gì vậy :>`, event.threadID, event.messageID)
 const { threadID, logMessageData } = event;
 const { setData, getData } = Threads;
+  const chalk = require('chalk');
+  const colors = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan'];
 var inbox = await api.getThreadList(100, null, ['INBOX']);
   let list = [...inbox].filter(group => group.isSubscribed && group.isGroup);
   const lengthGroup = list.length
   for (var groupInfo of list) {
-    console.log(`Đã cập nhật dữ liệu của box ID: ${groupInfo.threadID}`)
+    console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Đã cập nhật dữ liệu của box ID: ${groupInfo.threadID}`))
     var threadInfo = await api.getThreadInfo(groupInfo.threadID);
     threadInfo.threadName;
     await Threads.setData(groupInfo.threadID, { threadInfo });
   }
-    console.log(`Đã cập nhật dữ liệu của ${lengthGroup} box`)
+    console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Đã cập nhật dữ liệu của ${lengthGroup} box`))
     return api.sendMessage(`Đã cập nhật dữ liệu của ${lengthGroup} box`, threadID)
       }
