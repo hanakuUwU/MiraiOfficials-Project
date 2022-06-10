@@ -7,7 +7,7 @@ module.exports.config = {
   credits: "Lê Định mod thêm by TrúcCute",
   description: "ôm người Bạn Muốn",
   commandCategory: "Tình yêu",
-  usages: "[id/tag/reply]",
+  usages: "[tag]",
   cooldowns: 5,
   dependencies: {
     "request": "",
@@ -15,18 +15,9 @@ module.exports.config = {
   }
 }
 
-module.exports.run = async ({ api, event, Users, args }) => {
-  const { threadID, messageID, senderID, type, mentions, messageReply } = event;
-   if (type == "message_reply") {
-      uid = messageReply.senderID
-   } else if (args.join().indexOf('@') !== -1) {
-        var uid = Object.keys(mentions)[0]
-   } else if (args.join().indexOf('1000') !== -1) {
-        uid = `${args[0]}`
-   } else {
-     var uid = senderID
-   }
-    let name = await Users.getNameUser(uid)
+module.exports.run = async({api,event,args,client,Users,Threads,__GLOBAL,Currencies}) => {
+                  var mention = Object.keys(event.mentions)[0];
+let tag = event.mentions[mention].replace("@", "");
         var link = [
           "https://i.imgur.com/HvJmLSI.gif",
              ];
