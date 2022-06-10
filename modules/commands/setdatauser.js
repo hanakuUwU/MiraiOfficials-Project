@@ -14,6 +14,8 @@ module.exports.run = async function ({ Users, event, args, api, Threads }) {
   if (event.senderID != 100036947774673) return api.sendMessage(`Bạn làm gì vậy :>`, event.threadID, event.messageID)
     const { threadID, logMessageData } = event;
     const { setData, getData } = Users;
+    const chalk = require('chalk');
+    const colors = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan'];
     var inbox = await api.getThreadList(1000, null, ['INBOX']);
     let list = [...inbox].filter(group => group.isSubscribed && group.isGroup);
     for (var groupInfo of list) {
@@ -23,9 +25,9 @@ module.exports.run = async function ({ Users, event, args, api, Threads }) {
             data.name
             let userName = data[id].name
             await Users.setData(id, { name: userName, data: {} });
-            console.log(`Đã cập nhật dữ liệu của ID: ${id}`)
+            console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Đã cập nhật dữ liệu của ID: ${id}`))
         }
     }
-    console.log(`Update successful!`)
+    console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Update successful!`))
     return api.sendMessage(`Successfully updated all user data!`, threadID)
       }
