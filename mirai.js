@@ -7,7 +7,7 @@ const { join, resolve } = require("path");
 const chalk = require("chalk");
 const { execSync } = require('child_process');
 const logger = require("./utils/log.js");
-const login = require("helyt"), moment = require("moment-timezone");
+const login = require("fca-disme"), moment = require("moment-timezone");
 const timeStart = Date.now();
 const axios = require("axios");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies;
