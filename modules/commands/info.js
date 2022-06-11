@@ -1,8 +1,8 @@
 module.exports.config = {
   name: "info",
-  version: "18.0.7",
+  version: "1.9.7",
   hasPermssion: 0,
-  credits: "Hung Cho (Khánh Milo Fix) mod Nguyen",
+  credits: "Hung Cho (Khánh Milo Fix) mod TrúcCute",
   description: "Xem thông tin thread/user",
   commandCategory: "Tiện ích",
   usages: "[thread/user]",
@@ -131,13 +131,14 @@ module.exports.run = async function ({ api, event, args, Users}) {
         var uid = senderID
   } 
      let data = await api.getUserInfo(uid),
-       { profileUrl, gender } = data[uid];
+       { profileUrl, gender, isFriend } = data[uid];
     let name = await Users.getNameUser(uid)
     var callback = () => api.sendMessage({body:
-      `💦𝐓𝐞̂𝐧: `+ name +
-      `\n🐧𝐔𝐈𝐃: `+ uid +
-      `\n🏝𝐏𝐫𝐨𝐟𝐢𝐥𝐞:\n `+ profileUrl +
-      `\n🦋𝐆𝐢𝐨̛́𝐢 𝐭𝐢́𝐧𝐡: `+ (gender == 2 ? '𝐍𝐚𝐦' : gender == 1 ? '𝐍𝐮̛̃' : 'UNKNOWN'),attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);   
+      `💦Tên: `+ name +
+      `\n🐧UID: `+ uid +
+      `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
+      `\n🦋Giới tính: `+ (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
+      `\n🏝Profile:\n`+ profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);   
        return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
   }
 }
