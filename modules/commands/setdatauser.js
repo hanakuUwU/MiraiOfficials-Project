@@ -25,7 +25,7 @@ module.exports.run = async function ({ Users, event, args, api, Threads }) {
             data.name
             let userName = data[id].name
             await Users.setData(id, { name: userName, data: {} });
-            console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Đã cập nhật dữ liệu của ID: ${id}`))
+            console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Đã cập nhật dữ liệu của ${userName} || ${id}`))
         }
     }
     console.log(chalk[colors[Math.floor(Math.random() * colors.length)]](`Update successful!`))
