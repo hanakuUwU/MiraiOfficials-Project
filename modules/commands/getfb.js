@@ -2,7 +2,7 @@ module.exports.config = {
   name: "getfb",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "Nguyen",
+  credits: "TrúcCute",//chính chủ xin đừng hiểu nhầm thay credits 
   description: "Lấy link fb",
   commandCategory: "tiện ích",
   usages: "[trống] or [tag]/[reply]",
