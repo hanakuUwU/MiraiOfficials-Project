@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "info",
-  version: "1.9.7",
+  version: "1.9.8",
   hasPermssion: 0,
   credits: "Hung Cho (Khánh Milo Fix) mod TrúcCute",
   description: "Xem thông tin thread/user",
@@ -46,6 +46,7 @@ module.exports.run = async function ({ api, event, args, Users}) {
   if (args.length == 0) return api.sendMessage(`Vui lòng dùng\n=> ${global.config.PREFIX}${this.config.name} thread\n=> ${global.config.PREFIX}${this.config.name} user`, threadID);
 
   if (args[0] == "thread") {
+    try {
     if (!fs.existsSync(totalPath)) fs.writeFileSync(totalPath, JSON.stringify({}));
     let totalChat = JSON.parse(fs.readFileSync(totalPath));
     let threadInfo = await api.getThreadInfo(event.threadID);
@@ -120,9 +121,16 @@ module.exports.run = async function ({ api, event, args, Users}) {
     return request(encodeURI(`${threadInfo.imageSrc}`))
       .pipe(fs.createWriteStream(__dirname + '/cache/1.png'))
       .on('close', () => callback());
+    } catch (e) {
+  return ( 
+    console.log(e), 
+    api.sendMessage( 'Không thể lấy thông tin nhóm của bạn!', event.threadID, event.messageID )
+  )
+    }
   }
 
   if (args[0] == "user") {
+    try {
     if (type == "message_reply") {
       uid = event.messageReply.senderID
     } else if (args.join().indexOf('@') !== -1) {
@@ -140,5 +148,11 @@ module.exports.run = async function ({ api, event, args, Users}) {
       `\n🦋Giới tính: `+ (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
       `\n🏝Profile:\n`+ profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);   
        return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+    } catch (e) {
+      return ( 
+        console.log(e), 
+        api.sendMessage( 'Không thể lấy thông tin nhóm của bạn!', event.threadID, event.messageID ) 
+      )
+    }
   }
 }
