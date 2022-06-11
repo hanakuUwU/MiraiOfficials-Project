@@ -52,7 +52,8 @@ module.exports.run = async ({ api, event, Users }) => {
     "oxi là chất gây nghiện",
     "admin yêu con gái chứ không trai",
     "admin là trai thẳng",
-    "tag admin bằng ban"
+    "tag admin bằng ban",
+    "chửi bot bạn không khác gì thiểu năng vì rảnh háng chửi 1 thứ vô tri"
   ]
   let name = await Users.getNameUser(event.senderID)
   return api.sendMessage({body:
