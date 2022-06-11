@@ -2,7 +2,7 @@ module.exports.config = {
     name: "setdatabox",
     version: "1.0",
     hasPermssion: 2,
-    credits: "D-Jukie",
+    credits: "D-Jukie mod random màu by TrúcCute",
     description: "Set dữ liệu mới của các box vào data",
     commandCategory: "Hệ thống admin-bot",
     usages: "Làm mới dữ liệu box",
