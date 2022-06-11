@@ -53,7 +53,15 @@ module.exports.run = async ({ api, event, Users }) => {
     "admin yêu con gái chứ không trai",
     "admin là trai thẳng",
     "tag admin bằng ban",
-    "chửi bot bạn không khác gì thiểu năng vì rảnh háng chửi 1 thứ vô tri"
+    "chửi bot bạn không khác gì thiểu năng vì rảnh háng chửi 1 thứ vô tri",
+    "bạn sẽ nổi tiếng nếu thay credits",
+    "người Trung Quốc là China",
+    "người Việt Nam nói tiếng Việt",
+    "buồn ngủ bạn sẽ ngủ",
+    "muối rất mặn",
+    "đường rất ngọt",
+    "con người biết nói",
+    "chúng ta đang sống ở trái đất"
   ]
   let name = await Users.getNameUser(event.senderID)
   return api.sendMessage({body:
