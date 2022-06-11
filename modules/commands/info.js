@@ -4,7 +4,7 @@ module.exports.config = {
     hasPermssion: 0,
     credits: "Hung Cho (Khánh Milo Fix) mod thêm by TrúcCute",
     description: "Xem thông tin thread/user",
-    commandCategory: "Bổ não",
+    commandCategory: "bổ não",
     usages: "[thread/user]",
     cooldowns: 5,
     dependencies: {
@@ -39,7 +39,9 @@ module.exports.run = async function({ api, event, args, Users }) {
     const { threadID, messageID, senderID, type, mentions, messageReply } = event;
     const moment = require("moment-timezone");
     const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
-    if (args.length == 0) return api.sendMessage(`Vui lòng dùng\n=> ${global.config.PREFIX}${this.config.name} thread\n=> ${global.config.PREFIX}${this.config.name} user`, threadID);
+    if (args.length == 0) {
+      return api.sendMessage(`Vui lòng dùng\n=> ${global.config.PREFIX}${this.config.name} thread\n=> ${global.config.PREFIX}${this.config.name} user`, threadID);
+    }
     if (args[0] == "thread") {
         try {
             if (!fs.existsSync(totalPath)) fs.writeFileSync(totalPath, JSON.stringify({}));
