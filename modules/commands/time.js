@@ -67,7 +67,7 @@ module.exports.run = async ({ api, event, Users }) => {
   return api.sendMessage({body:
     `Xin chào ` + name +
     `\n🌺────────────🌺` +
-    `\n\nHôm nay là ` + thu +
+    `\nHôm nay là ` + thu +
     `\nBây giờ là ` + gio + 
     ` giờ ` + phut + 
     ` phút ` + giay + 
@@ -76,10 +76,11 @@ module.exports.run = async ({ api, event, Users }) => {
     ` tháng ` + thang +
     ` năm ` + nam +
     `\nTỉ lệ có ny trong năm nay của bạn là: ` + tile + 
-    '%' +
+    `%` +
     `\n[Bạn có biết?]: ` + msg[Math.floor(Math.random() * msg.length)] +
-    `\n\n🌺────────────🌺` +
+    `\n🌺────────────🌺` +
     `\nThính: ` + data1 +
-    `\n\nCa dao: ` + data
+    `\n\n🌺────────────🌺` +
+    `\nCa dao: ` + data
                           , attachment: cc}, event.threadID, event.messageID)
 }
