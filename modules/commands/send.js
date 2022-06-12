@@ -1,76 +1,111 @@
+const fs = require('fs');
+const request = require('request');
 module.exports.config = {
-	name: "send",
-	version: "1.0.2",
-	hasPermssion: 2,
-	credits: "Mirai mod by HĐGN",
-	description: "Gửi tin nhắn tới các nhóm(reply vào ảnh/video cần gửi kèm)!\nPhiên bản xịn hơn của sendnotiUwU",
-	commandCategory: "Admin",
-	usages: "[Text]",
-	cooldowns: 5
-};
-
-module.exports.languages = {
-	"vi": {
-		"sendSuccess": "𝐓𝐡𝐨̂𝐧𝐠 𝐛𝐚́𝐨 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 𝐓𝐨̛́𝐢 %1 𝐍𝐡𝐨́𝐦!",
-		"sendFail": "[!] 𝐊𝐡𝐨̂𝐧𝐠 𝐓𝐡𝐞̂̉ 𝐆𝐮̛̉𝐢 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 𝐓𝐨̛́𝐢 %1 𝐍𝐡𝐨́𝐦"
-	},
-	"en": {
-		"sendSuccess": "Sent message to %1 thread!",
-		"sendFail": "[!] Can't send message to %1 thread"
-	}
-}
-
-module.exports.run = async ({ api, event, args, getText, Users }) => {
-  const name = await Users.getNameUser(event.senderID)
-const moment = require("moment-timezone");
-      var gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss");  
-if (event.type == "message_reply") {
-const request = global.nodemodule["request"];
-const fs = require('fs')
-const axios = require('axios')
-			var getURL = await request.get(event.messageReply.attachments[0].url);
-			
-					var pathname = getURL.uri.pathname;
-var ext = pathname.substring(pathname.lastIndexOf(".") + 1);
-			
-					var path = __dirname + `/cache/snoti`+`.${ext}`;
-
-
-var abc = event.messageReply.attachments[0].url;
-    let getdata = (await axios.get(`${abc}`, { responseType: 'arraybuffer' })).data;
-
-  fs.writeFileSync(path, Buffer.from(getdata, 'utf-8'));
-
-
-	var allThread = global.data.allThreadID || [];
-	var count = 1,
-		cantSend = [];
-	for (const idThread of allThread) {
-		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
-		else {
-			api.sendMessage({body: `ㅤ »🌸 𝑨𝑫𝑴𝑰𝑵 𝑩𝑶𝑻 🌸«\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n『 ${args.join(` `)} 』`,attachment: fs.createReadStream(path) }, idThread, (error, info) => {
-				if (error) cantSend.push(idThread);
-			});
-			count++;
-			await new Promise(resolve => setTimeout(resolve, 500));
-		}
-	}
-	return api.sendMessage(getText("sendSuccess", count), event.threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), event.threadID, event.messageID) : "", event.messageID);
-
-}
-else {
-	var allThread = global.data.allThreadID || [];
-	var count = 1,
-		cantSend = [];
-	for (const idThread of allThread) {
-		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
-		else {
-			api.sendMessage(`====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n『 ${args.join(` `)} 』`, idThread, (error, info) => {
-				if (error) cantSend.push(idThread);
-			});
-			count++;
-			await new Promise(resolve => setTimeout(resolve, 500));
-		}
-	}
-	return api.sendMessage(getText("sendSuccess", count), event.threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), event.threadID, event.messageID) : "", event.messageID); }
+  name: "send",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "TruongMini",
+  description: "",
+  commandCategory: "Tiện ích",
+  usages: "[msg]",
+  cooldowns: 5,
+  dependencies: {
+    "fs-extra": "",
+    "request": ""
   }
+}
+
+let atmDir = [];
+const getAtm = (atm, body) => new Promise(async (resolve) => {
+    let msg = {}, attachment = [];
+    msg.body = body;
+    for(let eachAtm of atm) {
+        await new Promise(async (resolve) => {
+            try {
+                let response =  await request.get(eachAtm.url),
+                    pathName = response.uri.pathname,
+                    ext = pathName.substring(pathName.lastIndexOf(".") + 1),
+                    path = __dirname + `/cache/${eachAtm.filename}.${ext}`
+                response
+                    .pipe(fs.createWriteStream(path))
+                    .on("close", () => {
+                        attachment.push(fs.createReadStream(path));
+                        atmDir.push(path);
+                        resolve();
+                    })
+            } catch(e) { console.log(e); }
+        })
+    }
+    msg.attachment = attachment;
+    resolve(msg);
+})
+
+module.exports.handleReply = async function ({ api, event, handleReply, Users, Threads }) {
+    const { threadID, messageID, senderID, body } = event;
+    let name = await Users.getNameUser(senderID);
+    switch (handleReply.type) {
+        case "sendnoti": {
+            let text = `Nội dung : ${body}\n\nTừ ${name}\nNhóm ${(await Threads.getInfo(threadID)).threadName || "Unknow"}`;
+            if(event.attachments.length > 0) text = await getAtm(event.attachments, `Nội dung : ${body}\n\nTừ ${name}\nNhóm ${(await Threads.getInfo(threadID)).threadName || "Unknow"}`);
+            api.sendMessage(text, handleReply.threadID, (err, info) => {
+                atmDir.forEach(each => fs.unlinkSync(each))
+                atmDir = [];
+                global.client.handleReply.push({
+                    name: this.config.name,
+                    type: "reply",
+                    messageID: info.messageID,
+                    messID: messageID,
+                    threadID
+                })
+            });
+            break;
+        }
+        case "reply": {
+            let text = `Nội dung : ${body}\n\nTừ ${name}\nReply tin nhắn này để báo về admin`;
+            if(event.attachments.length > 0) text = await getAtm(event.attachments, `Nội dung: ${body}\n\nTừ ${name}\nReply tin nhắn này để báo về admin`);
+            api.sendMessage(text, handleReply.threadID, (err, info) => {
+                atmDir.forEach(each => fs.unlinkSync(each))
+                atmDir = [];
+                global.client.handleReply.push({
+                    name: this.config.name,
+                    type: "sendnoti",
+                    messageID: info.messageID,
+                    threadID
+                })
+            }, handleReply.messID);
+            break;
+        }
+    }
+}
+
+module.exports.run = async function ({ api, event, args, Users }) {
+    const { threadID, messageID, senderID, messageReply } = event;
+    if (!args[0]) return api.sendMessage("Please input message", threadID);
+    let allThread = global.data.allThreadID || [];
+    let can = 0, canNot = 0;
+    let text = `ㅤ »🌸 𝔸𝕕𝕞𝕚𝕟𝔹𝕠𝕥 🌸«\n\nLúc: ${gio}\nGửi từ: ${await Users.getNameUser(senderID)}\nNội dung:\n『 ${args.join(` `)} 』\n\nReply tin nhắn để báo về admin`;
+    if(event.type == "message_reply") text = await getAtm(messageReply.attachments, `ㅤ »🌸 𝔸𝕕𝕞𝕚𝕟𝔹𝕠𝕥 🌸«\n\nLúc: ${gio}\nGửi từ: ${await Users.getNameUser(senderID)}\nNội dung:\n『 ${args.join(` `)} 』\n\nReply tin nhắn để báo về admin`);
+    await new Promise(resolve => {
+        allThread.forEach((each) => {
+            try {
+                api.sendMessage(text, each, (err, info) => {
+                    if(err) { canNot++; }
+                    else {
+                        can++;
+                        atmDir.forEach(each => fs.unlinkSync(each))
+                        atmDir = [];
+                        global.client.handleReply.push({
+                            name: this.config.name,
+                            type: "sendnoti",
+                            messageID: info.messageID,
+                            messID: messageID,
+                            threadID
+                        })
+                        resolve();
+                    }
+                })
+            } catch(e) { console.log(e) }
+        })
+    })
+    api.sendMessage(`Gửi thành công đến ${can} box, không thể gửi đến ${canNot} box`, threadID)
+}
