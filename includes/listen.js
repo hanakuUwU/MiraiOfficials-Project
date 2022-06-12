@@ -353,16 +353,16 @@ module.exports = function({ api, models }) {
 	//========= Send event to handle need =========//
 	/////////////////////////////////////////////////
 	
-	return/* async*/ (event) => {
-    /*if (event.type == "change_thread_image") api.sendMessage(`» [ Update Thread ] ${event.snippet}`, event.threadID);
-	  let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
+	return /*async*/ (event) => {
+    if (event.type == "change_thread_image") api.sendMessage(`» [ Update Thread ] ${event.snippet}`, event.threadID);
+	  /*let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
 	  let adminBot = global.config.ADMINBOT;
 	  let ndhBot = global.config.NDH;
 	  let pendingPath = __dirname + "/../modules/commands/cache/pendingdThreads.json";
 	  if (!data.includes(event.threadID) && !adminBot.includes(event.senderID) &&!ndhBot.includes(event.senderID)) {
 		
 		//getPrefix
-		  const threadSetting = (await Threads.getData(String(event.threadID))).data || {};
+		 /* const threadSetting = (await Threads.getData(String(event.threadID))).data || {};
 		  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
 		  //check body
 		if (event.body && event.body == `${prefix}request`) {
@@ -378,7 +378,7 @@ module.exports = function({ api, models }) {
 		  });
 		}
 		// if (event.threadID == 7349457131746039) console.log(prefix);
-		if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`Box của bạn chưa được duyệt, để gửi yêu cầu duyệt, dùng:\n${prefix}request`, event.threadID);
+	if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`Box của bạn chưa được duyệt, để gửi yêu cầu duyệt, dùng:\n${prefix}request`, event.threadID);
 	};*/
 		switch (event.type) {
 			case "message":
