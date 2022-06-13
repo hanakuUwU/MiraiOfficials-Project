@@ -1,6 +1,6 @@
 module.exports.config = {
     name: "info",
-    version: "2.1.0",
+    version: "2.1.1",
     hasPermssion: 0,
     credits: "Hung Cho (Khánh Milo Fix) mod thêm by TrúcCute",
     description: "Xem thông tin thread/user",
@@ -35,18 +35,17 @@ module.exports.handleEvent = async ({ api, event, args }) => {
     }
 }
 
-module.exports.run = async function({ api, event, args, Users }) {
+module.exports.run = async function({ api, event, args, Users, Threads }) {
     const { threadID, messageID, senderID, type, mentions, messageReply } = event;
     const moment = require("moment-timezone");
     const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
     if (args.length == 0) {
-      return api.sendMessage(`Vui lòng dùng\n=> ${global.config.PREFIX}${this.config.name} thread\n=> ${global.config.PREFIX}${this.config.name} user`, threadID);
+      return api.sendMessage(`Bạn có thể dùng\n==> ${global.config.PREFIX}${this.config.name} thread để xem thông tin box\n==> ${global.config.PREFIX}${this.config.name} user để xem thông tin người dùng`, threadID);
     }
     if (args[0] == "thread") {
         try {
             if (!fs.existsSync(totalPath)) fs.writeFileSync(totalPath, JSON.stringify({}));
             let totalChat = JSON.parse(fs.readFileSync(totalPath));
-            let threadInfo = await api.getThreadInfo(args[1] || threadID);
             let timeByMS = Date.now();
             var memLength = threadInfo.participantIDs.length;
             let threadMem = threadInfo.participantIDs.length;
@@ -65,6 +64,12 @@ module.exports.run = async function({ api, event, args, Users }) {
                     nope.push(nName)
                 }
             };
+            var { adminIDs } = await api.getThreadInfo(args[1] || threadID);
+            var adminName = [];
+            for (const arrayAdmin of adminIDs) {
+          const name = await Users.getNameUser(arrayAdmin.id)
+          adminName.push(name)
+            }
             var nam = gendernam.length;
             var nu = gendernu.length;
             let qtv = threadInfo.adminIDs.length;
@@ -74,7 +79,7 @@ module.exports.run = async function({ api, event, args, Users }) {
             let threadName = threadInfo.threadName;
             let id = threadInfo.threadID;
             let sex = threadInfo.approvalMode;
-            var pd = sex == false ? '𝐭𝐚̆́𝐭' : sex == true ? '𝐛𝐚̣̂𝐭' : '𝐤𝐡';
+            var pd = sex == false ? 'tắt' : sex == true ? 'bật' : 'kh';
             if (!totalChat[args[1] || threadID]) {
               totalChat[args[1] || threadID] = {
                     time: timeByMS,
@@ -86,8 +91,8 @@ module.exports.run = async function({ api, event, args, Users }) {
             let mdtt = Math.floor(Math.random() * 101);
             let preCount = totalChat[args[1] || threadID].count || 0;
             let ytd = totalChat[args[1] || threadID].ytd || 0;
-            let hnay = (ytd != 0) ? (sl - preCount) : "𝐜𝐡𝐮̛𝐚 𝐜𝐨́ 𝐭𝐡𝐨̂́𝐧𝐠 𝐤𝐞̂";
-            let hqua = (ytd != 0) ? ytd : "𝐜𝐡𝐮̛𝐚 𝐜𝐨́ 𝐭𝐡𝐨̂́𝐧𝐠 𝐤𝐞̂";
+            let hnay = (ytd != 0) ? (sl - preCount) : "chưa có thống kê";
+            let hqua = (ytd != 0) ? ytd : "chưa có thống kê";
             if (timeByMS - totalChat[args[1] || threadID].time > _24hours) {
                 if (timeByMS - totalChat[args[1] || threadID].time > (_24hours * 2)) {
                   totalChat[args[1] || threadID].count = sl;
@@ -102,7 +107,7 @@ module.exports.run = async function({ api, event, args, Users }) {
             }
             var callback = () =>
                 api.sendMessage({
-                        body: `⭐️𝐁𝐨𝐱: ${threadName}\n🎮 𝐈𝐃 𝐁𝐨𝐱: ${id}\n📱 𝐏𝐡𝐞̂ 𝐝𝐮𝐲𝐞̣̂𝐭: ${pd}\n🐰 𝐄𝐦𝐨𝐣𝐢: ${icon || "👍"}\n📌 𝐓𝐡𝐨̂𝐧𝐠 𝐭𝐢𝐧: ${threadMem} 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧\n𝐒𝐨̂́ 𝐭𝐯 𝐧𝐚𝐦 🧑‍🦰: ${nam} 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧\n𝐒𝐨̂́ 𝐭𝐯 𝐧𝐮̛̃ 👩‍🦰: ${nu} 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧\n🕵️‍♂️ 𝐆𝐨̂̀𝐦 ${qtv} 𝐪𝐮𝐚̉𝐧 𝐭𝐫𝐢̣ 𝐯𝐢𝐞̂𝐧\n💬 𝐓𝐨̂̉𝐧𝐠: ${sl} 𝐭𝐢𝐧 𝐧𝐡𝐚̆́𝐧\n📈 𝐌𝐮̛́𝐜 𝐭𝐮̛𝐨̛𝐧𝐠 𝐭𝐚́𝐜: ${mdtt}%\n🌟 𝐓𝐨̂̉𝐧𝐠 𝐬𝐨̂́ 𝐭𝐢𝐧 𝐧𝐡𝐚̆́𝐧 𝐡𝐨̂𝐦 𝐪𝐮𝐚: ${hqua}\n🌟 𝐓𝐨̂̉𝐧𝐠 𝐬𝐨̂́ 𝐭𝐢𝐧 𝐧𝐡𝐚̆́𝐧 𝐡𝐨̂𝐦 𝐧𝐚𝐲: ${hnay}\n⠀⠀⠀ ⠀ ⠀ 『${gio}』`,
+                        body: `⭐️Box: ${data3 || "không có"}\n🎮 ID: ${id}\n📱 Phê duyệt: ${pd}\n🐰 Emoji: ${icon || "👍"}\n📌 Thông tin: ${threadMem} thành viên\nSố tv nam 🧑‍🦰: ${nam} thành viên\nSố tv nữ 👩‍🦰: ${nu} thành viên\n🕵️‍♂️ QTV: ${adminName.join(', ')}\n💬 Tổng: ${sl} tin nhắn\n📈 Mức tương tác: ${mdtt}\n🌟 Tổng tin nhắn hôm qua: ${hqua}\n🌟 Tổng tin nhắn hôm nay: ${hnay}\n⠀⠀⠀ ⠀ ⠀ 『${gio}』`,
                         attachment: fs.createReadStream(__dirname + '/cache/1.png')
                     },
                     threadID,
@@ -115,7 +120,7 @@ module.exports.run = async function({ api, event, args, Users }) {
         } catch (e) {
             return (
               console.log(e),
-              api.sendMessage('Không thể lấy thông tin nhóm của bạn!', threadID, messageID)
+              api.sendMessage(`Không thể lấy thông tin nhóm của bạn!\n${e}`, threadID, messageID)
             )
         }
     }
@@ -145,7 +150,7 @@ module.exports.run = async function({ api, event, args, Users }) {
         } catch (e) {
             return (
               console.log(e),
-              api.sendMessage('Không thể lấy thông tin người dùng!', threadID, messageID)
+              api.sendMessage(`Không thể lấy thông tin người dùng!\n${e}`, threadID, messageID)
             )
         }
     }
