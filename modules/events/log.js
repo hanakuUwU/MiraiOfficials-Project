@@ -41,7 +41,7 @@ module.exports.run = async function ({ api, event, Users, Threads }) {
   switch (event.logMessageType) {
     case "log:thread-name": {
         newName = event.logMessageData.name || "𝐓𝐞̂𝐧 𝐤𝐡𝐨̂𝐧𝐠 𝐭𝐨̂̀𝐧 𝐭𝐚̣𝐢";
-        //task = "Người dùng thay đổi tên nhóm thành " + newName + "";
+        task = "Người dùng thay đổi tên nhóm thành " + newName + "";
         await Threads.setData(event.threadID, {name: newName});
         break;
     }
