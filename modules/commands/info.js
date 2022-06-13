@@ -46,6 +46,7 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
         try {
             if (!fs.existsSync(totalPath)) fs.writeFileSync(totalPath, JSON.stringify({}));
             let totalChat = JSON.parse(fs.readFileSync(totalPath));
+            let threadInfo = await api.getThreadInfo(args[1] || threadID); 
             let timeByMS = Date.now();
             var memLength = threadInfo.participantIDs.length;
             let threadMem = threadInfo.participantIDs.length;
