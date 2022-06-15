@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "info",
-  version: "2.1.5",
+  version: "2.1.6",
   hasPermssion: 0,
   credits: "Hung Cho (Khánh Milo Fix) mod thêm by TrúcCute",//sản phẩm có tham khảo 1 ít code của mdl avt D-Jukie 
   description: "Xem thông tin thread/user",
@@ -36,9 +36,12 @@ module.exports.handleEvent = async ({ api, event, args }) => {
 module.exports.run = async function({ api, event, args, Users, Threads }) {
   const { threadID, messageID, senderID, type, mentions, messageReply } = event;
   const moment = require("moment-timezone");
-  const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss || DD/MM/YYYY")
+  const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss || DD/MM/YYYY");
+  const threadSetting = global.data.threadData.get(parseInt(event.threadID)) || {}; 
+  const Prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+
   if (args.length == 0) {
-    return api.sendMessage(`Bạn có thể dùng\n==> ${global.config.PREFIX}${this.config.name} thread để xem thông tin box\n==> ${global.config.PREFIX}${this.config.name} user để xem thông tin người dùng`, threadID);
+    return api.sendMessage(`Bạn có thể dùng\n==> ${Prefix}${this.config.name} thread để xem thông tin box\n==> ${Prefix}${this.config.name} user để xem thông tin người dùng`, threadID);
     }
   if (args[0] == "thread") {
     try {
