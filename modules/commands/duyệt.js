@@ -1,14 +1,19 @@
 const fs = require("fs-extra");
 module.exports.config = {
-    name: "duyệt",
-    version: "1.1.0",
-    credits: "CatalizCS mod by Kadeer",
-    hasPermssion: 2,
-    description: "Quản lý tin nhắn chờ của bot",
-    commandCategory: "admin",
-    usages: "[u] [t] [a]",
-    cooldowns: 5
-};
+  name: "duyệt",
+  version: "1.1.0",
+  credits: "CatalizCS mod by Kadeer",
+  hasPermssion: 2,
+  description: "Quản lý tin nhắn chờ của bot",
+  commandCategory: "admin",
+  usages: "[u] [t] [a]",
+  cooldowns: 5,
+  dependencies: {
+    "fs-extra": "",
+    "request": ""
+  }
+}
+
 module.exports.onLoad = () => {
     const request = require("request");
     const dirMaterial = __dirname + `/noprefix/`;
