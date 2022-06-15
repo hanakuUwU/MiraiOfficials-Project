@@ -1,8 +1,8 @@
 module.exports.config = {
   name: "info",
-  version: "2.1.2",
+  version: "2.1.5",
   hasPermssion: 0,
-  credits: "Hung Cho (Khánh Milo Fix) mod thêm by TrúcCute",
+  credits: "Hung Cho (Khánh Milo Fix) mod thêm by TrúcCute",//sản phẩm có tham khảo 1 ít code của mdl avt D-Jukie 
   description: "Xem thông tin thread/user",
   commandCategory: "bổ não",
   usages: "[thread/user]",
@@ -123,13 +123,12 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
       }
     }
   if (args[0] == "user") {
-    try {
-      if (type == "message_reply") {
+    if(!args[1]){
+      if(type == "message_reply"){
         uid = messageReply.senderID
-        } else if (args.join().indexOf('@') !== -1) {
-        var uid = Object.keys(mentions)[0]
-        } else {
-        var uid = senderID
+      }
+        else {
+          uid = senderID
         }
       let data = await api.getUserInfo(uid),
         { profileUrl, gender, isFriend } = data[uid];
@@ -142,14 +141,39 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
             `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
             `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
             `\n🏝Profile:\n` + profileUrl,
-          attachment: fs.createReadStream(__dirname + "/cache/1.png")
-          }, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);
-      return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname + '/cache/1.png')).on('close', () => callback());
-      } catch (e) {
-      return (
-        console.log(e),
-        api.sendMessage(`Không thể lấy thông tin người dùng!\nLỗi: ${e}`, threadID, messageID)
-        )
+          attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID); 
+      return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+      }
+      else {
+        if (args.join().indexOf('@') !== -1){
+          var uid = Object.keys(mentions)[0]
+          let data = await api.getUserInfo(uid),
+        { profileUrl, gender, isFriend } = data[uid];
+      let name = await Users.getNameUser(uid)
+      var callback = () => 
+        api.sendMessage({
+          body:
+            `💦Tên: ` + name +
+            `\n🐧UID: ` + uid +
+            `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
+            `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
+            `\n🏝Profile:\n` + profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);
+          return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+          }
+          else {
+            let data = await api.getUserInfo(args[1]),
+        { profileUrl, gender, isFriend } = data[args[1]];
+      let name = await Users.getNameUser(args[1])
+      var callback = () => 
+        api.sendMessage({
+          body:
+            `💦Tên: ` + name +
+            `\n🐧UID: ` + (args[1] || uid) +
+            `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
+            `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
+            `\n🏝Profile:\n` + profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);
+            return request(encodeURI(`https://graph.facebook.com/${args[1] || uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+            }
       }
     }
   }
