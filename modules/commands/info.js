@@ -168,11 +168,11 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
         api.sendMessage({
           body:
             `💦Tên: ` + name +
-            `\n🐧UID: ` + (args[1] || uid) +
+            `\n🐧UID: ` + args[1] +
             `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
             `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
             `\n🏝Profile:\n` + profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);
-            return request(encodeURI(`https://graph.facebook.com/${args[1] || uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+            return request(encodeURI(`https://graph.facebook.com/${args[1]}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
             }
       }
     }
