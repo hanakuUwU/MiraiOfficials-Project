@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 module.exports.config = {
     name: "duyệt",
-    version: "1.0.6",
+    version: "1.1.0",
     credits: "CatalizCS mod by Kadeer",
     hasPermssion: 2,
     description: "Quản lý tin nhắn chờ của bot",
@@ -32,7 +32,7 @@ module.exports.handleReply = async function({ api, event, handleReply, getText }
         for (const singleIndex of index) {
             if (isNaN(singleIndex) || singleIndex <= 0 || singleIndex > handleReply.pending.length) return api.sendMessage(`❯ ${singleIndex} Không Phải Là Một Con Số Hợp Lệ`, threadID, messageID);
             api.unsendMessage(handleReply.messageID);
-            api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "Cre by CatalizCS" : global.config.BOTNAME}`, handleReply.pending[singleIndex - 1].threadID, api.getCurrentUserID());
+            api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot was made by GK" : global.config.BOTNAME}`, handleReply.pending[singleIndex - 1].threadID, api.getCurrentUserID());
             api.sendMessage("", event.threadID, () => api.sendMessage({body:`🔱🪂𝗣𝗵𝗲̂ 𝗗𝘂𝘆𝗲̣̂𝘁 𝗧𝗵𝗮̀𝗻𝗵 𝗖𝗼̂𝗻𝗴✅\n\n❯ 𝑩𝒂̂𝒚 𝑯 𝑩𝒐𝒙 𝑪𝒖̉𝒂 𝑩𝒂̣𝒏 𝑪𝒐́ 𝑻𝒉𝒆̂̉ 𝑺𝒖̛̉ 𝑫𝒖̣𝒏𝒈 𝑩𝒐𝒕\n❯ 𝑺𝒖̛̉ 𝒅𝒖̣𝒏𝒈 ${global.config.PREFIX}𝙢𝙚𝙣𝙪 𝒉𝒐𝒂̣̆𝒄 ${global.config.PREFIX}𝙝𝙚𝙡𝙥 đ𝒆̂̉ 𝒃𝒊𝒆̂́𝒕 𝒕𝒐𝒂̀𝒏 𝒃𝒐̣̂ 𝒍𝒆̣̂𝒏𝒉 𝒄𝒐́ 𝒎𝒂̣̆𝒕 𝒕𝒓𝒆̂𝒏 𝒃𝒐𝒕 𝒏𝒂̀𝒚\n『 𝐃𝐮̀𝐧𝐠 𝐜𝐚𝐥𝐥𝐚𝐝 𝐛𝐚́𝐨 𝐜𝐡𝐨 𝐀𝐝𝐦𝐢𝐧𝐁𝐨𝐭 𝐧𝐞̂́𝐮 𝐜𝐨́ 𝐥𝐨̂̃𝐢 』`, attachment: fs.createReadStream(__dirname + "/noprefix/rankup.mp4")} ,handleReply.pending[singleIndex - 1].threadID));
             count+=1;
         }
