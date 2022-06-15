@@ -1,7 +1,7 @@
 const axios = require("axios");
 module.exports.config = {
     name: "hi",
-    version: "1.0.2",
+    version: "1.1.0",
     hasPermssion: 0,
     credits: "Kanichi mod time by TrúcCute",
     description: "noprefix",
@@ -21,8 +21,8 @@ module.exports.handleEvent = async ({ event, api,Users }) => {
 			responseType: "stream"
 		})).data;
   const moment = require("moment-timezone");
-  const hours = moment.tz('Asia/Ho_Chi_Minh').format('HH');
-  const session = (hours < 4 ? "sớm tinh mơ" : hours > 4 && hours <= 7 ? "sáng sớm" : hours > 7 && hours <= 10 ? "sáng" : hours > 10 && hours <= 12 ? "trưa" : hours > 12 && hours <= 17 ? "chiều" : hours > 17 && hours <= 18 ? "chiều tà" : hours > 18 && hours <= 24 ? "tối" : "khuya")
+  const hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm');
+  const session = (hours > 2401 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2400 ? "tối" : "khuya")
   let name = await Users.getNameUser(event.senderID)
   var msg = {body: `chào buổi ${session}, chúc ${name} 1 ngày vui vẻ`, attachment: download}
   if (event.body.toLowerCase() == "hi"){
@@ -40,6 +40,12 @@ module.exports.handleEvent = async ({ event, api,Users }) => {
   if (event.body.toLowerCase() == "chào"){
         return api.sendMessage(msg,event.threadID,event.messageID);}
   if (event.body.toLowerCase() == "chao"){
+        return api.sendMessage(msg,event.threadID,event.messageID);}
+  if (event.body.toLowerCase() == "lô"){
+        return api.sendMessage(msg,event.threadID,event.messageID);}
+  if (event.body.toLowerCase() == "2"){
+        return api.sendMessage(msg,event.threadID,event.messageID);}
+  if (event.body.toLowerCase() == "hê nhô"){
         return api.sendMessage(msg,event.threadID,event.messageID);}
         };
 module.exports.run = async ({ event, api }) => {
