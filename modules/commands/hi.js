@@ -14,7 +14,7 @@ module.exports.config = {
     }
 }
 
-module.exports.handleEvent = async ({ event, api,Users }) => {
+module.exports.handleEvent = async ({ event, api, Users }) => {
   const res = await axios.get('https://apiurl.miraiofficials123.repl.co');
   const data = res.data.url;
   let download = (await axios.get(data, {
@@ -22,7 +22,7 @@ module.exports.handleEvent = async ({ event, api,Users }) => {
 		})).data;
   const moment = require("moment-timezone");
   const hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm');
-  const session = (hours > 2401 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2100 ? "tối" : hours > 2101 && hours <= 2400 ? "tối muộn" : "lỗi")
+  const session = (hours > 0001 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2100 ? "tối" : hours > 2101 && hours <= 2400 ? "tối muộn" : "lỗi")
   let name = await Users.getNameUser(event.senderID)
   var msg = {body: `Xin chào ${name}, chúc bạn một buổi ${session} vui vẻ ❤️`, attachment: download}
   if (event.body.toLowerCase() == "hi"){
@@ -49,5 +49,5 @@ module.exports.handleEvent = async ({ event, api,Users }) => {
         return api.sendMessage(msg,event.threadID,event.messageID);}
         };
 module.exports.run = async ({ event, api }) => {
-return api.sendMessage("𝐃𝐮̀𝐧𝐠 𝐬𝐚𝐢 𝐜𝐚́𝐜𝐡 𝐫𝐨̂̀𝐢 𝐥𝐞̂𝐮 𝐥𝐞̂𝐮",event.threadID)
-    }
+  return api.sendMessage(`Dùng sai rồi lêu lêu`, event.threadID, event.messageID)
+}
