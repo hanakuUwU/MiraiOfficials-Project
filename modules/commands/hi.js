@@ -22,9 +22,9 @@ module.exports.handleEvent = async ({ event, api,Users }) => {
 		})).data;
   const moment = require("moment-timezone");
   const hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm');
-  const session = (hours > 2401 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2400 ? "tối" : "khuya")
+  const session = (hours > 2401 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2100 ? "tối" : hours > 2101 && hours <= 2400 ? "tối muộn" : "lỗi")
   let name = await Users.getNameUser(event.senderID)
-  var msg = {body: `chào buổi ${session}, chúc ${name} 1 ngày vui vẻ`, attachment: download}
+  var msg = {body: `Xin chào ${name}, chúc bạn một buổi ${session} vui vẻ ❤️`, attachment: download}
   if (event.body.toLowerCase() == "hi"){
         return api.sendMessage(msg,event.threadID,event.messageID);}
   if (event.body.toLowerCase() == "hii"){
