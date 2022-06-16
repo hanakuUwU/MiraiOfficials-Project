@@ -49,5 +49,5 @@ let name = await Users.getNameUser(uid)
     `\nUrl:\n` + profileUrl +
     `\n\n[===[ ` + gio + ` ]===]`,
     attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
-       return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+       return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
 }
