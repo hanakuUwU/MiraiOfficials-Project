@@ -1,6 +1,10 @@
+const totalPath = __dirname + '/cache/totalChat.json';
+const _24hours = 86400000;
+const fs = require("fs-extra");
+const request = require("request");
 module.exports.config = {
   name: "info",
-  version: "2.1.6",
+  version: "2.1.5",
   hasPermssion: 0,
   credits: "Hung Cho (Khánh Milo Fix) mod thêm by TrúcCute",//sản phẩm có tham khảo 1 ít code của mdl avt D-Jukie 
   description: "Xem thông tin thread/user",
@@ -11,27 +15,22 @@ module.exports.config = {
     "fs-extra": "",
     "request": ""
     }
-  };
-
-const totalPath = __dirname + '/cache/totalChat.json';
-const _24hours = 86400000;
-const fs = require("fs-extra");
-const request = require("request");
+  }
 
 module.exports.handleEvent = async ({ api, event, args }) => {
-    if (!fs.existsSync(totalPath)) fs.writeFileSync(totalPath, JSON.stringify({}));
-    let totalChat = JSON.parse(fs.readFileSync(totalPath));
-    if (!totalChat[event.threadID]) return;
-    if (Date.now() - totalChat[event.threadID].time > (_24hours * 2)) {
-        let sl = (await api.getThreadInfo(event.threadID)).messageCount;
-        totalChat[event.threadID] = {
-            time: Date.now() - _24hours,
-            count: sl,
-            ytd: sl - totalChat[event.threadID].count
-        }
-        fs.writeFileSync(totalPath, JSON.stringify(totalChat, null, 2));
+  if (!fs.existsSync(totalPath)) fs.writeFileSync(totalPath, JSON.stringify({}));
+  let totalChat = JSON.parse(fs.readFileSync(totalPath));
+  if (!totalChat[event.threadID]) return;
+  if (Date.now() - totalChat[event.threadID].time > (_24hours * 2)) {
+    let sl = (await api.getThreadInfo(event.threadID)).messageCount;
+    totalChat[event.threadID] = {
+      time: Date.now() - _24hours,
+      count: sl,
+      ytd: sl - totalChat[event.threadID].count
+      }
+    fs.writeFileSync(totalPath, JSON.stringify(totalChat, null, 2));
     }
-}
+  }
 
 module.exports.run = async function({ api, event, args, Users, Threads }) {
   const { threadID, messageID, senderID, type, mentions, messageReply } = event;
@@ -144,7 +143,7 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
             `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
             `\n🏝Profile:\n` + profileUrl,
           attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID); 
-      return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+      return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
       }
       else {
         if (args.join().indexOf('@') !== -1){
@@ -160,7 +159,7 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
             `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
             `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
             `\n🏝Profile:\n` + profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);
-          return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+          return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
           }
           else {
             let data = await api.getUserInfo(args[1]),
@@ -174,8 +173,8 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
             `\n🙆‍♀️Trạng thái: ` + (isFriend == true ? "đã kết bạn với bot" : isFriend == false ? "chưa kết bạn với bot" : "UNKOWN") +
             `\n🦋Giới tính: ` + (gender == 2 ? 'nam' : gender == 1 ? 'nữ' : 'UNKNOWN') +
             `\n🏝Profile:\n` + profileUrl,attachment: fs.createReadStream(__dirname + "/cache/1.png")}, threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"), messageID);
-            return request(encodeURI(`https://graph.facebook.com/${args[1]}/picture?height=750&width=750&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+            return request(encodeURI(`https://graph.facebook.com/${args[1]}/picture?height=750&width=750&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
             }
-      }
+        }
     }
   }
