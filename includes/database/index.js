@@ -4,7 +4,7 @@ const { DATABASE } = global.config;
 
 var dialect = Object.keys(DATABASE), storage;
 dialect = dialect[0]; 
-storage = resolve(`modules/commands/${DATABASE[dialect].storage}`);
+storage = resolve(`modules/commands/cache/${DATABASE[dialect].storage}`);
 //storage = resolve(__dirname, `../${DATABASE[dialect].storage}`);
 //chỉnh lại lưu trong includes nếu thích
 module.exports.sequelize = new Sequelize({
