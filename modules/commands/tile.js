@@ -1,42 +1,44 @@
 module.exports.config = {
-    name: "tile",
-    version: "1.0.0",
-    hasPermssion: 0,
-    credits: "Jukie~",
-    description: "Xem tỉ lệ hợp đôi giữa 2 người",
-    commandCategory: "Tình yêu",
-    usages: "[tag]",
-    cooldowns: 5,
-    dependencies: {
-        "fs-extra": "",
-        "axios": ""
-    }
+  name: "tile",
+  version: "1.1.0",
+  hasPermssion: 0,
+  credits: "D-Jukie mod reply by TrúcCute",//làm lại code cho dễ nhìn by TrúcCute
+  description: "xem tile",
+  commandCategory: "bổ não",
+  usages: "tag/reply",
+  cooldowns: 5,
+  dependencies: {
+    "axios": "",
+    "fs-extra": "",
+    "request": ""
+  }
 }
 
-  module.exports.run = async function({ api, args, Users, event}) {
-  const axios=global["nodemodule"]["axios"];
-  const request=global["nodemodule"]["request"];
-  const fs=global["nodemodule"]["fs-extra"];
-  var mention=Object["keys"](event["mentions"])[0];
-
-  if(!mention){return api["sendMessage"]("𝐂𝐚̂̀𝐧 𝐩𝐡𝐚̉𝐢 𝐭𝐚𝐠 𝟏 𝐧𝐠𝐮̛𝐨̛̀𝐢 𝐛𝐚̣𝐧 𝐦𝐮𝐨̂́𝐧 𝐱𝐞𝐦 𝐭𝐢̉ 𝐥𝐞̣̂ 𝐡𝐨̛̣𝐩 𝐧𝐡𝐚𝐮",event["threadID"])};
-  var name=( await Users["getData"](mention))["name"];
-  var namee=( await Users["getData"](event["senderID"]))["name"];
-  var tle=Math["floor"](Math["random"]()* 101);
-  var arraytag=[];arraytag["push"]({id:mention,tag:name});arraytag["push"]({id:event["senderID"],tag:namee});
-  var mentions=Object["keys"](event["mentions"]);
-
-  let Avatar=( await axios["get"](`${"https://graph.facebook.com/"}${mentions}${"/picture?height=1500&width=1500&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD"}`,{responseType:"arraybuffer"}))["data"];
-  fs["writeFileSync"](__dirname+ "/cache/avt.png",Buffer["from"](Avatar,"utf-8"));
-
-  let Avatar2=( await axios["get"](`${"https://graph.facebook.com/"}${event["senderID"]}${"/picture?height=1500&width=1500&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD"}`,{responseType:"arraybuffer"}))["data"];
-  fs["writeFileSync"](__dirname+ "/cache/avt2.png",Buffer["from"](Avatar2,"utf-8"));
-
-    let Avatar3=( await axios["get"](`${"https://i.imgur.com/0lgB4WG.png"}`,{responseType:"arraybuffer"}))["data"];
-  fs["writeFileSync"](__dirname+ "/cache/avt3.png",Buffer["from"](Avatar3,"utf-8"));
-  var imglove=[];imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt2.png"));
-    imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt3.png"));
-  imglove["push"](fs["createReadStream"](__dirname+ "/cache/avt.png"));
-  var msg={body:`${"💟===💟𝐓𝐢̉ 𝐥𝐞̣̂ 𝐡𝐨̛̣𝐩 𝐧𝐡𝐚𝐮💟===💟"}\n${namee}\n${"⠀⠀⠀⠀ ⠀⠀⠀ <3"}\n${name}\n${"𝐋𝐚̀: "}${tle}${"% "}`,mentions:arraytag,attachment:imglove};
-  return api["sendMessage"](msg,event["threadID"],event["messageID"])
-        }
+module.exports.run = async ({ api, event, Users, args }) => {
+  let axios = require('axios');
+  let fs = require('fs-extra');
+  let request = require('request');
+  let { threadID, messageID, senderID, mentions, messageReply, type } = event;
+  if (type == "message_reply") {
+    uid = messageReply.senderID
+  } else {
+    uid = Object.keys(mentions)[0]
+  }
+  if (!uid) {
+    return api.sendMessage('Vui tag hoặc reply để xem tile', threadID, messageID)
+  }
+  let name = await Users.getNameUser(senderID);
+  let name2 = await Users.getNameUser(uid);
+  let tile = Math.floor(Math.random() * 101);
+  let avt1 = (await axios.get(`https://graph.facebook.com/${senderID}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, {responseType: "arraybuffer"})).data;
+  fs.writeFileSync(__dirname+ '/cache/1.png', Buffer.from(avt1, 'utf-8'));
+  let avt2 = (await axios.get(`https://graph.facebook.com/${uid}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, {responseType: "arraybuffer"})).data;
+  fs.writeFileSync(__dirname+ '/cache/2.png', Buffer.from(avt2, 'utf-8'));
+  let tim = (await axios.get(`https://i.imgur.com/0lgB4WG.png`, {responseType: "arraybuffer"})).data;
+  fs.writeFileSync(__dirname+ '/cache/3.png', Buffer.from(tim, 'utf-8'));
+  let c = [];
+  c.push(fs.createReadStream(__dirname+ '/cache/1.png'));
+  c.push(fs.createReadStream(__dirname+ '/cache/3.png'));
+  c.push(fs.createReadStream(__dirname+ '/cache/2.png'));
+  return api.sendMessage({body: `💟===💟Tỉ lệ hợp nhau💟===💟\nBạn: ${name} ❤️\n⠀⠀⠀⠀ ⠀⠀⠀ 😘\nNgười ấy: ${name2} ❤️\nLà: ${tile}%\n======🔥=========🔥======`, attachment: c}, threadID)
+    }
