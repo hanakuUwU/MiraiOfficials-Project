@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "tile",
-  version: "1.1.5",
+  version: "1.2.0",
   hasPermssion: 0,
   credits: "D-Jukie mod reply by TrúcCute",//làm lại code cho dễ nhìn by TrúcCute
   description: "xem tile",
@@ -15,6 +15,7 @@ module.exports.config = {
   }
 
 module.exports.run = async ({ api, event, Users, args }) => {
+  var token = `6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
   let axios = require('axios');
   let fs = require('fs-extra');
   let request = require('request');
@@ -34,12 +35,12 @@ module.exports.run = async ({ api, event, Users, args }) => {
   let name2 = await Users.getNameUser(uid);
   let tile = Math.floor(Math.random() * 101);
   
-  let avt1 = (await axios.get(`https://graph.facebook.com/${senderID}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, {
+  let avt1 = (await axios.get(`https://graph.facebook.com/${senderID}/picture?width=512&height=512&access_token=`+token, {
     responseType: "arraybuffer"
   })).data;
   fs.writeFileSync(__dirname+ `/cache/${senderID}.png`, Buffer.from(avt1, 'utf-8'));
   
-  let avt2 = (await axios.get(`https://graph.facebook.com/${uid}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, {
+  let avt2 = (await axios.get(`https://graph.facebook.com/${uid}/picture?width=512&height=512&access_token=`+token, {
     responseType: "arraybuffer"
   })).data;
   fs.writeFileSync(__dirname+ `/cache/${uid}.png`, Buffer.from(avt2, 'utf-8'));
