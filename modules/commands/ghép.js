@@ -83,7 +83,7 @@ module.exports.run = async function({ api, event, args, Users }) {
       }
     }
   }
-  console.log(data)
+  //console.log(data)
 
   let mung = [
     "Chúc 2 bạn trăm năm hạnh phút",
