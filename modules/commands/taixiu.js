@@ -33,7 +33,7 @@ module.exports.run = async function ({
     if (moneyUser < money) api.sendMessage(`⚡️Số dư bạn không đủ ${money}$ để có thể chơi`, event.threadID, event.messageID);
     else {
     try {
-        const res = await axios.get(`https://Api-vip.ducdz999.repl.co/game/taixiu`);
+        const res = await axios.get(`https://APITaiXiu.miraiofficials123.repl.co`);
         var data = res.data;
         var ketqua = data.ketqua
         var ketquaGame = ketqua.slice(0, 3)
