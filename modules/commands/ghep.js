@@ -40,7 +40,7 @@ module.exports.run = async ({ api, event, args, Users }) => {
       }
     }
   }
-  console.log(data)
+  //console.log(data)
                      
   if (data.length == 0) return api.sendMessage("⚡️Rất tiếc! Không tìm thấy nửa đời của bạn :(‌", threadID, messageID);
   let uid = data[Math.floor(Math.random() * data.length)]
