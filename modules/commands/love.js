@@ -9,7 +9,8 @@ module.exports.config = {
   cooldowns: 1
 }
 module.exports.run = async ({ api, event,args, Users }) => {
- const axios = global.nodemodule["axios"];
+  var token = `6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+  const axios = global.nodemodule["axios"];
   const fs = global.nodemodule["fs-extra"];
   if (!args[0]) {
             var ThreadInfo = await api.getThreadInfo(event.threadID);
@@ -33,11 +34,11 @@ module.exports.run = async ({ api, event,args, Users }) => {
     let dapr2 = await api.getUserInfo(e),
  { profileUrl } = data2[e];
 
-            let getAvatar = (await axios.get(`https://graph.facebook.com/${e}/picture?height=1500&width=1500&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`, { responseType: "arraybuffer" } )).data; 
-            fs.writeFileSync( __dirname + "/cache/1.png", Buffer.from(getAvatar, "utf-8") );
+            let getAvatar = (await axios.get(`https://graph.facebook.com/${e}/picture?height=1500&width=1500&access_token=`+token, { responseType: "arraybuffer" } )).data; 
+            fs.writeFileSync( __dirname + `/cache/${event.threadID}.png`, Buffer.from(getAvatar, "utf-8") );
             api.sendMessage({ body: `💓 𝐓𝐢̀𝐦 𝐊𝐢𝐞̂́𝐦 𝐍𝐮̛̉𝐚 𝐊𝐢𝐚 𝐂𝐮̉𝐚 𝐁𝐚̣𝐧\n🎀 𝐓𝐞̂𝐧: ${n || "không thể lấy"}\n💌 𝐌𝐨̂́𝐢 𝐐𝐮𝐚𝐧 𝐇𝐞̣̂: 𝐅.𝐀 (𝐜𝐨́ 𝐭𝐡𝐞̂̉)\n💏 𝐓𝐢̉ 𝐋𝐞̣̂ 𝐏𝐡𝐮̀ 𝐇𝐨̛̣𝐩: ${a.toFixed(2)}%\n💳 𝐈𝐃: ${e}\n💟 𝐏𝐫𝐨𝐟𝐢𝐥𝐞:\n` + profileUrl,
-                  attachment: fs.createReadStream(__dirname + `/cache/1.png`)
-            }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/1.png`), event.messageID);
+                  attachment: fs.createReadStream(__dirname + `/cache/${event.threadID}.png`)
+            }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.threadID}.png`), event.messageID);
   }
   else {            
     var ThreadInfo = await api.getThreadInfo(event.threadID);
@@ -65,9 +66,9 @@ module.exports.run = async ({ api, event,args, Users }) => {
             const url = api.getCurrentUserID(e);
     let data2 = await api.getUserInfo(e),
  { profileUrl } = data2[e];
-            let getAvatar = (await axios.get(`https://graph.facebook.com/${e}/picture?height=1500&width=1500&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`, { responseType: "arraybuffer" } )).data; 
-            fs.writeFileSync( __dirname + "/cache/1.png", Buffer.from(getAvatar, "utf-8") );
+            let getAvatar = (await axios.get(`https://graph.facebook.com/${e}/picture?height=1500&width=1500&access_token=`+token, { responseType: "arraybuffer" } )).data; 
+            fs.writeFileSync( __dirname + `/cache/${event.threadID}.png`, Buffer.from(getAvatar, "utf-8") );
             api.sendMessage({ body: `💓 𝐓𝐢̀𝐦 𝐊𝐢𝐞̂́𝐦 𝐍𝐮̛̉𝐚 𝐊𝐢𝐚 𝐂𝐮̉𝐚 𝐁𝐚̣𝐧\n🎀 𝐓𝐞̂𝐧: ${n || "không thể lấy"}\n💌 𝐌𝐨̂́𝐢 𝐐𝐮𝐚𝐧 𝐇𝐞̣̂: 𝐅.𝐀 (𝐜𝐨́ 𝐭𝐡𝐞̂̉)\n💏 𝐓𝐢̉ 𝐋𝐞̣̂ 𝐏𝐡𝐮̀ 𝐇𝐨̛̣𝐩: ${a.toFixed(2)}%\n💳 𝐈𝐃: ${e}\n💟 𝐏𝐫𝐨𝐟𝐢𝐥𝐞: \n` + profileUrl,
-                  attachment: fs.createReadStream(__dirname + `/cache/1.png`)
-            }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/1.png`), event.messageID);}
+                  attachment: fs.createReadStream(__dirname + `/cache/${event.threadID}.png`)
+            }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.threadID}.png`), event.messageID);}
 }
