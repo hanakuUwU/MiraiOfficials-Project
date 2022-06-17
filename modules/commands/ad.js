@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "ad",
-  version: "1.4.2",
+  version: "1.5.0",
   hasPermssion: 0,
   credits: "TrúcCute",// chính chủ xin đừng hiểu nhầm thay credits
   description: "xem thông tin admin",
@@ -16,6 +16,7 @@ module.exports.config = {
 }
 // thay uid nó tự thay link, name, và uid, giớ tính, còn lại tự thay vì t k bt=))
 module.exports.run = async function ({ api, event, Users, Currencies }) {
+  var token = `6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
   var uid = `100036947774673`;// thay uid vô để giúp thay name, giới tính, link fb
   const axios = require('axios');
   const fs = require('fs-extra');
@@ -48,6 +49,6 @@ let name = await Users.getNameUser(uid)
     `\n😽Thắc mắc gì ib qua đường link phía dưới` +
     `\nUrl:\n` + profileUrl +
     `\n\n[===[ ` + gio + ` ]===]`,
-    attachment: fs.createReadStream(__dirname + "/cache/1.png")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.png"),event.messageID);   
-       return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=EAAAAUaZA8jlABAM2LJjUZA5XqRQXp1BjMFOcycPItUAvONE46Cc4y5MCLY5QkXzqZACFGUkHVWW0IKQ2WylDezxN9ZA17yIMXZB4GxWU83bALEWX1WUInHEsvNUrvk3Aq0ZAvZBHmZBdBxkK8X30PQZCCWjyUxk15asSTAzZCkzW5L1ODaTBJhxR7t0vAkYY6ff9QZD`)).pipe(fs.createWriteStream(__dirname+'/cache/1.png')).on('close',() => callback());
+    attachment: fs.createReadStream(__dirname + `/cache/${uid}.png`)}, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${uid}.png`),event.messageID);   
+       return request(encodeURI(`https://graph.facebook.com/${uid}/picture?height=750&width=750&access_token=`+ token)).pipe(fs.createWriteStream(__dirname+`/cache/${uid}.png`)).on('close',() => callback());
 }
