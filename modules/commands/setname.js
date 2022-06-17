@@ -30,7 +30,7 @@ module.exports.run = async ({ api, event, args, Users }) => {
       } else {
     const name = args.join(" ")
       return api.changeNickname(`${name}`, threadID, senderID),
-        api.sendMessage(`Đã đổi tên của ${name2} thành ${name || "tên gốc"}`, threadID, (err, info) =>
+        api.sendMessage(`Đã đổi tên của bạn thành ${name || "tên gốc"}`, threadID, (err, info) =>
           setTimeout(() => {api.unsendMessage(info.messageID) } , delayUnsend * 1000))
       }
     }
