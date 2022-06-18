@@ -1,6 +1,6 @@
 module.exports.config = {
 	name: "adminUpdate",
-	eventType: ["log:thread-admins","log:thread-name", "log:user-nickname","log:thread-icon","log:thread-color"],
+	eventType: ["log:thread-admins","log:thread-name", "log:user-nickname","log:thread-icon","log:thread-color","log:link-status","log:magic-words","log:thread-approval-mode", "log:thread-poll"],
 	version: "1.0.1",
 	credits: "Mirai Team",
 	description: "Cập nhật thông tin nhóm một cách nhanh chóng",
@@ -24,6 +24,25 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
     try {
         let dataThread = (await getData(threadID)).threadInfo;
         switch (logMessageType) {
+             case "log:magic-words":
+            {
+                return api.sendMessage(`Theme ${event.logMessageData.magic_word} đã thêm hiệu ứng: ${event.logMessageData.theme_name}\nEmoij: ${event.logMessageData.emoji_effect || "Không có emoji"}\nTổng ${event.logMessageData.new_magic_word_count} hiệu ứng từ ngữ được thêm vào`, threadID)
+            }
+        case "log:thread-poll":
+            {
+                var str = event.logMessageData.question_json
+                var obj = JSON.parse(str);
+                if (event.logMessageData.event_type == "question_creation") {
+                    return api.sendMessage(`${event.logMessageBody}`, threadID)
+                }
+                if (event.logMessageData.event_type == "update_vote") {
+                    return api.sendMessage(`${event.logMessageBody}`, threadID)
+                }
+            }
+        case "log:thread-approval-mode":
+            {
+                return api.sendMessage(event.logMessageBody, threadID)
+            }
             case "log:thread-admins": {
                 if (logMessageData.ADMIN_EVENT == "add_admin") {
                     dataThread.adminIDs.push({ id: logMessageData.TARGET_ID })
