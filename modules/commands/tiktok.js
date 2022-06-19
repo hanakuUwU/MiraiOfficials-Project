@@ -7,9 +7,8 @@ module.exports.config = {
 	commandCategory: "Mạng xã hội",
 	usages: "",
 	cooldowns: 5
-}, module.exports.onLoad = function() {
-	console.log("===TIKTOK DOWNLOAD NO WATERMARK===")
 }
+  
 module.exports.run = async function({ args,event,	api }) {
   const axios = require("axios");
   const res = (await axios.get(`http://api.leanhtruong.net/api-no-key/tiksearch?keyword=${args.join(" ")}`)).data
