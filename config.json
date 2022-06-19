@@ -4,26 +4,27 @@
     "autoCreateDB": true,
     "allowInbox": true,
     "autoClean": false,
+    "adminOnly": false,
+    "adminPaseOnly": true,
+    "ndhOnly": false,
+    "UPTIME": 0,
     "commandDisabled": [],
     "eventDisabled": [],
-    "adminOnly": false,
-    "adminPaseOnly": false,
-    "ndhOnly": false,
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "ChatBot",
+    "BOTNAME": "",
     "PREFIX": ",",
-    "NDH": [],
     "ADMINBOT": [
         "100036947774673"
     ],
+    "NDH": [],
     "DATABASE": {
         "sqlite": {
             "storage": "data.sqlite"
         }
     },
-    "APPSTATEPATH": "appstate.json",
+    "APPSTATEPATH": "2.json",
     "FCAOption": {
         "forceLogin": true,
         "listenEvents": true,
