@@ -7,9 +7,9 @@ module.exports.config = {
 	commandCategory: "Mạng xã hội",
 	usages: "",
 	cooldowns: 5
-}, module.exports.onLoad = function() {
-	console.log("===TIKTOK DOWNLOAD NO WATERMARK===")
-}, module.exports.run = async function({ args,event,	api }) {
+}
+
+module.exports.run = async function({ args,event,	api }) {
   const axios = require("axios");
   const fs = require("fs-extra");
     const request = require("request");
