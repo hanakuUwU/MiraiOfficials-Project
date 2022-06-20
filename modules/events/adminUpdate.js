@@ -1,6 +1,6 @@
 module.exports.config = {
 	name: "adminUpdate",
-	eventType: ["log:thread-admins","log:thread-name", "log:user-nickname","log:thread-icon","log:thread-color","log:link-status","log:magic-words","log:thread-approval-mode", "log:thread-poll"],
+	eventType: ["log:thread-admins","log:thread-name", "log:user-nickname","log:thread-icon","log:thread-color","log:link-status","log:magic-words","log:thread-approval-mode", "log:thread-poll", "log:thread-call"],
 	version: "1.0.1",
 	credits: "Mirai Team",
 	description: "Cập nhật thông tin nhóm một cách nhanh chóng",
@@ -98,6 +98,36 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
                         return api.unsendMessage(info.messageID);
                     } else return;
                 });
+                break;
+            }
+
+            case "log:thread-call": {
+                if (logMessageData.event == "group_call_started") {
+                    const name = await Users.getNameUser(logMessageData.caller_id);
+                    api.sendMessage(`» [ ThreadUpdate ]\n» ${name} đã bắt đầu ${(logMessageData.video) ? 'VIDEO ' : ''}CALL.`, threadID);
+                }
+                else if (logMessageData.event == "group_call_ended") {
+                    const callDuration = logMessageData.call_duration;
+
+                    //Transform seconds to hours, minutes and seconds
+                    let hours = Math.floor(callDuration / 3600);
+                    let minutes = Math.floor((callDuration - (hours * 3600)) / 60);
+                    let seconds = callDuration - (hours * 3600) - (minutes * 60);
+
+                    //Add 0 if less than 10
+                    if (hours < 10) hours = "0" + hours;
+                    if (minutes < 10) minutes = "0" + minutes;
+                    if (seconds < 10) seconds = "0" + seconds;
+
+                    const timeFormat = `${hours}:${minutes}:${seconds}`;
+
+                    api.sendMessage(`» [ ThreadUpdate ]\n» ${(logMessageData.video) ? 'VIDEO ' : ''}CALL HAS ENDED.\n» CALL DURATION: ${timeFormat}`, threadID);
+                    
+                }
+                else if (logMessageData.joining_user) {
+                    const name = await Users.getNameUser(logMessageData.joining_user);
+                    api.sendMessage(`» [ ThreadUpdate ]\n» ${name} đã tham gia ${(logMessageData.group_call_type == '1') ? 'VIDEO ' : ''}CALL.`, threadID);
+                }
                 break;
             }
 
