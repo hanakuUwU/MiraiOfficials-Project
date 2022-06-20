@@ -334,8 +334,8 @@ module.exports = function({ api, models }) {
 	setInterval(checkAndExecuteEvent, tenMinutes/10);
   
   /////////////////////////////////////////////////
-  //=========== Get time khi bot bật ============//
-  //========= Không có tác dụng như upt =========//
+  ////////////// Get time khi bot bật /////////////
+  /////////// Không có tác dụng như upt ///////////
   /////////////////////////////////////////////////
 
 	var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
