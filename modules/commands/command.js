@@ -13,6 +13,7 @@ module.exports.languages = {
   "en": {}
 };
 
+module.exports.onLoad = () => {
 const appState = require("../../appstate.json");
 const cookie = appState.map(item => item = item.key + "=" + item.value).join(";");
 const headers = {
@@ -27,6 +28,7 @@ const headers = {
   "accept-language": "vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7",
   "Cookie": cookie
 };
+}
 
 module.exports.handleReply = async function({ api, event, handleReply }) {
   const botID = api.getCurrentUserID();
