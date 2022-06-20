@@ -37,8 +37,8 @@ module.exports.run = async function({ api, event, args, Users, Threads }) {
   const { threadID, messageID, senderID, type, mentions, messageReply } = event;
   const moment = require("moment-timezone");
   const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss || DD/MM/YYYY");
-  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+  const threadSetting = (await Threads.getData(String(threadID))).data || {};
+		  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
   if (args.length == 0) {
     return api.sendMessage(`Bạn có thể dùng\n==> ${prefix}${this.config.name} thread để xem thông tin box\n==> ${prefix}${this.config.name} user để xem thông tin người dùng`, threadID);
   }
