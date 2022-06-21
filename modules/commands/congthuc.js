@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "congthuc",
-  version: "1.2.0",
+  version: "1.5.0",
   hasPermssion: 0,
   credits: "TrúcCute",
   description: "công thức toán lí",
