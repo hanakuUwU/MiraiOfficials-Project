@@ -16,7 +16,7 @@ module.exports.config = {
 }
 // thay uid nó tự thay link, name, và uid, giớ tính, còn lại tự thay vì t k bt=))
 module.exports.run = async function ({ api, event, Users, Currencies }) {
-  var token = `6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+  var token = `566034311867544|uYVSZPr3ktHpAsv11gWUkz9D4JI`;
   var uid = `100036947774673`;// thay uid vô để giúp thay name, giới tính, link fb
   const axios = require('axios');
   const fs = require('fs-extra');
