@@ -33,7 +33,7 @@ module.exports.handleEvent = async ({ api, event, args }) => {
 }
 
 module.exports.run = async function({ api, event, args, Users, Threads }) {
-  var token = `566034311867544|uYVSZPr3ktHpAsv11gWUkz9D4JI`;
+  var token = `6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
   const { threadID, messageID, senderID, type, mentions, messageReply } = event;
   const moment = require("moment-timezone");
   const gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss || DD/MM/YYYY");
