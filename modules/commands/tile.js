@@ -15,7 +15,7 @@ module.exports.config = {
   }
 
 module.exports.run = async ({ api, event, Users, args }) => {
-  var token = `566034311867544|uYVSZPr3ktHpAsv11gWUkz9D4JI`;
+  var token = `6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
   let axios = require('axios');
   let fs = require('fs-extra');
   let request = require('request');
