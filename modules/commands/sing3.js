@@ -2,17 +2,17 @@ module.exports.config = {
     name: "sing3",
     version: "1.0.0",
     hasPermssion: 0,
-    credits: "D-Jukie mod chinh le (do anh Diện xóa file data nh quyên đã fork về và thay lại)",
+    credits: "D-Jukie",
     description: "Phát video thông qua link YouTube hoặc từ khoá tìm kiếm",
     commandCategory: "Phương tiện",
     usages: "[searchVideos]",
-    cooldowns: 10,
+    cooldowns: 5,
     dependencies: {
         "ytdl-core": "",
         "simple-youtube-api": ""
     },
     envConfig: {
-        "YOUTUBE_API": "AIzaSyDEE1-zZSRVI8lTaQOVsIAQFgL-_BJKvhk"
+        "YOUTUBE_API": "AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE"
     }
 };
 
@@ -24,9 +24,9 @@ module.exports.handleReply = async function ({
     const axios = global.nodemodule['axios'];
     const fs = global.nodemodule["fs-extra"];
     const request = global.nodemodule["request"];
-    const res = await axios.get(`https://raw.githubusercontent.com/KhangGia1810/data/main/sing.json`);
-    const length_KEY = res.data.keySing.length
-    const randomAPIKEY = res.data.keySing[Math.floor(Math.random() * length_KEY)]
+    const res = await axios.get(`https://shiron-official.github.io/apikey-DATA/apikey_rapiapi.json`);
+    const length_KEY = res.data.keyVideo.length
+    const randomAPIKEY = res.data.keyVideo[Math.floor(Math.random() * length_KEY)]
     const {
         createReadStream,
         createWriteStream,
@@ -35,30 +35,28 @@ module.exports.handleReply = async function ({
     } = global.nodemodule["fs-extra"];
     try {
         var options = {
-            method: 'GET',
-            url: 'https://youtube-mp36.p.rapidapi.com/dl',
-            params: {
-                id: `${handleReply.link[event.body - 1]}`
-            },
-            headers: {
-                'x-rapidapi-host': 'youtube-mp36.p.rapidapi.com',
-                'x-rapidapi-key': `${randomAPIKEY.API_KEY}`
-            }
-        };
+                  method: 'GET',
+                  url: 'https://ytstream-download-youtube-videos.p.rapidapi.com/dl',
+                  params: {id: `${handleReply.link[event.body - 1]}`, geo: 'DE'},
+                  headers: {
+                    'x-rapidapi-host': 'ytstream-download-youtube-videos.p.rapidapi.com',
+                    'x-rapidapi-key': `${randomAPIKEY}`
+                  }
+                };
         const data = await axios.request(options);
-        path1 = __dirname + `/cache/${event.senderID}.m4a`
-        const getms = (await axios.get(`${data.data.link}`, {
+        path1 = __dirname + `/cache/${event.senderID}.mp3`
+        const getms = (await axios.get(`${data.data.link["18"]}`, {
             responseType: "arraybuffer"
         })).data;
         fs.writeFileSync(path1, Buffer.from(getms, "utf-8"));
         api.unsendMessage(handleReply.messageID)
-        if (fs.statSync(__dirname + `/cache/${event.senderID}.m4a`).size > 26000000) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => unlinkSync(__dirname + `/cache/${event.senderID}.m4a`), event.messageID);
+        if (fs.statSync(__dirname + `/cache/${event.senderID}.mp3`).size > 104000000) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐯𝐢𝐝𝐞𝐨 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐦𝐛', event.threadID, () => unlinkSync(__dirname + `/cache/${event.senderID}.mp3`), event.messageID);
         else return api.sendMessage({
             body: `${data.data.title}`,
-            attachment: fs.createReadStream(__dirname + `/cache/${event.senderID}.m4a`)
-        }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.senderID}.m4a`), event.messageID)
+            attachment: fs.createReadStream(__dirname + `/cache/${event.senderID}.mp3`)
+        }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.senderID}.mp3`), event.messageID)
     } catch {
-        return api.sendMessage('Không thể xử lý yêu cầu của bạn!', event.threadID, event.messageID);
+        return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐱𝐮̛̉ 𝐥𝐲́ 𝐲𝐞̂𝐮 𝐜𝐚̂̀𝐮 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧', event.threadID, event.messageID);
     }
     return api.unsendMessage(handleReply.messageID);
 }
@@ -70,11 +68,11 @@ module.exports.run = async function ({
     const axios = global.nodemodule['axios'];
     const fs = global.nodemodule["fs-extra"];
     const request = global.nodemodule["request"];
-    const res = await axios.get(`https://raw.githubusercontent.com/KhangGia1810/data/main/sing.json`);
-    const length_KEY = res.data.keySing.length
-    const randomAPIKEY = res.data.keySing[Math.floor(Math.random() * length_KEY)]
     const ytdl = global.nodemodule["ytdl-core"];
     const YouTubeAPI = global.nodemodule["simple-youtube-api"];
+    const res = await axios.get(`https://shiron-official.github.io/apikey-DATA/apikey_rapiapi.json`);
+    const length_KEY = res.data.keyVideo.length
+    const randomAPIKEY = res.data.keyVideo[Math.floor(Math.random() * length_KEY)]
     const {
         createReadStream,
         createWriteStream,
@@ -83,35 +81,32 @@ module.exports.run = async function ({
     } = global.nodemodule["fs-extra"];
     const youtube = new YouTubeAPI(global.configModule[this.config.name].YOUTUBE_API);
     const keyapi = global.configModule[this.config.name].YOUTUBE_API
-    if (args.length == 0 || !args) return api.sendMessage('» Phần tìm kiếm không được để trống!', event.threadID, event.messageID);
+    if (args.length == 0 || !args) return api.sendMessage('» 𝐏𝐡𝐚̂̀𝐧 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐤𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐛𝐨̉ 𝐭𝐫𝐨̂́𝐧𝐠', event.threadID, event.messageID);
     const keywordSearch = args.join(" ");
     if (args.join(" ").indexOf("https://") == 0) {
         var url = args.join(" ")
         var urlsplit = url.split(/^.*(youtu.be\/|v\/|embed\/|watch\?|youtube.com\/user\/[^#]*#([^\/]*?\/)*)\??v?=?([^#\&\?]*).*/);
         const linkUrlSing = urlsplit[3]
         var options = {
-            method: 'GET',
-            url: 'https://youtube-mp36.p.rapidapi.com/dl',
-            params: {
-                id: `${linkUrlSing}`
-            },
-            headers: {
-                'x-rapidapi-host': 'youtube-mp36.p.rapidapi.com',
-                'x-rapidapi-key': `${randomAPIKEY.API_KEY}`
-            }
-        };
+                      method: 'GET',
+                      url: 'https://ytstream-download-youtube-videos.p.rapidapi.com/dl',
+                      params: {id: `${linkUrlSing}`, geo: 'DE'},
+                      headers: {
+                        'x-rapidapi-host': 'ytstream-download-youtube-videos.p.rapidapi.com',
+                        'x-rapidapi-key': `${randomAPIKEY}`
+                      }
+                    };
         const data = await axios.request(options);
-        console.log(data.data.link)
-        path1 = __dirname + `/cache/${event.senderID}.m4a`
-        const getms = (await axios.get(`${data.data.link}`, {
+        path1 = __dirname + `/cache/${event.senderID}.mp3`
+        const getms = (await axios.get(`${data.data.link["18"]}`, {
             responseType: "arraybuffer"
         })).data;
         fs.writeFileSync(path1, Buffer.from(getms, "utf-8"));
-        if (fs.statSync(__dirname + `/cache/${event.senderID}.m4a`).size > 26000000) return api.sendMessage('Không thể gửi file vì dung lượng lớn hơn 25MB.', event.threadID, () => unlinkSync(__dirname + `/cache/${event.senderID}.m4a`), event.messageID);
+        if (fs.statSync(__dirname + `/cache/${event.senderID}.mp3`).size > 104000000) return api.sendMessage('𝐊𝐡𝐨̂𝐧𝐠 𝐭𝐡𝐞̂̉ 𝐠𝐮̛̉𝐢 𝐯𝐢𝐝𝐞𝐨 𝐯𝐢̀ 𝐝𝐮𝐧𝐠 𝐥𝐮̛𝐨̛̣𝐧𝐠 𝐥𝐨̛́𝐧 𝐡𝐨̛𝐧 𝟐𝟓𝐦𝐛', event.threadID, () => unlinkSync(__dirname + `/cache/${event.senderID}.mp3`), event.messageID);
         else return api.sendMessage({
-            body: `» ${data.data.title}`,
-            attachment: fs.createReadStream(__dirname + `/cache/${event.senderID}.m4a`)
-        }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.senderID}.m4a`), event.messageID)
+            body: `» ${data.data.title} «`,
+            attachment: fs.createReadStream(__dirname + `/cache/${event.senderID}.mp3`)
+        }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/${event.senderID}.mp3`), event.messageID)
     } else {
         try {
             var link = [],
@@ -140,15 +135,15 @@ module.exports.run = async function ({
 
                 imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
                 num = num+=1
-                if (num == 1) var num1 = "🐳 ⓵ ❗"
-                if (num == 2) var num1 = "🐳 ⓶ ❗"
-                if (num == 3) var num1 = "🐳 ⓷ ❗"
-                if (num == 4) var num1 = "🐳 ⓸ ❗"
-                if (num == 5) var num1 = "🐳 ⓹ ❗"
-                if (num == 6) var num1 = "🐳 ⓺ ❗"
-                msg += (`${num1} ꧁${time}꧂ ${value.title}\n\n`);
+                if (num == 1) var num1 = "🐳 ⓵"
+                if (num == 2) var num1 = "🐳 ⓶" 
+                if (num == 3) var num1 = "🐳 ⓷" 
+                if (num == 4) var num1 = "🐳 ⓸" 
+                if (num == 5) var num1 = "🐳 ⓹" 
+                if (num == 6) var num1 = "🐳 ⓺"
+                msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${time}\n[📻] 𝐊𝐞̂𝐧𝐡: ${channel}\n---------------------------\n`);
             }
-            var body = `»🔎 Có ${link.length} kết quả trùng với từ khoá tìm kiếm của bạn:\n\n${msg}» Hãy reply(phản hồi) chọn một trong những tìm kiếm trên`
+            var body = `»🔎 𝐂𝐨́ ${link.length} 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n\n${msg}\n» 𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢 𝐭𝐡𝐞𝐨 𝐬𝐨̂́ 𝐭𝐡𝐮̛́ 𝐭𝐮̛̣) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
 
             return api.sendMessage({
                     attachment: imgthumnail,
@@ -191,15 +186,15 @@ module.exports.run = async function ({
                 fs.writeFileSync(folderthumnail, Buffer.from(getthumnail, 'utf-8'));
                 imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
                 num = num+=1
-                if (num == 1) var num1 = "🐳 ⓵ ❗"
-                if (num == 2) var num1 = "🐳 ⓶ ❗"
-                if (num == 3) var num1 = "🐳 ⓷ ❗"
-                if (num == 4) var num1 = "🐳 ⓸ ❗"
-                if (num == 5) var num1 = "🐳 ⓹ ❗"
-                if (num == 6) var num1 = "🐳 ⓺ ❗"
-                msg += (`${num1} ꧁${time}꧂ ${value.title}\n\n`);
+                if (num == 1) var num1 = "🐳 ⓵"
+                if (num == 2) var num1 = "🐳 ⓶"
+                if (num == 3) var num1 = "🐳 ⓷"
+                if (num == 4) var num1 = "🐳 ⓸"
+                if (num == 5) var num1 = "🐳 ⓹"
+                if (num == 6) var num1 = "🐳 ⓺"
+                msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${time}\n[📻] 𝐊𝐞̂𝐧𝐡: ${channel}\n---------------------------\n`);
             }
-            var body = `»🔎 Có ${link.length} kết quả trùng với từ khoá tìm kiếm của bạn:\n\n${msg}» Hãy reply(phản hồi) chọn một trong những tìm kiếm trên`
+            var body = `»🔎 𝐂𝐨́ ${link.length} 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n\n${msg}\n» 𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢 𝐭𝐡𝐞𝐨 𝐬𝐨̂́ 𝐭𝐡𝐮̛́ 𝐭𝐮̛̣) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
             return api.sendMessage({
                     attachment: imgthumnail,
                     body: body
@@ -215,4 +210,4 @@ module.exports.run = async function ({
     for (let ii = 1; ii < 7; ii++) {
         unlinkSync(__dirname + `/cache/${ii}.png`)
     }
-                                }
+}
