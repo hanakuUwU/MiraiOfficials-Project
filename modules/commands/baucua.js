@@ -1,33 +1,34 @@
- var request = require("request");const { readdirSync, readFileSync, writeFileSync, existsSync, copySync, createWriteStream, createReadStream } = require("fs-extra");
-    module.exports.config = {
-        name: "baucua",
-        version: "1.0.0",
-        hasPermssion: 0,
-        credits: "Horizon Lucius Synthesis I",
-        description: "bầu cua duma mệt",
-        commandCategory: "game",
-        usages: "baucua + tên + tìn :v",
-        cooldowns: 5
-    };
+var request = require("request");
+const { readdirSync, readFileSync, writeFileSync, existsSync, copySync, createWriteStream, createReadStream } = require("fs-extra");
+module.exports.config = {
+  name: "baucua",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "Horizon Lucius Synthesis I",
+  description: "bầu cua duma mệt",
+  commandCategory: "game",
+  usages: "baucua + tên + tìn :v",
+  cooldowns: 5
+};
 
-    module.exports.onLoad = async function () {
-        if (!existsSync(__dirname + '/cache/ga.jpg')) {
-            request('https://i.imgur.com/jPdZ1Q8.jpg').pipe(createWriteStream(__dirname + '/cache/ga.jpg'));
-        }
-        if (!existsSync(__dirname + '/cache/tom.jpg')) {
-            request('https://i.imgur.com/4214Xx9.jpg').pipe(createWriteStream(__dirname + '/cache/tom.jpg'));
-        }
+module.exports.onLoad = async function () {
+  if (!existsSync(__dirname + '/cache/ga.jpg')) {
+    request('https://i.imgur.com/9sieJ9B.png').pipe(createWriteStream(__dirname + '/cache/ga.jpg'));
+  }
+  if (!existsSync(__dirname + '/cache/tom.jpg')) {
+            request('https://i.imgur.com/qANOJ5D.png').pipe(createWriteStream(__dirname + '/cache/tom.jpg'));
+  }
         if (!existsSync(__dirname + '/cache/bau.jpg')) {
-            request('https://i.imgur.com/4KLd4EE.jpg').pipe(createWriteStream(__dirname + '/cache/bau.jpg'));
+            request('https://i.imgur.com/O0439dO.png').pipe(createWriteStream(__dirname + '/cache/bau.jpg'));
         }
         if (!existsSync(__dirname + '/cache/cua.jpg')) {
-            request('https://i.imgur.com/s8YAaxx.jpg').pipe(createWriteStream(__dirname + '/cache/cua.jpg'));
+            request('https://i.imgur.com/WGHdcsY.jpg').pipe(createWriteStream(__dirname + '/cache/cua.jpg'));
         }
         if (!existsSync(__dirname + '/cache/ca.jpg')) {
-            request('https://i.imgur.com/YbFzAOU.jpg').pipe(createWriteStream(__dirname + '/cache/ca.jpg'));
+            request('https://i.imgur.com/tyUBM1z.png').pipe(createWriteStream(__dirname + '/cache/ca.jpg'));
         }
         if (!existsSync(__dirname + '/cache/nai.jpg')) {
-            request('https://i.imgur.com/UYhUZf8.jpg').pipe(createWriteStream(__dirname + '/cache/nai.jpg'));
+            request('https://i.imgur.com/zjxcG85.png').pipe(createWriteStream(__dirname + '/cache/nai.jpg'));
         }
         if (!existsSync(__dirname + '/cache/baucua.gif')) {
             request('https://i.imgur.com/dlrQjRL.gif').pipe(createWriteStream(__dirname + '/cache/baucua.gif'));
