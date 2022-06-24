@@ -24,21 +24,24 @@ module.exports.onLoad = function () {
     return;
 }
 
-module.exports.run = async function({ api, event }) {
+module.exports.run = async function({ api, event, Threads }) {
+  const { threadID } = event;
   const moment = require("moment-timezone");
 	var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
+  const hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm'); 
+  let { threadName, participantIDs } = await api.getThreadInfo(threadID);
+  const session = (hours > 0001 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2100 ? "tối" : hours > 2101 && hours <= 2400 ? "tối muộn" : "lỗi")
 	const { join } = global.nodemodule["path"];
-	const { threadID } = event;
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-		api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot was made by GK" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
-		const fs = require("fs");
-		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 ⫷`, attachment: fs.createReadStream(__dirname + "/cache/joinGif/hello.gif")} ,threadID));
+		api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
+		const fs = require("fs-extra");
+		return api.sendMessage("", event.threadID, () => api.sendMessage({body:`⫸ 𝐊𝐞̂́𝐭 𝐍𝐨̂́𝐢 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 𝐁𝐨𝐱 ${threadName}\n𝐋𝐮́𝐜: ${gio}\n𝐂𝐡𝐮́𝐜 𝐜𝐚́𝐜 𝐛𝐚̣𝐧 𝐱𝐚̀𝐢 𝐛𝐨𝐭 𝐯𝐮𝐢 𝐯𝐞̉ =)`}, threadID));
 	}
 	else {
 		try {
 			const { createReadStream, existsSync, mkdirSync, readdirSync } = global.nodemodule["fs-extra"];
-			let { threadName, participantIDs } = await api.getThreadInfo(threadID);
-
+      const threadSetting = (await Threads.getData(String(threadID))).data || {};		 
+      const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
 			const threadData = global.data.threadData.get(parseInt(threadID)) || {};
 			const path = join(__dirname, "cache", "joinMp4");
 			const pathGif = join(path, `${threadID}.mp4`);
@@ -53,7 +56,7 @@ module.exports.run = async function({ api, event }) {
 			}
 			memLength.sort((a, b) => a - b);
 			
-			(typeof threadData.customJoin == "undefined") ? msg = `🇻🇳𝐖𝐞𝐥𝐜𝐨𝐦𝐞 {name}\n🔰{type} 𝐬𝐞̃ 𝐥𝐚̀ 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧 𝐜𝐮̉𝐚 𝐛𝐨𝐱 {threadName} 𝐭𝐮̛̀ 𝐠𝐢𝐨̛̀\n👤𝐁𝐚̣𝐧 𝐥𝐚̀ 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧 𝐭𝐡𝐮̛́ {soThanhVien} 𝐜𝐮̉𝐚 𝐛𝐨𝐱\n📌𝐃𝐮̀𝐧𝐠 𝐥𝐞̣̂𝐧𝐡 ${global.config.PREFIX}𝐦𝐞𝐧𝐮 𝐡𝐨𝐚̣̆𝐜 ${global.config.PREFIX}𝐡𝐞𝐥𝐩 đ𝐞̂̉ 𝐛𝐢𝐞̂́𝐭 𝐭𝐡𝐞̂𝐦 𝐭𝐡𝐨̂𝐧𝐠 𝐭𝐢𝐧 💖♥\n⠀=[ ${gio} ]=` : msg = threadData.customJoin;
+			(typeof threadData.customJoin == "undefined") ? msg = `🇻🇳𝐖𝐞𝐥𝐜𝐨𝐦𝐞 {name}\n🔰{type} 𝐬𝐞̃ 𝐥𝐚̀ 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧 𝐜𝐮̉𝐚 𝐛𝐨𝐱 {threadName} 𝐭𝐮̛̀ 𝐠𝐢𝐨̛̀\n👤𝐁𝐚̣𝐧 𝐥𝐚̀ 𝐭𝐡𝐚̀𝐧𝐡 𝐯𝐢𝐞̂𝐧 𝐭𝐡𝐮̛́ {soThanhVien} 𝐜𝐮̉𝐚 𝐛𝐨𝐱\n📌𝐃𝐮̀𝐧𝐠 𝐥𝐞̣̂𝐧𝐡 ${prefix}𝐦𝐞𝐧𝐮 𝐡𝐨𝐚̣̆𝐜 ${prefix}𝐡𝐞𝐥𝐩 đ𝐞̂̉ 𝐛𝐢𝐞̂́𝐭 𝐭𝐡𝐞̂𝐦 𝐭𝐡𝐨̂𝐧𝐠 𝐭𝐢𝐧 💖♥\n𝐂𝐡𝐮́𝐜 𝐛𝐚̣𝐧 𝟏 𝐛𝐮𝐨̂̉𝐢 ${session} 𝐯𝐮𝐢 𝐯𝐞̉ =)\n⠀=[ ${gio} ]=` : msg = threadData.customJoin;
 			msg = msg
 			.replace(/\{name}/g, nameArray.join(', '))
 			.replace(/\{type}/g, (memLength.length > 1) ?  '𝐂𝐚́𝐜 𝐁𝐚̣𝐧' : '𝐁𝐚̣𝐧')
