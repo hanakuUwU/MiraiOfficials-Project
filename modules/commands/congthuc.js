@@ -16,8 +16,8 @@ module.exports.config = {
 module.exports.run = async ({ api, event, args, handleReply, Threads }) => {
     let delayUnSend = 60;//tính theo giây
     let { threadID, messageID } = event;
-    const threadSetting = (await Threads.getData(String(threadID))).data || {};
-    const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+    let threadSetting = (await Threads.getData(String(threadID))).data || {};
+    let prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
     if (!args[0]) return api.sendMessage(`Vui lòng dùng\n==> ${prefix}${this.config.name} toán\n==> ${prefix}${this.config.name} lí`, threadID, messageID)
     if (args[0].toLowerCase() != 'toán' && args[0].toLowerCase() != 'lí') return api.sendMessage(`Vui lòng dùng\n==> ${prefix}${this.config.name} toán\n==> ${prefix}${this.config.name} lí`, threadID, messageID)
   switch (args[0]) {
@@ -49,16 +49,16 @@ module.exports.run = async ({ api, event, args, handleReply, Threads }) => {
 }
   
 module.exports.handleReply = async ({ api, event, handleReply }) => {
-    const delaySend = 1;//tính theo giây
+    let delaySend = 1;//tính theo giây
     let delayUnSend = 60;
-    const { writeFileSync, createReadStream, unlinkSync } = require('fs-extra');
-    const axios = require('axios');
-    const { threadID, messageID, body } = event;
+    let { writeFileSync, createReadStream, unlinkSync } = require('fs-extra');
+    let { get } = require('axios');
+    let { threadID, messageID, body } = event;
       switch(handleReply.type) {
         case "reply": {
             switch(body) {
               case "1": {
-                  let tim = (await axios.get(`https://i.imgur.com/qtNw4pA.jpeg`, {
+                  let tim = (await get(`https://i.imgur.com/qtNw4pA.jpeg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.jpeg', Buffer.from(tim, 'utf-8'));
@@ -70,7 +70,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "2": {
-                  let tim = (await axios.get(`https://imgur.com/FpcwDH0.png`, {
+                  let tim = (await get(`https://imgur.com/FpcwDH0.png`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.png', Buffer.from(tim, 'utf-8'));
@@ -82,7 +82,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "3": {
-                  let tim = (await axios.get(`https://i.imgur.com/WkxOvVZ.jpeg`, {
+                  let tim = (await get(`https://i.imgur.com/WkxOvVZ.jpeg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.jpeg', Buffer.from(tim, 'utf-8'));
@@ -94,7 +94,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "4": {
-                  let tim = (await axios.get(`https://i.imgur.com/AODxsFO.png`, {
+                  let tim = (await get(`https://i.imgur.com/AODxsFO.png`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.png', Buffer.from(tim, 'utf-8'));
@@ -106,7 +106,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "5": {
-                  let tim = (await axios.get(`https://i.imgur.com/ubmnDFT.jpg`, {
+                  let tim = (await get(`https://i.imgur.com/ubmnDFT.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.jpg', Buffer.from(tim, 'utf-8'));
@@ -118,7 +118,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "6": {
-                  let tim = (await axios.get(`https://imgur.com/Mpt2cA1.png`, {
+                  let tim = (await get(`https://imgur.com/Mpt2cA1.png`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.png', Buffer.from(tim, 'utf-8'));
@@ -130,7 +130,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "7": {
-                  let tim = (await axios.get(`https://imgur.com/fl9PFTM.jpg`, {
+                  let tim = (await get(`https://imgur.com/fl9PFTM.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.jpg', Buffer.from(tim, 'utf-8'));
@@ -142,7 +142,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
                 };
                 break;
               case "8": {
-                  let tim = (await axios.get(`https://i.imgur.com/PTPOLrx.jpg`, {
+                  let tim = (await get(`https://i.imgur.com/PTPOLrx.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/toan.jpg', Buffer.from(tim, 'utf-8'));
@@ -212,7 +212,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
         case "lop10": {
           switch(body) {
             case "1": {
-              let tim = (await axios.get(`https://imgur.com/O3BPVQj.jpg`, {
+              let tim = (await get(`https://imgur.com/O3BPVQj.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -223,7 +223,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "2": {
-              let tim = (await axios.get(`https://imgur.com/cUgoR1p.jpg`, {
+              let tim = (await get(`https://imgur.com/cUgoR1p.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -234,7 +234,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "3": {
-              let tim = (await axios.get(`https://i.imgur.com/XvLwGoz.jpg`, {
+              let tim = (await get(`https://i.imgur.com/XvLwGoz.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -245,7 +245,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "4": {
-              let tim = (await axios.get(`https://imgur.com/0cUxKfX.jpg`, {
+              let tim = (await get(`https://imgur.com/0cUxKfX.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -256,7 +256,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "5": {
-              let tim = (await axios.get(`https://imgur.com/rR3uEvz.jpg`, {
+              let tim = (await get(`https://imgur.com/rR3uEvz.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -267,7 +267,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "6": {
-              let tim = (await axios.get(`https://imgur.com/50HYPY9.jpg`, {
+              let tim = (await get(`https://imgur.com/50HYPY9.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -278,7 +278,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "7": {
-              let tim = (await axios.get(`https://imgur.com/OV3F0Kc.jpg`, {
+              let tim = (await get(`https://imgur.com/OV3F0Kc.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -297,7 +297,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
         case "lop11": {
           switch(body) {
             case "1": {
-              let tim = (await axios.get(`https://i.imgur.com/S6lSsum.png`, {
+              let tim = (await get(`https://i.imgur.com/S6lSsum.png`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.png', Buffer.from(tim, 'utf-8'));
@@ -308,7 +308,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "2": {
-              let tim = (await axios.get(`https://i.imgur.com/vgrUOSd.jpeg`, {
+              let tim = (await get(`https://i.imgur.com/vgrUOSd.jpeg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpeg', Buffer.from(tim, 'utf-8'));
@@ -319,7 +319,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "3": {
-              let tim = (await axios.get(`https://imgur.com/CTNcaA5.jpg`, {
+              let tim = (await get(`https://imgur.com/CTNcaA5.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -330,7 +330,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "4": {
-              let tim = (await axios.get(`https://imgur.com/VWI4ul1.jpg`, {
+              let tim = (await get(`https://imgur.com/VWI4ul1.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -341,7 +341,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "5": {
-              let tim = (await axios.get(`https://imgur.com/2gO96D3.jpg`, {
+              let tim = (await get(`https://imgur.com/2gO96D3.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -352,7 +352,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "6": {
-              let tim = (await axios.get(`https://imgur.com/PUQfkWk.jpg`, {
+              let tim = (await get(`https://imgur.com/PUQfkWk.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -363,7 +363,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "7": {
-              let tim = (await axios.get(`https://imgur.com/N01uu6F.jpg`, {
+              let tim = (await get(`https://imgur.com/N01uu6F.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -382,7 +382,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
         case "lop12": {
           switch(body) {
             case "1": {
-              let tim = (await axios.get(`https://imgur.com/VZHxkBn.jpg`, {
+              let tim = (await get(`https://imgur.com/VZHxkBn.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -393,7 +393,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "2": {
-              let tim = (await axios.get(`https://imgur.com/vSWLWG1.jpg`, {
+              let tim = (await get(`https://imgur.com/vSWLWG1.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -404,7 +404,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "3": {
-              let tim = (await axios.get(`https://imgur.com/XnoIYY0.jpg`, {
+              let tim = (await get(`https://imgur.com/XnoIYY0.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -415,7 +415,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "4": {
-              let tim = (await axios.get(`https://imgur.com/2i5eUZZ.jpg`, {
+              let tim = (await get(`https://imgur.com/2i5eUZZ.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -426,7 +426,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "5": {
-              let tim = (await axios.get(`https://imgur.com/sjypqgp.jpg`, {
+              let tim = (await get(`https://imgur.com/sjypqgp.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -437,7 +437,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "6": {
-              let tim = (await axios.get(`https://imgur.com/8RQ013R.jpg`, {
+              let tim = (await get(`https://imgur.com/8RQ013R.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
@@ -448,7 +448,7 @@ module.exports.handleReply = async ({ api, event, handleReply }) => {
             };
               break;
             case "7": {
-              let tim = (await axios.get(`https://imgur.com/DxDd3QL.jpg`, {
+              let tim = (await get(`https://imgur.com/DxDd3QL.jpg`, {
       responseType: "arraybuffer"
     })).data;
     writeFileSync(__dirname+ '/cache/li.jpg', Buffer.from(tim, 'utf-8'));
