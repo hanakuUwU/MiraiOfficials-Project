@@ -12,7 +12,6 @@ module.exports.config = {
 module.exports.handleEvent = async ({ event, api, Threads }) => {
   var { threadID, messageID, body, senderID } = event;
   //if (senderID == global.data.botID) return;
-  if ((this.config.credits) != "ManhG") { return api.sendMessage(`Sai credits!`, threadID, messageID)}
   function out(data) {
     api.sendMessage(data, threadID, messageID)
   }
