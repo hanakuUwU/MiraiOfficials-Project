@@ -18,10 +18,10 @@ module.exports.run = async ({ api, event, args, handleReply, Threads }) => {
     let { threadID, messageID } = event;
     const threadSetting = (await Threads.getData(String(threadID))).data || {};
     const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-    if (!args[0]) return api.sendMessage(`Vui lòng dùng\n==> ${prefix}${this.config.name} toán\n==> ${prefix}${this.config.name} lí`, threadID, messageID);
-    const choose = args[0]
-    if (choose.toLowerCase() != 'toán' && choose.toLowerCase() != 'lí') return api.sendMessage(`Vui lòng dùng\n==> ${prefix}${this.config.name} toán\n==> ${prefix}${this.config.name} lí`, threadID, messageID)
-    if (args[0] == 'toán') {
+    if (!args[0]) return api.sendMessage(`Vui lòng dùng\n==> ${prefix}${this.config.name} toán\n==> ${prefix}${this.config.name} lí`, threadID, messageID)
+    if (args[0].toLowerCase() != 'toán' && args[0].toLowerCase() != 'lí') return api.sendMessage(`Vui lòng dùng\n==> ${prefix}${this.config.name} toán\n==> ${prefix}${this.config.name} lí`, threadID, messageID)
+  switch (args[0]) {
+    case 'toán': {
       return api.sendMessage({body: 
       "=== Công thức toán ===\n» Mời bạn nhập lựa chọn «\n\n1. Đạo hàm.\n2. Nguyên hàm.\n3. Logarit.\n4. Diện tích.\n5. Thể tích\n6. Lượng giác\n7. Lũy thừa\n8. Tọa độ trong không gian\n\n» Hãy reply tin nhắn và chọn theo số «"
               }, threadID, (error, info) => {
@@ -33,7 +33,7 @@ module.exports.run = async ({ api, event, args, handleReply, Threads }) => {
           }), setTimeout(() => {api.unsendMessage(info.messageID) }, delayUnSend * 1000)
       })
     }
-    if (args[0] == 'lí') {
+    case 'lí': {
       return api.sendMessage({body: 
       "=== Lớp ===\n» Mời bạn nhập lựa chọn «\n\n1. Lớp 10.\n2. Lớp 11.\n3. Lớp 12.\n\n» Hãy reply tin nhắn và chọn theo số «"
               }, threadID, (error, info) => {
@@ -46,6 +46,7 @@ module.exports.run = async ({ api, event, args, handleReply, Threads }) => {
       })
     }
   }
+}
   
 module.exports.handleReply = async ({ api, event, handleReply }) => {
     const delaySend = 1;//tính theo giây
