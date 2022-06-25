@@ -1,65 +1,105 @@
-const timeout = 60
-const coinsup = Math.floor(Math.random() * 2000) + 100
-const coinsdown = 1000
-const tientrochoi = 1000
+const timeout = 120
 module.exports.config = {
     name: "dovuilq",
     version: "1.0.0",
     hasPermssion: 0,
-    credits: "araxy",
-    description: "",
-    commandCategory: "Game",
+    credits: "D-Jukie",
+    description: "Đố vui, hong vui thì thôi",
+    commandCategory: "game",
     usages: "",
     cooldowns: 5
-};
-module.exports.run = async function ({ api, args, event, Currencies, Users }) {
-  const axios = require("axios");
-    const fs = require("fs-extra");
-    const request = require("request");
-   
-    const { senderID ,threadID, messageID } = event;
-    var info = await api.getUserInfo(event.senderID);
-    var nameSender = info[event.senderID].name;
-    var arraytag = [], img = [];
-        arraytag.push({id: event.senderID, tag: nameSender});
-        let balance = (await Currencies.getData(senderID)).money;
-    if (balance <= 5000) return api.sendMessage('bạn nghèo  quá nên không có tiền chơi đâu liuliu',threadID,messageID);
-     await Currencies.decreaseMoney(event.senderID, parseInt(tientrochoi));
-const araxy = (await axios.get('https://apicailoznheuwu.duongduong216.repl.co/quest/lienquan')).data
-    let Avatar = (await axios.get(araxy.skillInfo , { responseType: "arraybuffer" } )).data; 
-         fs.writeFileSync(__dirname + "/cache/lienquan.png", Buffer.from(Avatar, "utf-8") );
-         img.push(fs.createReadStream(__dirname + "/cache/lienquan.png"));
-     var msg = {body: `${nameSender} trả lời câu hỏi này để được 1 số tiền hời nhé UwU (-${tientrochoi}$)\n${araxy.question}\n${araxy.options_}` ,mentions: arraytag,attachment: img}
-        
-        return api.sendMessage(msg, event.threadID, (error, info) => {
+}
+
+module.exports.handleReply = async function ({ args, event, Users, api, handleReply }) {
+    const axios = global.nodemodule['axios'];  
+    var { dataGame, dapan, nameUser } = handleReply;
+    if (handleReply.author != event.senderID) return 
+    switch (handleReply.type) {
+        case "reply": {
+            const aw = event.body
+            const dapanUser = dataGame
+            const checkTrue = dapan
+            if (aw.toLowerCase() == 'a' && dataGame.a == checkTrue) {
+                api.unsendMessage(handleReply.messageID)
+                var msg = {body: `✔${nameUser} đã trả lời chính xác!\nĐáp án: ${checkTrue}`}
+                return api.sendMessage(msg, event.threadID, event.messageID)   
+            } else 
+             if (aw.toLowerCase() == 'b' && dataGame.b == checkTrue) {
+                api.unsendMessage(handleReply.messageID)
+                var msg = {body: `✔${nameUser} đã trả lời chính xác!\nĐáp án: ${checkTrue}`}
+                return api.sendMessage(msg, event.threadID, event.messageID)
+            } else 
+             if (aw.toLowerCase() == 'c' && dataGame.c == checkTrue) {
+                api.unsendMessage(handleReply.messageID)
+                var msg = {body: `✔${nameUser} đã trả lời chính xác!\nĐáp án: ${checkTrue}`}
+                return api.sendMessage(msg, event.threadID, event.messageID)
+            } else 
+             if (aw.toLowerCase() == 'd' && dataGame.d == checkTrue) {
+                api.unsendMessage(handleReply.messageID)
+                var msg = {body: `✔${nameUser} đã trả lời chính xác!\nĐáp án: ${checkTrue}`}
+                return api.sendMessage(msg, event.threadID, event.messageID)
+            }
+            else {
+            api.unsendMessage(handleReply.messageID)
+            api.sendMessage(`✘Tiếc quá! ${nameUser} trả lời sai rồi!!!\nĐáp án chính xác là: ${dapan}`, event.threadID);
+            }
+        }
+    }
+}
+
+module.exports.handleReaction = ({ Users, api, event, handleReaction,  }) => {
+    var { dataGame, dapan, author, nameUser } = handleReaction;
+    //if (parseInt(event.userID) !== parseInt(handleReaction.author)) return;
+    if (event.userID != author) return;
+    console.log(event.userID)
+    console.log(author)
+    if (event.reaction != "👍" && event.reaction != "😆"&& event.reaction != "😮"&& event.reaction != "😀") return;
+    let response = "";
+    if (event.reaction == "👍") response = dataGame.a
+    else if (event.reaction == "😀") response = dataGame.b
+    else if (event.reaction == "😆") response = dataGame.c
+    else if (event.reaction == "😮") response = dataGame.d
+
+    if (response == handleReaction.dapan) { 
+        api.unsendMessage(handleReaction.messageID)
+        api.sendMessage(`✔Hay quá! ${nameUser} trả lời đúng rồi.\nĐáp án: ${dapan}`, event.threadID) 
+    } else {
+    api.unsendMessage(handleReaction.messageID)
+    api.sendMessage(`✘Tiếc quá! ${nameUser} trả lời sai rồi!!!\nĐáp án chính xác là: ${dapan}`, event.threadID);
+    }
+}
+
+module.exports.run = async ({ api, event, Users }) => {
+const axios = require('axios');  
+const { threadID, messageID } = event;
+const res = await axios.get(`https://apilienquan.miraiofficials123.repl.co/`);
+const dataGame = res.data
+const qq = res.data.images;
+let cc = (await axios.get(qq, {
+			responseType: "stream"
+		})).data;
+var namePlayer_react = await Users.getData(event.senderID)
+        return api.sendMessage({body: `❔Câu hỏi dành cho bạn:\n${dataGame.questions}\n\n👍/A. ${dataGame.a}\n😀/B. ${dataGame.b}\n😆/C. ${dataGame.c}\n😮/D. ${dataGame.d}\n\n🌻Reply tin nhắn hoặc thả cảm xúc để trả lời`, attachment: cc}, event.threadID, (error, info) => {
+        global.client.handleReaction.push({
+            type: "reply",
+            name: this.config.name,
+            author: event.senderID,
+            messageID: info.messageID,
+            dataGame: res.data,
+            dapan: dataGame.dapan,
+            nameUser: namePlayer_react.name
+        })
         global.client.handleReply.push({
             type: "reply",
             name: this.config.name,
             author: event.senderID,
             messageID: info.messageID,
-            answer: araxy.answer_
+            dataGame: res.data,
+            dapan: dataGame.dapan,
+            nameUser: namePlayer_react.name
         })
+setTimeout(function(){ 
+        api.unsendMessage(info.messageID)
+        }, timeout*1000);
     }) 
-}
-module.exports.handleReply = async function ({ args, event, Users, Currencies, api, handleReply }) {
-    const axios = global.nodemodule['axios'];  
-    let { author, answer, messageID } = handleReply;
-    if (event.senderID != author) return api.sendMessage("xàm lồn quá cho người ta trả lời đi đbrr", event.threadID, event.messageID); 
-    switch (handleReply.type) {
-        case "reply": {
-            const dapan = event.body
-            if (dapan == answer) {
-               await Currencies.increaseMoney(event.senderID, parseInt(coinsup))
-               
-               var namePlayer = await Users.getData(event.senderID)
-                api.unsendMessage(handleReply.messageID)
-                var msg = {body: `${namePlayer.name} đã trả lời chính xác!\nĐáp án: ${answer} (+${coinsup}$)`}
-                return api.sendMessage(msg, event.threadID, event.messageID)
-            }
-            else
-               await Currencies.decreaseMoney(event.senderID, parseInt(coinsdown))
-            return api.sendMessage(`Câu trả lời không đúng. Đáp án: ${answer} (-${coinsdown}$)!!!`, event.threadID, event.messageID),
-            api.unsendMessage(handleReply.messageID);
-        }
-    }
 }
