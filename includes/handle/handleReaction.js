@@ -8,15 +8,30 @@ module.exports = function ({ api, models, Users, Threads, Currencies }) {
             const indexOfMessage = handleReaction[indexOfHandle];
             const handleNeedExec = commands.get(indexOfMessage.name);
 
-            if (!handleNeedExec) return api.sendMessage(global.getText('handleReaction', 'missingValue'), threadID, messageID);
+            if (!handleNeedExec) return api.sendMessage(getText('handleReaction', 'missingValue'), threadID, messageID);
             try {
+            const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
+            
+            //ADT START
+            if (!threadSetting.hasOwnProperty('lang')) threadSetting.lang = global.config.language;
+            var getText = function (...args) {
+            	const langText = global.languageADT[threadSetting.lang];
+            	if (!langText.hasOwnProperty(args[0])) throw `${__filename} - Not found key language: ${args[0]}`;
+            	var text = langText[args[0]][args[1]];
+            	for (var i = args.length - 1; i > 0; i--) {
+            		const regEx = RegExp(`%${i}`, 'g');
+            		text = text.replace(regEx, args[i + 1]);
+            	}
+            	return text;
+            }
+            //ADT END
                 var getText2;
                 if (handleNeedExec.languages && typeof handleNeedExec.languages == 'object') 
                 	getText2 = (...value) => {
                     const react = handleNeedExec.languages || {};
-                    if (!react.hasOwnProperty(global.config.language)) 
-                    	return api.sendMessage(global.getText('handleCommand', 'notFoundLanguage', handleNeedExec.config.name), threadID, messageID);
-                    var lang = handleNeedExec.languages[global.config.language][value[0]] || '';
+                    if (!react.hasOwnProperty(threadSetting.lang)) 
+                    	return api.sendMessage(getText('handleCommand', 'notFoundLanguage', handleNeedExec.config.name), threadID, messageID);
+                    var lang = handleNeedExec.languages[threadSetting.lang][value[0]] || '';
                     for (var i = value.length; i > 0x2 * -0xb7d + 0x2111 * 0x1 + -0xa17; i--) {
                         const expReg = RegExp('%' + i, 'g');
                         lang = lang.replace(expReg, value[i]);
@@ -37,7 +52,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies }) {
                 handleNeedExec.handleReaction(Obj);
                 return;
             } catch (error) {
-                return api.sendMessage(global.getText('handleReaction', 'executeError', error), threadID, messageID);
+                return api.sendMessage(getText('handleReaction', 'executeError', error), threadID, messageID);
             }
         }
     };
