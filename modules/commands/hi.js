@@ -1,4 +1,3 @@
-const axios = require("axios");
 module.exports.config = {
     name: "hi",
     version: "1.1.0",
@@ -7,7 +6,7 @@ module.exports.config = {
     description: "noprefix",
     commandCategory: "bổ não",
     usages: "",
-    cooldowns: 0,
+    cooldowns: 10,
     denpendencies: {
         "axios": "",
         "moment-timezone": ""
@@ -15,39 +14,69 @@ module.exports.config = {
 }
 
 module.exports.handleEvent = async ({ event, api, Users }) => {
-  const res = await axios.get('https://apiurl.miraiofficials123.repl.co');
-  const data = res.data.url;
-  let download = (await axios.get(data, {
+  let { get } = require("axios");
+  let { threadID, body, senderID } = event;
+  let res = await get('https://apiurl.miraiofficials123.repl.co');
+  let data = res.data.url;
+  let download = (await get(data, {
 			responseType: "stream"
 		})).data;
-  const moment = require("moment-timezone");
-  const hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm');
-  const session = (hours > 0001 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2100 ? "tối" : hours > 2101 && hours <= 2400 ? "tối muộn" : "lỗi")
-  let name = await Users.getNameUser(event.senderID)
-  var msg = {body: `Xin chào ${name}, chúc bạn một buổi ${session} vui vẻ ❤️`, attachment: download}
-  if (event.body.toLowerCase() == "hi"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "hii"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "hí"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "hì"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "híí"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "hello"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "chào"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "chao"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "lô"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "2"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-  if (event.body.toLowerCase() == "hê nhô"){
-        return api.sendMessage(msg,event.threadID,event.messageID);}
-        };
+  let moment = require("moment-timezone");
+  let hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm');
+  let data2 = [
+    "tốt lành =)",
+    "vui vẻ 😄",
+    "hạnh phúc ❤",
+    "yêu đời 😘"
+  ];
+  let text = data2[Math.floor(Math.random() * data2.length)]
+  let session = (
+    hours > 0001 && hours <= 400 ? "sáng tinh mơ" : 
+    hours > 401 && hours <= 700 ? "sáng sớm" :
+    hours > 701 && hours <= 1000 ? "sáng" :
+    hours > 1001 && hours <= 1200 ? "trưa" : 
+    hours > 1201 && hours <= 1700 ? "chiều" : 
+    hours > 1701 && hours <= 1800 ? "chiều tà" : 
+    hours > 1801 && hours <= 2100 ? "tối" : 
+    hours > 2101 && hours <= 2400 ? "tối muộn" : 
+    "lỗi")
+  let name = await Users.getNameUser(senderID)
+  let msg = {body: `Xin chào ${name}, chúc bạn một buổi ${session} ${text}`, attachment: download}
+    if (body.toLowerCase() == "hi") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "hii") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "hí") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "hì") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "híí"){
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "hello") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "chào") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "chao"){
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "lô") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "2") {
+      return api.sendMessage(msg, threadID)
+    }
+    if (body.toLowerCase() == "hê nhô") {
+      return api.sendMessage(msg, threadID)
+    }
+}
+
 module.exports.run = async ({ event, api }) => {
-  return api.sendMessage(`Dùng sai rồi lêu lêu`, event.threadID, event.messageID)
+  return api.sendMessage(`Dùng sai rồi lêu lêu`, event.threadID)
 }
