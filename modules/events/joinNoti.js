@@ -30,7 +30,7 @@ module.exports.run = async function({ api, event, Threads }) {
 	var gio = moment.tz("Asia/Ho_Chi_Minh").format("D/MM/YYYY || HH:mm:ss");
   const hours = moment.tz('Asia/Ho_Chi_Minh').format('HHmm'); 
   let { threadName, participantIDs } = await api.getThreadInfo(threadID);
-  const session = (hours > 0001 && hours <= 400 ? "sớm tinh mơ" : hours > 401 && hours <= 700 ? "sáng sớm" : hours > 701 && hours <= 1000 ? "sáng" : hours > 1001 && hours <= 1200 ? "trưa" : hours > 1201 && hours <= 1700 ? "chiều" : hours > 1701 && hours <= 1800 ? "chiều tà" : hours > 1801 && hours <= 2100 ? "tối" : hours > 2101 && hours <= 2400 ? "tối muộn" : "lỗi")
+  const session = (hours > 0001 && hours <= 400 ? "𝐬𝐨̛́𝐦 𝐭𝐢𝐧𝐡 𝐦𝐨̛" : hours > 401 && hours <= 700 ? "𝐬𝐚́𝐧𝐠 𝐬𝐨̛́𝐦" : hours > 701 && hours <= 1000 ? "𝐬𝐚́𝐧𝐠" : hours > 1001 && hours <= 1200 ? "𝐭𝐫𝐮̛𝐚" : hours > 1201 && hours <= 1700 ? "𝐜𝐡𝐢𝐞̂̀𝐮" : hours > 1701 && hours <= 1800 ? "𝐜𝐡𝐢𝐞̂̀𝐮 𝐭𝐚̀" : hours > 1801 && hours <= 2100 ? "𝐭𝐨̂́𝐢" : hours > 2101 && hours <= 2400 ? "𝐭𝐨̂́𝐢 𝐦𝐮𝐨̣̂𝐧" : "lỗi")
 	const { join } = global.nodemodule["path"];
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
 		api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
@@ -70,7 +70,7 @@ module.exports.run = async function({ api, event, Threads }) {
 			if (existsSync(pathGif)) formPush = { body: msg, attachment: createReadStream(pathGif), mentions }
 			else if (randomPath.length != 0) {
 				const pathRandom = join(__dirname, "cache", "joinMp4", `${randomPath[Math.floor(Math.random() * randomPath.length)]}`);
-				formPush = { body: msg, attachment: createReadStream(pathRandom), mentions }
+				formPush = { body: msg, mentions }
 			}
 			else formPush = { body: msg, mentions }
 
