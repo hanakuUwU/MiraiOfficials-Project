@@ -1,6 +1,7 @@
+let fs = require("fs-extra");
 module.exports.config = {
     name: "hi",
-    version: "1.1.5",
+    version: "1.2.0",
     hasPermssion: 0,
     credits: "Kanichi mod lại by TrúcCute",
     description: "noprefix",
@@ -12,6 +13,14 @@ module.exports.config = {
       "moment-timezone": "",
       "fs-extra": ""
     }
+}
+
+module.exports.onLoad = () => {
+  let request = require("request");
+  let dirMaterial = __dirname + `/noprefix/`;
+  if (!fs.existsSync(dirMaterial + "noprefix")) fs.mkdirSync(dirMaterial, { recursive: true });
+  if (!fs.existsSync(dirMaterial + "bai.gif")) request("https://i.imgur.com/uVALChk.gif").pipe(fs.createWriteStream(dirMaterial + "bai.gif"))
+  if (!fs.existsSync(dirMaterial + "ngủ.gif")) request("https://i.pinimg.com/originals/0f/e1/16/0fe1161b019a6d11f39d267c284ec67d.gif").pipe(fs.createWriteStream(dirMaterial + "ngủ.gif"))
 }
 
 module.exports.handleEvent = async ({ event, api, Users }) => {
@@ -44,6 +53,8 @@ module.exports.handleEvent = async ({ event, api, Users }) => {
     "lỗi")
   let name = await Users.getNameUser(senderID)
   let msg = {body: `Xin chào ${name}, chúc bạn một buổi ${session} ${text}`, attachment: cc}
+  let msg2 = {body: `𝐏𝐚𝐢 𝐛𝐚̣𝐧 ${name}, 𝐒𝐞𝐞 𝐲𝐨𝐮 𝐧𝐞𝐱𝐭 𝐭𝐢𝐦𝐞❤️`, attachment: fs.createReadStream(__dirname + `/noprefix/bai.gif`)}
+  let msg3 = {body: `Chúc ${name} ngủ ngon nhé 😘`, attachment: fs.createReadStream(__dirname + `/noprefix/ngủ.gif`)}
   if (config.autoSend == true) {
     if (body.toLowerCase() == "hi") {
       return api.sendMessage(msg, threadID, (error, info) => {
@@ -131,6 +142,62 @@ module.exports.handleEvent = async ({ event, api, Users }) => {
           }
     if (body.toLowerCase() == "helo") {
       return api.sendMessage(msg, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "pai") {
+        return api.sendMessage(msg2, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "bye") {
+        return api.sendMessage(msg2, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "bai") {
+        return api.sendMessage(msg2, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "đi ngủ đây") {
+        return api.sendMessage(msg3, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "ngủ") {
+        return api.sendMessage(msg3, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "đi ngủ nha") {
+        return api.sendMessage(msg3, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "ngủ") {
+    return api.sendMessage(msg3, threadID, (error, info) => {
+        setTimeout(() => {
+          api.unsendMessage(info.messageID) 
+        }, AutoUnSend * 1000) 
+      })
+    }
+    if (body.toLowerCase() == "ngủ ngon") {
+        return api.sendMessage(msg3, threadID, (error, info) => {
         setTimeout(() => {
           api.unsendMessage(info.messageID) 
         }, AutoUnSend * 1000) 
