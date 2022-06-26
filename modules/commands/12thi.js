@@ -20,30 +20,30 @@ module.exports.onLoad = () => {
   let dirMaterial = __dirname + `/noprefix/12thi/`; 
   if (!existsSync(dirMaterial + "noprefix" + "12thi")) mkdirSync(dirMaterial, { recursive: true });
   
-  if (!existsSync(dirMaterial + "1.png")) request("https://i.imgur.com/65pq3xy.png").pipe(createWriteStream(dirMaterial + "1.png"));
+  if (!existsSync(dirMaterial + "1.png")) request("https://i.imgur.com/65pq3xy.png").pipe(createWriteStream(dirMaterial + "1.png"))
   
-  if (!existsSync(dirMaterial + "2.jpg")) request("https://i.imgur.com/y9jnojb.jpg").pipe(createWriteStream(dirMaterial + "2.jpg"));
+  if (!existsSync(dirMaterial + "2.jpg")) request("https://i.imgur.com/y9jnojb.jpg").pipe(createWriteStream(dirMaterial + "2.jpg"))
   
-  if (!existsSync(dirMaterial + "3.png")) request("https://i.imgur.com/7arOdiW.png").pipe(createWriteStream(dirMaterial + "3.png"));
+  if (!existsSync(dirMaterial + "3.png")) request("https://i.imgur.com/7arOdiW.png").pipe(createWriteStream(dirMaterial + "3.png"))
   
-  if (!existsSync(dirMaterial + "4.png")) request("https://i.imgur.com/qYUKk4b.png").pipe(createWriteStream(dirMaterial + "4.png"));
+  if (!existsSync(dirMaterial + "4.png")) request("https://i.imgur.com/qYUKk4b.png").pipe(createWriteStream(dirMaterial + "4.png"))
   
-  if (!existsSync(dirMaterial + "5.png")) request("https://i.imgur.com/dufsDoX.png").pipe(createWriteStream(dirMaterial + "5.png"));
+  if (!existsSync(dirMaterial + "5.png")) request("https://i.imgur.com/dufsDoX.png").pipe(createWriteStream(dirMaterial + "5.png"))
   
-  if (!existsSync(dirMaterial + "6.png")) request("https://i.imgur.com/Q9QxaGh.png").pipe(createWriteStream(dirMaterial + "6.png"));
+  if (!existsSync(dirMaterial + "6.png")) request("https://i.imgur.com/Q9QxaGh.png").pipe(createWriteStream(dirMaterial + "6.png"))
   
-  if (!existsSync(dirMaterial + "9.png")) request("https://i.imgur.com/HT3OD4L.png").pipe(createWriteStream(dirMaterial + "9.png"));
+  if (!existsSync(dirMaterial + "9.png")) request("https://i.imgur.com/HT3OD4L.png").pipe(createWriteStream(dirMaterial + "9.png"))
   
-  if (!existsSync(dirMaterial + "7.png")) request("https://i.imgur.com/nUONWQz.png").pipe(createWriteStream(dirMaterial + "7.png"));
+  if (!existsSync(dirMaterial + "7.png")) request("https://i.imgur.com/nUONWQz.png").pipe(createWriteStream(dirMaterial + "7.png"))
   
-  if (!existsSync(dirMaterial + "8.jpg")) request("https://i.imgur.com/n4RyhD8.jpg").pipe(createWriteStream(dirMaterial + "8.jpg"));
+  if (!existsSync(dirMaterial + "8.jpg")) request("https://i.imgur.com/n4RyhD8.jpg").pipe(createWriteStream(dirMaterial + "8.jpg"))
   
-  if (!existsSync(dirMaterial + "10.jpg")) request("https://i.imgur.com/wEQPhy0.jpg").pipe(createWriteStream(dirMaterial + "10.jpg"));
+  if (!existsSync(dirMaterial + "10.jpg")) request("https://i.imgur.com/wEQPhy0.jpg").pipe(createWriteStream(dirMaterial + "10.jpg"))
 
-  if (!existsSync(dirMaterial + "11.png")) request("https://i.imgur.com/6i1PXMn.png").pipe(createWriteStream(dirMaterial + "11.png"));
+  if (!existsSync(dirMaterial + "11.png")) request("https://i.imgur.com/6i1PXMn.png").pipe(createWriteStream(dirMaterial + "11.png"))
 
-  if (!existsSync(dirMaterial + "12.jpg")) request("https://i.imgur.com/0yWpf9J.jpg").pipe(createWriteStream(dirMaterial + "12.jpg"));
-  
+  if (!existsSync(dirMaterial + "12.jpg")) request("https://i.imgur.com/0yWpf9J.jpg").pipe(createWriteStream(dirMaterial + "12.jpg"))
+ 
 }
 
 module.exports.handleReply = async ({ api, event, handleReply }) => {
