@@ -7,6 +7,7 @@
     "adminOnly": false,
     "adminPaseOnly": true,
     "ndhOnly": false,
+    "autoSend": false,
     "UPTIME": 0,
     "commandDisabled": [],
     "eventDisabled": [],
