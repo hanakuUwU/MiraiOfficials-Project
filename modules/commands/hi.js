@@ -11,9 +11,6 @@ module.exports.config = {
       "axios": "",
       "moment-timezone": "",
       "fs-extra": ""
-    },
-    envConfig: {
-      AutoSend: true
     }
 }
 
@@ -47,7 +44,7 @@ module.exports.handleEvent = async ({ event, api, Users }) => {
     "lỗi")
   let name = await Users.getNameUser(senderID)
   let msg = {body: `Xin chào ${name}, chúc bạn một buổi ${session} ${text}`, attachment: cc}
-  if (global.configModule[this.config.name].AutoSend == true) {
+  if (config.autoSend == true) {
     if (body.toLowerCase() == "hi") {
       return api.sendMessage(msg, threadID, (error, info) => {
         setTimeout(() => {
@@ -153,8 +150,8 @@ module.exports.run = async function ({ event, api, args, Threads }) {
   switch (args[0]) {
     case 'o':
     case 'on': {
-      if (global.configModule[this.config.name].AutoSend == false) {
-                global.configModule[this.config.name].AutoSend = true;
+      if (config.autoSend == false) {
+          config.autoSend = true;
         api.sendMessage(`[⚜️] Bật thành công gửi lời chào đến thành viên`, threadID);
       }
       fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
@@ -162,8 +159,8 @@ module.exports.run = async function ({ event, api, args, Threads }) {
     }
     case 'of':
     case 'off': {
-      if (global.configModule[this.config.name].AutoSend == true) {
-                global.configModule[this.config.name].AutoSend = false;
+      if (config.autoSend == true) { 
+          config.autoSend = false;
         api.sendMessage(`[⚜️] Tắt thành công gửi lời chào đến thành viên`, threadID);
       }
       fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
