@@ -23,6 +23,8 @@ async function downloadMusicFromYoutube(link, path) {
                 dur: Number(data.videoDetails.lengthSeconds),
                 viewCount: data.videoDetails.viewCount,
                 likes: data.videoDetails.likes,
+                dislike:
+data.videoDetails.dislikes,
                 author: data.videoDetails.author.name,
                 timestart: timestart
             }
@@ -39,18 +41,18 @@ module.exports.config = {
     commandCategory: "Phương tiện",
     usages: "[searchMusic]",
     cooldowns: 0
-};
+}
 
 module.exports.handleReply = async function ({ api, event, handleReply }) {
     const axios = require('axios')
     const { createReadStream, unlinkSync, statSync } = require("fs-extra")
     try {
-        var path = `${__dirname}/cache/sing-${event.senderID}.mp3`
+        var path = `${__dirname}/cache/sing-${event.senderID}.m4a`
         var data = await downloadMusicFromYoutube('https://www.youtube.com/watch?v=' + handleReply.link[event.body -1], path);
         if (fs.statSync(path).size > 26214400) return api.sendMessage('𝗞𝗵𝗼̂𝗻𝗴 𝘁𝗵𝗲̂̉ 𝗴𝘂̛̉𝗶 𝗳𝗶𝗹𝗲. 𝗩𝘂𝗶 𝗹𝗼̀𝗻𝗴 𝗰𝗵𝗼̣𝗻 𝗯𝗮̀𝗶 𝗵𝗮́𝘁 𝗸𝗵𝗮́𝗰!', event.threadID, () => fs.unlinkSync(path), event.messageID);
         api.unsendMessage(handleReply.messageID)
         return api.sendMessage({ 
-            body: `🎧 𝗕𝗮̀𝗶 𝗵𝗮́𝘁: ${data.title}\n⏰ 𝗧𝗵𝗼̛̀𝗶 𝗴𝗶𝗮𝗻: ${this.convertHMS(data.dur)}\n👤 𝗧𝗲̂𝗻 𝗸𝗲̂𝗻𝗵: ${data.author}\n👀 𝗟𝘂̛𝗼̛̣𝘁 𝘅𝗲𝗺: ${data.viewCount}\n👍 𝗟𝘂̛𝗼̛̣𝘁 𝘁𝗵𝗶́𝗰𝗵: ${data.likes}\n⏱️ 𝗧𝗵𝗼̛̀𝗶 𝗴𝗶𝗮𝗻 𝘅𝘂̛̉ 𝗹𝗶́: ${Math.floor((Date.now()- data.timestart)/1000)} giây`,
+            body: `🎧 Music: ${data.title}\n⏰ Time: ${this.convertHMS(data.dur)}\n👤 Channel: ${data.author}\n👀 Views: ${data.viewCount}\n👍 Likes: ${data.likes}\n⏱️ Processing time: ${Math.floor((Date.now()- data.timestart)/1000)}s`,
             attachment: fs.createReadStream(path)}, event.threadID, ()=> fs.unlinkSync(path), 
          event.messageID)
             
@@ -70,7 +72,7 @@ module.exports.convertHMS = function(value) {
 module.exports.run = async function ({ api, event, args }) {
     if (args.length == 0 || !args) return api.sendMessage('» Phần tìm kiếm không được để trống!', event.threadID, event.messageID);
     const keywordSearch = args.join(" ");
-    var path = `${__dirname}/cache/sing-${event.senderID}.mp3`
+    var path = `${__dirname}/cache/sing-${event.senderID}.m4a`
     if (fs.existsSync(path)) { 
         fs.unlinkSync(path)
     }
@@ -79,7 +81,7 @@ module.exports.run = async function ({ api, event, args }) {
             var data = await downloadMusicFromYoutube(args.join(" "), path);
             if (fs.statSync(path).size > 26214400) return api.sendMessage('𝗞𝗵𝗼̂𝗻𝗴 𝘁𝗵𝗲̂̉ 𝗴𝘂̛̉𝗶 𝗳𝗶𝗹𝗲. 𝗩𝘂𝗶 𝗹𝗼̀𝗻𝗴 𝗰𝗵𝗼̣𝗻 𝗯𝗮̀𝗶 𝗵𝗮́𝘁 𝗸𝗵𝗮́𝗰!', event.threadID, () => fs.unlinkSync(path), event.messageID);
             return api.sendMessage({ 
-                body: `🎧 𝗕𝗮̀𝗶 𝗵𝗮́𝘁: ${data.title}\n⏰ 𝗧𝗵𝗼̛̀𝗶 𝗴𝗶𝗮𝗻: ${this.convertHMS(data.dur)}\n👤 𝗧𝗲̂𝗻 𝗸𝗲̂𝗻𝗵: ${data.author}\n👀 𝗟𝘂̛𝗼̛̣𝘁 𝘅𝗲𝗺: ${data.viewCount}\n👍 𝗟𝘂̛𝗼̛̣𝘁 𝘁𝗵𝗶́𝗰𝗵: ${data.likes}\n⏱️ 𝗧𝗵𝗼̛̀𝗶 𝗴𝗶𝗮𝗻 𝘅𝘂̛̉ 𝗹𝗶́: ${Math.floor((Date.now()- data.timestart)/1000)} giây`,
+                body: `🎧 Music: ${data.title}\n⏰ Time: ${this.convertHMS(data.dur)}\n👤 Channel: ${data.author}\n👀 Views: ${data.viewCount}\n👍 Likes: ${data.likes}\n⏱️ Processing time: ${Math.floor((Date.now()- data.timestart)/1000)}s`,
                 attachment: fs.createReadStream(path)}, event.threadID, ()=> fs.unlinkSync(path), 
             event.messageID)
             
@@ -91,13 +93,19 @@ module.exports.run = async function ({ api, event, args }) {
                 msg = "",
                 num = 0
             const Youtube = require('youtube-search-api');
-            var data = (await Youtube.GetListByKeyword(keywordSearch, false,10)).items;
+            var data = (await Youtube.GetListByKeyword(keywordSearch, false,6)).items;
             for (let value of data) {
               link.push(value.id);
               num = num+=1
-              msg += (`${num}. ${value.title} (${value.length.simpleText})\n\n`);
+  if (num == 1) var num1 = "🐳 ⓵ "
+  if (num == 2) var num1 = "🐳 ⓶ "
+  if (num == 3) var num1 = "🐳 ⓷ "
+  if (num == 4) var num1 = "🐳 ⓸ "
+  if (num == 5) var num1 = "🐳 ⓹ "
+  if (num == 6) var num1 = "🐳 ⓺ "
+              msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${value.length.simpleText}\n---------------------------\n`);
             }
-            var body = `🔎 𝗖𝗼́ ${link.length} 𝗸𝗲̂́𝘁 𝗾𝘂𝗮̉ 𝘁𝗿𝘂̀𝗻𝗴 𝘃𝗼̛́𝗶 𝘁𝘂̛̀ 𝗸𝗵𝗼𝗮́ 𝘁𝗶̀𝗺 𝗸𝗶𝗲̂́𝗺 𝗰𝘂̉𝗮 𝗯𝗮̣𝗻:\n\n${msg}» 𝗛𝗮̃𝘆 𝗿𝗲𝗽𝗹𝘆(𝗽𝗵𝗮̉𝗻 𝗵𝗼̂̀𝗶) 𝗰𝗵𝗼̣𝗻 𝗺𝗼̣̂𝘁 𝘁𝗿𝗼𝗻𝗴 𝗻𝗵𝘂̛̃𝗻𝗴 𝘁𝗶̀𝗺 𝗸𝗶𝗲̂́𝗺 𝘁𝗿𝗲̂𝗻`
+            var body = `»🔎 𝐂𝐨́ ${link.length} 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n\n${msg}\n» 𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢 𝐭𝐡𝐞𝐨 𝐬𝐨̂́ 𝐭𝐡𝐮̛́ 𝐭𝐮̛̣) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
             return api.sendMessage({
               body: body
             }, event.threadID, (error, info) => global.client.handleReply.push({
