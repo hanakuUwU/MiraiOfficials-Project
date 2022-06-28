@@ -70,6 +70,7 @@ module.exports.convertHMS = function(value) {
     return (hours != '00' ? hours +':': '') + minutes+':'+seconds;
 }
 module.exports.run = async function ({ api, event, args }) {
+  let axios = require('axios');
     if (args.length == 0 || !args) return api.sendMessage('» Phần tìm kiếm không được để trống!', event.threadID, event.messageID);
     const keywordSearch = args.join(" ");
     var path = `${__dirname}/cache/sing-${event.senderID}.m4a`
@@ -91,11 +92,22 @@ module.exports.run = async function ({ api, event, args }) {
           try {
             var link = [],
                 msg = "",
-                num = 0
+                num = 0,
+                numb = 0;
+            var imgthumnail = []
             const Youtube = require('youtube-search-api');
             var data = (await Youtube.GetListByKeyword(keywordSearch, false,6)).items;
             for (let value of data) {
               link.push(value.id);
+              let folderthumnail = __dirname + `/cache/${numb+=1}.png`;
+                let linkthumnail = `https://img.youtube.com/vi/${value.id}/hqdefault.jpg`;
+                let getthumnail = (await axios.get(`${linkthumnail}`, {
+                    responseType: 'arraybuffer'
+                })).data;
+              let datac = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${value.id}&key=AIzaSyANZ2iLlzjDztWXgbCgL8Oeimn3i3qd0bE`)).data;
+              fs.writeFileSync(folderthumnail, Buffer.from(getthumnail, 'utf-8'));
+              imgthumnail.push(fs.createReadStream(__dirname + `/cache/${numb}.png`));
+                let channel = datac.items[0].snippet.channelTitle;
               num = num+=1
   if (num == 1) var num1 = "🐳 ⓵ "
   if (num == 2) var num1 = "🐳 ⓶ "
@@ -103,10 +115,11 @@ module.exports.run = async function ({ api, event, args }) {
   if (num == 4) var num1 = "🐳 ⓸ "
   if (num == 5) var num1 = "🐳 ⓹ "
   if (num == 6) var num1 = "🐳 ⓺ "
-              msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${value.length.simpleText}\n---------------------------\n`);
+              msg += (`${num1} ${value.title}\n[⏰] 𝐓𝐢𝐦𝐞: ${value.length.simpleText}\n[📻] 𝐊𝐞̂𝐧𝐡: ${channel}\n---------------------------\n`);
             }
             var body = `»🔎 𝐂𝐨́ ${link.length} 𝐝𝐚𝐧𝐡 𝐬𝐚́𝐜𝐡 𝐭𝐫𝐮̀𝐧𝐠 𝐯𝐨̛́𝐢 𝐭𝐮̛̀ 𝐤𝐡𝐨𝐚́ 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐜𝐮̉𝐚 𝐛𝐚̣𝐧:\n\n${msg}\n» 𝐇𝐚̃𝐲 𝐫𝐞𝐩𝐥𝐲 (𝐩𝐡𝐚̉𝐧 𝐡𝐨̂̀𝐢 𝐭𝐡𝐞𝐨 𝐬𝐨̂́ 𝐭𝐡𝐮̛́ 𝐭𝐮̛̣) 𝐜𝐡𝐨̣𝐧 𝐦𝐨̣̂𝐭 𝐭𝐫𝐨𝐧𝐠 𝐧𝐡𝐮̛̃𝐧𝐠 𝐭𝐢̀𝐦 𝐤𝐢𝐞̂́𝐦 𝐭𝐫𝐞̂𝐧`
             return api.sendMessage({
+              attachment: imgthumnail,
               body: body
             }, event.threadID, (error, info) => global.client.handleReply.push({
               type: 'reply',
