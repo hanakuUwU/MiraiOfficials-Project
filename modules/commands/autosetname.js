@@ -32,7 +32,7 @@ const axios = require("axios");
             thisThread.nameUser.push(content);
             const name = (await Users.getData(event.senderID)).name
             writeFileSync(pathData, JSON.stringify(dataJson, null, 4), "utf-8");
-            api.sendMessage(`Đặt cấu hình tên thành viên mới thành công\nPreview: ${content}\nNgười đặt: ${name}`, threadID, messageID);
+            api.sendMessage(`Đặt cấu hình tên thành viên mới thành công\nPreview: ${content} ${name}\nNgười đặt: ${name}`, threadID, messageID);
             break;
         }
         case "rm":
