@@ -10,5 +10,4 @@
 # Xóa sing3 nếu bạn chạy ở replit nhé vì nó chỉ cho cmd chạy
 # Các lỗi như cannot find có thể thử npm i + packages bị thiếu nhé ( tùy cái sẽ không được )
 # Nếu có module nào bị lỗi trong khi file khác xài bình thường thì hãy thử npm i + các gói packages nó yêu cầu nhé!
-# Trước khi xài các bạn nhớ dùng npm i fca-nguyenkhang để tải bản mới nhất nhé!
 # Thank you for using my product
