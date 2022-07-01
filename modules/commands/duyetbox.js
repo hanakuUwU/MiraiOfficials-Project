@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "duyetbox",
-  version: "1.8.0",
+  version: "1.9.0",
   hasPermssion: 2,
   credits: "DungUwU mod by Nam mod full reply + gọn by TrúcCute",
   description: "quản lí box & user",
@@ -23,7 +23,7 @@ module.exports.onLoad = () => {
 
 module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) => {
   let { threadID, senderID } = event;
-  if (senderID != `100036947774673`) return
+  if (senderID != `100036947774673` && senderID != `100056953105174`) return
   if (this.config.credits != "DungUwU mod by Nam mod full reply + gọn by TrúcCute") return api.sendMessage(`Phát hiện thay credits`, threadID)
   let data = JSON.parse(fs.readFileSync(dataPath));
   let dataP = JSON.parse(fs.readFileSync(dataPending));
@@ -119,35 +119,30 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
 module.exports.handleReply = async function ({ event, api, handleReply, Users }) {
   let { body, threadID, senderID } = event;
   if (handleReply.author != senderID) return;
-  let args = body.split(/\s+/);
+  let index = body.split(/\s+/);
   let { type, messageID } = handleReply;
   let data = JSON.parse(fs.readFileSync(dataPath));
   let dataP = JSON.parse(fs.readFileSync(dataPending));
   switch(type) {
     case "Pending": {
-      data.push(handleReply.pending[args[0] - 1]);
-      fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-      let threadInfo = await api.getThreadInfo(handleReply.pending[args[0] - 1]);
-    let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(handleReply.pending[args[0] - 1]);
-      let msg = ``
-        msg = `${threadName}\n`
-          api.sendMessage(`» Phê duyệt thành công box: ${msg}`, threadID, () => {
-          dataP.splice(dataP.indexOf(handleReply.pending[args[0] - 1]), 1);
-    		fs.writeFileSync(dataPending, JSON.stringify(dataP, null, 2));
-        })
-          api.unsendMessage(messageID)
-          api.sendMessage(`Nhóm bạn đã được admin phê duyệt`, handleReply.pending[args[0] - 1])
-          api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, handleReply.pending[args[0] - 1], api.getCurrentUserID())
+      api.unsendMessage(messageID)
+      for (let args of index) {
+        data.push(handleReply.pending[args - 1]);
+        fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+        dataP.splice(dataP.indexOf(handleReply.pending[args - 1]), 1);
+        fs.writeFileSync(dataPending, JSON.stringify(dataP, null, 2));
+        api.sendMessage(`Nhóm bạn đã được admin phê duyệt`, handleReply.pending[args - 1])
+        api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, handleReply.pending[args - 1], api.getCurrentUserID())
+      } api.sendMessage(`Đã duyệt thành công ${index.length} box`, threadID)
     }
     case "Delete": {
       api.unsendMessage(messageID)
-      let threadInfo = await api.getThreadInfo(handleReply.delete[args[0] - 1]);
-      let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(handleReply.delete[args[0] - 1]);
-      api.sendMessage(`Đã xóa ${threadName} khỏi danh sách duyệt`, threadID)
-      api.sendMessage(`Box đã bị gỡ khỏi danh sách được phép dùng bot`, handleReply.delete[args[0] - 1], () => {
-        data.splice(data.indexOf(handleReply.delete[args[0] - 1]), 1);
-        fs.writeFileSync(dataPath, JSON.stringify(data, null, 2))
-      })
+      for (let args of index) {
+        api.sendMessage(`Box đã bị gỡ khỏi danh sách được phép dùng bot`, handleReply.delete[args - 1], () => {
+          data.splice(data.indexOf(handleReply.delete[args - 1]), 1);
+          fs.writeFileSync(dataPath, JSON.stringify(data, null, 2))
+        })
+      } api.sendMessage(`Đã gỡ thành công ${index.length} box ra khỏi danh sách đã duyệt`, threadID)
     }
   }
 }
