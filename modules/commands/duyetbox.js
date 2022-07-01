@@ -16,7 +16,7 @@ let dataPath = __dirname + "/cache/approvedThreads.json";
 let dataPending = __dirname + "/cache/pendingdThreads.json";
 let fs = require("fs");
 
-module.exports.onLoad = async ({ api, event }) => {
+module.exports.onLoad = () => {
   if (!fs.existsSync(dataPath)) fs.writeFileSync(dataPath, JSON.stringify([]));
   if (!fs.existsSync(dataPending)) fs.writeFileSync(dataPending, JSON.stringify([]));
 }
