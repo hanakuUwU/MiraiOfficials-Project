@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "duyetbox",
-  version: "1.9.5",
+  version: "1.9.6",
   hasPermssion: 2,
   credits: "DungUwU mod by Nam mod full reply + gọn by TrúcCute",
   description: "quản lí box & user",
@@ -121,7 +121,7 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
             if (i >= dataP.length) break;
             let threadInfo = await api.getThreadInfo(dataP[i]);
             let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(dataP[i]);
-            msg += `\n[ ${i+1} ] - ${threadName}\nID: ${data[i]}\n`;
+            msg += `\n[ ${i+1} ] - ${threadName}\nID: ${dataP[i]}\n`;
           }
           msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang>` 
           api.sendMessage(`${msg}\nReply STT để duyệt`, threadID, (e, info) => {
