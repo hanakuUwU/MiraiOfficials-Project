@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "duyetbox",
-  version: "1.9.2",
+  version: "1.9.5",
   hasPermssion: 2,
   credits: "DungUwU mod by Nam mod full reply + gọn by TrúcCute",
   description: "quản lí box & user",
@@ -33,23 +33,22 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
   if (args[0] == "list") {
     try {
       if (data.length != 0) {
+        msg = `Có ${data.length} Box & User đã được duyệt\n`;
         if (args[1] == "all") {
-          msg = `Có ${data.length} Box & User đã được duyệt\n`;
-        for (e of data) {
-          let threadInfo = await api.getThreadInfo(e);
-          let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(e);
-          msg += `\n[ ${count+=1} ] - ${threadName}\nID: ${e}\n`
-        } api.sendMessage(`${msg}\nReply STT để gỡ khỏi danh sách đã duyệt`, threadID, (e, info) => {
-          global.client.handleReply.push({
-            type: "Delete",
-            name: this.config.name,
-            author: senderID,
-            messageID: info.messageID,
-            delete: data
+          for (e of data) {
+            let threadInfo = await api.getThreadInfo(e);
+            let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(e);
+            msg += `\n[ ${count+=1} ] - ${threadName}\nID: ${e}\n`
+          } api.sendMessage(`${msg}\nReply STT để gỡ khỏi danh sách đã duyệt`, threadID, (e, info) => {
+            global.client.handleReply.push({
+              type: "Delete",
+              name: this.config.name,
+              author: senderID,
+              messageID: info.messageID,
+              delete: data
+            })
           })
-        })
         } else {
-          msg = `Có ${data.length} Box & User đã được duyệt\n`;
           let page = 1;
           page = parseInt(args[1]) || 1;
           page < -1 ? page = 1 : "";
@@ -82,8 +81,8 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
   if (args[0] == "duyệt") {
     try {
       if (dataP.length != 0) {
+        msg = `Có ${dataP.length} Box & User chưa được duyệt:\n`;
         if (args[1] == "all") {
-          msg = `Có ${dataP.length} Box & User chưa được duyệt\n`;
           for (e of dataP) {
             let threadInfo = await api.getThreadInfo(e);
             let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(e);
@@ -98,7 +97,6 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
             })
           })
         } else {
-          msg = `Có ${dataP.length} Box & User chưa được duyệt\n`;
           let page = 1;
           page = parseInt(args[1]) || 1;
           page < -1 ? page = 1 : "";
