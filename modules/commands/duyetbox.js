@@ -156,7 +156,7 @@ module.exports.handleReply = async ({ event, api, handleReply, Users }) => {
     case "Pending": {
       api.unsendMessage(messageID)
       try {
-        for (let args of index) {
+        for (args of index) {
           data.push(handleReply.pending[args - 1]);
           fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
           dataP.splice(dataP.indexOf(handleReply.pending[args - 1]), 1);
@@ -171,7 +171,7 @@ module.exports.handleReply = async ({ event, api, handleReply, Users }) => {
     case "Delete": {
       api.unsendMessage(messageID)
       try {
-        for (let args of index) {
+        for (args of index) {
           api.sendMessage(`Box đã bị gỡ khỏi danh sách được phép dùng bot`, handleReply.delete[args - 1], () => {
             data.splice(data.indexOf(handleReply.delete[args - 1]), 1);
             fs.writeFileSync(dataPath, JSON.stringify(data, null, 2))
