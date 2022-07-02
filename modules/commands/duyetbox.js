@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "duyetbox",
-  version: "1.9.1",
+  version: "1.9.2",
   hasPermssion: 2,
   credits: "DungUwU mod by Nam mod full reply + gọn by TrúcCute",
   description: "quản lí box & user",
@@ -87,7 +87,7 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
       if (type == "message_reply") {
         idBox = messageReply.senderID
       }
-      if (isNaN(parseInt(idBox))) return api.sendMessage("Không phải một con số", threadID);
+      if (isNaN(idBox)) return api.sendMessage("Không phải một con số", threadID);
       if (!data.includes(idBox)) return api.sendMessage("Box không được duyệt từ trước!", threadID);
       let threadInfo = await api.getThreadInfo(idBox);
       let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(idBox);
@@ -103,7 +103,7 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
     try {
       let threadInfo = await api.getThreadInfo(args[0]);
       let ID = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(args[0]);
-      if (isNaN(parseInt(args[0]))) api.sendMessage("ID bạn nhập không hợp lệ", threadID)
+      if (isNaN(args[0])) api.sendMessage("ID bạn nhập không hợp lệ", threadID)
       if (data.includes(args[0])) {
         api.sendMessage(`${ID} đã được phê duyệt từ trước!`, threadID)
       } else {
@@ -151,6 +151,7 @@ module.exports.handleReply = async ({ event, api, handleReply, Users }) => {
   let { type, messageID } = handleReply;
   let data = JSON.parse(fs.readFileSync(dataPath));
   let dataP = JSON.parse(fs.readFileSync(dataPending));
+  if (isNaN(index)) return api.sendMessage("💟 WTF biết phân biệt số với chữ không?", threadID)
   switch(type) {
     case "Pending": {
       api.unsendMessage(messageID)
