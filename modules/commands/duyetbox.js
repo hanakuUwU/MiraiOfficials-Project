@@ -27,11 +27,14 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
   if (this.config.credits != "DungUwU mod by Nam mod full reply + gọn by TrúcCute") return api.sendMessage(`Phát hiện thay credits`, threadID)
   let data = JSON.parse(fs.readFileSync(dataPath));
   let dataP = JSON.parse(fs.readFileSync(dataPending));
+  let threadSetting = (await Threads.getData(String(threadID))).data || {};
+    let prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
   let msg = "", count = 0;
   if (args[0] == "list") {
     try {
       if (data.length != 0) {
-        msg = `Có ${data.length} Box & User đã được duyệt\n`;
+        if (args[1] == "all") {
+          msg = `Có ${data.length} Box & User đã được duyệt\n`;
         for (e of data) {
           let threadInfo = await api.getThreadInfo(e);
           let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(e);
@@ -45,6 +48,30 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
             delete: data
           })
         })
+        } else {
+          msg = `Có ${data.length} Box & User đã được duyệt\n`;
+          let page = 1;
+          page = parseInt(args[1]) || 1;
+          page < -1 ? page = 1 : "";
+          let limit = 10;
+          let numPage = Math.ceil(data.length/limit);
+          for (i = limit*(page - 1); i < limit*(page-1) + limit; i++) {
+            if (i >= data.length) break;
+            let threadInfo = await api.getThreadInfo(data[i]);
+            let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(data[i]);
+            msg += `\n[ ${i+1} ] - ${threadName}\nID: ${data[i]}\n`;
+          }
+          msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang>`
+            api.sendMessage(`${msg}\nReply STT để gỡ khỏi danh sách đã duyệt`, threadID, (e, info) => {
+              global.client.handleReply.push({
+                type: "Delete",
+                name: this.config.name,
+                author: senderID,
+                messageID: info.messageID,
+                delete: data
+              })
+            })
+        }
       } else {
         api.sendMessage(`Không có Box & User nào được duyệt`, threadID)
       }
@@ -55,20 +82,45 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
   if (args[0] == "duyệt") {
     try {
       if (dataP.length != 0) {
-        msg = `Có ${dataP.length} Box & User chưa được duyệt\n`;
-        for (e of dataP) {
-          let threadInfo = await api.getThreadInfo(e);
-          let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(e);
-          msg += `\n[ ${count+=1} ] - ${threadName}\nID: ${e}\n`
-        } api.sendMessage(`${msg}\nReply STT để duyệt`, threadID, (e, info) => {
-          global.client.handleReply.push({
-            type: "Pending",
-            name: this.config.name,
-            author: senderID,
-            messageID: info.messageID,
-            pending: dataP
+        if (args[1] == "all") {
+          msg = `Có ${dataP.length} Box & User chưa được duyệt\n`;
+          for (e of dataP) {
+            let threadInfo = await api.getThreadInfo(e);
+            let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(e);
+            msg += `\n[ ${count+=1} ] - ${threadName}\nID: ${e}\n`
+          } api.sendMessage(`${msg}\nReply STT để duyệt`, threadID, (e, info) => {
+            global.client.handleReply.push({
+              type: "Pending",
+              name: this.config.name,
+              author: senderID,
+              messageID: info.messageID,
+              pending: dataP
+            })
           })
-        })
+        } else {
+          msg = `Có ${dataP.length} Box & User chưa được duyệt\n`;
+          let page = 1;
+          page = parseInt(args[1]) || 1;
+          page < -1 ? page = 1 : "";
+          let limit = 10;
+          let numPage = Math.ceil(dataP.length/limit);
+          for (i = limit*(page - 1); i < limit*(page-1) + limit; i++) {
+            if (i >= dataP.length) break;
+            let threadInfo = await api.getThreadInfo(dataP[i]);
+            let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(dataP[i]);
+            msg += `\n[ ${i+1} ] - ${threadName}\nID: ${data[i]}\n`;
+          }
+          msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang>` 
+          api.sendMessage(`${msg}\nReply STT để duyệt`, threadID, (e, info) => {
+            global.client.handleReply.push({
+              type: "Pending",
+              name: this.config.name,
+              author: senderID,
+              messageID: info.messageID,
+              pending: dataP
+            })
+          })
+        }
       } else {
         api.sendMessage(`Không có Box & User nào chưa được duyệt`, threadID)
       }
@@ -77,8 +129,6 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
     }
   }
   if (args[0] == "help") {
-    let threadSetting = (await Threads.getData(String(threadID))).data || {};
-    let prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
     api.sendMessage(`Bạn có thể dùng:\n1. ${prefix}${this.config.name} list để xem danh sách đã duyệt\n2. ${prefix}${this.config.name} duyệt để xem danh sách chưa duyệt\n3. ${prefix}${this.config.name} help để xem cách xài\n4. ${prefix}${this.config.name} trống để duyệt chính mình hoặc box`, threadID)
   }
   if (args[0] == "del") {
@@ -156,13 +206,13 @@ module.exports.handleReply = async ({ event, api, handleReply, Users }) => {
     case "Pending": {
       api.unsendMessage(messageID)
       try {
-        for (args of index) {
-          data.push(handleReply.pending[args - 1]);
+        for (adc of index) {
+          data.push(handleReply.pending[adc - 1]);
           fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-          dataP.splice(dataP.indexOf(handleReply.pending[args - 1]), 1);
+          dataP.splice(dataP.indexOf(handleReply.pending[adc - 1]), 1);
           fs.writeFileSync(dataPending, JSON.stringify(dataP, null, 2));
-          api.sendMessage(`Nhóm bạn đã được admin phê duyệt`, handleReply.pending[args - 1])
-          api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, handleReply.pending[args - 1], api.getCurrentUserID())
+          api.sendMessage(`Nhóm bạn đã được admin phê duyệt`, handleReply.pending[adc - 1])
+          api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, handleReply.pending[adc - 1], api.getCurrentUserID())
         } api.sendMessage(`Đã duyệt thành công ${index.length} box`, threadID)
       } catch(e) {
         api.sendMessage(e, threadID)
