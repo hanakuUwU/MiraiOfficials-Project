@@ -151,7 +151,7 @@ module.exports.handleReply = async ({ event, api, handleReply, Users }) => {
   let { type, messageID } = handleReply;
   let data = JSON.parse(fs.readFileSync(dataPath));
   let dataP = JSON.parse(fs.readFileSync(dataPending));
-  if (isNaN(index)) return api.sendMessage("💟 WTF biết phân biệt số với chữ không?", threadID)
+  if (isNaN(parseInt(index))) return api.sendMessage("💟 WTF biết phân biệt số với chữ không?", threadID)
   switch(type) {
     case "Pending": {
       api.unsendMessage(messageID)
