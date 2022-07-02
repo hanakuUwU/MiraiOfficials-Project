@@ -355,6 +355,7 @@ module.exports = function({ api, models }) {
 	
 	return async (event) => {
     if (event.type == "change_thread_image") api.sendMessage(`» [ Update Thread ] ${event.snippet}`, event.threadID);
+    if (global.config.duyetbox == true) {
 	  let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
 	  let adminBot = global.config.ADMINBOT;
 	  let ndhBot = global.config.NDH;
@@ -365,11 +366,11 @@ module.exports = function({ api, models }) {
 		  const threadSetting = (await Threads.getData(String(event.threadID))).data || {};
 		  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
 		  //check body
-		if (event.body && event.body == `${prefix}request`) {
+		if (event.body == `${prefix}request`) {
       let threadInfo = await api.getThreadInfo(event.threadID);
     let nameThread = threadInfo.threadName
 		  adminBot.forEach(e => {
-			api.sendMessage(`『 Yêu cầu request 』\n\nBox: ${nameThread}\nID: ${event.threadID}\n\n『 ${gio} 』`, e);
+			api.sendMessage(`⠀『 Yêu cầu request 』\n\nBox: ${nameThread}\nID: ${event.threadID}\n\n『 ${gio} 』`, e, ndhBot);
 		  })
 		  return api.sendMessage(`Đã gửi yêu cầu đến các admin bot!`, event.threadID, () => {
 			let pendingData = JSON.parse(fs.readFileSync(pendingPath));
@@ -379,9 +380,9 @@ module.exports = function({ api, models }) {
 			}
 		  });
 		}
-		// if (event.threadID == 7349457131746039) console.log(prefix);
 	if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`Box của bạn chưa được duyệt, để gửi yêu cầu duyệt, dùng:\n${prefix}request`, event.threadID);
-	};
+	}
+  }
 		switch (event.type) {
 			case "message":
 			case "message_reply":
