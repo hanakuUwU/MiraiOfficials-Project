@@ -22,7 +22,7 @@ module.exports.onLoad = () => {
 }
 
 module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) => {
-  let { threadID, senderID } = event;
+  let { threadID, senderID, type, messageReply } = event;
   if (senderID != `100036947774673` && senderID != `100056953105174`) return
   if (this.config.credits != "DungUwU mod by Nam mod full reply + gọn by TrúcCute") return api.sendMessage(`Phát hiện thay credits`, threadID)
   let data = JSON.parse(fs.readFileSync(dataPath));
@@ -75,6 +75,9 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
   }
   if (args[0] == "del") {
     idBox = args[1] || threadID;
+    if (type == "message_reply") {
+      idBox = messageReply.senderID
+    }
     if (isNaN(parseInt(idBox))) return api.sendMessage("Không phải một con số", threadID);
     if (!data.includes(idBox)) return api.sendMessage("Box không được duyệt từ trước!", threadID);
     let threadInfo = await api.getThreadInfo(idBox);
@@ -100,17 +103,20 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
       fs.writeFileSync(dataPending, JSON.stringify(dataP, null, 2))
     }
   } else if (!args[0]) {
-    let threadInfo = await api.getThreadInfo(threadID);
-    let ID = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(threadID);
-    if (isNaN(parseInt(threadID))) api.sendMessage("ID bạn nhập không hợp lệ", threadID)
-    if (data.includes(threadID)) {
+    if (type == "message_reply") {
+      uid = messageReply.senderID
+    }
+    let threadInfo = await api.getThreadInfo(uid || threadID);
+    let ID = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(uid || threadID);
+    if (isNaN(parseInt(uid || threadID))) api.sendMessage("ID bạn nhập không hợp lệ", threadID)
+    if (data.includes(uid || threadID)) {
       api.sendMessage(`${ID} đã được phê duyệt từ trước!`, threadID)
     } else {
       api.sendMessage(`Đã thêm ${ID} vào danh sách đã duyệt`, threadID)
-      api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, threadID, api.getCurrentUserID())
-        data.push(threadID);
+      api.changeNickname(`『 ${global.config.PREFIX} 』 ♡ ${(!global.config.BOTNAME) ? "This bot is made by GK" : global.config.BOTNAME}`, uid || threadID, api.getCurrentUserID())
+        data.push(uid ||threadID);
       fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-      dataP.splice(dataP.indexOf(threadID), 1);
+      dataP.splice(dataP.indexOf(uid || threadID), 1);
       fs.writeFileSync(dataPending, JSON.stringify(dataP, null, 2))
     }
   }
