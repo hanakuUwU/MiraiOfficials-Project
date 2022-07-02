@@ -23,6 +23,7 @@ module.exports.onLoad = () => {
 
 module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) => {
   let { threadID, senderID, type, messageReply } = event;
+  let { configPath } = global.client;
   if (senderID != `100036947774673` && senderID != `100056953105174`) return
   if (this.config.credits != "DungUwU mod by Nam mod full reply + gọn by TrúcCute") return api.sendMessage(`Phát hiện thay credits`, threadID)
   let data = JSON.parse(fs.readFileSync(dataPath));
@@ -30,6 +31,20 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
   let threadSetting = (await Threads.getData(String(threadID))).data || {};
     let prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
   let msg = "", count = 0;
+  if (args[0] == "on") {
+    if (config.duyetbox == false) {
+        config.duyetbox = true;
+        api.sendMessage(`[⚜️] Bật thành công duyệt box`, threadID);
+      }
+      fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8')
+  }
+  if (args[0] == "off") {
+    if (config.duyetbox == true) {
+        config.duyetbox = false;
+        api.sendMessage(`[⚜️] Tắt thành công duyệt box`, threadID);
+      }
+      fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8')
+  }
   if (args[0] == "list") {
     try {
       if (data.length != 0) {
@@ -127,7 +142,7 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
     }
   }
   if (args[0] == "help") {
-    api.sendMessage(`Bạn có thể dùng:\n1. ${prefix}${this.config.name} list để xem danh sách đã duyệt\n2. ${prefix}${this.config.name} duyệt để xem danh sách chưa duyệt\n3. ${prefix}${this.config.name} help để xem cách xài\n4. ${prefix}${this.config.name} trống để duyệt chính mình hoặc box`, threadID)
+    api.sendMessage(`Bạn có thể dùng:\n1. ${prefix}${this.config.name} list để xem danh sách đã duyệt\n2. ${prefix}${this.config.name} duyệt để xem danh sách chưa duyệt\n3. ${prefix}${this.config.name} help để xem cách xài\n4. ${prefix}${this.config.name} trống để duyệt chính mình hoặc box\n5. ${prefix}${this.config.name} on/off để bật tắt duyệt box`, threadID)
   }
   if (args[0] == "del") {
     try {
