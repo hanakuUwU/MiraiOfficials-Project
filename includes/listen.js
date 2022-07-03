@@ -360,7 +360,7 @@ module.exports = function({ api, models }) {
 	  let adminBot = global.config.ADMINBOT;
 	  let ndhBot = global.config.NDH;
 	  let pendingPath = __dirname + "/../modules/commands/cache/pendingdThreads.json";
-	  if (!data.includes(event.threadID) && !adminBot.includes(event.senderID) &&!ndhBot.includes(event.senderID)) {
+	  if (!data.includes(event.senderID) && !data.includes(event.threadID) && !adminBot.includes(event.senderID) &&!ndhBot.includes(event.senderID)) {
 		
 		//getPrefix
 		  const threadSetting = (await Threads.getData(String(event.threadID))).data || {};
@@ -368,14 +368,14 @@ module.exports = function({ api, models }) {
 		  //check body
 		if (event.body == `${prefix}request`) {
       let threadInfo = await api.getThreadInfo(event.threadID);
-    let nameThread = threadInfo.threadName
+    let nameThread = threadInfo.threadName || await Users.getNameUser(event.senderID)
 		  adminBot.forEach(e => {
 			api.sendMessage(`⠀『 Yêu cầu request 』\n\nBox: ${nameThread}\nID: ${event.threadID}\n\n『 ${gio} 』`, e, ndhBot);
 		  })
 		  return api.sendMessage(`Đã gửi yêu cầu đến các admin bot!`, event.threadID, () => {
 			let pendingData = JSON.parse(fs.readFileSync(pendingPath));
-			if (!pendingData.includes(event.threadID)) {
-			  pendingData.push(event.threadID);
+			if (!pendingData.includes(event.threadID) || !pendingData.includes(event.senderID)) {
+			  pendingData.push(event.threadID || event.senderID);
 			fs.writeFileSync(pendingPath, JSON.stringify(pendingData));
 			}
 		  });
