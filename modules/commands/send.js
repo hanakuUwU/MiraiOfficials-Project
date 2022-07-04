@@ -1,3 +1,7 @@
+let request = require("request")
+let fs = require('fs')
+let axios = require('axios')
+let moment = require("moment-timezone")
 module.exports.config = {
 	name: "send",
 	version: "1.0.5",
@@ -26,15 +30,11 @@ module.exports.languages = {
 	}
 }
 
-module.exports.run = async ({ api, event, args, getText, Users }) => {
+module.exports.run = async ({ api, event, args, getText, Users, handleReply }) => {
   let { senderID, messageReply, threadID, messageID, type } = event;
   let name = await Users.getNameUser(senderID)
-  let moment = require("moment-timezone")
   let gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
   if (type == "message_reply") {
-    let request = require("request")
-    let fs = require('fs')
-    let axios = require('axios')
     if (messageReply.attachments[0].type == "audio") {
       path = __dirname + `/cache/snoti.m4a` ||  __dirname + `/cache/snoti.mp3`
     }
@@ -58,7 +58,14 @@ module.exports.run = async ({ api, event, args, getText, Users }) => {
       if (isNaN(parseInt(idThread)) || idThread == threadID) ""
       else {
         api.sendMessage({body: `ㅤ »🌸 𝑨𝑫𝑴𝑰𝑵 𝑩𝑶𝑻 🌸«\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n『 ${args.join(` `)} 』`, attachment: fs.createReadStream(path) }, idThread, (e, info) => {
-          if (e) cantSend.push(idThread);
+          global.client.handleReply.push({
+                type: "callad",
+                name: this.config.name,
+                author: senderID,
+                ID: messageID,
+                messageID: info.messageID
+              });
+          if (e) cantSend.push(idThread)
         });
         count++;
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -73,12 +80,69 @@ module.exports.run = async ({ api, event, args, getText, Users }) => {
       if (isNaN(parseInt(idThread)) || idThread == threadID) ""
       else {
         api.sendMessage(`====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n『 ${args.join(` `)} 』`, idThread, (error, info) => {
-          if (error) cantSend.push(idThread)
+          global.client.handleReply.push({
+                type: "callad",
+                name: this.config.name,
+                author: senderID,
+                ID: messageID,
+                messageID: info.messageID
+              });
+          if (e) cantSend.push(idThread)
         });
         count++;
         await new Promise(resolve => setTimeout(resolve, 500))
       }
     }
     return api.sendMessage(getText("sendSuccess", count), threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), threadID, messageID) : "", messageID)
+  }
+}
+
+module.exports.handleReply = async ({ api, event, handleReply, Users }) => {
+  let { body, threadID, senderID, messageID } = event;
+  let index = body.split(" ");
+  let { type } = handleReply;
+  let gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
+  switch(type) {
+    case "callad": {
+      let name = await Users.getNameUser(senderID)
+      if (event.attachments.length != 0) {
+        if (event.attachments[0].type == "audio") {
+    path = __dirname + `/cache/snoti.m4a` ||  __dirname + `/cache/snoti.mp3`
+  }
+  if (event.attachments[0].type == "photo") {
+    path = __dirname + `/cache/snoti.jpg`
+  }
+  if (event.attachments[0].type == "video") {
+    path = __dirname + `/cache/snoti.mp4`
+  }
+  if (event.attachments[0].type == "animated_image") {
+    path = __dirname + `/cache/snoti.gif`
+  }
+        let abc = event.attachments[0].url;
+  let getdata = (await axios.get(`${abc}`, {
+    responseType: 'arraybuffer'
+  })).data
+  fs.writeFileSync(path, Buffer.from(getdata, 'utf-8'))
+        api.sendMessage({body: `Từ ${name}\nNội dung: ${body}`, attachment: fs.createReadStream(path)}, handleReply.author, (e, info) => {
+          global.client.handleReply.push({
+                type: "callad",
+                name: this.config.name,
+                author: threadID,
+                ID: messageID,
+                messageID: info.messageID
+          })
+        }, handleReply.ID)
+      } else if (index.length != 0) {
+        api.sendMessage({body: `Từ ${name}\nNội dung: ${body}`}, handleReply.author, (e, info) => {
+          global.client.handleReply.push({
+                type: "callad",
+                name: this.config.name,
+                author: threadID,
+                ID: messageID,
+                messageID: info.messageID
+          })
+        }, handleReply.ID)
+      }
+    }
   }
 }
