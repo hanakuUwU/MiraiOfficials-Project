@@ -6,7 +6,7 @@ module.exports.config = {
 	name: "send",
 	version: "1.0.5",
 	hasPermssion: 2,
-	credits: "Mirai mod by HĐGN mod lại by TrúcCute",
+	credits: "Mirai mod lại by TrúcCute",
 	description: "Gửi tin nhắn tới các nhóm(reply vào ảnh/video cần gửi kèm)!\nPhiên bản xịn hơn của sendnotiUwU",
 	commandCategory: "Admin",
 	usages: "[Text]",
@@ -33,7 +33,7 @@ module.exports.languages = {
 module.exports.run = async ({ api, event, args, getText, Users, handleReply }) => {
   let { senderID, messageReply, threadID, messageID, type } = event;
   let name = await Users.getNameUser(senderID)
-  let gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
+  let gio = moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY - HH:mm:s");
   if (type == "message_reply") {
     if (messageReply.attachments[0].type == "audio") {
       path = __dirname + `/cache/snoti.m4a` ||  __dirname + `/cache/snoti.mp3`
@@ -57,7 +57,7 @@ module.exports.run = async ({ api, event, args, getText, Users, handleReply }) =
     for (idThread of allThread) {
       if (isNaN(parseInt(idThread)) || idThread == threadID) ""
       else {
-        api.sendMessage({body: `ㅤ »🌸 𝑨𝑫𝑴𝑰𝑵 𝑩𝑶𝑻 🌸«\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n『 ${args.join(` `)} 』`, attachment: fs.createReadStream(path) }, idThread, (e, info) => {
+        api.sendMessage({body: `====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n-----------------------------------------------\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n-----------------------------------------------\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n ${args.join(` `)}\n-----------------------------------------------\n𝐀𝐝𝐦𝐢𝐧: ${name} `, attachment: fs.createReadStream(path) }, idThread, (e, info) => {
           global.client.handleReply.push({
                 type: "callad",
                 name: this.config.name,
@@ -79,7 +79,7 @@ module.exports.run = async ({ api, event, args, getText, Users, handleReply }) =
     for (idThread of allThread) {
       if (isNaN(parseInt(idThread)) || idThread == threadID) ""
       else {
-        api.sendMessage(`====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n𝐆𝐮̛̉𝐢 𝐭𝐮̛̀ 𝐀𝐝𝐦𝐢𝐧: ${name}\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n『 ${args.join(` `)} 』`, idThread, (error, info) => {
+        api.sendMessage(`====== [ 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 ] ======\n-----------------------------------------------\n𝐓𝐡𝐨̛̀𝐢 𝐠𝐢𝐚𝐧: ${gio}\n-----------------------------------------------\n𝐍𝐨̣̂𝐢 𝐝𝐮𝐧𝐠:\n ${args.join(` `)}\n-----------------------------------------------\n𝐀𝐝𝐦𝐢𝐧: ${name}`, idThread, (error, info) => {
           global.client.handleReply.push({
                 type: "callad",
                 name: this.config.name,
