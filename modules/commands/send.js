@@ -1,7 +1,6 @@
 let request = require("request")
 let fs = require('fs')
 let axios = require('axios')
-let moment = require("moment-timezone")
 module.exports.config = {
 	name: "send",
 	version: "1.0.5",
@@ -14,26 +13,15 @@ module.exports.config = {
   dependencies: {
     "fs": "",
     "axios": "",
-    "moment-timezone": "",
     "request": ""
   }
 }
 
-module.exports.languages = {
-	"vi": {
-		"sendSuccess": "𝐓𝐡𝐨̂𝐧𝐠 𝐛𝐚́𝐨 𝐓𝐡𝐚̀𝐧𝐡 𝐂𝐨̂𝐧𝐠 𝐓𝐨̛́𝐢 %1 𝐍𝐡𝐨́𝐦!",
-		"sendFail": "[!] 𝐊𝐡𝐨̂𝐧𝐠 𝐓𝐡𝐞̂̉ 𝐆𝐮̛̉𝐢 𝐓𝐡𝐨̂𝐧𝐠 𝐁𝐚́𝐨 𝐓𝐨̛́𝐢 %1 𝐍𝐡𝐨́𝐦"
-	},
-	"en": {
-		"sendSuccess": "Sent message to %1 thread!",
-		"sendFail": "[!] Can't send message to %1 thread"
-	}
-}
-
-module.exports.run = async ({ api, event, args, getText, Users, handleReply }) => {
+module.exports.run = async ({ api, event, args, Users, handleReply }) => {
   let { senderID, messageReply, threadID, messageID, type } = event;
   let name = await Users.getNameUser(senderID)
-  let gio = moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY - HH:mm:s");
+  let cc = require("moment-timezone")
+  let gio = cc.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY - HH:mm:s");
   if (type == "message_reply") {
     if (messageReply.attachments[0].type == "audio") {
       path = __dirname + `/cache/snoti.m4a` ||  __dirname + `/cache/snoti.mp3`
@@ -66,12 +54,11 @@ module.exports.run = async ({ api, event, args, getText, Users, handleReply }) =
                 messageID: info.messageID
               });
           if (e) cantSend.push(idThread)
-        });
+        })
         count++;
       await new Promise(resolve => setTimeout(resolve, 500));
       }
-    }
-    return api.sendMessage(getText("sendSuccess", count), threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), threadID, messageID) : "", messageID)
+    } api.sendMessage(`Đã thông báo thành công đến ${count} box và không thành công đến ${cantSend.length} box`, threadID)
   }
   else {
     let allThread = global.data.allThreadID || [];
@@ -92,17 +79,14 @@ module.exports.run = async ({ api, event, args, getText, Users, handleReply }) =
         count++;
         await new Promise(resolve => setTimeout(resolve, 500))
       }
-    }
-    return api.sendMessage(getText("sendSuccess", count), threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), threadID, messageID) : "", messageID)
+    } api.sendMessage(`Đã thông báo thành công đến ${count} box và không thành công đến ${cantSend.length} box`, threadID)
   }
 }
 
 module.exports.handleReply = async ({ api, event, handleReply, Users }) => {
   let { body, threadID, senderID, messageID } = event;
-  let index = body.split(" ");
-  let { type } = handleReply;
-  let gio = moment.tz("Asia/Ho_Chi_Minh").format("HH:mm:ss")
-  switch(type) {
+  let index = body.split(" ")
+  switch(handleReply.type) {
     case "callad": {
       let name = await Users.getNameUser(senderID)
       if (event.attachments.length != 0) {
@@ -118,11 +102,6 @@ module.exports.handleReply = async ({ api, event, handleReply, Users }) => {
   if (event.attachments[0].type == "animated_image") {
     path = __dirname + `/cache/snoti.gif`
   }
-        let abc = event.attachments[0].url;
-  let getdata = (await axios.get(`${abc}`, {
-    responseType: 'arraybuffer'
-  })).data
-  fs.writeFileSync(path, Buffer.from(getdata, 'utf-8'))
         api.sendMessage({body: `Từ ${name}\nNội dung: ${body}`, attachment: fs.createReadStream(path)}, handleReply.author, (e, info) => {
           global.client.handleReply.push({
                 type: "callad",
