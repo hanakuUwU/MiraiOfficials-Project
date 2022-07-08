@@ -75,7 +75,7 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
             let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(data[i]);
             msg += `\n[ ${i+1} ] - ${threadName}\nID: ${data[i]}\n`;
           }
-          msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang>`
+          msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang/all>`
             api.sendMessage(`${msg}\nReply STT để gỡ khỏi danh sách đã duyệt`, threadID, (e, info) => {
               global.client.handleReply.push({
                 type: "Delete",
@@ -123,7 +123,7 @@ module.exports.run = async ({ api, event, handleReply, Threads, args, Users }) =
             let threadName = threadInfo.threadName ? threadInfo.threadName : await Users.getNameUser(dataP[i]);
             msg += `\n[ ${i+1} ] - ${threadName}\nID: ${dataP[i]}\n`;
           }
-          msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang>` 
+          msg += `\nTrang (${page}/${numPage})\nDùng ${prefix}${this.config.name} list <số trang/all>` 
           api.sendMessage(`${msg}\nReply STT để duyệt`, threadID, (e, info) => {
             global.client.handleReply.push({
               type: "Pending",
